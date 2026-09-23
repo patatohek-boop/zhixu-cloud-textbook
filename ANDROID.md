@@ -1,13 +1,13 @@
 # 安卓 App
 
-应用名称：知序云教材。包名：`app.zhixu.textbook`。初版：1.0.0。适用 Android 8.0 及以上、具有可正常运行的 Android System WebView 的设备。
+应用名称：知序云教材。包名：`app.zhixu.textbook`。初版：1.0.0。适用 Android 8.0 及以上、具有较新 Android System WebView 的设备；请通过应用商店更新网页组件。
 
 ## 安装与使用
 
 正式签名 APK 会放在本仓库的 [Releases](https://github.com/patatohek-boop/zhixu-cloud-textbook/releases) 中。下载后在安卓手机打开 APK，按照系统提示允许本次安装。安装包未经应用商店审核，不应关闭系统安全保护来强行安装；如设备有拦截，可先核对来源与公布的 SHA-256。
 
 - 全部 182 节教材、公式字体、22 张示意图和 11 个实验随包内置，首次打开也无需联网。
-- 顶部“应用菜单”提供返回书架、备份导入/导出、打印、打开网页版、下载新版与版本说明。
+- 顶部“应用菜单”提供返回书架、备份导入/导出、打印、打开网页版、查看新版安装包与版本说明。
 - 学习记录只保存在这个 App 内，与浏览器中的网站记录不自动同步。迁移时先从原位置导出 JSON，再在目标位置导入；不同笔记合并保留。
 - 导出和导入使用系统文件选择器，不需要授予整个手机存储的访问权限。
 - 打开参考链接或在线新版时使用系统浏览器。App 本身没有联网权限，网页中的外链不能在 App 内执行。
@@ -23,7 +23,7 @@ GitHub 工作流 `Build Android textbook` 自动构建未经签名的 release �
 
 ## 构建
 
-使用 JDK 17、Android SDK Platform 37 和 Build Tools 36.0.0。已固定 AGP 9.2.1、Gradle 9.4.1（含下载 SHA-256）及 AndroidX WebKit 1.17.0。
+使用 JDK 17、Android SDK Platform 37.0 和 Build Tools 36.0.0。已固定 AGP 9.2.1、Gradle 9.4.1（含下载 SHA-256）及 AndroidX WebKit 1.17.0。
 
 ```sh
 python tools/build.py
