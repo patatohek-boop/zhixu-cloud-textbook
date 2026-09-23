@@ -8,7 +8,7 @@
 
 ## 直接阅读
 
-下载完整仓库后，可以直接打开 `site/index.html`。公式组件与字体均已包含，无需外部 CDN。使用浏览器本地文件打开时，剪贴板等功能可能受浏览器限制；更完整的本机预览方式：
+公式组件与字体均已包含，无需外部 CDN。建议通过正式网址或下面的本机预览方式阅读；直接打开 `site/index.html` 时，浏览器对本地文件来源、安全策略和剪贴板的处理可能不同：
 
 ```sh
 python -m http.server 8765 --directory site
@@ -41,6 +41,8 @@ python -m http.server 8765 --directory site
 ```sh
 python tools/build.py
 node tools/validate.cjs
+node tools/test-learning-state.cjs
+python tools/security_check.py
 ```
 
 生成器只使用 Python 标准库。公式检查使用仓库自带的 KaTeX，无需安装 Node 包。正式发布会自动运行同样的校验。
@@ -76,3 +78,9 @@ tools/validate.cjs     全部公式与交互模型检查
 用小而清晰的更新改善教材：补定义、注明条件、验证单位、重算例题、给出反例、修正图示。新知识点至少应包含“解释—条件—例题—练习—解析”，并记录来源。不要将未写完的目录条目标成完整章节。
 
 更新记录见 [CHANGELOG.md](CHANGELOG.md)，内容审校说明见 [CONTENT_REVIEW.md](CONTENT_REVIEW.md)。第三方组件许可见 [THIRD_PARTY.md](THIRD_PARTY.md) 及对应许可文件。教材内容的后续公开许可由仓库所有者决定。
+
+## 安全与笔记隐私
+
+本次安全检查、修复证据与剩余边界见 [SECURITY_REVIEW.md](SECURITY_REVIEW.md)。笔记与导出备份为明文，不适合保存密码或其他敏感资料，也不要上传到公开仓库。相同 GitHub Pages 用户域名下的其他项目共享浏览器同源存储；不同仓库路径并不能隔离笔记。站点已设置内容安全策略，限制脚本联网和不需要的嵌入功能。
+
+发布组件固定到完整提交版本，升级时应核验官方版本；第三方前端组件升级后需核对官方发行包并更新 `tools/vendor-integrity.json`，不可为通过检查而跳过来源验证。
