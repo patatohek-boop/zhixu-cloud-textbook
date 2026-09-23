@@ -72,6 +72,8 @@ public final class MainActivity extends Activity {
     private boolean busy;
     private boolean backPending;
     private boolean waitingForScript;
+    private boolean engineWarningShown;
+    private int pageGeneration;
     private Uri pendingDocument;
     private int pendingRequest;
 
@@ -176,6 +178,7 @@ public final class MainActivity extends Activity {
     private void createReader(Bundle state) {
         ready = false;
         backPending = false;
+        engineWarningShown = false;
         web = new WebView(this);
         web.setBackgroundColor(Color.rgb(246, 248, 246));
         web.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS);
@@ -231,8 +234,11 @@ public final class MainActivity extends Activity {
     }
 
     private boolean isReader() {
-        Uri uri = parse(web == null ? null : web.getUrl());
-        return ready && isLocalAsset(uri) && "/assets/www/index.html".equals(uri.getPath())
+        return ready && isReaderUrl(parse(web == null ? null : web.getUrl()));
+    }
+
+    private static boolean isReaderUrl(Uri uri) {
+        return isLocalAsset(uri) && "/assets/www/index.html".equals(uri.getPath())
             && uri.getQuery() == null;
     }
 
@@ -259,11 +265,15 @@ public final class MainActivity extends Activity {
         @Override public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
             Uri uri = request.getUrl();
             if ("zhixu".equals(uri.getScheme())) {
-                boolean trusted = request.isForMainFrame() && request.hasGesture() && isReader()
+                boolean knownCommand = "export".equals(uri.getHost()) || "import".equals(uri.getHost())
+                    || "print".equals(uri.getHost());
+                boolean trustedPage = request.isForMainFrame() && isReader() && knownCommand
                     && uri.getUserInfo() == null && uri.getPort() == -1
                     && (uri.getPath() == null || uri.getPath().isEmpty())
                     && uri.getQuery() == null && uri.getFragment() == null;
-                if (trusted) {
+                if (trustedPage && !request.hasGesture()) {
+                    message("当前系统未识别到点击，请使用顶部“应用菜单”完成导入、导出或打印。");
+                } else if (trustedPage) {
                     switch (String.valueOf(uri.getHost())) {
                         case "export": chooseDocument(EXPORT); break;
                         case "import": chooseDocument(IMPORT); break;
@@ -280,11 +290,29 @@ public final class MainActivity extends Activity {
 
         @Override public void onPageStarted(WebView view, String url, android.graphics.Bitmap favicon) {
             ready = false;
+            pageGeneration++;
         }
 
         @Override public void onPageFinished(WebView view, String url) {
-            ready = true;
-            if (pendingDocument != null && isReader()) consumeDocument();
+            // Detect unsupported JavaScript syntax with an ES5-only probe. A finished HTML load
+            // does not imply the textbook scripts ran, especially on old Android 8 WebViews.
+            if (view != web || !isReaderUrl(parse(url)) || !isReaderUrl(parse(view.getUrl()))) return;
+            final int generation = pageGeneration;
+            view.evaluateJavascript("Boolean(window.ZHIXU && typeof window.ZHIXU.exportBackup === 'function' && typeof window.ZHIXU.importBackup === 'function' && typeof window.ZHIXU.flush === 'function' && typeof window.ZHIXU.handleBack === 'function')", result -> {
+                if (!alive() || view != web || generation != pageGeneration
+                        || !isReaderUrl(parse(view.getUrl()))) return;
+                ready = "true".equals(result);
+                if (ready) {
+                    if (pendingDocument != null) consumeDocument();
+                } else if (!engineWarningShown) {
+                    engineWarningShown = true;
+                    new AlertDialog.Builder(MainActivity.this).setTitle("教材未能加载")
+                        .setMessage("当前系统网页组件可能过旧，无法运行教材。请通过手机应用商店更新 Android System WebView（Android 系统 WebView）和 Chrome，然后重新打开本应用。\n\n也可以使用已更新的浏览器打开网页版。若更新组件后仍出现此提示，请重新安装最新版教材。")
+                        .setPositiveButton("打开网页版", (dialog, which) -> openBrowser(Uri.parse(WEBSITE)))
+                        .setNegativeButton("退出", (dialog, which) -> finish())
+                        .setCancelable(false).show();
+                }
+            });
         }
 
         @Override public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
