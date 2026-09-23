@@ -6,3 +6,13 @@ Thumbs.db
 .env.*
 .sites-runtime/
 node_modules/
+android/.gradle/
+android/.kotlin/
+android/local.properties
+android/**/build/
+*.jks
+*.keystore
+*.p12
+*.apk
+*.aab
+*.idsig

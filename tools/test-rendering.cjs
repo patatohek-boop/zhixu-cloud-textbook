@@ -4,11 +4,14 @@ const root=path.resolve(__dirname,'../site');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const scripts=[...html.matchAll(/<script defer src="([^"]+)"/g)].map(x=>x[1]);
 const hostile='</textarea><img src=x onerror="alert(1)"><script>alert(1)</script>';
-function app(hash='',stored){
- const dom=new JSDOM(html,{url:'https://example.test/textbook/'+hash,runScripts:'outside-only',virtualConsole:new VirtualConsole()});
+function app(hash='',stored,android=false){
+ const dom=new JSDOM(html,{url:(android?'https://appassets.androidplatform.net/assets/www/index.html':'https://example.test/textbook/')+hash,runScripts:'outside-only',virtualConsole:new VirtualConsole()});
  const w=dom.window;w.scrollTo=()=>{};w.HTMLElement.prototype.scrollIntoView=()=>{};
  if(stored)w.localStorage.setItem('zhixu-learning-v1',JSON.stringify(stored));
- for(const file of scripts)w.eval(fs.readFileSync(path.join(root,file),'utf8'));
+ for(const file of scripts){
+  if(android&&file==='assets/app.js')w.eval(fs.readFileSync(path.join(root,'../android/web/android-adapter.js'),'utf8'));
+  w.eval(fs.readFileSync(path.join(root,file),'utf8'));
+ }
  return dom;
 }
 const dom=app('#/course/calculus/calculus-03',{notes:{'calculus-03':hostile},answers:{'calculus-03':null}}),w=dom.window,d=w.document;
@@ -61,4 +64,48 @@ for(const id of ['__proto__','constructor','toString']){
 for(const stored of [{answers:{'calculus-03':null},notes:[]},{answers:{'calculus-03':{choice:99}},font:{},completed:{}}]){
  const broken=app('#/course/calculus/calculus-03',stored);assert.ok(broken.window.document.querySelector('#lesson-body'));broken.window.close();
 }
-console.log(JSON.stringify({attack_payloads:attacks.length,lessons,formulas,notes:'escaped',invalid_routes:'handled',lab:'updated',quiz:'correct',status:'passed'},null,2));
+
+// The native wrapper and webpage use the same synchronous, transactional backup API.
+const backupDom=app('#/course/calculus/calculus-03'),bw=backupDom.window,bd=bw.document,api=bw.ZHIXU;
+const note=bd.querySelector('#note-text');note.value='尚未等待自动保存的笔记';note.dispatchEvent(new bw.Event('input'));
+const backup=api.exportBackup();assert.equal(typeof backup,'string');
+const parsed=JSON.parse(backup);assert.equal(parsed.format,'zhixu-learning');assert.equal(parsed.version,1);
+assert.equal(parsed.notes['calculus-03'],note.value);
+assert.equal(JSON.parse(bw.localStorage.getItem('zhixu-learning-v1')).notes['calculus-03'],note.value);
+const imported={...parsed,notes:{'calculus-03':hostile},completed:['calculus-03']};
+const merged=api.importBackup(JSON.stringify(imported));assert.equal(merged.ok,true);assert.equal(merged.merged,1);
+assert.equal(bd.querySelectorAll('#my-notes img,#my-notes script').length,0);
+assert.ok(bd.querySelector('#note-text').value.includes(hostile));
+assert.ok(api.state.completed.includes('calculus-03'));
+assert.equal(api.importBackup(imported).merged,0,'reimport must not duplicate a merged note');
+const liveBefore=JSON.stringify(api.state),storedBefore=bw.localStorage.getItem('zhixu-learning-v1');
+for(const input of ['{bad',{},' '.repeat(10000001),{...parsed,notes:{'calculus-03':false}}]){
+ assert.equal(api.importBackup(input).ok,false);
+ assert.equal(JSON.stringify(api.state),liveBefore);assert.equal(bw.localStorage.getItem('zhixu-learning-v1'),storedBefore);
+}
+const setItem=bw.Storage.prototype.setItem;
+bw.Storage.prototype.setItem=()=>{throw Error('quota exceeded');};
+const failed=api.importBackup({...parsed,notes:{'calculus-03':'写入失败不应追加'}});
+assert.equal(failed.ok,false);assert.match(failed.error,/原记录未更改/);
+assert.equal(JSON.stringify(api.state),liveBefore);assert.equal(bw.localStorage.getItem('zhixu-learning-v1'),storedBefore);
+assert.equal(api.flush(),false);
+bw.Storage.prototype.setItem=setItem;assert.equal(api.flush(),true);
+const searchDialog=bd.querySelector('#search-dialog');searchDialog.close=()=>searchDialog.removeAttribute('open');searchDialog.setAttribute('open','');
+assert.equal(api.handleBack(),true);assert.equal(searchDialog.open,false);
+bd.querySelector('#menu').click();assert.equal(api.handleBack(),true);assert.ok(!bd.querySelector('#course-sidebar').classList.contains('open'));
+bd.querySelector('#focus').click();assert.equal(api.handleBack(),true);assert.ok(!bd.body.classList.contains('focus'));
+assert.equal(api.handleBack(),false);
+backupDom.window.close();
+
+const androidDom=app('#/notebook',undefined,true),aw=androidDom.window,ad=aw.document;
+assert.equal(aw.ZhixuAndroid.isApp,true);assert.match(ad.querySelector('#main').textContent,/与网站不自动同步/);
+let webpageHandlerRan=false;ad.querySelector('#export').onclick=()=>{webpageHandlerRan=true;};
+const exportEvent=new aw.MouseEvent('click',{bubbles:true,cancelable:true});ad.querySelector('#export').dispatchEvent(exportEvent);
+assert.equal(exportEvent.defaultPrevented,true);assert.equal(webpageHandlerRan,false);
+aw.ZhixuAndroid.notify(hostile);assert.equal(ad.querySelector('#toast').textContent,hostile);assert.equal(ad.querySelectorAll('#toast img,#toast script').length,0);
+aw.location.hash='#/about';aw.dispatchEvent(new aw.HashChangeEvent('hashchange'));
+assert.match(ad.querySelector('#main').textContent,/安装包内置的教材版本/);
+assert.match(ad.querySelector('#main').textContent,/独立本地存储/);
+assert.ok(!ad.querySelector('#main').textContent.includes('其他项目共享本地存储边界'));
+androidDom.window.close();
+console.log(JSON.stringify({attack_payloads:attacks.length,lessons,formulas,notes:'escaped',invalid_routes:'handled',lab:'updated',quiz:'correct',backup_api:'transactional',android_adapter:'isolated',back_handler:'passed',status:'passed'},null,2));

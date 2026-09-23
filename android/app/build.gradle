@@ -1,0 +1,47 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'app.zhixu.textbook'
+    compileSdk 37
+
+    defaultConfig {
+        applicationId 'app.zhixu.textbook'
+        minSdk 26
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+        testInstrumentationRunner 'app.zhixu.textbook.TextbookSmokeTest'
+    }
+    buildFeatures { buildConfig true }
+    buildTypes {
+        release {
+            minifyEnabled false
+            // Release artifacts are signed locally; no private key is stored in GitHub.
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets {
+        main.assets.srcDir layout.buildDirectory.dir('generated/textbookAssets')
+    }
+    lint {
+        abortOnError true
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.17.0'
+}
+
+tasks.register('bundleTextbook', Exec) {
+    workingDir rootProject.projectDir.parentFile
+    commandLine 'python', 'tools/bundle_android.py'
+    inputs.dir rootProject.projectDir.parentFile.toPath().resolve('site').toFile()
+    inputs.dir rootProject.projectDir.toPath().resolve('web').toFile()
+    outputs.dir layout.buildDirectory.dir('generated/textbookAssets')
+}
+tasks.named('preBuild').configure { dependsOn 'bundleTextbook' }
