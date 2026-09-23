@@ -94,16 +94,19 @@ jobs:
           adb install android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
           timeout 180 adb shell am instrument -w app.zhixu.textbook.test/app.zhixu.textbook.TextbookSmokeTest | tee work/android-smoke.txt
           grep -q ZHIXU_SMOKE_SUCCESS work/android-smoke.txt
-          adb shell am start -n app.zhixu.textbook/.MainActivity
-          sleep 3
-          adb exec-out screencap -p > work/android-smoke.png
+          adb exec-out run-as app.zhixu.textbook cat files/reader-screen.png > work/android-reader.png
+          test -s work/android-reader.png
+          adb shell am start -W -n app.zhixu.textbook/.MainActivity
+          sleep 15
+          adb exec-out screencap -p > work/android-home.png
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
           name: android-smoke
           path: |
             work/android-smoke.txt
-            work/android-smoke.png
+            work/android-reader.png
+            work/android-home.png
             work/emulator.log
             work/android-logcat.txt
           retention-days: 14

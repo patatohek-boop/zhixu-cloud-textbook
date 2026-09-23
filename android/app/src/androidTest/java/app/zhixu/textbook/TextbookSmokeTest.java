@@ -5,6 +5,7 @@ import android.app.Instrumentation;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
@@ -178,6 +181,28 @@ public final class TextbookSmokeTest extends Instrumentation {
         waitUntil("document.querySelector('#note-text') && document.querySelectorAll('.katex').length > 10", "Formula lesson failed to render");
         require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0")), "Formula rendering errors");
         require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.teaching-figure img').length>0")), "Diagram missing");
+        saveReaderScreenshot();
+    }
+
+    private void saveReaderScreenshot() throws Exception {
+        CountDownLatch visualReady = new CountDownLatch(1);
+        runOnMainSync(() -> web.postVisualStateCallback(SystemClock.uptimeMillis(), new WebView.VisualStateCallback() {
+            @Override public void onComplete(long requestId) { visualReady.countDown(); }
+        }));
+        require(visualReady.await(15, TimeUnit.SECONDS), "Reader visual frame timed out");
+        // The callback guarantees readiness for the next draw; allow the compositor to present it.
+        SystemClock.sleep(300);
+        android.app.UiAutomation automation = getUiAutomation();
+        require(automation != null, "Screenshot automation unavailable");
+        Bitmap screenshot = automation.takeScreenshot();
+        require(screenshot != null, "Reader screenshot unavailable");
+        File destination = new File(getTargetContext().getFilesDir(), "reader-screen.png");
+        try (FileOutputStream output = new FileOutputStream(destination)) {
+            require(screenshot.compress(Bitmap.CompressFormat.PNG, 100, output), "Reader screenshot encoding failed");
+            output.flush();
+        } finally {
+            screenshot.recycle();
+        }
     }
 
     private void invalidRoute() throws Exception {

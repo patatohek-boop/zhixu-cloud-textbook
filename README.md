@@ -18,7 +18,7 @@ python -m http.server 8765 --directory site
 
 ## 教材功能
 
-安卓离线 App 的安装、备份迁移和构建说明见 [ANDROID.md](ANDROID.md)；正式签名安装包通过仓库 Releases 提供。
+安卓离线 App：[下载 Android 1.0.0 APK](https://github.com/patatohek-boop/zhixu-cloud-textbook/releases/tag/android-v1.0.0)。安装、备份迁移和持续构建说明见 [ANDROID.md](ANDROID.md)。
 
 - 课程书架、分组目录、前后课导航、先修关系与学习路线。
 - 全文搜索、公式排版、代码复制、折叠例题解析、即时自测反馈。
