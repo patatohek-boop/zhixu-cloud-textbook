@@ -77,17 +77,22 @@ jobs:
       - name: Prepare emulator
         run: |
           sdkmanager 'emulator' 'system-images;android-35;google_apis;x86_64'
-          echo no | avdmanager create avd --force --name zhixu-test --package 'system-images;android-35;google_apis;x86_64'
+          export ANDROID_AVD_HOME="$RUNNER_TEMP/zhixu-avd"
+          mkdir -p "$ANDROID_AVD_HOME"
+          echo "ANDROID_AVD_HOME=$ANDROID_AVD_HOME" >> "$GITHUB_ENV"
+          echo no | avdmanager create avd --force --name zhixu-test --device pixel_2 --path "$ANDROID_AVD_HOME/zhixu-test.avd" --package 'system-images;android-35;google_apis;x86_64'
+          "$ANDROID_HOME/emulator/emulator" -list-avds | grep -x zhixu-test
       - name: Verify offline app on Android 15
         timeout-minutes: 10
         run: |
-          "$ANDROID_HOME/emulator/emulator" -avd zhixu-test -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader_indirect -camera-back none -camera-front none > work/emulator.log 2>&1 &
-          adb wait-for-device
+          trap 'timeout 15 adb logcat -d > work/android-logcat.txt 2>&1 || true; tail -60 work/emulator.log || true' EXIT
+          "$ANDROID_HOME/emulator/emulator" -avd zhixu-test -no-window -no-audio -no-boot-anim -no-snapshot -gpu software -camera-back none -camera-front none > work/emulator.log 2>&1 &
+          timeout 90 adb wait-for-device
           timeout 240 bash -c 'until [ "$(adb shell getprop sys.boot_completed | tr -d "\r")" = "1" ]; do sleep 3; done'
           adb shell input keyevent 82
           adb install android/app/build/outputs/apk/debug/app-debug.apk
           adb install android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-          adb shell am instrument -w app.zhixu.textbook.test/app.zhixu.textbook.TextbookSmokeTest | tee work/android-smoke.txt
+          timeout 180 adb shell am instrument -w app.zhixu.textbook.test/app.zhixu.textbook.TextbookSmokeTest | tee work/android-smoke.txt
           grep -q ZHIXU_SMOKE_SUCCESS work/android-smoke.txt
           adb shell am start -n app.zhixu.textbook/.MainActivity
           sleep 3
@@ -100,4 +105,5 @@ jobs:
             work/android-smoke.txt
             work/android-smoke.png
             work/emulator.log
+            work/android-logcat.txt
           retention-days: 14
