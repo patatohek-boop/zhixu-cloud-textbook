@@ -56,6 +56,8 @@ jobs:
           cp android/app/build/outputs/apk/debug/app-debug.apk work/android-artifact/
           cp android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk work/android-artifact/
           git rev-parse HEAD > work/android-artifact/source-commit.txt
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging android/app/build/outputs/apk/release/app-release-unsigned.apk > work/android-artifact/apk-metadata.txt
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump permissions android/app/build/outputs/apk/release/app-release-unsigned.apk > work/android-artifact/apk-permissions.txt
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: android-unsigned

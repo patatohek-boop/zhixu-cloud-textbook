@@ -26,7 +26,8 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
     sourceSets {
-        main.assets.srcDir layout.buildDirectory.dir('generated/textbookAssets')
+        // AGP 9 rejects Provider values in SourceSet; preBuild owns generation below.
+        main.assets.srcDir layout.buildDirectory.dir('generated/textbookAssets').get().asFile
     }
     lint {
         abortOnError true
