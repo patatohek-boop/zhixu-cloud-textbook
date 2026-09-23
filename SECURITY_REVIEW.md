@@ -30,10 +30,11 @@
 
 1. **学习笔记是浏览器本地明文。** 同一 `patatohek-boop.github.io` 域名下的其他项目共享同源存储边界，仓库路径不形成隔离。本站没有上传笔记的代码，但同源的不可信网站或恶意浏览器扩展可能读取它们。不要在笔记或备份中保存密码、令牌、身份证件等敏感资料；备份也不要提交到公开仓库。参见 [浏览器同源存储规则](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)。
 2. **仓库及网站公开。** 课文和源码对外可读；GitHub 仍可能记录常规访问日志。GitHub 凭据不包含在网页或仓库中。
-3. **main 尚未配置分支保护。** 有写入权限的账号可以直接更改并发布网站；网站无法阻止仓库拥有者账号被接管。为保持单人更新流程，本轮没有开启会阻止直接更新的强制审核规则。账户双重验证状态不在本次检查范围内。
+3. **main 已启用分支保护。** 2026-09-23 已通过 GitHub 接口写入并读回确认：禁止强制推送和删除；更新必须经过合并请求，且通过 GitHub Actions 提供的 `Textbook validation` 检查；合并前须与主分支保持同步，规则也适用于管理员。为兼容单人维护，不要求另一人批准。拥有管理员权限的身份仍能修改保护设置，因此不能替代账号安全。账户双重验证由拥有者在个人安全页面配置，本报告不宣称已核验其状态。更新步骤见 [安全维护指南](SECURITY_MAINTENANCE.md)。
 4. **部分响应头受 GitHub Pages 托管限制。** 已观察到 HTTPS 与 HSTS；没有 `X-Frame-Options` / `frame-ancestors` 响应头，因此未宣称完全防止他站嵌入。`frame-ancestors` 不能用 HTML meta 生效，不能通过添加无效配置解决。若未来增加敏感操作，可采用支持自定义响应头的独立域名/托管。参见 [frame-ancestors 限制](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors)。
 5. 为 KaTeX 和动态布局保留内联样式权限，但未开放内联脚本或 eval。`script-src 'self'` 不是同源代码被篡改后的保护罩；文件哈希检查也不能替代上游漏洞维护。
 6. 当前 vendor 组件没有自动升级；GitHub 依赖告警未启用，且静态复制的组件不能只靠常规包管理器扫描识别。更新时需核验官方公告、精确版本与完整性记录，不能把“当前无告警”理解为长期安全保证。
+7. **后续版本已启用不可变发布。** 2026-09-23 已读回确认仓库 `immutable-releases.enabled=true`。新版本应先创建草稿、上传并核验 APK 和校验文件，再发布锁定附件与标签。设置不追溯已有版本：`android-v1.0.0` 仍为 `immutable=false`，其正式 APK 和下载地址未改动。
 
 ## 维护者复核
 
