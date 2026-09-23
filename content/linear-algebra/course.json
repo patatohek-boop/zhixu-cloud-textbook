@@ -1,0 +1,43 @@
+{
+  "id": "linear-algebra",
+  "title": "线性代数",
+  "enTitle": "Linear Algebra",
+  "icon": "⊞",
+  "color": "#4769A3",
+  "description": "从方程组与向量开始，理解空间、投影、谱分解和数据降维。建立面向工程计算与机器学习的本科核心基础。",
+  "prerequisites": [
+    "初等代数",
+    "平面坐标与方程"
+  ],
+  "sources": [
+    {
+      "title": "MIT OCW 18.06SC · Linear Algebra",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/",
+      "scope": "用于核对方程组、四个基本子空间、最小二乘、谱理论、正定性与 SVD 等课程主题；讲解和例题为原创。"
+    }
+  ],
+  "lessons": [
+    "linear-algebra-01.md",
+    "linear-algebra-02.md",
+    "linear-algebra-03.md",
+    "linear-algebra-04.md",
+    "linear-algebra-05.md",
+    "linear-algebra-06.md",
+    "linear-algebra-07.md",
+    "linear-algebra-08.md",
+    "linear-algebra-09.md",
+    "linear-algebra-10.md",
+    "linear-algebra-11.md",
+    "linear-algebra-12.md",
+    "linear-algebra-13.md",
+    "linear-algebra-14.md",
+    "linear-algebra-15.md",
+    "linear-algebra-16.md",
+    "linear-algebra-17.md",
+    "linear-algebra-18.md",
+    "linear-algebra-19.md",
+    "linear-algebra-20.md",
+    "linear-algebra-21.md",
+    "linear-algebra-22.md"
+  ]
+}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" role="img" aria-labelledby="fundamental-theorem-title fundamental-theorem-desc">
+<title id="fundamental-theorem-title">积分基本定理：累积的变化率</title><desc id="fundamental-theorem-desc">绿色区域为从零到二的积分，橙色区域为二到二点五的新增面积。窄条平均高度在宽度趋零时趋于函数在左端的值。</desc>
+<defs>
+<marker id="fundamental-theorem-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker>
+<marker id="fundamental-theorem-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent,#155f52)"/></marker>
+<marker id="fundamental-theorem-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--blue,#266f9b)"/></marker>
+<marker id="fundamental-theorem-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#bd7148"/></marker>
+</defs>
+<g font-family="'Noto Sans CJK SC','Microsoft YaHei',Arial,sans-serif" font-size="18" fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+<text x="240" y="27" text-anchor="middle" font-size="20" font-weight="650">积分基本定理：累积的变化率</text>
+<g stroke="currentColor" stroke-width="1.4" opacity=".45"><line x1="66" y1="218" x2="427" y2="218" marker-end="url(#fundamental-theorem-arrow)"/><line x1="76" y1="224" x2="76" y2="54" marker-end="url(#fundamental-theorem-arrow)"/></g><text x="425" y="241" text-anchor="end">t</text><text x="61" y="58" text-anchor="end">f</text>
+<path d="M76 218 L76 175 L216 132 L216 218 Z" fill="var(--accent,#155f52)" opacity=".15"/>
+<path d="M216 218 L216 132 L251 121.25 L251 218 Z" fill="#bd7148" opacity=".3" stroke="#bd7148" stroke-width="1.8"/>
+<line x1="76" y1="175" x2="398" y2="76.1" stroke="var(--accent,#155f52)" stroke-width="3"/>
+<text x="203" y="64" >f(t)=1+t/2</text>
+<text x="137" y="188" text-anchor="middle" fill="var(--accent,#155f52)" font-size="21">A(x)</text>
+<text x="300" y="149" >新增面积</text>
+<line x1="297" y1="154" x2="248" y2="168" stroke="currentColor" opacity=".7" marker-end="url(#fundamental-theorem-arrow)"/>
+<line x1="216" y1="132" x2="216" y2="218" stroke="currentColor" opacity=".35" stroke-dasharray="4 4"/>
+<text x="76" y="241" text-anchor="middle">0</text><text x="216" y="241" text-anchor="middle">2</text><text x="251" y="241" text-anchor="middle">2.5</text>
+<text x="304" y="209" >Δx=0.5</text>
+<text x="240" y="268" text-anchor="middle">A′(x)=f(x)：新增面积 ÷ Δx → 高度</text>
+</g></svg>

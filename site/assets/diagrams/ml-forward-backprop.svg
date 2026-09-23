@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="backprop-title backprop-desc">
+<title id="backprop-title">神经网络前向计算与反向传播</title>
+<desc id="backprop-desc">输入二经过权重一得到隐藏量二，再经过权重三得到预测六。目标四，平方损失为二。反向计算损失对预测的导数为二，对隐藏量的导数为六，对权重 v 的导数为四，对权重 w 的导数为十二。</desc>
+<defs>
+<marker id="backprop-arrow-g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#155f52"/></marker>
+<marker id="backprop-arrow-b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#266f9b"/></marker>
+<marker id="backprop-arrow-r" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#bd7148"/></marker>
+<style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC","PingFang SC",sans-serif;fill:#203b35;font-size:18px}.title{font-size:22px;font-weight:700}.muted{fill:#586f68}.green{fill:#155f52}.blue{fill:#266f9b}.rust{fill:#bd7148}.strong{font-weight:700}.mono{font-family:Consolas,"Microsoft YaHei",monospace}</style>
+</defs>
+<rect width="640" height="360" rx="12" fill="#ffffff"/>
+<rect x="1" y="1" width="638" height="358" rx="11" fill="none" stroke="#dbe5e0"/>
+
+<style>text{font-size:24px}.title{font-size:27px}.formula{font-family:Cambria,"Times New Roman","Microsoft YaHei",serif}</style>
+<text x="24" y="38" class="title">先算结果，再传回梯度</text>
+<text x="24" y="73" class="formula muted">h = wx，ŷ = vh，L = (ŷ − y)² / 2</text>
+<rect x="24" y="96" width="116" height="86" rx="10" fill="#eaf3ef" stroke="#155f52"/>
+<rect x="176" y="96" width="116" height="86" rx="10" fill="#eaf3ef" stroke="#155f52"/>
+<rect x="328" y="96" width="116" height="86" rx="10" fill="#eef5f9" stroke="#266f9b"/>
+<rect x="480" y="96" width="136" height="86" rx="10" fill="#faf1ea" stroke="#bd7148"/>
+<text x="82" y="127" text-anchor="middle" class="green strong">输入</text>
+<text x="82" y="162" text-anchor="middle" class="formula">x = 2</text>
+<text x="234" y="127" text-anchor="middle" class="green strong">隐藏量</text>
+<text x="234" y="162" text-anchor="middle" class="formula">h = 2</text>
+<text x="386" y="127" text-anchor="middle" class="blue strong">输出</text>
+<text x="386" y="162" text-anchor="middle" class="formula">ŷ = 6</text>
+<text x="548" y="127" text-anchor="middle" class="rust strong">损失</text>
+<text x="548" y="162" text-anchor="middle" class="formula">L = 2</text>
+<path d="M142 140H173" stroke="#155f52" stroke-width="2.8" marker-end="url(#backprop-arrow-g)"/>
+<path d="M294 140H325" stroke="#155f52" stroke-width="2.8" marker-end="url(#backprop-arrow-g)"/>
+<path d="M446 140H477" stroke="#155f52" stroke-width="2.8" marker-end="url(#backprop-arrow-g)"/>
+<text x="234" y="216" text-anchor="middle" class="formula green">w = 1</text>
+<text x="386" y="216" text-anchor="middle" class="formula green">v = 3</text>
+<text x="548" y="216" text-anchor="middle" class="formula muted">y = 4</text>
+<path d="M548 229V282H234" fill="none" stroke="#bd7148" stroke-width="3" marker-end="url(#backprop-arrow-r)"/>
+<text x="420" y="265" class="formula rust">∂L/∂ŷ = 2</text>
+<text x="202" y="265" class="formula rust">∂L/∂h = 6</text>
+<path d="M234 285V309M386 285V309" stroke="#bd7148" stroke-width="2"/>
+<text x="154" y="337" class="formula rust">∂L/∂w = 12</text>
+<text x="352" y="337" class="formula rust">∂L/∂v = 4</text>
+</svg>

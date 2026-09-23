@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" role="img" aria-labelledby="epsilon-delta-title epsilon-delta-desc">
+<title id="epsilon-delta-title">极限：先限制输出误差</title><desc id="epsilon-delta-desc">横坐标 1.5 至 2.5 的绿色带与纵坐标 4 至 6 的蓝色带，展示 δ=0.5 对应 ε=1。函数通过点 (2,5)。</desc>
+<defs>
+<marker id="epsilon-delta-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker>
+<marker id="epsilon-delta-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent,#155f52)"/></marker>
+<marker id="epsilon-delta-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--blue,#266f9b)"/></marker>
+<marker id="epsilon-delta-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#bd7148"/></marker>
+</defs>
+<g font-family="'Noto Sans CJK SC','Microsoft YaHei',Arial,sans-serif" font-size="18" fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+<text x="240" y="27" text-anchor="middle" font-size="20" font-weight="650">极限：先限制输出误差</text>
+<rect x="205" y="54" width="90" height="166" fill="var(--accent,#155f52)" opacity=".10"/>
+<rect x="70" y="112" width="360" height="36" fill="var(--blue,#266f9b)" opacity=".13"/>
+<g stroke="currentColor" stroke-width="1.4" opacity=".45"><line x1="60" y1="220" x2="442" y2="220" marker-end="url(#epsilon-delta-arrow)"/><line x1="70" y1="226" x2="70" y2="48" marker-end="url(#epsilon-delta-arrow)"/></g><text x="440" y="243" text-anchor="end">x</text><text x="55" y="52" text-anchor="end">y</text>
+<g stroke="var(--blue,#266f9b)" stroke-width="1.3" stroke-dasharray="5 5"><line x1="70" y1="148" x2="430" y2="148" /><line x1="70" y1="112" x2="430" y2="112" /></g>
+<g stroke="var(--accent,#155f52)" stroke-width="1.3" stroke-dasharray="5 5"><line x1="205" y1="54" x2="205" y2="220" /><line x1="295" y1="54" x2="295" y2="220" /></g>
+<line x1="70" y1="202" x2="430" y2="58" stroke="var(--accent,#155f52)" stroke-width="3"/>
+<line x1="70" y1="130" x2="250" y2="130" stroke="currentColor" opacity=".3" stroke-dasharray="3 5"/>
+<circle cx="250" cy="130" r="5" fill="var(--accent,#155f52)"/>
+<text x="100" y="69" >f(x)=2x+1</text>
+<text x="84" y="104" fill="var(--blue,#266f9b)">ε=1</text>
+<text x="310" y="208" fill="var(--accent,#155f52)">δ=0.5</text>
+<text x="57" y="154" text-anchor="end">4</text><text x="57" y="136" text-anchor="end">5</text><text x="57" y="118" text-anchor="end">6</text>
+<text x="205" y="244" text-anchor="middle">1.5</text><text x="250" y="244" text-anchor="middle">2</text><text x="295" y="244" text-anchor="middle">2.5</text>
+<text x="240" y="269" text-anchor="middle">|x−2| &lt; 0.5 ⇒ |f(x)−5| &lt; 1</text>
+</g></svg>

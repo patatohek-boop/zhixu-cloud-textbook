@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 468" width="640" height="468" role="img" aria-labelledby="wall-title wall-desc">
+<title id="wall-title">复合平壁及其串联热阻网络</title>
+<desc id="wall-desc">上图热量从热空气依次经过内侧对流、两层不同导热系数的墙体、外侧对流流向冷空气。下图同一热路等效为四个串联热阻，面积为相同的A，稳态无内热源。</desc>
+<defs>
+<marker id="wall-g" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#155f52"/></marker>
+<marker id="wall-b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#266f9b"/></marker>
+<marker id="wall-o" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#bd7148"/></marker>
+<marker id="wall-gray" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L7 3.5L0 7Z" fill="#526760"/></marker>
+</defs>
+<rect width="640" height="468" rx="16" fill="#ffffff"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif" font-size="18" fill="#183f38" stroke-linecap="round" stroke-linejoin="round">
+
+<text x="320" y="34" text-anchor="middle" font-size="22" font-weight="600">复合平壁与串联热阻</text>
+<rect x="208" y="79" width="102" height="169" fill="#e4eee8" stroke="#155f52" stroke-width="2"/>
+<rect x="310" y="79" width="116" height="169" fill="#edf5fb" stroke="#266f9b" stroke-width="2"/>
+<text x="259" y="108" text-anchor="middle">材料 1</text><text x="368" y="108" text-anchor="middle">材料 2</text>
+<text x="259" y="137" text-anchor="middle">k₁</text><text x="368" y="137" text-anchor="middle">k₂</text>
+<text x="94" y="106" text-anchor="middle" fill="#bd7148">热空气</text><text x="94" y="135" text-anchor="middle" fill="#bd7148">T∞,₁；h₁</text>
+<text x="543" y="106" text-anchor="middle" fill="#266f9b">冷空气</text><text x="543" y="135" text-anchor="middle" fill="#266f9b">T∞,₂；h₂</text>
+<path d="M85 184H543" stroke="#bd7148" stroke-width="3.5" fill="none" marker-end="url(#wall-o)"/>
+<rect x="276" y="163" width="82" height="37" rx="7" fill="#ffffff"/>
+<text x="317" y="188" text-anchor="middle" fill="#bd7148">热流 Q̇</text>
+<text x="208" y="272" text-anchor="middle" font-size="17">Ts,₁</text><text x="310" y="272" text-anchor="middle" font-size="17">Ti</text><text x="426" y="272" text-anchor="middle" font-size="17">Ts,₂</text>
+<path d="M208 284V299M310 284V299M426 284V299M208 291H426" stroke="#526760" stroke-width="1.5" fill="none"/>
+<rect x="245" y="281" width="27" height="23" fill="#ffffff"/><rect x="355" y="281" width="27" height="23" fill="#ffffff"/>
+<text x="259" y="299" text-anchor="middle" font-size="16">L₁</text><text x="369" y="299" text-anchor="middle" font-size="16">L₂</text>
+<path d="M42 364H600" stroke="#526760" stroke-width="2" fill="none"/>
+<rect x="76" y="350" width="61" height="28" rx="3" fill="#fbefe7" stroke="#bd7148" stroke-width="2"/>
+<rect x="194" y="350" width="61" height="28" rx="3" fill="#eef6f2" stroke="#155f52" stroke-width="2"/>
+<rect x="326" y="350" width="61" height="28" rx="3" fill="#edf5fb" stroke="#266f9b" stroke-width="2"/>
+<rect x="471" y="350" width="61" height="28" rx="3" fill="#edf5fb" stroke="#266f9b" stroke-width="2"/>
+<text x="106" y="337" text-anchor="middle" font-size="16">1/(h₁A)</text><text x="225" y="337" text-anchor="middle" font-size="16">L₁/(k₁A)</text>
+<text x="357" y="337" text-anchor="middle" font-size="16">L₂/(k₂A)</text><text x="502" y="337" text-anchor="middle" font-size="16">1/(h₂A)</text>
+<g fill="#183f38"><circle cx="42" cy="364" r="4"/><circle cx="166" cy="364" r="4"/><circle cx="287" cy="364" r="4"/><circle cx="425" cy="364" r="4"/><circle cx="600" cy="364" r="4"/></g>
+<text x="42" y="406" text-anchor="middle" font-size="16">T∞,₁</text><text x="166" y="406" text-anchor="middle" font-size="16">Ts,₁</text><text x="287" y="406" text-anchor="middle" font-size="16">Ti</text><text x="425" y="406" text-anchor="middle" font-size="16">Ts,₂</text><text x="600" y="406" text-anchor="middle" font-size="16">T∞,₂</text>
+<text x="320" y="450" text-anchor="middle" font-size="16">稳态、无内热源、各层面积 A 相同；同一热流经过各热阻</text>
+</g></svg>

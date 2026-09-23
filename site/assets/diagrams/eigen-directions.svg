@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" role="img" aria-labelledby="eigen-directions-title eigen-directions-desc">
+<title id="eigen-directions-title">特征向量：方向不变，只作伸缩</title><desc id="eigen-directions-desc">矩阵为两行两列，元素依次是 2、1、1、2。向量 (1,1) 映成 (3,3)，向量 (1,-1) 保持原值，两条特征直线互相垂直。</desc>
+<defs>
+<marker id="eigen-directions-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker>
+<marker id="eigen-directions-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent,#155f52)"/></marker>
+<marker id="eigen-directions-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--blue,#266f9b)"/></marker>
+<marker id="eigen-directions-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#bd7148"/></marker>
+</defs>
+<g font-family="'Noto Sans CJK SC','Microsoft YaHei',Arial,sans-serif" font-size="18" fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+<text x="240" y="27" text-anchor="middle" font-size="20" font-weight="650">特征向量：方向不变，只作伸缩</text>
+<g stroke="currentColor" stroke-width="1.4" opacity=".45"><line x1="110" y1="160" x2="322" y2="160" marker-end="url(#eigen-directions-arrow)"/><line x1="180" y1="239" x2="180" y2="42" marker-end="url(#eigen-directions-arrow)"/></g><text x="320" y="183" text-anchor="end">x</text><text x="165" y="46" text-anchor="end">y</text>
+<g stroke-width="1.2" stroke-dasharray="4 5" opacity=".35">
+<line x1="120.5" y1="219.5" x2="299" y2="41" stroke="var(--accent,#155f52)"/>
+<line x1="127.5" y1="107.5" x2="253.5" y2="233.5" stroke="var(--blue,#266f9b)"/>
+</g>
+<line x1="180" y1="160" x2="285" y2="55" stroke="var(--accent,#155f52)" stroke-width="3.2" marker-end="url(#eigen-directions-green)"/>
+<line x1="180" y1="160" x2="215" y2="125" stroke="#bd7148" stroke-width="4" marker-end="url(#eigen-directions-orange)"/>
+<line x1="180" y1="160" x2="215" y2="195" stroke="var(--blue,#266f9b)" stroke-width="3" marker-end="url(#eigen-directions-blue)"/>
+<text x="298" y="59" fill="var(--accent,#155f52)">Av₁=(3,3)</text>
+<text x="298" y="85" >λ₁=3</text>
+<text x="231" y="130" >v₁=(1,1)</text>
+<text x="227" y="207" fill="var(--blue,#266f9b)">Av₂=v₂=(1,−1)</text>
+<text x="36" y="77" >A=</text>
+<path d="M78 48 H72 V102 H78 M137 48 H143 V102 H137" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="90" y="70" text-anchor="middle">2</text><text x="124" y="70" text-anchor="middle">1</text><text x="90" y="94" text-anchor="middle">1</text><text x="124" y="94" text-anchor="middle">2</text>
+<text x="240" y="268" text-anchor="middle">沿 v₁ 放大 3 倍；沿 v₂ 保持长度</text>
+</g></svg>

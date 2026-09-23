@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" role="img" aria-labelledby="local-linear-title local-linear-desc">
+<title id="local-linear-title">导数：用切线做局部预测</title><desc id="local-linear-desc">绿色抛物线和蓝色切线在 (1,1) 相切。x=1.6 时，实际函数值 2.56 与切线值 2.20 相差 0.36。</desc>
+<defs>
+<marker id="local-linear-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker>
+<marker id="local-linear-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent,#155f52)"/></marker>
+<marker id="local-linear-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--blue,#266f9b)"/></marker>
+<marker id="local-linear-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#bd7148"/></marker>
+</defs>
+<g font-family="'Noto Sans CJK SC','Microsoft YaHei',Arial,sans-serif" font-size="18" fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+<text x="240" y="27" text-anchor="middle" font-size="20" font-weight="650">导数：用切线做局部预测</text>
+<g stroke="currentColor" stroke-width="1.4" opacity=".45"><line x1="55" y1="222" x2="448" y2="222" marker-end="url(#local-linear-arrow)"/><line x1="65" y1="228" x2="65" y2="42" marker-end="url(#local-linear-arrow)"/></g><text x="446" y="245" text-anchor="end">x</text><text x="50" y="46" text-anchor="end">y</text>
+<polyline points="65,222 69.25,221.9725 73.5,221.89 77.75,221.7525 82,221.56 86.25,221.3125 90.5,221.01 94.75,220.6525 99,220.24 103.25,219.7725 107.5,219.25 111.75,218.6725 116,218.04 120.25,217.3525 124.5,216.60999999999999 128.75,215.8125 133,214.96 137.25,214.0525 141.5,213.09 145.75,212.0725 150,211 154.25,209.8725 158.5,208.69 162.75,207.4525 167,206.16 171.25,204.8125 175.5,203.41 179.75,201.9525 184,200.44 188.25,198.8725 192.5,197.25 196.75000000000003,195.5725 201,193.84 205.25,192.0525 209.50000000000003,190.20999999999998 213.75,188.3125 218.00000000000003,186.35999999999999 222.25,184.3525 226.5,182.29 230.75000000000003,180.17249999999999 235,178 239.25000000000003,175.77249999999998 243.5,173.49 247.75,171.1525 252.00000000000003,168.76 256.25,166.3125 260.5,163.81 264.75,161.2525 269,158.64 273.25,155.97249999999997 277.5,153.25 281.75,150.47249999999997 286,147.64 290.25,144.7525 294.5,141.81 298.75,138.8125 303,135.76 307.25,132.65249999999997 311.5,129.48999999999998 315.75,126.2725 320,123 324.25,119.67250000000001 328.50000000000006,116.28999999999996 332.75000000000006,112.85249999999996 337,109.35999999999999 341.25,105.8125 345.5,102.21000000000001 349.75000000000006,98.55249999999995 354.00000000000006,94.83999999999997 358.25,91.07249999999999 362.5,87.25 366.75,83.3725 371.00000000000006,79.43999999999994 375.25000000000006,75.45249999999996 379.5,71.41 383.75,67.3125 388,63.16 392.25000000000006,58.95249999999996 396.50000000000006,54.68999999999997 400.75,50.3725 405,46 409.25,41.57249999999999 413.50000000000006,37.08999999999995 417.75000000000006,32.55249999999995 422,27.95999999999998" fill="none" stroke="var(--accent,#155f52)" stroke-width="3"/>
+<line x1="150" y1="222" x2="422" y2="81.19999999999999" stroke="var(--blue,#266f9b)" stroke-width="2.6"/>
+<g stroke="currentColor" opacity=".35" stroke-dasharray="4 5"><line x1="235" y1="178" x2="235" y2="222" /><line x1="337" y1="109.36" x2="337" y2="222" /></g>
+<line x1="337" y1="125.19999999999999" x2="337" y2="109.36" stroke="#bd7148" stroke-width="4"/>
+<line x1="332" y1="125.19999999999999" x2="342" y2="125.19999999999999" stroke="#bd7148" stroke-width="2"/>
+<line x1="332" y1="109.36" x2="342" y2="109.36" stroke="#bd7148" stroke-width="2"/>
+<circle cx="235" cy="178" r="5" fill="var(--accent,#155f52)"/>
+<text x="377" y="44" fill="var(--accent,#155f52)">y=x²</text>
+<text x="80" y="102" fill="var(--blue,#266f9b)">切线 y=2x−1</text>
+<text x="350" y="125" >误差 h²</text>
+<text x="246" y="175" >a=1</text>
+<text x="235" y="245" text-anchor="middle">1</text><text x="337" y="245" text-anchor="middle">1.6</text>
+<line x1="235" y1="211" x2="337" y2="211" stroke="currentColor" opacity=".6" stroke-width="1.4"/>
+<text x="286" y="204" text-anchor="middle">h=0.6</text>
+<text x="240" y="269" text-anchor="middle">x=1.6：真值 2.56，线性近似 2.20</text>
+</g></svg>

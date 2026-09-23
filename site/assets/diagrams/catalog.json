@@ -1,0 +1,134 @@
+[
+  {
+    "file": "epsilon-delta.svg",
+    "course": "calculus",
+    "lesson": "calculus-02",
+    "caption": "对 f(x)=2x+1，在 a=2、L=5 处，δ=0.5 将函数值限制在 5±1 的输出带内。"
+  },
+  {
+    "file": "local-linear.svg",
+    "course": "calculus",
+    "lesson": "calculus-03",
+    "caption": "y=x² 在 a=1 处的切线为 y=2x−1；向右移动 h=0.6 后，线性近似少估 h²=0.36。"
+  },
+  {
+    "file": "fundamental-theorem.svg",
+    "course": "calculus",
+    "lesson": "calculus-07",
+    "caption": "A(x) 是从 0 到 x 的累积面积。新增的窄条面积除以宽度 Δx，在 Δx→0 时趋于当前位置的高度 f(x)。"
+  },
+  {
+    "file": "gradient-contours.svg",
+    "course": "calculus",
+    "lesson": "calculus-16",
+    "caption": "f=x²+2y² 的等高线为椭圆。P=(1,1) 位于 f=3 上，梯度 (2,4) 与切向 (2,−1) 正交。"
+  },
+  {
+    "file": "jacobian-area.svg",
+    "course": "calculus",
+    "lesson": "calculus-19",
+    "caption": "变换 x=2u+v、y=v 将单位正方形变为面积为 2 的平行四边形；Jacobian 行列式为 2。"
+  },
+  {
+    "file": "projection-residual.svg",
+    "course": "linear-algebra",
+    "lesson": "linear-algebra-10",
+    "caption": "目标 b=(3,1) 投影到 y=x，得到 p=(2,2)，剩余 e=(1,−1) 与目标直线正交。"
+  },
+  {
+    "file": "eigen-directions.svg",
+    "course": "linear-algebra",
+    "lesson": "linear-algebra-13",
+    "caption": "A=[[2,1],[1,2]] 的两个特征方向为 (1,1) 与 (1,−1)，伸缩倍数分别为 3 和 1。"
+  },
+  {
+    "file": "svd-ellipse.svg",
+    "course": "linear-algebra",
+    "lesson": "linear-algebra-18",
+    "caption": "单位圆先经 Vᵀ 旋转后仍为圆，再被 Σ=diag(2,1) 变为半轴 2 与 1 的椭圆，最后经 U 旋转 30°。"
+  },
+  {
+    "file": "thermo-boundaries.svg",
+    "course": "thermodynamics",
+    "lesson": "thermodynamics-01",
+    "caption": "图 1　选择边界决定能量账本的形式。闭口系统不允许质量穿越边界；控制体的质量流还会携带焓、动能与势能。"
+  },
+  {
+    "file": "thermo-engine-heat-pump.svg",
+    "course": "thermodynamics",
+    "lesson": "thermodynamics-10",
+    "caption": "图 2　热机与热泵共享能量守恒，却具有相反的功方向。图中 Q_H、Q_L 和 W 均取正的大小。"
+  },
+  {
+    "file": "thermo-pv-work.svg",
+    "course": "thermodynamics",
+    "lesson": "thermodynamics-05",
+    "caption": "图 3　准平衡膨胀的边界功等于 ∫p dV。对相同体积起终点，过程曲线不同，功也可不同。"
+  },
+  {
+    "file": "heat-composite-wall.svg",
+    "course": "heat-transfer",
+    "lesson": "heat-transfer-03",
+    "caption": "图 4　同一热流依次经过两侧对流与两层导热热阻。各段温降等于该段热阻乘总热流率。"
+  },
+  {
+    "file": "heat-fin.svg",
+    "course": "heat-transfer",
+    "lesson": "heat-transfer-06",
+    "caption": "图 5　肋片增加换热面积，但沿程温降使远端面积的贡献较小。下图采用绝热端部模型。"
+  },
+  {
+    "file": "heat-boundary-layer.svg",
+    "course": "heat-transfer",
+    "lesson": "heat-transfer-11",
+    "caption": "图 6　对流换热最终由壁面附近的温度梯度传递。左侧展示空间中的边界层，右侧是某位置的温度剖面，两图横轴含义不同。"
+  },
+  {
+    "file": "heat-radiation-view-factor.svg",
+    "course": "heat-transfer",
+    "lesson": "heat-transfer-21",
+    "caption": "图 7　角系数来自表面间的可见性、相对方向和距离。互易关系是 A₁F₁₂=A₂F₂₁，不能一般地写成 F₁₂=F₂₁。"
+  },
+  {
+    "file": "heat-counterflow-profile.svg",
+    "course": "heat-transfer",
+    "lesson": "heat-transfer-23",
+    "caption": "图 8　按同一空间坐标绘制逆流温度，冷热两条线可以同时向右降低，因为冷流体实际向左流动。两端温差分别为 50 K 与 40 K。"
+  },
+  {
+    "file": "python-object-alias.svg",
+    "course": "python",
+    "lesson": "python-02",
+    "caption": "a 与 b 指向同一列表：通过任一名字修改列表内容，另一名字也能观察到变化。"
+  },
+  {
+    "file": "python-function-scope.svg",
+    "course": "python",
+    "lesson": "python-07",
+    "caption": "调用把外部值绑定给局部参数，return 把结果交回调用处；局部名字 c 不会重新绑定外部名字 t。"
+  },
+  {
+    "file": "python-loop-accumulation.svg",
+    "course": "python",
+    "lesson": "python-06",
+    "caption": "每轮把当前值加入 total；处理前 k 项后，total 等于这 k 项之和，这就是循环不变量。"
+  },
+  {
+    "file": "ml-data-split-leakage.svg",
+    "course": "machine-learning",
+    "lesson": "machine-learning-05",
+    "caption": "先划分数据，再只在训练部分拟合预处理与模型；验证集用于选择，测试集用于最终评估。"
+  },
+  {
+    "file": "ml-bias-variance.svg",
+    "course": "machine-learning",
+    "lesson": "machine-learning-06",
+    "caption": "常见概念图：复杂度提高时训练误差下降，验证误差可能先下降后上升。过简单偏差风险高，过复杂方差风险高。"
+  },
+  {
+    "file": "ml-forward-backprop.svg",
+    "course": "machine-learning",
+    "lesson": "machine-learning-18",
+    "caption": "前向得到预测 6 与损失 2；反向从输出误差 2 出发，得到隐藏量梯度 6、参数梯度 ∂L/∂v=4 与 ∂L/∂w=12。"
+  }
+]

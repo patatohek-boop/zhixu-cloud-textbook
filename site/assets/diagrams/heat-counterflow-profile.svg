@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 496" width="640" height="496" role="img" aria-labelledby="counterflow-title counterflow-desc">
+<title id="counterflow-title">逆流换热器沿同一空间坐标的温度曲线</title>
+<desc id="counterflow-desc">热流体由左向右从100摄氏度降至60摄氏度，冷流体由右向左从20摄氏度升至50摄氏度。以相同空间坐标绘图时两条温度曲线均向右下降，左端温差50K，右端40K；曲线仅示意端点温度和流向。</desc>
+<defs>
+<marker id="counterflow-g" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#155f52"/></marker>
+<marker id="counterflow-b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#266f9b"/></marker>
+<marker id="counterflow-o" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#bd7148"/></marker>
+<marker id="counterflow-gray" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L7 3.5L0 7Z" fill="#526760"/></marker>
+</defs>
+<rect width="640" height="496" rx="16" fill="#ffffff"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif" font-size="18" fill="#183f38" stroke-linecap="round" stroke-linejoin="round">
+
+<text x="320" y="34" text-anchor="middle" font-size="21" font-weight="600">逆流换热器：先统一空间坐标</text>
+<path d="M66 404H607M66 404V67" stroke="#526760" stroke-width="2" fill="none" marker-end="url(#counterflow-gray)"/>
+<text x="24" y="79" font-size="17">T</text><text x="610" y="425" font-size="17">x</text>
+<path d="M108 100L560 220" stroke="#bd7148" stroke-width="4" fill="none"/>
+<path d="M108 250L560 340" stroke="#266f9b" stroke-width="4" fill="none"/>
+<path d="M268 142.5L383 173" stroke="#bd7148" stroke-width="4" fill="none" marker-end="url(#counterflow-o)"/>
+<path d="M390 306L275 283.3" stroke="#266f9b" stroke-width="4" fill="none" marker-end="url(#counterflow-b)"/>
+<path d="M108 100V250M560 220V340" stroke="#526760" stroke-width="1.6" stroke-dasharray="6 6" fill="none"/>
+<circle cx="108" cy="100" r="5" fill="#bd7148"/><circle cx="560" cy="220" r="5" fill="#bd7148"/>
+<circle cx="108" cy="250" r="5" fill="#266f9b"/><circle cx="560" cy="340" r="5" fill="#266f9b"/>
+<text x="105" y="82" fill="#914b2e" font-size="17">热入口 100 ℃</text><text x="463" y="180" fill="#914b2e" font-size="17">热出口 60 ℃</text>
+<text x="110" y="305" fill="#266f9b" font-size="17">冷出口 50 ℃</text><text x="462" y="368" fill="#266f9b" font-size="17">冷入口 20 ℃</text>
+<text x="338" y="107" text-anchor="middle" fill="#bd7148" font-size="18">热流体 →</text><text x="340" y="350" text-anchor="middle" fill="#266f9b" font-size="18">← 冷流体</text>
+<text x="127" y="182" font-size="17">ΔT₁ = 50 K</text><text x="548" y="286" text-anchor="end" font-size="17">ΔT₂ = 40 K</text>
+<text x="108" y="428" text-anchor="middle" font-size="16">左端</text><text x="560" y="428" text-anchor="middle" font-size="16">右端</text>
+<text x="320" y="456" text-anchor="middle" font-size="16">端温差配对：热入口－冷出口；热出口－冷入口</text>
+<text x="320" y="475" text-anchor="middle" font-size="16" fill="#526760">曲线为端点与方向示意，实际沿程通常不是直线</text>
+</g></svg>

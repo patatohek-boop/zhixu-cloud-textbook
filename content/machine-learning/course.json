@@ -1,0 +1,72 @@
+{
+  "id": "machine-learning",
+  "title": "机器学习",
+  "enTitle": "Machine Learning",
+  "icon": "◇",
+  "color": "#5968a7",
+  "description": "从问题、数据和概率统计出发，理解监督学习、无监督学习与神经网络，建立可靠评估和部署意识。覆盖本科核心；现代生成模型、因果与强化学习等为有边界的高级导读。",
+  "prerequisites": [
+    "Python 基础与 NumPy 数组",
+    "线性代数：向量、矩阵与特征值",
+    "微积分：导数、偏导数与链式法则"
+  ],
+  "sources": [
+    {
+      "title": "MIT 6.036 Introduction to Machine Learning",
+      "url": "https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/",
+      "scope": "建模、泛化、监督学习与强化学习的课程结构"
+    },
+    {
+      "title": "An Introduction to Statistical Learning",
+      "url": "https://www.statlearning.com/",
+      "scope": "回归、分类、重采样、正则化、树、支持向量机及高级统计学习的主题覆盖"
+    },
+    {
+      "title": "ISLP 官方 Python 资源",
+      "url": "https://www.statlearning.com/resources-python",
+      "scope": "实验与进一步阅读入口；本课程例题为原创"
+    },
+    {
+      "title": "scikit-learn 官方用户指南",
+      "url": "https://scikit-learn.org/stable/user_guide.html",
+      "scope": "算法适用条件、评估、预处理、校准与常见陷阱"
+    },
+    {
+      "title": "Deep Learning 在线教材",
+      "url": "https://www.deeplearningbook.org/",
+      "scope": "神经网络与现代表示学习的进一步阅读"
+    }
+  ],
+  "lessons": [
+    "machine-learning-01.md",
+    "machine-learning-02.md",
+    "machine-learning-03.md",
+    "machine-learning-04.md",
+    "machine-learning-05.md",
+    "machine-learning-06.md",
+    "machine-learning-07.md",
+    "machine-learning-08.md",
+    "machine-learning-09.md",
+    "machine-learning-10.md",
+    "machine-learning-11.md",
+    "machine-learning-12.md",
+    "machine-learning-13.md",
+    "machine-learning-14.md",
+    "machine-learning-15.md",
+    "machine-learning-16.md",
+    "machine-learning-17.md",
+    "machine-learning-18.md",
+    "machine-learning-19.md",
+    "machine-learning-20.md",
+    "machine-learning-21.md",
+    "machine-learning-22.md",
+    "machine-learning-23.md",
+    "machine-learning-24.md",
+    "machine-learning-25.md",
+    "machine-learning-26.md",
+    "machine-learning-27.md",
+    "machine-learning-28.md",
+    "machine-learning-29.md",
+    "machine-learning-30.md"
+  ]
+}

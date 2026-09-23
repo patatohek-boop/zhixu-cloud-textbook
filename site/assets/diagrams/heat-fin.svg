@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" width="640" height="480" role="img" aria-labelledby="fin-title fin-desc">
+<title id="fin-title">直肋片的轴向导热、表面对流与温度降低</title>
+<desc id="fin-desc">热从恒温基底传入肋片并沿肋片轴向导热，同时由上下表面对流到环境。下方曲线示意沿肋片温度降低且高于环境，采用绝热端部模型。</desc>
+<defs>
+<marker id="fin-g" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#155f52"/></marker>
+<marker id="fin-b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#266f9b"/></marker>
+<marker id="fin-o" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#bd7148"/></marker>
+<marker id="fin-gray" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L7 3.5L0 7Z" fill="#526760"/></marker>
+</defs>
+<rect width="640" height="480" rx="16" fill="#ffffff"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif" font-size="18" fill="#183f38" stroke-linecap="round" stroke-linejoin="round">
+
+<text x="320" y="34" text-anchor="middle" font-size="22" font-weight="600">肋片：把热导向更大的换热表面</text>
+<rect x="98" y="118" width="43" height="150" fill="#f7e4d5" stroke="#bd7148" stroke-width="2"/>
+<text x="119" y="95" text-anchor="middle" fill="#bd7148">基底 Tb</text>
+<rect x="141" y="173" width="365" height="40" fill="#e7f1eb" stroke="#155f52" stroke-width="2.5"/>
+<path d="M161 193H467" stroke="#155f52" stroke-width="3" fill="none" marker-end="url(#fin-g)"/>
+<rect x="255" y="181" width="118" height="24" fill="#e7f1eb"/><text x="314" y="199" text-anchor="middle" font-size="16" fill="#155f52">沿肋片导热</text>
+<path d="M204 166V107" stroke="#bd7148" stroke-width="2.2" fill="none" marker-end="url(#fin-o)"/>
+<path d="M204 220V279" stroke="#bd7148" stroke-width="2.2" fill="none" marker-end="url(#fin-o)"/>
+<path d="M292 166V107" stroke="#bd7148" stroke-width="2.2" fill="none" marker-end="url(#fin-o)"/>
+<path d="M292 220V279" stroke="#bd7148" stroke-width="2.2" fill="none" marker-end="url(#fin-o)"/>
+<path d="M380 166V107" stroke="#bd7148" stroke-width="2.2" fill="none" marker-end="url(#fin-o)"/>
+<path d="M380 220V279" stroke="#bd7148" stroke-width="2.2" fill="none" marker-end="url(#fin-o)"/>
+<path d="M468 166V107" stroke="#bd7148" stroke-width="2.2" fill="none" marker-end="url(#fin-o)"/>
+<path d="M468 220V279" stroke="#bd7148" stroke-width="2.2" fill="none" marker-end="url(#fin-o)"/>
+<text x="345" y="79" text-anchor="middle" fill="#bd7148">表面对流：h，环境 T∞</text>
+<path d="M506 174V212" stroke="#266f9b" stroke-width="6"/>
+<text x="555" y="182" text-anchor="middle" font-size="16" fill="#266f9b">绝热端</text><text x="555" y="209" text-anchor="middle" font-size="16" fill="#266f9b">dT/dx = 0</text>
+<path d="M141 299H506M141 292V306M506 292V306" stroke="#526760" stroke-width="1.5" fill="none"/>
+<rect x="302" y="287" width="42" height="24" fill="#fff"/><text x="323" y="305" text-anchor="middle" font-size="16">L</text>
+<path d="M141 431H558M141 431V329" stroke="#526760" stroke-width="1.8" fill="none" marker-end="url(#fin-gray)"/>
+<path d="M141 414H506" stroke="#266f9b" stroke-width="1.7" stroke-dasharray="6 6" fill="none"/>
+<text x="115" y="352" text-anchor="middle" font-size="16">Tb</text><text x="116" y="419" text-anchor="middle" font-size="16" fill="#266f9b">T∞</text><text x="569" y="437" font-size="16">x</text>
+<path d="M141 347C235 373 325 393 420 399C464 402 488 402 506 402" stroke="#155f52" stroke-width="3" fill="none"/>
+<text x="381" y="351" text-anchor="middle" font-size="17" fill="#155f52">温度沿程降低，端部斜率为零</text>
+<text x="320" y="466" text-anchor="middle" font-size="16">示意：恒定根温、常物性、均匀 h；实际肋片并非整片等于 Tb</text>
+</g></svg>

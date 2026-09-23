@@ -1,0 +1,73 @@
+{
+  "id": "heat-transfer",
+  "title": "传热学",
+  "enTitle": "Heat Transfer",
+  "icon": "↗",
+  "color": "#e3a32a",
+  "description": "从导热、对流与辐射理解温度场和热流，学习瞬态、相变、换热器及热质耦合，并用设计与验证连接工程实践。覆盖本科核心与主要延伸入口。",
+  "prerequisites": [
+    "微积分中的导数、积分和微分方程入门",
+    "工程热力学的能量守恒",
+    "流体力学中的流量与 Reynolds 数"
+  ],
+  "sources": [
+    {
+      "title": "MIT 2.51 Intermediate Heat and Mass Transfer — syllabus",
+      "url": "https://ocw.mit.edu/courses/2-51-intermediate-heat-and-mass-transfer-fall-2008/pages/syllabus/",
+      "scope": "非稳态与多维导热、对流、相变、辐射与传质的本科核心范围校对。"
+    },
+    {
+      "title": "MIT 16.050 Thermal Energy — syllabus",
+      "url": "https://ocw.mit.edu/courses/16-050-thermal-energy-fall-2002/pages/syllabus/",
+      "scope": "传热三方式、热阻、肋片、瞬态与换热器的入门教学顺序。"
+    },
+    {
+      "title": "MIT — Steady-State One-Dimensional Conduction",
+      "url": "https://web.mit.edu/16.unified/www/FALL/thermodynamics/notes/node117.html",
+      "scope": "一维导热方程、边界条件与平壁解的基础核查。"
+    },
+    {
+      "title": "MIT — Dimensionless Numbers and Analysis of Results",
+      "url": "https://web.mit.edu/16.unified/www/FALL/thermodynamics/notes/node124.html",
+      "scope": "Biot 数的定义与固体内部温差判据。"
+    },
+    {
+      "title": "Lienhard & Lienhard — A Heat Transfer Textbook, 6th edition",
+      "url": "https://ahtt.mit.edu/",
+      "scope": "作者官方开放教材入口；关联式、沸腾凝结、辐射、传质和高级延伸的进一步阅读。本站不转载教材图表或原题。"
+    },
+    {
+      "title": "California State University, Northridge — ME 375 Convection Coefficients II",
+      "url": "https://www.csun.edu/~lcaretto/me375/08-forced%20convection%20two.pdf",
+      "scope": "核对平板层流、管内充分发展 Nu、Gnielinski 与自然对流关联式条件；本站使用原创例题，不转载讲义图表。"
+    }
+  ],
+  "lessons": [
+    "heat-transfer-01.md",
+    "heat-transfer-02.md",
+    "heat-transfer-03.md",
+    "heat-transfer-04.md",
+    "heat-transfer-05.md",
+    "heat-transfer-06.md",
+    "heat-transfer-07.md",
+    "heat-transfer-08.md",
+    "heat-transfer-09.md",
+    "heat-transfer-10.md",
+    "heat-transfer-11.md",
+    "heat-transfer-12.md",
+    "heat-transfer-13.md",
+    "heat-transfer-14.md",
+    "heat-transfer-15.md",
+    "heat-transfer-16.md",
+    "heat-transfer-17.md",
+    "heat-transfer-18.md",
+    "heat-transfer-19.md",
+    "heat-transfer-20.md",
+    "heat-transfer-21.md",
+    "heat-transfer-22.md",
+    "heat-transfer-23.md",
+    "heat-transfer-24.md",
+    "heat-transfer-25.md",
+    "heat-transfer-26.md"
+  ]
+}

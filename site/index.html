@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="知序：面向初学者的数学、热流体、Python 与机器学习云教材。原创讲解、例题解析、交互实验与自主学习记录。">
+  <meta name="theme-color" content="#155f52"><title>知序 · 理工学习手册</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23155f52'/%3E%3Cpath d='M10 10h8v20h-8m20-20h-8v20h8' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/vendor/katex/katex.min.css"><link rel="stylesheet" href="assets/style.css">
+  <script defer src="assets/vendor/marked.js"></script><script defer src="assets/vendor/purify.js"></script><script defer src="assets/vendor/katex/katex.min.js"></script>
+  <script defer src="assets/data.js"></script><script defer src="assets/labs.js"></script><script defer src="assets/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳到正文</a>
+  <header class="topbar">
+    <a class="brand" href="#/"><span class="brand-mark">[ ]</span><span>知序<span class="brand-en">OPEN LEARNING</span></span></a>
+    <nav aria-label="主导航"><a href="#/" data-nav="home">学习书架</a><a href="#/path" data-nav="path">学习路线</a><a href="#/labs" data-nav="labs">交互实验</a></nav>
+    <button class="search-trigger" id="search-open" aria-label="搜索全部教材"><span>⌕</span><span>搜索知识点</span><kbd>/</kbd></button>
+    <button class="icon-btn" id="theme" aria-label="切换深色模式" title="切换深色模式">◐</button>
+    <a class="icon-btn" href="#/notebook" aria-label="我的学习记录" title="我的学习记录">▤</a>
+  </header>
+  <div id="shell"><main id="main" tabindex="-1"><div class="loading">正在打开学习手册…</div></main></div>
+  <dialog id="search-dialog" aria-labelledby="search-title"><div class="dialog-head"><h2 id="search-title">搜索教材</h2><button class="icon-btn" data-close="search-dialog" aria-label="关闭搜索">×</button></div><label class="sr-only" for="search-input">标题、公式术语或知识点</label><input id="search-input" type="search" placeholder="试试「梯度」「熵」「边界层」" autocomplete="off"><p class="muted" id="search-count" aria-live="polite">搜索全部课程的标题与正文</p><div id="search-results"></div></dialog>
+  <div id="toast" role="status"></div><noscript>请启用 JavaScript 以浏览教材。源码中的 content 文件夹也提供全部 Markdown 课文。</noscript>
+</body></html>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" role="img" aria-labelledby="gradient-contours-title gradient-contours-desc">
+<title id="gradient-contours-title">梯度：垂直等高线、指向上升</title><desc id="gradient-contours-desc">三个椭圆分别对应函数值一、三、五。点 (1,1) 位于值三的椭圆，梯度指向右上方，蓝色切线与之垂直。</desc>
+<defs>
+<marker id="gradient-contours-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker>
+<marker id="gradient-contours-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent,#155f52)"/></marker>
+<marker id="gradient-contours-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--blue,#266f9b)"/></marker>
+<marker id="gradient-contours-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#bd7148"/></marker>
+</defs>
+<g font-family="'Noto Sans CJK SC','Microsoft YaHei',Arial,sans-serif" font-size="18" fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+<text x="240" y="27" text-anchor="middle" font-size="20" font-weight="650">梯度：垂直等高线、指向上升</text>
+<g stroke="currentColor" stroke-width="1.4" opacity=".45"><line x1="83" y1="168" x2="379" y2="168" marker-end="url(#gradient-contours-arrow)"/><line x1="230" y1="245" x2="230" y2="43" marker-end="url(#gradient-contours-arrow)"/></g><text x="377" y="191" text-anchor="end">x</text><text x="215" y="47" text-anchor="end">y</text>
+<ellipse cx="230" cy="168" rx="48" ry="33.941125496954285" fill="none" stroke="var(--accent,#155f52)" stroke-width="1.5" opacity="0.55"/><ellipse cx="230" cy="168" rx="83.13843876330611" ry="58.78775382679627" fill="none" stroke="var(--accent,#155f52)" stroke-width="2.5" opacity="1"/><ellipse cx="230" cy="168" rx="107.33126291998991" ry="75.8946638440411" fill="none" stroke="var(--accent,#155f52)" stroke-width="1.5" opacity="0.55"/>
+<line x1="225.2" y1="93.6" x2="330.8" y2="146.4" stroke="var(--blue,#266f9b)" stroke-width="2.2"/>
+<line x1="278" y1="120" x2="311.6" y2="52.80000000000001" stroke="var(--accent,#155f52)" stroke-width="3" marker-end="url(#gradient-contours-green)"/>
+<circle cx="278" cy="120" r="5" fill="var(--accent,#155f52)"/>
+<text x="331" y="61" font-size="17">∇f=(2,4)</text>
+<text x="302" y="104" >P=(1,1)</text>
+<text x="349" y="151" fill="var(--blue,#266f9b)">切向</text>
+<text x="80" y="66" >f=x²+2y²</text>
+<text x="107" y="87" >等高线</text>
+<text x="318" y="223" >5</text><text x="283" y="211" >3</text><text x="250" y="204" >1</text>
+<text x="240" y="270" text-anchor="middle">在 P 点：梯度 ⟂ 等高线</text>
+</g></svg>

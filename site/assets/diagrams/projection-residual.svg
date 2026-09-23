@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" role="img" aria-labelledby="projection-residual-title projection-residual-desc">
+<title id="projection-residual-title">投影：最接近的点与正交残差</title><desc id="projection-residual-desc">橙色为目标向量 (3,1)，绿色为投影 (2,2)，蓝色从投影点指向目标，是残差 (1,-1)。残差与目标直线成直角。</desc>
+<defs>
+<marker id="projection-residual-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker>
+<marker id="projection-residual-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent,#155f52)"/></marker>
+<marker id="projection-residual-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--blue,#266f9b)"/></marker>
+<marker id="projection-residual-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#bd7148"/></marker>
+</defs>
+<g font-family="'Noto Sans CJK SC','Microsoft YaHei',Arial,sans-serif" font-size="18" fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+<text x="240" y="27" text-anchor="middle" font-size="20" font-weight="650">投影：最接近的点与正交残差</text>
+<g stroke="currentColor" stroke-width="1.4" opacity=".45"><line x1="69" y1="219" x2="367" y2="219" marker-end="url(#projection-residual-arrow)"/><line x1="80" y1="229" x2="80" y2="40" marker-end="url(#projection-residual-arrow)"/></g><text x="365" y="242" text-anchor="end">x</text><text x="65" y="44" text-anchor="end">y</text>
+<line x1="80" y1="219" x2="248" y2="51" stroke="var(--accent,#155f52)" opacity=".4" stroke-width="2"/>
+<line x1="80" y1="219" x2="260" y2="159" stroke="#bd7148" stroke-width="3" marker-end="url(#projection-residual-orange)"/>
+<line x1="80" y1="219" x2="200" y2="99" stroke="var(--accent,#155f52)" stroke-width="3.5" marker-end="url(#projection-residual-green)"/>
+<line x1="200" y1="99" x2="260" y2="159" stroke="var(--blue,#266f9b)" stroke-width="3" marker-end="url(#projection-residual-blue)"/>
+<path d="M193 106 L200 113 L207 106" fill="none" stroke="var(--blue,#266f9b)" stroke-width="1.6"/>
+<text x="265" y="56" >目标直线 y=x</text>
+<text x="206" y="84" fill="var(--accent,#155f52)">p=(2,2)</text>
+<text x="278" y="164" >b=(3,1)</text>
+<text x="290" y="113" fill="var(--blue,#266f9b)">e=(1,−1)</text>
+<text x="65" y="239" >0</text>
+<text x="240" y="269" text-anchor="middle">b=p+e，正交残差 e ⟂ 目标直线</text>
+</g></svg>

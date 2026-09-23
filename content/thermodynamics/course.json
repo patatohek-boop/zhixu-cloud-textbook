@@ -1,0 +1,57 @@
+{
+  "id": "thermodynamics",
+  "title": "工程热力学",
+  "enTitle": "Engineering Thermodynamics",
+  "icon": "◒",
+  "color": "#d97757",
+  "description": "从系统与性质出发，建立能量、熵与火用账本，分析动力循环、制冷热泵、混合物和反应。覆盖本科核心，明确理想模型与高级专题的边界。",
+  "prerequisites": [
+    "基础代数、对数与单位换算",
+    "微积分中的导数和积分"
+  ],
+  "sources": [
+    {
+      "title": "MIT 16.050 Thermal Energy — syllabus",
+      "url": "https://ocw.mit.edu/courses/16-050-thermal-energy-fall-2002/pages/syllabus/",
+      "scope": "本科热力学、热机循环、热化学与传热基础的范围校对；正文与例题为原创。"
+    },
+    {
+      "title": "MIT 2.43 Advanced Thermodynamics — syllabus",
+      "url": "https://ocw.mit.edu/courses/2-43-advanced-thermodynamics-spring-2024/pages/syllabus/",
+      "scope": "火用、多组分与平衡主题的延伸边界。研究生非平衡热力学未在本入门课程中完整展开。"
+    },
+    {
+      "title": "MIT Thermodynamics and Propulsion — online notes",
+      "url": "https://web.mit.edu/16.unified/www/FALL/thermodynamics/notes/notes.html",
+      "scope": "系统与控制体、第一和第二定律、循环的概念与符号交叉核查。"
+    }
+  ],
+  "lessons": [
+    "thermodynamics-01.md",
+    "thermodynamics-02.md",
+    "thermodynamics-03.md",
+    "thermodynamics-04.md",
+    "thermodynamics-05.md",
+    "thermodynamics-06.md",
+    "thermodynamics-07.md",
+    "thermodynamics-08.md",
+    "thermodynamics-09.md",
+    "thermodynamics-10.md",
+    "thermodynamics-11.md",
+    "thermodynamics-12.md",
+    "thermodynamics-13.md",
+    "thermodynamics-14.md",
+    "thermodynamics-15.md",
+    "thermodynamics-16.md",
+    "thermodynamics-17.md",
+    "thermodynamics-18.md",
+    "thermodynamics-19.md",
+    "thermodynamics-20.md",
+    "thermodynamics-21.md",
+    "thermodynamics-22.md",
+    "thermodynamics-23.md",
+    "thermodynamics-24.md",
+    "thermodynamics-25.md",
+    "thermodynamics-26.md"
+  ]
+}

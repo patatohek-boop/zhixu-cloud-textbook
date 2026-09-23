@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-labelledby="alias-title alias-desc">
+<title id="alias-title">两个名字，一个可变对象</title>
+<desc id="alias-desc">赋值 b 等于 a 后，名字 a 和 b 的箭头都指向同一列表。调用 b.append(30) 修改共享列表，因此两者都看到十、二十、三十。</desc>
+<defs>
+<marker id="alias-arrow-g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#155f52"/></marker>
+<marker id="alias-arrow-b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#266f9b"/></marker>
+<marker id="alias-arrow-r" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#bd7148"/></marker>
+<style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC","PingFang SC",sans-serif;fill:#203b35;font-size:18px}.title{font-size:22px;font-weight:700}.muted{fill:#586f68}.green{fill:#155f52}.blue{fill:#266f9b}.rust{fill:#bd7148}.strong{font-weight:700}.mono{font-family:Consolas,"Microsoft YaHei",monospace}</style>
+</defs>
+<rect width="480" height="300" rx="12" fill="#ffffff"/>
+<rect x="1" y="1" width="478" height="298" rx="11" fill="none" stroke="#dbe5e0"/>
+
+<text x="24" y="36" class="title">两个名字，一个可变对象</text>
+<text x="24" y="66" class="muted">b = a：增加引用，不复制列表</text>
+<rect x="34" y="95" width="88" height="48" rx="10" fill="#eaf3ef" stroke="#155f52"/>
+<text x="78" y="126" text-anchor="middle" class="strong green mono">a</text>
+<rect x="34" y="176" width="88" height="48" rx="10" fill="#eef5f9" stroke="#266f9b"/>
+<text x="78" y="207" text-anchor="middle" class="strong blue mono">b</text>
+<path d="M122 119C190 119 185 150 241 150" fill="none" stroke="#155f52" stroke-width="3" marker-end="url(#alias-arrow-g)"/>
+<path d="M122 200C190 200 185 173 241 173" fill="none" stroke="#266f9b" stroke-width="3" marker-end="url(#alias-arrow-b)"/>
+<text x="257" y="113" class="muted">同一个列表对象</text>
+<rect x="251" y="129" width="198" height="67" rx="12" fill="#f7faf8" stroke="#155f52" stroke-width="2"/>
+<text x="268" y="170" class="mono" style="font-size:23px">[10, 20, <tspan class="rust strong">30</tspan>]</text>
+<text x="252" y="224" class="rust mono">b.append(30)</text>
+<text x="24" y="261">新增元素对两个名字都可见。</text>
+<text x="24" y="285" class="muted">修改对象内容 ≠ 重新绑定名字</text>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 424" width="640" height="424" role="img" aria-labelledby="boundarylayer-title boundarylayer-desc">
+<title id="boundarylayer-title">热边界层与某位置的温度剖面</title>
+<desc id="boundarylayer-desc">热流体外掠等温热平板时，流体从壁面温度逐渐过渡到远处主流温度。左图展示热边界层沿下游增厚，右图单独以温度为横轴、离壁距离为纵轴展示热壁条件下的温度剖面。</desc>
+<defs>
+<marker id="boundarylayer-g" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#155f52"/></marker>
+<marker id="boundarylayer-b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#266f9b"/></marker>
+<marker id="boundarylayer-o" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#bd7148"/></marker>
+<marker id="boundarylayer-gray" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L7 3.5L0 7Z" fill="#526760"/></marker>
+</defs>
+<rect width="640" height="424" rx="16" fill="#ffffff"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif" font-size="18" fill="#183f38" stroke-linecap="round" stroke-linejoin="round">
+
+<text x="320" y="34" text-anchor="middle" font-size="22" font-weight="600">热边界层：壁面梯度决定换热</text>
+<path d="M46 304C97 252 179 162 354 115L354 304Z" fill="#e8f2ec"/>
+<path d="M46 304C97 252 179 162 354 115" stroke="#155f52" stroke-width="2.5" stroke-dasharray="8 6" fill="none"/>
+<rect x="38" y="304" width="328" height="12" rx="2" fill="#bd7148"/>
+<path d="M58 89H337" stroke="#266f9b" stroke-width="3" fill="none" marker-end="url(#boundarylayer-b)"/>
+<text x="195" y="73" text-anchor="middle" fill="#266f9b">来流 U∞，T∞</text>
+<text x="87" y="343" fill="#bd7148">热平板 Ts</text>
+<text x="222" y="218" text-anchor="middle" fill="#155f52">热边界层</text>
+<text x="220" y="246" text-anchor="middle" font-size="16" fill="#155f52">沿下游逐渐增厚</text>
+<path d="M328 133V299M318 133H338M318 299H338" stroke="#155f52" stroke-width="1.7" fill="none"/>
+<text x="342" y="190" font-size="16" fill="#155f52">δt</text>
+<line x1="392" y1="63" x2="392" y2="356" stroke="#d9e3df" stroke-width="2"/>
+<text x="512" y="76" text-anchor="middle" font-size="18">某位置的温度剖面</text>
+<path d="M427 304H607M427 304V101" stroke="#526760" stroke-width="1.8" fill="none" marker-end="url(#boundarylayer-gray)"/>
+<text x="412" y="108" font-size="17">y</text><text x="610" y="329" font-size="17">T</text>
+<path d="M463 109V303" stroke="#266f9b" stroke-width="1.7" stroke-dasharray="6 6" fill="none"/>
+<path d="M580 304C528 282 478 236 466 172C463 148 463 128 463 111" stroke="#155f52" stroke-width="3.2" fill="none"/>
+<path d="M428 304H586" stroke="#bd7148" stroke-width="5" fill="none"/>
+<text x="463" y="336" text-anchor="middle" font-size="17" fill="#266f9b">T∞</text><text x="580" y="336" text-anchor="middle" font-size="17" fill="#bd7148">Ts</text>
+<text x="513" y="378" text-anchor="middle" font-size="16">壁面 y = 0，远处 T → T∞</text>
+<text x="194" y="384" text-anchor="middle" font-size="16">图示为 Ts &gt; T∞ 的加热情况</text>
+<text x="320" y="411" text-anchor="middle" font-size="16" fill="#526760">边界层外缘为近似定义，不是温度突变的界面</text>
+</g></svg>

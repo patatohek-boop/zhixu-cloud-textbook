@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="280" viewBox="0 0 480 280" role="img" aria-labelledby="jacobian-area-title jacobian-area-desc">
+<title id="jacobian-area-title">Jacobian：坐标格子怎样改面积</title><desc id="jacobian-area-desc">左侧边长一的正方形，映成右侧顶点 (0,0)、(2,0)、(3,1)、(1,1) 的平行四边形。两图单位尺度一致，面积变为两倍。</desc>
+<defs>
+<marker id="jacobian-area-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor"/></marker>
+<marker id="jacobian-area-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent,#155f52)"/></marker>
+<marker id="jacobian-area-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--blue,#266f9b)"/></marker>
+<marker id="jacobian-area-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#bd7148"/></marker>
+</defs>
+<g font-family="'Noto Sans CJK SC','Microsoft YaHei',Arial,sans-serif" font-size="18" fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+<text x="240" y="27" text-anchor="middle" font-size="20" font-weight="650">Jacobian：坐标格子怎样改面积</text>
+<g stroke="currentColor" stroke-width="1.4" opacity=".45"><line x1="59" y1="215" x2="157" y2="215" marker-end="url(#jacobian-area-arrow)"/><line x1="70" y1="222" x2="70" y2="99" marker-end="url(#jacobian-area-arrow)"/></g><text x="155" y="238" text-anchor="end">u</text><text x="55" y="103" text-anchor="end">v</text>
+<g stroke="currentColor" stroke-width="1.4" opacity=".45"><line x1="279" y1="215" x2="474" y2="215" marker-end="url(#jacobian-area-arrow)"/><line x1="290" y1="222" x2="290" y2="99" marker-end="url(#jacobian-area-arrow)"/></g><text x="472" y="238" text-anchor="end">x</text><text x="275" y="103" text-anchor="end">y</text>
+<path d="M70 215 L125 215 L125 160 L70 160 Z" fill="var(--blue,#266f9b)" fill-opacity=".15" stroke="var(--blue,#266f9b)" stroke-width="2.4"/>
+<path d="M290 215 L400 215 L455 160 L345 160 Z" fill="var(--accent,#155f52)" fill-opacity=".17" stroke="var(--accent,#155f52)" stroke-width="2.4"/>
+<text x="98" y="144" text-anchor="middle">面积 1</text>
+<text x="378" y="144" text-anchor="middle">面积 2</text>
+<text x="125" y="239" text-anchor="middle">1</text><text x="55" y="166" text-anchor="end">1</text>
+<text x="400" y="239" text-anchor="middle">2</text><text x="275" y="166" text-anchor="end">1</text>
+<text x="222" y="102" text-anchor="middle">x=2u+v</text><text x="222" y="128" text-anchor="middle">y=v</text>
+<line x1="171" y1="183" x2="249" y2="183" stroke="currentColor" stroke-width="1.8" opacity=".7" marker-end="url(#jacobian-area-arrow)"/>
+<text x="240" y="270" text-anchor="middle">det J=2：每个小面积扩大 2 倍</text>
+</g></svg>

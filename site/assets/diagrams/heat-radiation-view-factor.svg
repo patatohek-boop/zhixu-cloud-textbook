@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 444" width="640" height="444" role="img" aria-labelledby="viewfactor-title viewfactor-desc">
+<title id="viewfactor-title">辐射角系数的几何：距离与法线夹角</title>
+<desc id="viewfactor-desc">两个互相可见的表面元之间以直线交换辐射，距离r和各表面法线与连线之间夹角决定几何权重。角系数是整个表面对表面直接到达的能量比例，并满足面积加权互易关系。</desc>
+<defs>
+<marker id="viewfactor-g" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#155f52"/></marker>
+<marker id="viewfactor-b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#266f9b"/></marker>
+<marker id="viewfactor-o" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#bd7148"/></marker>
+<marker id="viewfactor-gray" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L7 3.5L0 7Z" fill="#526760"/></marker>
+</defs>
+<rect width="640" height="444" rx="16" fill="#ffffff"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif" font-size="18" fill="#183f38" stroke-linecap="round" stroke-linejoin="round">
+
+<text x="320" y="34" text-anchor="middle" font-size="22" font-weight="600">角系数：看得见多少，朝向如何</text>
+<rect x="99" y="307" width="197" height="12" fill="#e0eee7" stroke="#155f52" stroke-width="2"/>
+<rect x="344" y="84" width="203" height="12" fill="#e4eff8" stroke="#266f9b" stroke-width="2"/>
+<text x="195" y="351" text-anchor="middle" fill="#155f52">表面 1：A₁</text><text x="446" y="68" text-anchor="middle" fill="#266f9b">表面 2：A₂</text>
+<circle cx="181" cy="307" r="5" fill="#155f52"/><circle cx="445" cy="96" r="5" fill="#266f9b"/>
+<path d="M181 301L440 100" stroke="#bd7148" stroke-width="2.6" stroke-dasharray="8 5" fill="none" marker-end="url(#viewfactor-o)"/>
+<path d="M181 303V209" stroke="#526760" stroke-width="2" fill="none" marker-end="url(#viewfactor-gray)"/>
+<path d="M445 101V190" stroke="#526760" stroke-width="2" fill="none" marker-end="url(#viewfactor-gray)"/>
+<text x="154" y="214" text-anchor="end" font-size="17">法线 n₁</text><text x="465" y="184" font-size="17">法线 n₂</text>
+<path d="M181 263A44 44 0 0 1 216 279" stroke="#155f52" stroke-width="2" fill="none"/>
+<text x="201" y="258" fill="#155f52">θ₁</text>
+<path d="M445 140A44 44 0 0 1 410 123" stroke="#266f9b" stroke-width="2" fill="none"/>
+<text x="402" y="157" fill="#266f9b">θ₂</text>
+<text x="343" y="226" fill="#bd7148">距离 r</text>
+<rect x="77" y="369" width="489" height="42" rx="8" fill="#f0f5f2"/>
+<text x="321" y="396" text-anchor="middle" font-size="22" fill="#155f52">A₁F₁₂ = A₂F₂₁</text>
+<text x="320" y="434" text-anchor="middle" font-size="16">漫射、无参与介质；夹角相对法线，互易的是 A×F</text>
+</g></svg>

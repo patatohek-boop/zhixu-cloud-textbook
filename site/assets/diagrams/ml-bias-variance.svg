@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" role="img" aria-labelledby="tradeoff-title tradeoff-desc">
+<title id="tradeoff-title">复杂度、欠拟合与过拟合的概念示意</title>
+<desc id="tradeoff-desc">横轴模型复杂度，纵轴误差。训练误差单调下降，验证误差呈示意性的先下降后上升曲线。图无实测刻度，趋势仅为经典概念示意。</desc>
+<defs>
+<marker id="tradeoff-arrow-g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#155f52"/></marker>
+<marker id="tradeoff-arrow-b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#266f9b"/></marker>
+<marker id="tradeoff-arrow-r" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#bd7148"/></marker>
+<style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC","PingFang SC",sans-serif;fill:#203b35;font-size:18px}.title{font-size:22px;font-weight:700}.muted{fill:#586f68}.green{fill:#155f52}.blue{fill:#266f9b}.rust{fill:#bd7148}.strong{font-weight:700}.mono{font-family:Consolas,"Microsoft YaHei",monospace}</style>
+</defs>
+<rect width="480" height="360" rx="12" fill="#ffffff"/>
+<rect x="1" y="1" width="478" height="358" rx="11" fill="none" stroke="#dbe5e0"/>
+
+<text x="24" y="35" class="title">复杂度：从欠拟合到过拟合</text>
+<text x="24" y="63" class="rust">概念示意 · 非实测数据</text>
+<rect x="58" y="105" width="110" height="155" fill="#faf1ea"/>
+<rect x="168" y="105" width="153" height="155" fill="#eaf3ef"/>
+<rect x="321" y="105" width="135" height="155" fill="#faf1ea"/>
+<text x="108" y="96" text-anchor="middle">欠拟合</text>
+<text x="243" y="96" text-anchor="middle">合适区间</text>
+<text x="389" y="96" text-anchor="middle">过拟合</text>
+<path d="M58 265V108M58 265H457" fill="none" stroke="#586f68" stroke-width="2"/>
+<text x="17" y="124" class="muted">误</text><text x="17" y="147" class="muted">差</text>
+<path d="M70 130C123 187 172 217 239 234S371 255 443 258" fill="none" stroke="#155f52" stroke-width="3.5"/>
+<path d="M70 119C120 177 157 204 219 210S335 191 443 119" fill="none" stroke="#266f9b" stroke-width="3.5"/>
+<path d="M78 288H108" stroke="#155f52" stroke-width="3.5"/><text x="119" y="294" class="green">训练误差</text>
+<path d="M268 288H298" stroke="#266f9b" stroke-width="3.5"/><text x="309" y="294" class="blue">验证误差</text>
+<text x="322" y="322">模型复杂度 →</text>
+<text x="24" y="346" class="muted">真实趋势需由数据验证；图中没有量化刻度。</text>
+</svg>

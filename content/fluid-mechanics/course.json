@@ -1,0 +1,59 @@
+{
+  "id": "fluid-mechanics",
+  "title": "流体力学",
+  "enTitle": "Fluid Mechanics",
+  "icon": "≈",
+  "color": "#287b96",
+  "description": "从压力与守恒出发，理解流动、管路、边界层与可压缩效应。",
+  "prerequisites": [
+    "基本力学与单位",
+    "单变量微积分；向量基础"
+  ],
+  "sources": [
+    {
+      "title": "MIT OCW 2.06 · Fluid Dynamics",
+      "url": "https://ocw.mit.edu/courses/2-06-fluid-dynamics-spring-2013/",
+      "scope": "本科基础体系：静力、守恒、管流、相似与外流"
+    },
+    {
+      "title": "MIT OCW 2.25 · Advanced Fluid Mechanics",
+      "url": "https://ocw.mit.edu/courses/2-25-advanced-fluid-mechanics-fall-2013/pages/calendar/",
+      "scope": "连续介质、黏性流、势流、涡量与边界层的进阶结构"
+    },
+    {
+      "title": "MIT OCW 2.29 · Numerical Fluid Mechanics",
+      "url": "https://ocw.mit.edu/courses/2-29-numerical-fluid-mechanics-spring-2015/",
+      "scope": "数值方法与 CFD 后续学习"
+    }
+  ],
+  "lessons": [
+    "fluid-mechanics-01.md",
+    "fluid-mechanics-02.md",
+    "fluid-mechanics-03.md",
+    "fluid-mechanics-04.md",
+    "fluid-mechanics-05.md",
+    "fluid-mechanics-06.md",
+    "fluid-mechanics-07.md",
+    "fluid-mechanics-08.md",
+    "fluid-mechanics-09.md",
+    "fluid-mechanics-10.md",
+    "fluid-mechanics-11.md",
+    "fluid-mechanics-12.md",
+    "fluid-mechanics-13.md",
+    "fluid-mechanics-14.md",
+    "fluid-mechanics-15.md",
+    "fluid-mechanics-16.md",
+    "fluid-mechanics-17.md",
+    "fluid-mechanics-18.md",
+    "fluid-mechanics-19.md",
+    "fluid-mechanics-20.md",
+    "fluid-mechanics-21.md",
+    "fluid-mechanics-22.md",
+    "fluid-mechanics-23.md",
+    "fluid-mechanics-24.md",
+    "fluid-mechanics-25.md",
+    "fluid-mechanics-26.md",
+    "fluid-mechanics-27.md",
+    "fluid-mechanics-28.md"
+  ]
+}

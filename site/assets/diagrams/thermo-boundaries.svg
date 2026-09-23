@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 430" width="640" height="430" role="img" aria-labelledby="boundaries-title boundaries-desc">
+<title id="boundaries-title">闭口系统与控制体的能量边界</title>
+<desc id="boundaries-desc">左图闭口系统质量固定，热量进入、功输出；右图控制体有质量和焓流穿越边界，同时可以交换热与功。箭头表示选定正方向，不表示所有工况必须如此。</desc>
+<defs>
+<marker id="boundaries-g" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#155f52"/></marker>
+<marker id="boundaries-b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#266f9b"/></marker>
+<marker id="boundaries-o" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L9 4.5L0 9Z" fill="#bd7148"/></marker>
+<marker id="boundaries-gray" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto" markerUnits="strokeWidth"><path d="M0 0L7 3.5L0 7Z" fill="#526760"/></marker>
+</defs>
+<rect width="640" height="430" rx="16" fill="#ffffff"/>
+<g font-family="system-ui, -apple-system, 'Segoe UI', 'Microsoft YaHei', sans-serif" font-size="18" fill="#183f38" stroke-linecap="round" stroke-linejoin="round">
+
+<text x="160" y="36" text-anchor="middle" font-size="22" font-weight="600">闭口系统</text>
+<text x="480" y="36" text-anchor="middle" font-size="22" font-weight="600">控制体</text>
+<line x1="320" y1="64" x2="320" y2="365" stroke="#d9e3df" stroke-width="2"/>
+<rect x="69" y="130" width="184" height="170" rx="22" fill="#eef6f2" stroke="#155f52" stroke-width="3" stroke-dasharray="9 7"/>
+<text x="161" y="207" text-anchor="middle" font-size="20">固定的一团物质</text>
+<text x="161" y="242" text-anchor="middle">质量 m 不变</text>
+<path d="M161 76V150" fill="none" stroke="#bd7148" stroke-width="3" marker-end="url(#boundaries-o)"/>
+<text x="183" y="103" fill="#bd7148">热 Q 输入</text>
+<path d="M236 250H301" fill="none" stroke="#155f52" stroke-width="3" marker-end="url(#boundaries-g)"/>
+<text x="269" y="284" fill="#155f52" text-anchor="middle">功 W</text>
+<text x="161" y="343" text-anchor="middle" font-size="17">无质量穿越边界</text>
+<rect x="385" y="145" width="180" height="135" rx="18" fill="#eef5fa" stroke="#266f9b" stroke-width="3" stroke-dasharray="9 7"/>
+<text x="475" y="205" text-anchor="middle" font-size="20">选定空间区域</text>
+<text x="475" y="238" text-anchor="middle" font-size="17">可储存质量与能量</text>
+<path d="M335 187H408" fill="none" stroke="#266f9b" stroke-width="3" marker-end="url(#boundaries-b)"/>
+<text x="340" y="166" font-size="16" fill="#266f9b">流入</text>
+<path d="M544 244H617" fill="none" stroke="#266f9b" stroke-width="3" marker-end="url(#boundaries-b)"/>
+<text x="578" y="224" font-size="16" fill="#266f9b">流出</text>
+<path d="M475 80V160" fill="none" stroke="#bd7148" stroke-width="3" marker-end="url(#boundaries-o)"/>
+<text x="496" y="111" fill="#bd7148">热 Q</text>
+<path d="M475 264V340" fill="none" stroke="#155f52" stroke-width="3" marker-end="url(#boundaries-g)"/>
+<text x="495" y="325" fill="#155f52">功 W</text>
+<text x="475" y="376" text-anchor="middle" font-size="16">质量流携带焓、动能与势能</text>
+<text x="320" y="412" text-anchor="middle" font-size="16" fill="#526760">虚线为分析边界；热、功和质量流须分别记账</text>
+</g></svg>

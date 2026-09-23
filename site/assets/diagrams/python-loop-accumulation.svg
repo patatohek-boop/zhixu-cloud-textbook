@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 340" role="img" aria-labelledby="loop-title loop-desc">
+<title id="loop-title">for 循环的累计状态</title>
+<desc id="loop-desc">表格依次展示开始前累计值零，处理十八后为十八，处理二十后为三十八，处理二十二后为六十。累计变量必须在循环外初始化。</desc>
+<defs>
+<marker id="loop-arrow-g" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#155f52"/></marker>
+<marker id="loop-arrow-b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#266f9b"/></marker>
+<marker id="loop-arrow-r" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#bd7148"/></marker>
+<style>text{font-family:"Microsoft YaHei","Noto Sans CJK SC","PingFang SC",sans-serif;fill:#203b35;font-size:18px}.title{font-size:22px;font-weight:700}.muted{fill:#586f68}.green{fill:#155f52}.blue{fill:#266f9b}.rust{fill:#bd7148}.strong{font-weight:700}.mono{font-family:Consolas,"Microsoft YaHei",monospace}</style>
+</defs>
+<rect width="480" height="340" rx="12" fill="#ffffff"/>
+<rect x="1" y="1" width="478" height="338" rx="11" fill="none" stroke="#dbe5e0"/>
+
+<text x="24" y="36" class="title">for 循环：每一步都能追踪</text>
+<text x="24" y="68" class="mono">total = 0 → total += value</text>
+<rect x="22" y="91" width="436" height="196" rx="10" fill="#fff" stroke="#c8d8d0"/>
+<path d="M23 130H457M23 169H457M23 208H457M23 247H457M167 92V286M293 92V286" stroke="#dbe5e0"/>
+<path d="M33 92H447Q457 92 457 102V130H23V102Q23 92 33 92" fill="#eaf3ef"/>
+<text x="94" y="118" text-anchor="middle" class="strong green">处理到</text>
+<text x="230" y="118" text-anchor="middle" class="strong green">当前值</text>
+<text x="376" y="118" text-anchor="middle" class="strong green">累计 total</text>
+<text x="94" y="157" text-anchor="middle">开始前</text><text x="230" y="157" text-anchor="middle">—</text><text x="376" y="157" text-anchor="middle">0</text>
+<text x="94" y="196" text-anchor="middle">第 1 项</text><text x="230" y="196" text-anchor="middle">18</text><text x="376" y="196" text-anchor="middle" class="blue">18</text>
+<text x="94" y="235" text-anchor="middle">第 2 项</text><text x="230" y="235" text-anchor="middle">20</text><text x="376" y="235" text-anchor="middle" class="blue">38</text>
+<text x="94" y="274" text-anchor="middle">第 3 项</text><text x="230" y="274" text-anchor="middle">22</text><text x="376" y="274" text-anchor="middle" class="strong green">60</text>
+<text x="24" y="319">不变量：total = 已处理数据之和</text>
+</svg>
