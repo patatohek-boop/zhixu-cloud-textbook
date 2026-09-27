@@ -19,8 +19,10 @@ assert.equal(d.querySelector('#note-text').value,hostile);
 assert.equal(d.querySelectorAll('#my-notes img,#my-notes script').length,0);
 assert.equal(d.querySelectorAll('.math-error').length,0);
 assert.ok(d.querySelectorAll('#lesson-body .katex').length>10);
-assert.equal(d.querySelectorAll('#lesson-body figure img').length,1);
-assert.equal(d.querySelectorAll('#lesson-body details').length,2);
+assert.ok(d.querySelectorAll('#lesson-body figure img').length>=1);
+assert.ok(d.querySelectorAll('#lesson-body details').length>=2);
+assert.ok(d.querySelectorAll('#mobile-toc-list [data-scroll]').length>3);
+assert.ok(d.querySelector('.prereq a[href^="#/course/"]'));
 const h=d.querySelector('[data-param=h]');h.value='.1';h.dispatchEvent(new w.Event('input'));
 assert.match(d.querySelector('.lab-result').textContent,/1\.500/);
 d.querySelector('[data-answer="2"]').click();assert.match(d.querySelector('#feedback').textContent,/回答正确/);
@@ -53,7 +55,25 @@ for(const course of w.COURSES)for(const l of course.chapters){
   formulas+=fragment.querySelectorAll('.katex').length;
  }
 }
-assert.equal(lessons,182);assert.equal(formulas,1265);
+assert.equal(lessons,w.TEXTBOOK_VERSION.lessons);assert.ok(lessons>182);
+assert.ok(formulas>1265,'The expanded textbook must retain and extend the original mathematical content');
+assert.equal(w.TEXTBOOK_VERSION.version,'1.1.0');
+w.location.hash='#/review/fluid-mechanics/fluid-mechanics-30';w.dispatchEvent(new w.HashChangeEvent('hashchange'));
+assert.ok(d.querySelector('#review-fluid-mechanics-30').open);
+assert.equal(d.querySelectorAll('.review-record').length,w.COURSES.find(c=>c.id==='fluid-mechanics').chapters.length);
+assert.ok(d.querySelectorAll('.review-map a[href^="#/course/fluid-mechanics/"]').length>=35);
+const audit=w.CONTENT_REVIEW.find(a=>a.course_id==='fluid-mechanics');audit.records[0].changes.push(hostile);
+w.dispatchEvent(new w.HashChangeEvent('hashchange'));
+assert.equal(d.querySelectorAll('.review-page img,.review-page script').length,0);
+assert.ok(d.querySelector('.review-record-body').textContent.includes(hostile));
+audit.records[0].changes.pop();
+for(const course of w.COURSES){
+ w.location.hash='#/review/'+course.id;w.dispatchEvent(new w.HashChangeEvent('hashchange'));
+ assert.equal(d.querySelectorAll('.review-record').length,course.chapters.length);
+ assert.ok(!d.querySelector('#main').textContent.includes('[object Object]'),course.id+' added topics must be readable');
+ const review=w.CONTENT_REVIEW.find(a=>a.course_id===course.id);
+ for(const t of review.added_topics)assert.ok(d.querySelector('#main').textContent.includes(typeof t==='string'?t:t.title));
+}
 w.location.hash='#/notebook';w.dispatchEvent(new w.HashChangeEvent('hashchange'));
 assert.equal(d.querySelectorAll('.saved-row img,.saved-row script').length,0);
 assert.ok(d.querySelector('.saved-row').textContent.includes(hostile));

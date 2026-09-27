@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 400" role="img" aria-labelledby="title"><title id="title">固定控制体的流入、流出与外法线方向</title><rect width="680" height="400" fill="#ffffff"/><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#155f52"/></marker></defs><g font-family="sans-serif" font-size="17" fill="#223b42">
+<text x="32" y="36" font-weight="bold">控制体：积累 = 流入 − 流出</text>
+<rect x="214" y="112" width="254" height="182" rx="18" fill="#eef7f4" stroke="#155f52" stroke-width="2" stroke-dasharray="8 6"/>
+<text x="290" y="177">选定的区域</text><text x="277" y="209">质量 M(t) 可变化</text>
+<path d="M55 226H210M470 226H625" fill="none" stroke="#155f52" stroke-width="4" marker-end="url(#arrow)"/>
+<text x="52" y="192">入口：流入为正</text><text x="485" y="192">出口：流出为正</text>
+<path d="M214 265H160M468 265H522" stroke="#155f52" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="122" y="302">外法线 ←</text><text x="490" y="302">→ 外法线</text>
+<text x="216" y="78">虚线为固定控制面，流体可以穿越</text>
+<text x="69" y="347">统一用外法线计通量：入口 u·n &lt; 0，出口 u·n &gt; 0</text>
+<text x="92" y="375" font-size="15" fill="#566d74">不创造质量；区域内的水与“同一批水”是两个不同对象。</text>
+</g></svg>

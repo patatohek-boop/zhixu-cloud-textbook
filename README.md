@@ -2,7 +2,7 @@
 
 面向初学者、可以持续修订的中文云教材。包含微积分、线性代数、工程热力学、传热学、流体力学、Python 学习和机器学习。
 
-目前为 2026 年 9 月初版：182 节原创课文、每节两道带解析练习和一题概念自测，配有教学示意图与交互实验。正文约 17 万汉字，公式、代码、元数据另计。准确统计见 `site/assets/content-stats.json`。
+目前为 2026 年 9 月 27 日 1.1.0 修订版：原有 182 节全部核对并修订，补入 35 节，共 217 节。正文约 24.1 万汉字，配有定义、通俗解释、证明或推导、例题与解析练习、25 张示意图和 11 个交互实验。公式、代码、元数据另计；准确统计见 `site/assets/content-stats.json`。
 
 **覆盖定位：本科核心知识体系与部分高级主题导读。尚未经过外部专业教师逐章审校，不宣称穷尽七个学科所有知识。** 关键工程、科研或考试结论请结合引用资料核验。每科标注结构参考和延伸阅读；本站并非 MIT、Stanford 或北航的官方教材或翻译。
 
@@ -18,12 +18,16 @@ python -m http.server 8765 --directory site
 
 ## 教材功能
 
-安卓离线 App：[下载 Android 1.0.0 APK](https://github.com/patatohek-boop/zhixu-cloud-textbook/releases/tag/android-v1.0.0)。安装、备份迁移和持续构建说明见 [ANDROID.md](ANDROID.md)。
+在线阅读：[知序云教材](https://patatohek-boop.github.io/zhixu-cloud-textbook/)。逐节变更、课程讲义对照和未展开范围可在[修订与覆盖](https://patatohek-boop.github.io/zhixu-cloud-textbook/#/review)查看。
+
+安卓离线 App：[下载 Android 1.1.0 APK](https://github.com/patatohek-boop/zhixu-cloud-textbook/releases/tag/android-v1.1.0)。安装、备份迁移和持续构建说明见 [ANDROID.md](ANDROID.md)。
 
 - 课程书架、分组目录、前后课导航、先修关系与学习路线。
 - 全文搜索、公式排版、代码复制、折叠例题解析、即时自测反馈。
 - 导数、积分、矩阵、梯度、卡诺热机、导热、冷却、伯努利、回归、梯度下降与 Python 循环等交互实验。
 - 手机竖屏阅读、可展开目录、深浅色主题、字号调整、专注模式与打印。
+- 手机节内目录可直接定位定义、证明和练习；可点击先修链接补学前置概念。
+- 每节公开核对过的概念、证明、具体修改与范围限制，附课程主题映射和参考讲义。
 - 本设备学习进度、收藏、笔记、答题记录，以及 JSON 备份导出与合并导入。
 
 学习记录只保存在当前浏览器。不同浏览器、域名和设备不会自动同步。网站没有账户、云端笔记数据库、埋点或广告。换设备或清理浏览器之前，请在“我的学习记录”导出备份。
@@ -38,16 +42,20 @@ python -m http.server 8765 --directory site
 2. 保留课文的 `id`，这样读者已有记录仍能对应。
 3. 新增课文时，复制相邻课文作为格式参考，使用全新编号，再把文件名加入该课程 `course.json` 的 `lessons` 数组；数组顺序就是阅读顺序。
 4. 解析可用 `<details><summary>查看解析</summary>`，标签内 Markdown 前后留空行。
-5. 提交前运行检查：
+5. 同步修改 `reviews/content-audit-2026-09/` 内对应记录和覆盖映射；未来修订可新建目录并修改 `version.json`。提交前运行检查：
 
 ```sh
 python tools/build.py
 node tools/validate.cjs
 node tools/test-learning-state.cjs
+python tools/verify_fluid.py
+python tools/verify_thermal.py
 python tools/security_check.py
 ```
 
 生成器只使用 Python 标准库。公式检查使用仓库自带的 KaTeX，无需安装 Node 包。正式发布会自动运行同样的校验。
+
+数学独立复算工具 `tools/verify_math.py` 需要 SymPy；编程与机器学习的 `tools/verify_computing.py` 需要 NumPy、pandas、Matplotlib、scikit-learn。`tools/test-rendering.cjs` 需要 jsdom，可用环境变量 `ZHIXU_JSDOM_MODULE` 指定安装路径。它们用于核验实例和阅读器，不能代替证明的人工逻辑审查。
 
 ## 发布到 GitHub Pages
 
@@ -72,12 +80,14 @@ site/assets/diagrams/  原创教学示意图
 site/assets/vendor/    公式、Markdown、安全过滤组件及其许可
 tools/build.py         内容校验与生成
 tools/validate.cjs     全部公式与交互模型检查
+reviews/              逐节核对记录、公开课程映射与旧编号基线
+version.json          网站与离线教材的统一内容版本
 .github/workflows/     持续校验与自动发布
 ```
 
 ## 维护原则
 
-用小而清晰的更新改善教材：补定义、注明条件、验证单位、重算例题、给出反例、修正图示。新知识点至少应包含“解释—条件—例题—练习—解析”，并记录来源。不要将未写完的目录条目标成完整章节。
+用小而清晰的更新改善教材：先严谨定义，再通俗解释；定理先列假设，再写证明，标明每一步所用结论，并给例题、练习与解析。物理经验定律不能包装成数学定理，模型推导应列假设、边界与量纲。编程规则应区分语言保证与实现细节。来源应具体到讲义或章节，不把目录占位、证明思路或高级导读标成完整证明。
 
 更新记录见 [CHANGELOG.md](CHANGELOG.md)，内容审校说明见 [CONTENT_REVIEW.md](CONTENT_REVIEW.md)。第三方组件许可见 [THIRD_PARTY.md](THIRD_PARTY.md) 及对应许可文件。教材内容的后续公开许可由仓库所有者决定。
 

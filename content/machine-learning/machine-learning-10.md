@@ -3,7 +3,7 @@
   "id": "machine-learning-10",
   "title": "逻辑回归、多分类与交叉熵",
   "group": "02 · 可靠评估与线性模型",
-  "minutes": 25,
+  "minutes": 45,
   "level": "基础",
   "tags": [
     "逻辑回归",
@@ -12,7 +12,8 @@
   ],
   "objectives": [
     "计算 sigmoid 概率",
-    "解释交叉熵"
+    "解释交叉熵",
+    "定义 logit、sigmoid、Bernoulli 似然和交叉熵"
   ],
   "prerequisites": [
     "machine-learning-09"
@@ -29,9 +30,30 @@
     "answer": 0,
     "explanation": "softmax 形成和为一的互斥类别概率分布。"
   },
-  "lab": null
+  "lab": null,
+  "revision": "2026-09 · 定义、条件与论证逐章修订"
 }
 ---
+
+## 定义先于分类公式
+标签 y∈{0,1}。**优势**为 p/(1−p)，**对数优势（logit）**为 $\log[p/(1-p)]$，这里 log 是自然对数。逻辑回归假设 logit 等于线性分数 z=wᵀx+b，解方程得 $p=\sigma(z)=1/(1+e^{-z})$。这是概率模型假设，并非任何二分类数据必然满足的规律。
+
+给定特征，伯努利标签的概率质量为 $p^y(1-p)^{1-y}$。样本条件独立时似然相乘，负对数为逐样本交叉熵之和。通俗地说，训练希望把真实发生的类别分配到高概率，而不是只关心是否跨过某个阈值。
+
+## 逐步求导：为什么梯度如此简单
+$\sigma'(z)=e^{-z}/(1+e^{-z})^2=p(1-p)$。对
+$\ell=-y\log p-(1-y)\log(1-p)$，
+$$\frac{d\ell}{dp}=-\frac yp+\frac{1-y}{1-p}=\frac{p-y}{p(1-p)}.$$
+链式法则乘上 dp/dz 得 $d\ell/dz=p-y$，再乘 x 得对 w 的梯度 $(p-y)x$。二阶导 $d^2\ell/dz^2=p(1-p)\ge0$；整个线性模型 Hessian 为 $X^\top DX$，D 的对角为各 p_i(1−p_i)，所以 $v^\top X^\top DXv=\sum_iD_{ii}(x_i^\top v)^2\ge0$，目标凸。
+
+凸不保证有限最小点存在：可分数据能把正确类别分数推向无穷，让损失趋零却不在有限参数取到。正则化与数据条件必须另外考虑。
+
+## softmax 的归一化和稳定计算有代数依据
+互斥 K 类分数 z₁,…,z_K，$p_k=e^{z_k}/\sum_je^{z_j}$。各项非负且和为一。所有分数减同一 c 后，分子分母都有 e⁻ᶜ，约掉后概率不变，因此可取 c=max z 防指数溢出。
+
+真实类为 r，损失 $\ell=-z_r+\log\sum_je^{z_j}$，直接求偏导得
+$$\frac{\partial\ell}{\partial z_k}=p_k-\mathbf1\{k=r\},$$
+其中指示函数在条件成立时为一，否则为零。多标签任务各标签可同时成立，不满足互斥类别契约，不能强行使用这个和为一的输出。
 
 ## 名字叫回归，任务常是分类
 二分类逻辑回归先计算分数 $z=w^\top x+b$，再通过 sigmoid：

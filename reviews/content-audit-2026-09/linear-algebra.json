@@ -1,0 +1,1068 @@
+{
+  "course_id": "linear-algebra",
+  "reviewed_on": "2026-09-27",
+  "method": "保留原有逐节定义、条件、证明与例题审计；本轮对照官方课程主题细目并实际读取下列11份MIT讲义或解题笔记PDF正文，逐项映射核心知识并补充不足。数学论述为独立重写，讲义用于知识点与条件核对，不表示讲义已经证明本文全部扩展定理。",
+  "sources": [
+    {
+      "title": "MIT OCW 18.06SC · Linear Algebra Syllabus",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/",
+      "coverage": "核对本科空间、映射、正交、行列式、特征、正定与 SVD 结构；正文证明独立重编。"
+    },
+    {
+      "title": "MIT OCW 18.06SC · Ax=b and the Four Subspaces",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/ax-b-and-the-four-subspaces/",
+      "coverage": "核对Unit I消元、四个子空间、基维数、矩阵空间与图网络的课程结构。"
+    },
+    {
+      "title": "MIT OCW 18.06SC · Positive Definite Matrices and Applications",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/positive-definite-matrices-and-applications/",
+      "coverage": "核对正定、复数、FFT、Jordan、SVD、换基与伪逆课程列表。"
+    },
+    {
+      "title": "MIT OCW · 相似矩阵与Jordan形式讲义",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/6e1f793f6c25fd39e002c100e278bf1b_MIT18_06SCF11_Ses3.4sum.pdf",
+      "coverage": "18.06SC Lecture 28，正文第1-4页：相似、Jordan块、相同特征值与特征空间维数未必相似。本文独立补全链基存在、最小多项式与零度序列判块。",
+      "accessed_on": "2026-09-27",
+      "review_type": "PDF正文已实际读取，非仅课程目录"
+    },
+    {
+      "title": "MIT OCW · 对称矩阵与正定性讲义",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/804ab1e53134741d2044d241b50a285e_MIT18_06SCF11_Ses3.1sum.pdf",
+      "coverage": "18.06SC Lecture 25，正文第1-3页：实谱、正交谱、谱投影、主元符号与正定；本文补全紧致极值归纳、半正定全主子式与合同惯性证明。",
+      "accessed_on": "2026-09-27",
+      "review_type": "PDF正文已实际读取，非仅课程目录"
+    },
+    {
+      "title": "MIT OCW · 左右逆与伪逆讲义",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/0550c89b69c99e97dcbf52074e293308_MIT18_06SCF11_Ses3.8sum.pdf",
+      "coverage": "18.06SC Lecture 33，正文第1-3页：左右逆的秩条件、典型公式、行空间到列空间的可逆对应、伪逆。",
+      "accessed_on": "2026-09-27",
+      "review_type": "PDF正文已实际读取，非仅课程目录"
+    },
+    {
+      "title": "MIT OCW · 图、网络与关联矩阵讲义",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/d71b25b942dd3dec0ede49d712deb4b0_MIT18_06SCF11_Ses1.12sum.pdf",
+      "coverage": "18.06SC Lecture 12，正文第1-4页：关联矩阵、节点势、环流、树、Kirchhoff与加权网络；本文使用节点为行的转置约定，显式核对尺寸。",
+      "accessed_on": "2026-09-27",
+      "review_type": "PDF正文已实际读取，非仅课程目录"
+    },
+    {
+      "title": "MIT OCW · 复矩阵与FFT讲义",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/53f17d47bf99d26fdc472b3177c256a8_MIT18_06SCF11_Ses3.2sum.pdf",
+      "coverage": "18.06SC Lecture 26，正文第1-4页：共轭内积、Hermitian、酉、单位根和FFT递推；正规谱定理为相关结构的独立证明扩展。",
+      "accessed_on": "2026-09-27",
+      "review_type": "PDF正文已实际读取，非仅课程目录"
+    }
+  ],
+  "coverage_map": [
+    {
+      "reference_topics": "MIT 18.06：线性方程几何、消元、最简形与特殊解",
+      "lesson_ids": [
+        "linear-algebra-01",
+        "linear-algebra-02"
+      ],
+      "knowledge_points": [
+        "标量数域",
+        "向量与矩阵尺寸",
+        "线性组合",
+        "齐次非齐次",
+        "行列视角",
+        "特解加零空间",
+        "增广矩阵",
+        "可逆行操作",
+        "阶梯与最简形",
+        "主元自由变量",
+        "零空间特殊解",
+        "RREF 唯一性"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/"
+      ]
+    },
+    {
+      "reference_topics": "MIT 18.06：乘法与逆、分块矩阵、置换及 LU",
+      "lesson_ids": [
+        "linear-algebra-03",
+        "linear-algebra-04"
+      ],
+      "knowledge_points": [
+        "矩阵乘法",
+        "结合分配转置",
+        "双侧左右逆",
+        "分块",
+        "Schur 补",
+        "零因子反例",
+        "单位下三角与上三角",
+        "置换",
+        "LU 存在唯一",
+        "PA=LU",
+        "前代回代",
+        "数值主元"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/"
+      ]
+    },
+    {
+      "reference_topics": "MIT 18.06：空间、无关、基与维数、四个基本子空间",
+      "lesson_ids": [
+        "linear-algebra-05",
+        "linear-algebra-06",
+        "linear-algebra-07"
+      ],
+      "knowledge_points": [
+        "向量空间全部公理",
+        "子空间判据",
+        "span 最小性",
+        "和交并",
+        "仿射",
+        "直和",
+        "线性无关",
+        "交换引理",
+        "基长度一致",
+        "基扩充缩减",
+        "坐标唯一",
+        "维数公式",
+        "四个空间的输入输出侧",
+        "秩零度",
+        "行列秩一致",
+        "主元列",
+        "正交补",
+        "相容性"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/"
+      ]
+    },
+    {
+      "reference_topics": "MIT 18.06：线性映射、矩阵表示、换基与相似",
+      "lesson_ids": [
+        "linear-algebra-08"
+      ],
+      "knowledge_points": [
+        "线性映射",
+        "核与像",
+        "同构",
+        "有序基坐标",
+        "矩阵表示",
+        "相似与行等价"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/"
+      ]
+    },
+    {
+      "reference_topics": "MIT 18.06：行列式性质、余子式、Cramer 与体积",
+      "lesson_ids": [
+        "linear-algebra-09"
+      ],
+      "knowledge_points": [
+        "排列符号定义",
+        "多重线性交错",
+        "余子式伴随",
+        "乘法行列式",
+        "Cramer",
+        "体积缩放"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/"
+      ]
+    },
+    {
+      "reference_topics": "MIT 18.06：正交、投影、最小二乘、Gram–Schmidt 与 QR",
+      "lesson_ids": [
+        "linear-algebra-10",
+        "linear-algebra-11",
+        "linear-algebra-12"
+      ],
+      "knowledge_points": [
+        "实内积公理",
+        "范数和 Cauchy",
+        "正交补",
+        "投影存在唯一",
+        "Gram 系统",
+        "对称幂等",
+        "设计矩阵",
+        "残差符号",
+        "正规方程",
+        "最佳预测唯一",
+        "参数满列秩",
+        "加权内积",
+        "单位正交",
+        "薄和完整 QR",
+        "Gram–Schmidt",
+        "Householder",
+        "正交残差",
+        "数值近相关"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/"
+      ]
+    },
+    {
+      "reference_topics": "MIT 18.06：特征值向量、对角化、矩阵幂和 Jordan；补足矩阵多项式",
+      "lesson_ids": [
+        "linear-algebra-13",
+        "linear-algebra-14",
+        "linear-algebra-23"
+      ],
+      "knowledge_points": [
+        "特征向量非零",
+        "特征多项式",
+        "特征空间",
+        "代数几何重数",
+        "迹与行列式",
+        "数域",
+        "特征向量基",
+        "对角化",
+        "广义方向",
+        "Jordan 块",
+        "矩阵幂",
+        "临界增长",
+        "病态的初步含义与条件数入口",
+        "矩阵多项式",
+        "Cayley–Hamilton",
+        "最小多项式",
+        "Bézout",
+        "广义特征空间直和",
+        "幂零链基",
+        "Jordan",
+        "Jordan链底非零",
+        "块湮灭多项式因子的必要性",
+        "核维数序列",
+        "块大小唯一性"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/",
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/6e1f793f6c25fd39e002c100e278bf1b_MIT18_06SCF11_Ses3.4sum.pdf"
+      ]
+    },
+    {
+      "reference_topics": "MIT 18.06：对称谱、正定、二次型最小值",
+      "lesson_ids": [
+        "linear-algebra-15",
+        "linear-algebra-16"
+      ],
+      "knowledge_points": [
+        "实对称与正交",
+        "二次型",
+        "谱定理",
+        "不变正交补",
+        "Rayleigh 商",
+        "秩一投影",
+        "不变子空间",
+        "正交基下限制矩阵",
+        "正定半正定",
+        "顺序主子式",
+        "Schur 补",
+        "Cholesky",
+        "Sylvester",
+        "二次优化凸性",
+        "全体主子式半正定判据",
+        "合同与相似区别",
+        "惯性指数",
+        "对称消元主元条件"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/",
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/804ab1e53134741d2044d241b50a285e_MIT18_06SCF11_Ses3.1sum.pdf"
+      ]
+    },
+    {
+      "reference_topics": "MIT 18.06：复矩阵、函数正交投影、离散 Fourier 与 FFT",
+      "lesson_ids": [
+        "linear-algebra-17"
+      ],
+      "knowledge_points": [
+        "复数共轭模",
+        "共轭线性内积",
+        "Hermitian 酉正规",
+        "DFT",
+        "Parseval",
+        "FFT 蝶形",
+        "函数 Fourier 有限投影",
+        "交换Hermitian同时酉对角化",
+        "正规谱定理",
+        "实数与复数对角化范围"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/",
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/53f17d47bf99d26fdc472b3177c256a8_MIT18_06SCF11_Ses3.2sum.pdf"
+      ]
+    },
+    {
+      "reference_topics": "MIT 18.06：SVD、左右逆与伪逆、图像压缩；扩展岭与 PCA",
+      "lesson_ids": [
+        "linear-algebra-18",
+        "linear-algebra-19",
+        "linear-algebra-22"
+      ],
+      "knowledge_points": [
+        "完整薄截断 SVD",
+        "左右奇异方向",
+        "AᵀA 非负谱",
+        "秩",
+        "四空间",
+        "最大伸缩",
+        "Moore–Penrose 四条件",
+        "最小范数最小二乘",
+        "零空间选择",
+        "岭回归",
+        "奇异滤波",
+        "尺度",
+        "左逆与右逆",
+        "满列秩与满行秩",
+        "全部单侧逆参数化",
+        "中心化和样本协方差",
+        "PCA 方差",
+        "投影子空间",
+        "低秩近似",
+        "谱范数/Frobenius",
+        "数据泄漏"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/",
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/0550c89b69c99e97dcbf52074e293308_MIT18_06SCF11_Ses3.8sum.pdf"
+      ]
+    },
+    {
+      "reference_topics": "MIT 18.06 工程计算扩展：范数、条件数与可靠性",
+      "lesson_ids": [
+        "linear-algebra-20"
+      ],
+      "knowledge_points": [
+        "向量矩阵范数",
+        "Frobenius",
+        "条件数",
+        "前后向误差",
+        "残差界",
+        "矩阵扰动",
+        "正规方程平方条件"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/"
+      ]
+    },
+    {
+      "reference_topics": "MIT 18.06：图网络关联矩阵、Markov、微分系统和矩阵指数",
+      "lesson_ids": [
+        "linear-algebra-21",
+        "linear-algebra-24"
+      ],
+      "knowledge_points": [
+        "关联矩阵",
+        "Laplacian",
+        "连通分量",
+        "列随机",
+        "稳定分布",
+        "不可约非周期",
+        "正幂收缩",
+        "环流空间",
+        "生成树与生成森林",
+        "基本环基",
+        "加权Laplacian",
+        "参考节点与源项相容",
+        "矩阵指数",
+        "渐近稳定",
+        "谱半径",
+        "Jordan 指数",
+        "不可约图路径",
+        "正幂与收敛"
+      ],
+      "source_urls": [
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/",
+        "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/d71b25b942dd3dec0ede49d712deb4b0_MIT18_06SCF11_Ses1.12sum.pdf"
+      ]
+    }
+  ],
+  "added_topics": [
+    "矩阵多项式、Cayley–Hamilton 与 Jordan 链",
+    "矩阵指数、稳定性与有限 Markov 链收敛",
+    "不变子空间",
+    "正交基下限制矩阵",
+    "全体主子式半正定判据",
+    "合同与相似区别",
+    "惯性指数",
+    "对称消元主元条件",
+    "交换Hermitian同时酉对角化",
+    "正规谱定理",
+    "实数与复数对角化范围",
+    "左逆与右逆",
+    "满列秩与满行秩",
+    "全部单侧逆参数化",
+    "环流空间",
+    "生成树与生成森林",
+    "基本环基",
+    "加权Laplacian",
+    "参考节点与源项相容",
+    "Jordan链底非零",
+    "块湮灭多项式因子的必要性",
+    "核维数序列",
+    "块大小唯一性"
+  ],
+  "scope_limits": [
+    "以有限维实、复线性代数与 MIT 18.06 核心应用为范围；不覆盖抽象代数、张量、无限维泛函分析全部内容。",
+    "复数上的代数基本定理作为明确先修引用；实对称与 Hermitian 谱定理在本书独立给完整证明，不依赖未证明的复根存在论证。",
+    "Fourier 章证明有限函数投影、Bessel、DFT、Parseval 和 radix-2 FFT；连续 Fourier 无穷级数的完整点态与均方收敛属于后续分析。",
+    "数值部分给条件和误差理论、Householder 和 FFT 原理；不等同成熟库的生产实现、随机 SVD、Krylov 或稀疏求解全课程。",
+    "统计应用给代数最优性，不把低重构误差当作因果或泛化保证。",
+    "正规谱定理已补完整证明；一般Schur分解、实Jordan形式、双线性形式分类、对偶与商空间的系统理论、张量及矩阵束未纳入当前主课。",
+    "Jordan链存在与块大小唯一性属于精确代数证明；没有提供浮点Jordan识别的稳定算法。"
+  ],
+  "records": [
+    {
+      "id": "linear-algebra-01",
+      "title": "向量与线性方程的几何",
+      "checked_concepts": [
+        "标量数域",
+        "向量与矩阵尺寸",
+        "线性组合",
+        "齐次非齐次",
+        "行列视角",
+        "特解加零空间"
+      ],
+      "proofs": [
+        "全部解为特解加零空间",
+        "实线性系统仅三种解数",
+        "齐次叠加"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：全部解为特解加零空间",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-02",
+      "title": "高斯消元与解集结构",
+      "checked_concepts": [
+        "增广矩阵",
+        "可逆行操作",
+        "阶梯与最简形",
+        "主元自由变量",
+        "零空间特殊解",
+        "RREF 唯一性"
+      ],
+      "proofs": [
+        "行变换保解集",
+        "自由变量参数完整性",
+        "特殊解构成零空间基",
+        "行最简形唯一"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：行变换保解集",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-03",
+      "title": "矩阵运算、逆与分块",
+      "checked_concepts": [
+        "矩阵乘法",
+        "结合分配转置",
+        "双侧左右逆",
+        "分块",
+        "Schur 补",
+        "零因子反例"
+      ],
+      "proofs": [
+        "结合与转置法则",
+        "逆唯一和乘积逆",
+        "可逆与每右端唯一解等价",
+        "Schur 消元"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：结合与转置法则",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-04",
+      "title": "LU 分解、置换与重复求解",
+      "checked_concepts": [
+        "单位下三角与上三角",
+        "置换",
+        "LU 存在唯一",
+        "PA=LU",
+        "前代回代",
+        "数值主元"
+      ],
+      "proofs": [
+        "消元矩阵构造 LU",
+        "单位对角 LU 唯一",
+        "带置换存在",
+        "三角回代与成本"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：消元矩阵构造 LU",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-05",
+      "title": "向量空间与子空间",
+      "checked_concepts": [
+        "向量空间全部公理",
+        "子空间判据",
+        "span 最小性",
+        "和交并",
+        "仿射",
+        "直和"
+      ],
+      "proofs": [
+        "子空间线性组合判据",
+        "张成最小性",
+        "和交封闭",
+        "直和与唯一分解"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：子空间线性组合判据",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-06",
+      "title": "线性无关、基与维数",
+      "checked_concepts": [
+        "线性无关",
+        "交换引理",
+        "基长度一致",
+        "基扩充缩减",
+        "坐标唯一",
+        "维数公式"
+      ],
+      "proofs": [
+        "交换引理",
+        "基长度一致",
+        "基扩充缩减",
+        "坐标唯一",
+        "空间和维数公式"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：交换引理",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-07",
+      "title": "四个基本子空间与秩零度",
+      "checked_concepts": [
+        "四个空间的输入输出侧",
+        "秩零度",
+        "行列秩一致",
+        "主元列",
+        "正交补",
+        "相容性"
+      ],
+      "proofs": [
+        "核基扩充证明秩零度",
+        "行列秩等于主元数",
+        "四空间正交关系",
+        "左零空间相容性"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：核基扩充证明秩零度",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-08",
+      "title": "线性映射、矩阵表示与换基",
+      "checked_concepts": [
+        "线性映射",
+        "核与像",
+        "同构",
+        "有序基坐标",
+        "矩阵表示",
+        "相似与行等价"
+      ],
+      "proofs": [
+        "基像唯一确定矩阵",
+        "换基公式",
+        "相似的谱、秩、迹和行列式不变量"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：基像唯一确定矩阵",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-09",
+      "title": "行列式、体积与可逆性",
+      "checked_concepts": [
+        "排列符号定义",
+        "多重线性交错",
+        "余子式伴随",
+        "乘法行列式",
+        "Cramer",
+        "体积缩放"
+      ],
+      "proofs": [
+        "排列推出多重线性交错唯一",
+        "乘法行列式",
+        "余子式伴随恒等式",
+        "Cramer",
+        "初等变换体积缩放"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：排列推出多重线性交错唯一",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-10",
+      "title": "内积、正交与投影",
+      "checked_concepts": [
+        "实内积公理",
+        "范数和 Cauchy",
+        "正交补",
+        "投影存在唯一",
+        "Gram 系统",
+        "对称幂等"
+      ],
+      "proofs": [
+        "Cauchy 与勾股",
+        "Gram 系统证明投影存在",
+        "投影唯一最近性",
+        "正交分解",
+        "对称幂等充要"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：Cauchy 与勾股",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-11",
+      "title": "最小二乘与线性回归",
+      "checked_concepts": [
+        "设计矩阵",
+        "残差符号",
+        "正规方程",
+        "最佳预测唯一",
+        "参数满列秩",
+        "加权内积"
+      ],
+      "proofs": [
+        "展开目标证明正规方程必要充分",
+        "投影证明总存在",
+        "满列秩唯一",
+        "均值与加权方程"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：展开目标证明正规方程必要充分",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-12",
+      "title": "Gram–Schmidt 与 QR 分解",
+      "checked_concepts": [
+        "单位正交",
+        "薄和完整 QR",
+        "Gram–Schmidt",
+        "Householder",
+        "正交残差",
+        "数值近相关"
+      ],
+      "proofs": [
+        "正交化归纳",
+        "薄 QR 构造",
+        "QR 最小二乘勾股",
+        "Householder 正交与消元"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：正交化归纳",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": [
+        "给出算法与误差数学原理，不提供浮点库的全部稳定性证明。"
+      ]
+    },
+    {
+      "id": "linear-algebra-13",
+      "title": "特征值与特征向量",
+      "checked_concepts": [
+        "特征向量非零",
+        "特征多项式",
+        "特征空间",
+        "代数几何重数",
+        "迹与行列式",
+        "数域"
+      ],
+      "proofs": [
+        "特征方程等价",
+        "不同特征值无关",
+        "几何重数不超过代数重数",
+        "迹和积"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：特征方程等价",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": [
+        "一般复特征多项式分裂使用代数基本定理，其复分析证明未在本课程重建。"
+      ]
+    },
+    {
+      "id": "linear-algebra-14",
+      "title": "对角化、矩阵幂与 Jordan 思想",
+      "checked_concepts": [
+        "特征向量基",
+        "对角化",
+        "广义方向",
+        "Jordan 块",
+        "矩阵幂",
+        "临界增长",
+        "病态的初步含义与条件数入口"
+      ],
+      "proofs": [
+        "特征向量基充要",
+        "重数判据",
+        "矩阵幂",
+        "Jordan 块二项式"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：特征向量基充要",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言",
+        "首次讨论病态时补通俗含义与条件数链接；移除未定义Schur术语直引，明确后续上三角表示的范围。"
+      ],
+      "remaining_limits": [],
+      "rechecked_on": "2026-09-27"
+    },
+    {
+      "id": "linear-algebra-15",
+      "title": "对称矩阵与谱定理",
+      "checked_concepts": [
+        "实对称与正交",
+        "二次型",
+        "谱定理",
+        "不变正交补",
+        "Rayleigh 商",
+        "秩一投影",
+        "不变子空间",
+        "正交基下限制矩阵"
+      ],
+      "proofs": [
+        "紧致球面极值加不变正交补归纳的完整谱证明",
+        "异值特征向量正交",
+        "Rayleigh 范围",
+        "用E转置AE证明限制仍实对称且AE=EB"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：紧致球面极值加不变正交补归纳的完整谱证明",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言",
+        "补全谱归纳中限制矩阵的对称性及特征向量映回的步骤。"
+      ],
+      "remaining_limits": [],
+      "rechecked_on": "2026-09-27"
+    },
+    {
+      "id": "linear-algebra-16",
+      "title": "正定性、能量与 Cholesky 分解",
+      "checked_concepts": [
+        "正定半正定",
+        "顺序主子式",
+        "Schur 补",
+        "Cholesky",
+        "Sylvester",
+        "二次优化凸性",
+        "全体主子式半正定判据",
+        "合同与相似区别",
+        "惯性指数",
+        "对称消元主元条件"
+      ],
+      "proofs": [
+        "谱正定判据",
+        "Cholesky 存在唯一",
+        "Sylvester 双向",
+        "正定二次目标唯一全局最优",
+        "Hessian 凸性",
+        "H加epsilonI的主子式展开",
+        "正子空间最大维数证明惯性定律"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：谱正定判据",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言",
+        "补全半正定正确主子式条件和合同惯性证明，明确零主元下不能套无换位标量消元。"
+      ],
+      "remaining_limits": [],
+      "rechecked_on": "2026-09-27"
+    },
+    {
+      "id": "linear-algebra-17",
+      "title": "复内积、酉矩阵与 Fourier 视角",
+      "checked_concepts": [
+        "复数共轭模",
+        "共轭线性内积",
+        "Hermitian 酉正规",
+        "DFT",
+        "Parseval",
+        "FFT 蝶形",
+        "函数 Fourier 有限投影",
+        "交换Hermitian同时酉对角化",
+        "正规谱定理",
+        "实数与复数对角化范围"
+      ],
+      "proofs": [
+        "酉保内积",
+        "Hermitian 完整谱归纳",
+        "单位根正交与 Parseval",
+        "FFT 偶奇递推",
+        "Fourier 有限投影和 Bessel",
+        "不变特征空间上的公共酉基",
+        "Hermitian实虚部交换与正规等价"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：酉保内积",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言",
+        "补正规定义后的完整充要定理，分别说明旋转和缺陷矩阵，明确Schur是进阶范围。"
+      ],
+      "remaining_limits": [
+        "连续 Fourier 无限级数的完整点态及均方收敛另需分析；本节证明有限投影、DFT 与 FFT。",
+        "正规谱已证明；一般Schur酉三角化及其数值QR算法另学。"
+      ],
+      "rechecked_on": "2026-09-27"
+    },
+    {
+      "id": "linear-algebra-23",
+      "title": "矩阵多项式、Cayley–Hamilton 与 Jordan 链",
+      "checked_concepts": [
+        "矩阵多项式",
+        "Cayley–Hamilton",
+        "最小多项式",
+        "Bézout",
+        "广义特征空间直和",
+        "幂零链基",
+        "Jordan",
+        "Jordan链底非零",
+        "块湮灭多项式因子的必要性",
+        "核维数序列",
+        "块大小唯一性"
+      ],
+      "proofs": [
+        "伴随系数递推证明 Cayley–Hamilton",
+        "最小多项式唯一整除",
+        "Bézout 广义空间直和",
+        "幂零链基归纳",
+        "Jordan 和最小多项式判据",
+        "q(lambda)非零时q(J)有限级数逆",
+        "核维数一阶差计至少块长、二阶差计精确块长"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：伴随系数递推证明 Cayley–Hamilton",
+        "新增独立缺漏补章，安排在依赖知识之后并保留可核对练习",
+        "补链定义的非零条件、最小多项式必要性逻辑和相同重数仍不相似的反例；新增六维零度序列构造例题。"
+      ],
+      "remaining_limits": [
+        "一般复特征多项式分裂使用代数基本定理，其复分析证明未在本课程重建。",
+        "不包括实Jordan标准形或有理标准形；数值扰动下不能按精确零度盲目识别Jordan结构。"
+      ],
+      "rechecked_on": "2026-09-27"
+    },
+    {
+      "id": "linear-algebra-18",
+      "title": "奇异值分解 SVD",
+      "checked_concepts": [
+        "完整薄截断 SVD",
+        "左右奇异方向",
+        "AᵀA 非负谱",
+        "秩",
+        "四空间",
+        "最大伸缩"
+      ],
+      "proofs": [
+        "从 AᵀA 谱完整构造 SVD",
+        "奇异值数等于秩",
+        "四空间对应",
+        "最大伸缩"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：从 AᵀA 谱完整构造 SVD",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-19",
+      "title": "伪逆、最小范数与正则化",
+      "checked_concepts": [
+        "Moore–Penrose 四条件",
+        "最小范数最小二乘",
+        "零空间选择",
+        "岭回归",
+        "奇异滤波",
+        "尺度",
+        "左逆与右逆",
+        "满列秩与满行秩",
+        "全部单侧逆参数化"
+      ],
+      "proofs": [
+        "SVD 坐标最小范数唯一",
+        "四条件满足与唯一",
+        "岭滤波与零惩罚极限",
+        "单侧逆存在的秩充要条件",
+        "左右逆全部选择的投影公式"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：SVD 坐标最小范数唯一",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言",
+        "补矩形逆的条件、构造、非唯一性与伪逆选择，避免直接在秩不足时使用正规矩阵逆。"
+      ],
+      "remaining_limits": [],
+      "rechecked_on": "2026-09-27"
+    },
+    {
+      "id": "linear-algebra-20",
+      "title": "范数、条件数与数值可靠性",
+      "checked_concepts": [
+        "向量矩阵范数",
+        "Frobenius",
+        "条件数",
+        "前后向误差",
+        "残差界",
+        "矩阵扰动",
+        "正规方程平方条件"
+      ],
+      "proofs": [
+        "次乘性与条件数下界",
+        "奇异值条件数",
+        "残差到前向误差",
+        "Neumann 矩阵扰动界",
+        "正规方程平方条件"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：次乘性与条件数下界",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": [
+        "给出算法与误差数学原理，不提供浮点库的全部稳定性证明。"
+      ]
+    },
+    {
+      "id": "linear-algebra-21",
+      "title": "网络、Markov 链与线性动力学",
+      "checked_concepts": [
+        "关联矩阵",
+        "Laplacian",
+        "连通分量",
+        "列随机",
+        "稳定分布",
+        "不可约非周期",
+        "正幂收缩",
+        "环流空间",
+        "生成树与生成森林",
+        "基本环基",
+        "加权Laplacian",
+        "参考节点与源项相容"
+      ],
+      "proofs": [
+        "Laplacian 半正定和连通零空间",
+        "概率守恒",
+        "Cesàro 平均证明稳定分布存在",
+        "正幂收缩唯一收敛",
+        "环流维数m-n+c",
+        "叶节点归纳与基本环成基",
+        "固定参考节点后的正定唯一解"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：Laplacian 半正定和连通零空间",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言",
+        "依照实际网络讲义补树/环流/加权网络细项，显式说明关联矩阵转置与物理流向约定。"
+      ],
+      "remaining_limits": [],
+      "rechecked_on": "2026-09-27"
+    },
+    {
+      "id": "linear-algebra-24",
+      "title": "矩阵指数、稳定性与有限 Markov 链收敛",
+      "checked_concepts": [
+        "矩阵指数",
+        "渐近稳定",
+        "谱半径",
+        "Jordan 指数",
+        "不可约图路径",
+        "正幂与收敛"
+      ],
+      "proofs": [
+        "指数一致收敛与微分",
+        "线性系统唯一解",
+        "连续离散 Jordan 稳定判据",
+        "有限回路数论推出正幂"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：指数一致收敛与微分",
+        "新增独立缺漏补章，安排在依赖知识之后并保留可核对练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "linear-algebra-22",
+      "title": "PCA、低秩近似与学习路线",
+      "checked_concepts": [
+        "中心化和样本协方差",
+        "PCA 方差",
+        "投影子空间",
+        "低秩近似",
+        "谱范数/Frobenius",
+        "数据泄漏"
+      ],
+      "proofs": [
+        "PCA Rayleigh 与权重最优",
+        "谱范数 Eckart–Young",
+        "Frobenius Eckart–Young"
+      ],
+      "changes": [
+        "按对象、符号、量词和条件重写定义，并放在通俗解释之前",
+        "补入完整论证：PCA Rayleigh 与权重最优",
+        "保留并复核例题、练习与条件失效实例；删除重复旧导言和无证明断言"
+      ],
+      "remaining_limits": []
+    }
+  ],
+  "verification": {
+    "script": "tools/verify_math.py",
+    "command": "python -X utf8 tools/verify_math.py",
+    "checked_on": "2026-09-27",
+    "status": "passed",
+    "lessons": 55,
+    "metadata_checks": 381,
+    "mathematical_checks": 28,
+    "katex_formulas": 3594,
+    "scope": "从源Markdown直接渲染数学，检查ID/标题/覆盖映射/链接；独立符号积分和精确矩阵例题验证。定理逐步论证由人工复核，未宣称形式化证明。",
+    "total_checks": 409
+  }
+}

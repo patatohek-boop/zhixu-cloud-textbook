@@ -1,0 +1,1086 @@
+{
+  "course_id": "machine-learning",
+  "sources": [
+    {
+      "title": "Stanford CS229 syllabus",
+      "url": "https://cs229.stanford.edu/syllabus-summer2020.html",
+      "coverage": "概率统计、回归、MLE、感知机、GLM、Bayes、核与SVM、神经网络、泛化、聚类/EM、PCA与RL主题映射；证明和例题为本站原创推导"
+    },
+    {
+      "title": "MIT 6.036",
+      "url": "https://ocw.mit.edu/courses/6-036-introduction-to-machine-learning-fall-2020/",
+      "coverage": "本科机器学习学习目标和内容结构"
+    },
+    {
+      "title": "ISLP 官方教材入口",
+      "url": "https://www.statlearning.com/",
+      "coverage": "回归、分类、重采样、正则化、非线性、树、SVM、深度学习、生存分析、无监督与多重检验范围映射"
+    },
+    {
+      "title": "scikit-learn 线性模型官方指南",
+      "url": "https://scikit-learn.org/stable/modules/linear_model.html",
+      "coverage": "核对损失缩放、GLM 分布与实现边界；运行环境版本另列"
+    },
+    {
+      "title": "CS229 Probability Theory Review",
+      "url": "https://cs229.stanford.edu/section/cs229-prob.pdf",
+      "coverage": "已读第2—4节正文：分布、联合/边缘/条件分布、随机向量和协方差；补 ML02/04 的桥梁",
+      "accessed": "2026-09-27"
+    },
+    {
+      "title": "CS229 Supervised Learning Notes",
+      "url": "https://cs229.stanford.edu/notes2020spring/cs229-notes1.pdf",
+      "coverage": "已读最小二乘矩阵推导、高斯似然及 GLM 指数族正文，核对 ML31/33 的缩放和范围",
+      "accessed": "2026-09-27"
+    },
+    {
+      "title": "CS229 More on Multivariate Gaussians",
+      "url": "https://cs229.stanford.edu/section/more_on_gaussians.pdf",
+      "coverage": "已读定义、仿射/边缘与条件高斯正文，交叉核对 ML04/35",
+      "accessed": "2026-09-27"
+    },
+    {
+      "title": "ISLP Multiple Testing 官方实验正文",
+      "url": "https://intro-stat-learning.github.io/ISLP/labs/Ch13-multiple-lab.html",
+      "coverage": "已读 FWER 与 FDR/BH 部分，补 ML03 定义、步骤与原创新数值例",
+      "accessed": "2026-09-27"
+    },
+    {
+      "title": "ISLP Cross-Validation and the Bootstrap",
+      "url": "https://intro-stat-learning.github.io/ISLP/labs/Ch05-resample-lab.html",
+      "coverage": "已读重采样实验正文，补 ML03 Bootstrap 算法与 ML06 评估边界对照",
+      "accessed": "2026-09-27"
+    }
+  ],
+  "records": [
+    {
+      "id": "machine-learning-01",
+      "title": "从真实问题到学习任务与基线",
+      "checked_concepts": [
+        "定义样本、模型、参数、损失和经验风险",
+        "训练与未来分布区别",
+        "常数基线"
+      ],
+      "proofs": [
+        "常数平方损失最优为均值的配方证明"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-02",
+      "title": "概率桥梁：条件概率、贝叶斯与分布",
+      "checked_concepts": [
+        "定义样本空间、事件、随机变量、PMF/PDF/CDF",
+        "期望、方差、协方差与独立",
+        "条件概率、全概率和贝叶斯",
+        "补联合与边缘分布、连续条件密度的零概率事件边界",
+        "补条件期望、全期望、全方差与最优平方损失预测的逐式证明和手算题"
+      ],
+      "proofs": [
+        "全概率与贝叶斯公式证明",
+        "期望线性性和方差恒等式证明",
+        "零协方差不推出独立的反例",
+        "联合表全期望推导",
+        "中心化交叉项证明全方差和条件均值平方风险最优性"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id",
+        "补联合与边缘分布、连续条件密度的零概率事件边界",
+        "补条件期望、全期望、全方差与最优平方损失预测的逐式证明和手算题"
+      ],
+      "remaining_limits": [
+        "测度论构造和连续条件分布的完整存在性理论属于概率论后续课程；本章未声称证明所有分布的性质"
+      ]
+    },
+    {
+      "id": "machine-learning-03",
+      "title": "统计桥梁：估计、不确定性与检验",
+      "checked_concepts": [
+        "定义统计量、估计量、偏差、标准误和置信程序",
+        "无偏样本方差",
+        "检验错误与多重比较",
+        "Chebyshev 不等式",
+        "弱大数定律与中心极限定理区别",
+        "补 t 枢轴的 n>=2 和正方差条件、卡方定义",
+        "补有效 p 值、FWER/FDR、BH 算法及其独立条件",
+        "补 Bootstrap 明确计算步骤，区分重采样次数与原始样本量"
+      ],
+      "proofs": [
+        "样本均值方差和 n−1 方差修正证明",
+        "正态样本 t 枢轴推导",
+        "Bonferroni 上界证明",
+        "Chebyshev 不等式与有限方差弱大数定律完整证明"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id",
+        "补 t 枢轴的 n>=2 和正方差条件、卡方定义",
+        "补有效 p 值、FWER/FDR、BH 算法及其独立条件",
+        "补 Bootstrap 明确计算步骤，区分重采样次数与原始样本量"
+      ],
+      "remaining_limits": [
+        "一般中心极限定理、bootstrap 一致性、t 密度归一化与功效最优化未完整证明；本章的精确区间证明明确限于正态样本",
+        "BH算法有条件陈述与手算，本轮未给完整FDR定理证明；Bootstrap覆盖率不作无条件保证。"
+      ]
+    },
+    {
+      "id": "machine-learning-04",
+      "title": "数学桥梁：向量、矩阵与梯度",
+      "checked_concepts": [
+        "定义向量内积、范数、梯度和 Hessian",
+        "凸性、正定与存在唯一性",
+        "方向导数与形状",
+        "补秩、逆、对角矩阵、Hessian 凸性判据及单点半正定反例",
+        "补协方差矩阵、仿射变换公式、多元高斯密度与奇异边界"
+      ],
+      "proofs": [
+        "负梯度最陡下降方向证明",
+        "可微凸函数驻点全局最优证明",
+        "协方差半正定及仿射变换推导",
+        "沿线段证明 Hessian 凸性判据；负四次方反例",
+        "非退化多元高斯密度的线性换元依据"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id",
+        "补秩、逆、对角矩阵、Hessian 凸性判据及单点半正定反例",
+        "补协方差矩阵、仿射变换公式、多元高斯密度与奇异边界"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-31",
+      "title": "参数估计：似然、最大似然与最大后验",
+      "checked_concepts": [
+        "似然与概率的区别",
+        "Bernoulli 和高斯 MLE",
+        "Bayes 后验、MAP 与正则化",
+        "补 Bernoulli MLE 无偏/方差/一致性证明及均方误差分解",
+        "限定一般 MLE 结论需要可识别性与正则条件；重核 Beta 后验和正则缩放"
+      ],
+      "proofs": [
+        "Bernoulli MLE 与边界情况证明",
+        "高斯均值方差 MLE 推导",
+        "Beta 后验与平滑推导",
+        "高斯/拉普拉斯先验与惩罚对应",
+        "Beta 均值的积分分部与恒等式推导",
+        "Bernoulli MLE 的精确均值方差与 Chebyshev 一致性证明",
+        "估计量均方误差的偏差方差分解"
+      ],
+      "changes": [
+        "对照 Stanford CS229 与 ISLP 结构识别缺项后新增",
+        "包含严格定义、条件、逐步证明、通俗解释和解析练习",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id",
+        "补 Bernoulli MLE 无偏/方差/一致性证明及均方误差分解",
+        "限定一般 MLE 结论需要可识别性与正则条件；重核 Beta 后验和正则缩放"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-05",
+      "title": "数据划分、预处理与信息泄露",
+      "checked_concepts": [
+        "定义训练集验证集测试集与信息集合",
+        "预处理 fit/transform",
+        "固定模型独立测试的估计"
+      ],
+      "proofs": [
+        "独立测试平均损失条件无偏证明",
+        "全数据中心化的信息依赖反例"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-06",
+      "title": "评估指标、偏差方差与交叉验证",
+      "checked_concepts": [
+        "定义回归与分类指标及分母",
+        "平方损失偏差方差分解",
+        "交叉验证选择偏差"
+      ],
+      "proofs": [
+        "固定输入下偏差方差噪声分解证明",
+        "测试 R² 为负的例题"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-34",
+      "title": "有限样本为何能学习：集中不等式与泛化界",
+      "checked_concepts": [
+        "Markov 与 Hoeffding 界",
+        "有限模型类一致收敛",
+        "ERM 超额风险及适用边界",
+        "补指数矩求导和可交换依据，明确负尾推导",
+        "明确有限候选指固定函数，不能把同数据拟合算法的数量直接当函数类大小"
+      ],
+      "proofs": [
+        "Markov 不等式证明",
+        "Hoeffding 指数矩界与两侧概率证明",
+        "有限类并集界与 ERM 风险界证明",
+        "指数倾斜后二阶导等于方差的显式推导和有界可交换条件"
+      ],
+      "changes": [
+        "对照 Stanford CS229 与 ISLP 结构识别缺项后新增",
+        "包含严格定义、条件、逐步证明、通俗解释和解析练习",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id",
+        "补指数矩求导和可交换依据，明确负尾推导",
+        "明确有限候选指固定函数，不能把同数据拟合算法的数量直接当函数类大小"
+      ],
+      "remaining_limits": [
+        "VC/Rademacher 复杂度界、依赖数据集中以及深度网络泛化不在本章证明范围"
+      ]
+    },
+    {
+      "id": "machine-learning-07",
+      "title": "线性回归与最小二乘",
+      "checked_concepts": [
+        "定义线性参数模型、残差与可识别性",
+        "正规方程和投影",
+        "最小二乘与高斯似然"
+      ],
+      "proofs": [
+        "一元斜率截距公式推导",
+        "正规方程充分性及预测唯一性证明",
+        "高斯 MLE 等价最小二乘推导"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-08",
+      "title": "梯度下降、学习率与数值检查",
+      "checked_concepts": [
+        "定义梯度下降、学习率和光滑性",
+        "批量随机梯度和 epoch",
+        "Newton 法与停止条件"
+      ],
+      "proofs": [
+        "下降引理与步长条件证明",
+        "二次目标收敛区间证明",
+        "小批量梯度无偏性证明"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-09",
+      "title": "正则化、特征工程与非线性扩展",
+      "checked_concepts": [
+        "定义 L1/L2 正则和标准化尺度",
+        "岭闭式解与唯一性",
+        "Lasso 软阈值和 MAP",
+        "基函数、节点、分段线性和三次样条"
+      ],
+      "proofs": [
+        "岭回归正定与闭式解证明",
+        "一维 L1 软阈值完整分段推导",
+        "截断线性样条连续性与斜率跳变证明"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "平滑样条代表定理与完整 GAM 算法未展开"
+      ]
+    },
+    {
+      "id": "machine-learning-10",
+      "title": "逻辑回归、多分类与交叉熵",
+      "checked_concepts": [
+        "定义 logit、sigmoid、Bernoulli 似然和交叉熵",
+        "softmax 多分类",
+        "梯度凸性与有限最优条件"
+      ],
+      "proofs": [
+        "交叉熵的似然来源及 p−y 梯度证明",
+        "Hessian 半正定证明",
+        "softmax 平移不变性与多类梯度证明"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-32",
+      "title": "感知机：线性分类与错误次数界",
+      "checked_concepts": [
+        "感知机更新规则",
+        "线性可分与几何间隔",
+        "有限错误界与不可分边界",
+        "逐式复核零初值、增广空间、有界特征、正间隔与更新次数上界，保留可分与未收敛区分"
+      ],
+      "proofs": [
+        "感知机 Novikoff 型错误次数界完整证明",
+        "停止条件和可执行训练轨迹"
+      ],
+      "changes": [
+        "对照 Stanford CS229 与 ISLP 结构识别缺项后新增",
+        "包含严格定义、条件、逐步证明、通俗解释和解析练习",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id",
+        "逐式复核零初值、增广空间、有界特征、正间隔与更新次数上界，保留可分与未收敛区分"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-33",
+      "title": "广义线性模型：指数族、连接函数与计数回归",
+      "checked_concepts": [
+        "指数族和对数配分函数",
+        "连接函数与规范参数",
+        "GLM 梯度及 Newton 更新",
+        "补 Newton 到 IRLS 正规方程的推导与泊松首步手算",
+        "补共同固定尺度、正曲率、非规范连接与一般指数族边界"
+      ],
+      "proofs": [
+        "指数族均值方差由归一化求导推导",
+        "规范连接 GLM 梯度 Hessian 推导",
+        "Poisson 回归一参数例题",
+        "Newton 方程改写为迭代重加权最小二乘"
+      ],
+      "changes": [
+        "对照 Stanford CS229 与 ISLP 结构识别缺项后新增",
+        "包含严格定义、条件、逐步证明、通俗解释和解析练习",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id",
+        "补 Newton 到 IRLS 正规方程的推导与泊松首步手算",
+        "补共同固定尺度、正曲率、非规范连接与一般指数族边界"
+      ],
+      "remaining_limits": [
+        "非规范连接 IRLS、准似然及完整指数族测度理论为进一步课程"
+      ]
+    },
+    {
+      "id": "machine-learning-11",
+      "title": "朴素贝叶斯与生成式分类",
+      "checked_concepts": [
+        "定义生成式、判别式和条件独立",
+        "Bernoulli/多项式/高斯模型区别",
+        "共享协方差 LDA 与 QDA"
+      ],
+      "proofs": [
+        "朴素贝叶斯后验归一化推导",
+        "LDA 二次项抵消得到线性边界的证明"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-12",
+      "title": "近邻、距离与支持向量机",
+      "checked_concepts": [
+        "定义距离、近邻投票和间隔",
+        "hinge 损失与软约束",
+        "核的半正定条件与 SVM 对偶"
+      ],
+      "proofs": [
+        "点到超平面距离与最大间隔目标推导",
+        "软间隔消去松弛量得到 hinge 目标",
+        "SVM 对偶和核合法性证明",
+        "原对偶目标差非负与零差最优性证书的直接展开证明"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "强对偶的一般定理、无限维核空间表示定理及核训练算法收敛证明需继续学习凸优化；本章未冒称已证明这些定理"
+      ]
+    },
+    {
+      "id": "machine-learning-35",
+      "title": "概率预测：贝叶斯线性回归与高斯过程",
+      "checked_concepts": [
+        "后验与预测分布",
+        "高斯线性回归配方",
+        "高斯过程核与条件分布",
+        "补先验使后验精度正定的逐式论证",
+        "补线性核的半正定证明及贝叶斯回归关系",
+        "补 Schur 补半正定性证明，复核潜在值和新观测方差区别"
+      ],
+      "proofs": [
+        "贝叶斯线性后验完成平方推导",
+        "预测方差全方差分解",
+        "联合高斯条件分布与 GP 预测推导",
+        "后验精度矩阵正定证明",
+        "线性核半正定构造",
+        "残差退化高斯独立性分解与 Schur 补非负证明"
+      ],
+      "changes": [
+        "对照 Stanford CS229 与 ISLP 结构识别缺项后新增",
+        "包含严格定义、条件、逐步证明、通俗解释和解析练习",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id",
+        "补先验使后验精度正定的逐式论证",
+        "补线性核的半正定证明及贝叶斯回归关系",
+        "补 Schur 补半正定性证明，复核潜在值和新观测方差区别"
+      ],
+      "remaining_limits": [
+        "核超参数后验积分、稀疏 GP、非高斯似然近似推断需后续学习"
+      ]
+    },
+    {
+      "id": "machine-learning-13",
+      "title": "决策树、划分与剪枝",
+      "checked_concepts": [
+        "定义节点区域、不纯度和加权下降",
+        "分类叶与回归叶",
+        "贪心和剪枝范围"
+      ],
+      "proofs": [
+        "Gini 的错误概率解释与最大值界证明",
+        "回归划分误差分解证明"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-14",
+      "title": "随机森林、提升与集成学习",
+      "checked_concepts": [
+        "定义 bagging、随机森林、boosting 和折外预测",
+        "成员误差相关性",
+        "平方损失残差提升"
+      ],
+      "proofs": [
+        "等方差等相关平均方差公式证明",
+        "平方损失函数方向导数推导"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-15",
+      "title": "聚类：k-means、层次与密度",
+      "checked_concepts": [
+        "定义簇归属、中心和平方距离目标",
+        "交替最小化与空簇约定",
+        "密度和层次簇定义"
+      ],
+      "proofs": [
+        "簇均值最小化平方距离证明",
+        "Lloyd 两步目标不增证明"
+      ],
+      "changes": [
+        "先给出本章概念的严格定义、符号与适用条件",
+        "加入本章核心结论的逐步证明或推导",
+        "核对原例题、自测及经验结论的边界",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-16",
+      "title": "高斯混合与 EM 算法",
+      "checked_concepts": [
+        "定义混合密度、潜变量和责任度",
+        "KL 散度与下界",
+        "EM 更新和单调性条件"
+      ],
+      "proofs": [
+        "KL 非负与 EM 下界恒等式证明",
+        "EM 似然单调性证明",
+        "混合权重和高斯均值协方差更新推导"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "矩阵对数行列式微分使用线性代数的可逆矩阵微分规则；一般近似 EM/变分推断收敛并未在此证明"
+      ]
+    },
+    {
+      "id": "machine-learning-17",
+      "title": "PCA、降维与流形可视化",
+      "checked_concepts": [
+        "定义中心化、协方差、正交投影和重建",
+        "特征值与解释方差",
+        "PCA 最优子空间和监督信息差异"
+      ],
+      "proofs": [
+        "第一主方向 Rayleigh 商证明",
+        "多维方差最大与重建误差最小的等价证明"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-18",
+      "title": "神经网络与反向传播",
+      "checked_concepts": [
+        "定义层、激活、计算图和共享参数",
+        "链式法则反向递推",
+        "矩阵形状与梯度相加"
+      ],
+      "proofs": [
+        "多层仿射复合仍仿射的证明",
+        "矩阵反向传播公式推导",
+        "共享权重梯度累加证明"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-19",
+      "title": "深度网络优化与泛化",
+      "checked_concepts": [
+        "定义动量、Adam 一二阶矩和偏差修正",
+        "dropout 与期望缩放",
+        "归一化和训练推理状态"
+      ],
+      "proofs": [
+        "指数移动平均初始化偏差修正推导",
+        "倒置 dropout 均值和方差证明"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "未将 Adam 的经验易用性写成普遍收敛定理；深度非凸优化的完整理论不在本节覆盖"
+      ]
+    },
+    {
+      "id": "machine-learning-20",
+      "title": "卷积网络与图像学习",
+      "checked_concepts": [
+        "定义互相关、核、通道、填充和步长",
+        "输出尺寸与感受野",
+        "平移等变和不变"
+      ],
+      "proofs": [
+        "卷积输出长度计数推导",
+        "无限格点步长一的平移等变证明",
+        "参数数量计算"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-21",
+      "title": "序列、RNN 与时间预测",
+      "checked_concepts": [
+        "定义序列、隐藏状态和参数共享",
+        "BPTT 雅可比连乘",
+        "门控与时间评估的信息约束"
+      ],
+      "proofs": [
+        "线性状态递推展开证明",
+        "梯度消失的矩阵范数充分条件推导"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "GRU 的完整变体、ARIMA 估计与序列概率模型不在本节逐一推导；LSTM 明确为核心结构介绍"
+      ]
+    },
+    {
+      "id": "machine-learning-22",
+      "title": "注意力与 Transformer",
+      "checked_concepts": [
+        "定义查询键值和注意力矩阵形状",
+        "缩放、softmax 与掩码",
+        "无位置自注意力的置换等变"
+      ],
+      "proofs": [
+        "点积分数方差尺度推导",
+        "自注意力置换等变证明",
+        "注意力凸组合范围证明"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-23",
+      "title": "自监督、迁移与生成模型导读",
+      "checked_concepts": [
+        "定义自监督、迁移、潜变量与生成密度",
+        "自回归链式分解",
+        "VAE 下界与 GAN/扩散目标边界"
+      ],
+      "proofs": [
+        "联合分布链式分解证明",
+        "VAE ELBO 恒等式与下界证明"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "GAN 均衡与收敛、扩散反向过程和采样误差、对比学习泛化证明未完整展开，明确为后续专题"
+      ]
+    },
+    {
+      "id": "machine-learning-24",
+      "title": "不平衡、阈值与概率校准",
+      "checked_concepts": [
+        "定义排序、校准、行动损失",
+        "Brier proper scoring",
+        "成本敏感阈值与基础比例"
+      ],
+      "proofs": [
+        "Brier 分数在真实概率处唯一最小的证明",
+        "最优二分类成本阈值完整推导"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-25",
+      "title": "解释、稳健性与公平性",
+      "checked_concepts": [
+        "定义模型解释和干预效应",
+        "群体错误率与预测阳性值",
+        "公平标准冲突的精确条件"
+      ],
+      "proofs": [
+        "不同基础率下 equalized odds 与 PPV 冲突的代数证明"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-26",
+      "title": "部署、漂移与 MLOps",
+      "checked_concepts": [
+        "定义数据漂移、标签漂移和概念漂移",
+        "训练与服务契约",
+        "协变量迁移与重要性权重"
+      ],
+      "proofs": [
+        "固定条件分布下输入漂移仍改变风险的分解",
+        "协变量迁移重加权恒等式证明"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-27",
+      "title": "强化学习：状态、行动与长期回报",
+      "checked_concepts": [
+        "定义有限 MDP、策略、回报和价值",
+        "Bellman 期望/最优算子",
+        "表格算法与函数近似边界"
+      ],
+      "proofs": [
+        "Bellman 期望方程由回报分解推导",
+        "最优 Bellman 算子的压缩性与值迭代收敛证明"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "随机逼近意义下的 Q-learning 收敛定理、策略梯度定理和深度 RL 稳定性保留为高级专题"
+      ]
+    },
+    {
+      "id": "machine-learning-28",
+      "title": "因果推断：关联之外的边界",
+      "checked_concepts": [
+        "定义潜在结果、处理效应和观察结果",
+        "一致性、可交换性与重叠性",
+        "调整公式与碰撞点"
+      ],
+      "proofs": [
+        "标准化调整公式的识别证明",
+        "碰撞点选择引入关联的概率反例"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "工具变量、断点与双重差分仅为设计入口，未宣称给出其全部识别与估计理论"
+      ]
+    },
+    {
+      "id": "machine-learning-29",
+      "title": "完整实验：可复现的回归流程",
+      "checked_concepts": [
+        "定义合成机制、训练协议和实验结论范围",
+        "折内变换与选参",
+        "不可约噪声的条件风险"
+      ],
+      "proofs": [
+        "合成线性机制的 Bayes 风险下界推导",
+        "各集合样本数与训练流程追踪"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "machine-learning-30",
+      "title": "高级主题地图与继续学习",
+      "checked_concepts": [
+        "区分路线图与已掌握的证明",
+        "生存函数、风险与右删失",
+        "保形边际覆盖和多重比较"
+      ],
+      "proofs": [
+        "Kaplan–Meier 条件生存乘积推导",
+        "无平手交换性分数的保形秩覆盖证明"
+      ],
+      "changes": [
+        "明确模型对象、先修符号和精确条件",
+        "为核心数理结论增加可逐步核查的证明或推导",
+        "把导读范围和经验效果与已证明性质分开",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "Cox 部分似然、ICA、因子分析、图模型、推荐和图神经网络、差分隐私尚未完整展开；路线图明确列出未覆盖深度"
+      ]
+    }
+  ],
+  "added_topics": [
+    {
+      "id": "machine-learning-31",
+      "title": "参数估计：似然、最大似然与最大后验",
+      "reason": "对照官方课程结构补齐此前缺漏的核心专题，置于先修成立的位置"
+    },
+    {
+      "id": "machine-learning-32",
+      "title": "感知机：线性分类与错误次数界",
+      "reason": "对照官方课程结构补齐此前缺漏的核心专题，置于先修成立的位置"
+    },
+    {
+      "id": "machine-learning-33",
+      "title": "广义线性模型：指数族、连接函数与计数回归",
+      "reason": "对照官方课程结构补齐此前缺漏的核心专题，置于先修成立的位置"
+    },
+    {
+      "id": "machine-learning-34",
+      "title": "有限样本为何能学习：集中不等式与泛化界",
+      "reason": "对照官方课程结构补齐此前缺漏的核心专题，置于先修成立的位置"
+    },
+    {
+      "id": "machine-learning-35",
+      "title": "概率预测：贝叶斯线性回归与高斯过程",
+      "reason": "对照官方课程结构补齐此前缺漏的核心专题，置于先修成立的位置"
+    }
+  ],
+  "scope_limits": [
+    "提供本科核心的可追踪论证；未把现代生成模型、因果识别和生产级 MLOps 导读等同于完整专业课程。",
+    "因子分析、ICA、图模型、完整生存回归、推荐/图学习、完整生成模型理论未在本轮发展为专门课程，未计作已完整覆盖。",
+    "本轮完整推导有限二阶矩下全期望/全方差、Bernoulli一致性、规范GLM的IRLS和线性核；一般条件分布存在性、一般MLE渐近理论、BH完整FDR证明及任意相关多重检验属于后续专题。"
+  ],
+  "validation": {
+    "python_version": "3.10.10",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.9.2",
+    "scikit_learn": "1.7.2",
+    "executable_blocks": [
+      {
+        "lesson_id": "machine-learning-08",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "machine-learning-32",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "machine-learning-29",
+        "block": 1,
+        "passed": true
+      }
+    ],
+    "notes": [
+      "每个完整 Python 代码块在独立进程与临时目录执行，绘图使用非交互后端。",
+      "示例通过是具体可执行证据，不代替正文的数学证明。",
+      "pandas 3.0 Copy-on-Write 说明依据官方文档；本机代码运行环境是 pandas 2.3.3。"
+    ],
+    "numeric_and_contract_checks": [
+      "bisection square-root error",
+      "bisection input contract",
+      "sorting exhaustive small inputs (364)",
+      "constant squared-loss decomposition",
+      "Bayes alarm posterior",
+      "conditional expectation and total variance",
+      "conditional-mean squared-risk decomposition",
+      "BH step-up and Bonferroni example",
+      "Bernoulli MLE exact moments",
+      "least-squares gradient",
+      "normal-equation residual orthogonality",
+      "ridge stationary equation",
+      "L1 soft threshold -4",
+      "L1 soft threshold -1",
+      "L1 soft threshold 0",
+      "L1 soft threshold 0.5",
+      "L1 soft threshold 3",
+      "logistic p-y derivative",
+      "KL nonnegative example",
+      "PCA reconstruction spectral identity",
+      "GP predictive variance nonnegative",
+      "single-point GP posterior",
+      "linear-kernel GP and Bayesian regression equivalence",
+      "fairness conditional-rate example",
+      "finite-hypothesis bound numerical value",
+      "Poisson MLE gradient",
+      "Poisson first IRLS step",
+      "bounded exponential moment -3.0",
+      "bounded exponential moment -0.5",
+      "bounded exponential moment 0.5",
+      "bounded exponential moment 3.0",
+      "Bellman contraction example",
+      "attention permutation equivariance",
+      "EM lower-bound identity"
+    ],
+    "formula_rendering": {
+      "combined_courses": [
+        "python",
+        "machine-learning"
+      ],
+      "lessons": 64,
+      "formulas": 782,
+      "failures": 0,
+      "method": "用仓库内KaTeX解析全部公式，未以渲染通过代替数学核查"
+    },
+    "prerequisite_order": "所有同课程编号先修均在实际目录顺序之前",
+    "executed_block_count": 3,
+    "rerun": "python tools/verify_computing.py --report PATH",
+    "numeric_checks_scope": "34项为两课程联合检查集合，其中包括排序穷举、概率统计和机器学习恒等式；不是每门各有34个独立检查。",
+    "last_verified": "2026-09-27"
+  },
+  "coverage_map": [
+    {
+      "reference_topics": "CS229：概率统计、矩阵微积分、似然与贝叶斯估计",
+      "lesson_ids": [
+        "machine-learning-02",
+        "machine-learning-03",
+        "machine-learning-04",
+        "machine-learning-31"
+      ]
+    },
+    {
+      "reference_topics": "ISLP 与 CS229：任务定义、数据划分、误差指标、重采样和有限类学习理论",
+      "lesson_ids": [
+        "machine-learning-01",
+        "machine-learning-05",
+        "machine-learning-06",
+        "machine-learning-34"
+      ]
+    },
+    {
+      "reference_topics": "CS229 与 ISLP：最小二乘、梯度下降、正则化、逻辑回归",
+      "lesson_ids": [
+        "machine-learning-07",
+        "machine-learning-08",
+        "machine-learning-09",
+        "machine-learning-10"
+      ]
+    },
+    {
+      "reference_topics": "ISLP 非线性回归核心入口：多项式、交互、截断线性和三次样条",
+      "lesson_ids": [
+        "machine-learning-09"
+      ]
+    },
+    {
+      "reference_topics": "CS229：感知机、指数族与 GLM、生成式分类",
+      "lesson_ids": [
+        "machine-learning-32",
+        "machine-learning-33",
+        "machine-learning-11"
+      ]
+    },
+    {
+      "reference_topics": "CS229 与 ISLP：近邻、核与 SVM、贝叶斯回归和高斯过程",
+      "lesson_ids": [
+        "machine-learning-12",
+        "machine-learning-35"
+      ]
+    },
+    {
+      "reference_topics": "ISLP：树、剪枝、bagging、随机森林、boosting",
+      "lesson_ids": [
+        "machine-learning-13",
+        "machine-learning-14"
+      ]
+    },
+    {
+      "reference_topics": "CS229 与 ISLP：k-means、混合模型/EM、PCA",
+      "lesson_ids": [
+        "machine-learning-15",
+        "machine-learning-16",
+        "machine-learning-17"
+      ]
+    },
+    {
+      "reference_topics": "MIT 6.036/CS229 核心与现代延伸：网络、反向传播、优化、CNN、序列和注意力",
+      "lesson_ids": [
+        "machine-learning-18",
+        "machine-learning-19",
+        "machine-learning-20",
+        "machine-learning-21",
+        "machine-learning-22"
+      ]
+    },
+    {
+      "reference_topics": "现代专题有界入口：自监督/迁移/生成、校准、解释、漂移、因果与部署",
+      "lesson_ids": [
+        "machine-learning-23",
+        "machine-learning-24",
+        "machine-learning-25",
+        "machine-learning-26",
+        "machine-learning-28"
+      ]
+    },
+    {
+      "reference_topics": "CS229/MIT：有限 MDP、Bellman、值迭代与 RL 进一步路线",
+      "lesson_ids": [
+        "machine-learning-27"
+      ]
+    },
+    {
+      "reference_topics": "ISLP 生存分析入口与不确定性延伸：删失、KM 乘积、保形秩保证；完整合成回归实验",
+      "lesson_ids": [
+        "machine-learning-29",
+        "machine-learning-30"
+      ]
+    },
+    {
+      "reference_topics": "CS229概率与多元高斯讲义正文：连续条件密度、条件期望、协方差变换、条件高斯；ISLP正文：FWER/FDR、BH与Bootstrap步骤",
+      "lesson_ids": [
+        "machine-learning-02",
+        "machine-learning-03",
+        "machine-learning-04",
+        "machine-learning-31",
+        "machine-learning-35"
+      ]
+    }
+  ],
+  "review_date": "2026-09-27",
+  "review_method": "逐节读取原稿后，对全部旧章节增加针对性的严格定义、条件与论证，核对原例题和自测，再新增缺漏核心章；不是抽样审阅，也不是外部专家认证。",
+  "original_lessons_reviewed": 30,
+  "lessons_after_revision": 35,
+  "final_notes_review": {
+    "date": "2026-09-27",
+    "method": "保留前轮全章审阅记录，复核全部章节目录、先修、标题与coverage_map；本轮实际阅读官方讲义正文，集中检查概率统计与语言核心缺项，再运行所有完整代码和数学数值检查。",
+    "focused_lessons": [
+      "machine-learning-02",
+      "machine-learning-03",
+      "machine-learning-04",
+      "machine-learning-31",
+      "machine-learning-32",
+      "machine-learning-33",
+      "machine-learning-34",
+      "machine-learning-35"
+    ],
+    "external_pdf_access_limit": "ISLP 整本 PDF 链接本次不可访问，采用作者官方在线实验章节正文；未声称逐页通读整本教材。"
+  }
+}

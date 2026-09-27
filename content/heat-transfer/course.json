@@ -4,7 +4,7 @@
   "enTitle": "Heat Transfer",
   "icon": "↗",
   "color": "#e3a32a",
-  "description": "从导热、对流与辐射理解温度场和热流，学习瞬态、相变、换热器及热质耦合，并用设计与验证连接工程实践。覆盖本科核心与主要延伸入口。",
+  "description": "从定义与微元守恒推导导热、对流、辐射、换热器与传质。补足多维解析、积分法、Stefan流和移动相界；经验关联式明确范围与证据类型。",
   "prerequisites": [
     "微积分中的导数、积分和微分方程入门",
     "工程热力学的能量守恒",
@@ -40,6 +40,36 @@
       "title": "California State University, Northridge — ME 375 Convection Coefficients II",
       "url": "https://www.csun.edu/~lcaretto/me375/08-forced%20convection%20two.pdf",
       "scope": "核对平板层流、管内充分发展 Nu、Gnielinski 与自然对流关联式条件；本站使用原创例题，不转载讲义图表。"
+    },
+    {
+      "title": "IIT/NPTEL Lecture 24 — Heat Transfer in Boiling",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/103103032/module6/lec24/1.html",
+      "scope": "实读6.1：池沸腾分类、气泡半球受力和式6.1的毛细压。"
+    },
+    {
+      "title": "IIT/NPTEL Lecture 26 — Film Condensation",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/103103032/module6/lec26/1.html",
+      "scope": "实读6.4及下一页：竖直膜流动量平衡、凝液通量、平均系数、膜温物性、Jakob数及膜Reynolds数。"
+    },
+    {
+      "title": "IIT/NPTEL Lecture 26 — Properties and Regime Checks",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/103103032/module6/lec26/2.html",
+      "scope": "实读式6.8—6.12与正文，核对显热修正、物性温度和由凝液通量反查膜流。"
+    },
+    {
+      "title": "IIT/NPTEL Lecture 32 — Boiling Correlations",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/112101007/modules/lec32/1.5.html",
+      "scope": "实读关联式分类和参数说明；公式图片抓取受限，Rohsenow和CHF公式另由下列原始实验论文交叉核对。"
+    },
+    {
+      "title": "Virginia Tech — Direct Measurement of Boiling Water Heat Flux (2013)",
+      "url": "https://vtechworks.lib.vt.edu/bitstream/handle/10919/23091/Thompson_JL_T_2013.pdf",
+      "scope": "核对正文第2页式1—3、表面参数及CHF几何依赖；未把实验相关式当数学定理。"
+    },
+    {
+      "title": "MIT 16.050 Part 3 — Fundamentals of Heat Transfer",
+      "url": "https://ocw.mit.edu/courses/16-050-thermal-energy-fall-2002/87d9f4544b7fd64a77201382500d057c_10_part3.pdf",
+      "scope": "实读HT-56—59：平衡腔辐射、Kirchhoff定律条件及两灰平壁交换；核对现有第20—22节。"
     }
   ],
   "lessons": [
@@ -68,6 +98,11 @@
     "heat-transfer-23.md",
     "heat-transfer-24.md",
     "heat-transfer-25.md",
-    "heat-transfer-26.md"
+    "heat-transfer-26.md",
+    "heat-transfer-27.md",
+    "heat-transfer-28.md",
+    "heat-transfer-29.md",
+    "heat-transfer-30.md",
+    "heat-transfer-31.md"
   ]
 }

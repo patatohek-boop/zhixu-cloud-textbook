@@ -1,0 +1,952 @@
+{
+  "course_id": "fluid-mechanics",
+  "sources": [
+    {
+      "title": "MIT 2.06 Fluid Dynamics, Calendar",
+      "url": "https://ocw.mit.edu/courses/2-06-fluid-dynamics-spring-2013/pages/calendar/",
+      "coverage": "静力、控制体、动量、场方程、黏性流和管路核心"
+    },
+    {
+      "title": "MIT 2.25 Advanced Fluid Mechanics, Calendar",
+      "url": "https://ocw.mit.edu/courses/2-25-advanced-fluid-mechanics-fall-2013/pages/calendar/",
+      "coverage": "连续介质、流动运动学、相似、势流、涡量、边界层与黏性进阶的主题对照"
+    },
+    {
+      "title": "MIT 16.120 Compressible Flow, Syllabus",
+      "url": "https://ocw.mit.edu/courses/16-120-compressible-flow-spring-2003/pages/syllabus/",
+      "coverage": "可压缩核心补充对照：面积、摩擦、加热、波；特征线设计及高焓流仍明确为专项拓展"
+    },
+    {
+      "title": "MIT 2.20 Marine Hydrodynamics · Lecture 3",
+      "url": "https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture3/",
+      "coverage": "应力、牵引、角动量与质量动量守恒"
+    },
+    {
+      "title": "MIT 2.20 Marine Hydrodynamics · Lecture 4",
+      "url": "https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture4/",
+      "coverage": "牛顿材料关系和边界条件"
+    },
+    {
+      "title": "MIT 2.20 Marine Hydrodynamics · Lecture 10",
+      "url": "https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture10/",
+      "coverage": "源汇、偶极子、势流叠加及其边界"
+    },
+    {
+      "title": "MIT 2.20 Marine Hydrodynamics · Lecture 11",
+      "url": "https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture11/",
+      "coverage": "镜像法和势流受力条件"
+    },
+    {
+      "title": "MIT 2.20 Marine Hydrodynamics · Lecture 13",
+      "url": "https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture13/",
+      "coverage": "非定常势流与附加质量"
+    }
+  ],
+  "added_topics": [
+    "先修桥梁：符号、向量与守恒的阅读方法",
+    "涡量输运与 Kelvin 环量定理",
+    "低 Reynolds 数流动与润滑近似",
+    "启动流与振荡边界层：黏性如何传播",
+    "可压缩流补章：膨胀波、摩擦与加热",
+    "重力波与毛细波：自由表面的色散关系",
+    "稳定性与转捩：从扰动方程到能量判据",
+    "应力、变形率与牛顿流体：从受力面到方程",
+    "基本势流、镜像法与附加质量",
+    "自由界面、毛细压力与表面张力驱动流"
+  ],
+  "scope_limits": [
+    "完整组织本科通用流体力学核心链，并补充部分进阶解析模型；不宣称穷尽全部流体研究分支。",
+    "薄翼与三维升力线设计、船舶波浪辐射、复杂非牛顿/多相本构、气动声学和高温非平衡流属于进一步专项课程；本版提供相应基础而非完整专业设计课程。",
+    "湍流关联式与工程系数均需结合适用条件和物性资料；不存在由守恒方程直接证明所有经验常数的做法。"
+  ],
+  "records": [
+    {
+      "id": "fluid-mechanics-29",
+      "title": "先修桥梁：符号、向量与守恒的阅读方法",
+      "checked_concepts": [
+        "标量向量与分量",
+        "微分积分与场",
+        "点积叉积和通量",
+        "单位与守恒结构"
+      ],
+      "proofs": [
+        "微小长方体的散度公式",
+        "量纲一致性检验"
+      ],
+      "changes": [
+        "对照课程大纲补充独立章节，包含定义、通俗解释、推导、例题与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-01",
+      "title": "连续介质、单位与流体物性",
+      "checked_concepts": [
+        "连续介质与尺度",
+        "流体与剪切",
+        "局部密度与平均密度",
+        "比体积、重度和相对密度",
+        "压力与温标"
+      ],
+      "proofs": [
+        "质量积分与均匀密度公式",
+        "比体积和重度关系"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-02",
+      "title": "黏性、应力与本构关系",
+      "checked_concepts": [
+        "牵引与应力张量",
+        "法向应力和切向应力",
+        "变形率张量",
+        "牛顿本构",
+        "无滑移与无穿透"
+      ],
+      "proofs": [
+        "简单剪切从三维本构得到",
+        "刚体旋转无变形",
+        "Couette剪切力和耗散"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-03",
+      "title": "静水压与测压管",
+      "checked_concepts": [
+        "静力平衡",
+        "体力与压力梯度",
+        "压差、表压和绝对压",
+        "分层液体和压力连续条件"
+      ],
+      "proofs": [
+        "微元平衡推导静压方程",
+        "分层积分",
+        "等温气柱指数分布"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-04",
+      "title": "液面受力、浮力与稳定性",
+      "checked_concepts": [
+        "面积形心与压力中心",
+        "面积二次矩",
+        "浮心、重心与稳心",
+        "初稳性"
+      ],
+      "proofs": [
+        "平面静水合力及倾斜压力中心",
+        "阿基米德浮力",
+        "小倾角稳心半径"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-05",
+      "title": "表面张力、毛细与旋转液面",
+      "checked_concepts": [
+        "表面张力与表面能",
+        "主曲率和法线",
+        "接触角",
+        "Bond数",
+        "旋转与有效重力"
+      ],
+      "proofs": [
+        "曲面力平衡推导Young–Laplace",
+        "毛细高度",
+        "刚体旋转自由面"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-06",
+      "title": "流场、流线与物质导数",
+      "checked_concepts": [
+        "欧拉场与质点轨迹",
+        "局部导数和物质导数",
+        "梯度、散度和旋度",
+        "流线、迹线、脉线",
+        "运动分解"
+      ],
+      "proofs": [
+        "物质导数链式法则",
+        "稳态三种流线关系",
+        "旋转率为涡量一半"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-07",
+      "title": "控制体、输运定理与质量守恒",
+      "checked_concepts": [
+        "物质系统与控制体",
+        "广延量与比性质",
+        "控制面外法线",
+        "质量和体积通量",
+        "移动边界"
+      ],
+      "proofs": [
+        "固定与移动控制体雷诺输运定理",
+        "质量积分方程",
+        "稳态管流连续性"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-08",
+      "title": "动量守恒与弯管受力",
+      "checked_concepts": [
+        "线动量与通量",
+        "压力牵引",
+        "壁面反力",
+        "动量修正系数",
+        "表压使用条件"
+      ],
+      "proofs": [
+        "控制体动量式",
+        "平均速度修正与beta不小于1",
+        "层流beta等于4/3"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-09",
+      "title": "角动量与透平机械入门",
+      "checked_concepts": [
+        "关于固定点的角动量",
+        "叉积与轴向力矩",
+        "绝对与相对速度",
+        "轴功率",
+        "理想比功"
+      ],
+      "proofs": [
+        "角动量控制体式",
+        "欧拉透平方程及符号"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-10",
+      "title": "机械能、伯努利与能量损失",
+      "checked_concepts": [
+        "机械能与水头",
+        "沿流线导数",
+        "保守体力",
+        "焓和流动功",
+        "动能修正",
+        "损失和熵产"
+      ],
+      "proofs": [
+        "沿流线伯努利",
+        "跨流线条件",
+        "动能修正alpha",
+        "总能量与机械能区别"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-11",
+      "title": "连续方程与 Navier–Stokes 方程",
+      "checked_concepts": [
+        "连续方程",
+        "Cauchy动量方程",
+        "牛顿本构",
+        "梯度散度Laplacian",
+        "边界初值与闭合"
+      ],
+      "proofs": [
+        "积分到局部守恒",
+        "对流形式等价",
+        "不可压牛顿Navier–Stokes"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-12",
+      "title": "Couette 与 Poiseuille 精确解",
+      "checked_concepts": [
+        "平行流",
+        "充分发展",
+        "常压力梯度",
+        "Dirichlet边界条件",
+        "线性叠加"
+      ],
+      "proofs": [
+        "Couette–Poiseuille通解",
+        "平均和最大速度",
+        "唯一性与壁面应力"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-31",
+      "title": "低 Reynolds 数流动与润滑近似",
+      "checked_concepts": [
+        "Stokes方程",
+        "可逆性与边界条件",
+        "球体阻力",
+        "薄隙润滑与Reynolds方程"
+      ],
+      "proofs": [
+        "球体Stokes解及阻力积分",
+        "薄隙通量与润滑方程"
+      ],
+      "changes": [
+        "对照课程大纲补充独立章节，包含定义、通俗解释、推导、例题与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-32",
+      "title": "启动流与振荡边界层：黏性如何传播",
+      "checked_concepts": [
+        "扩散初边值问题",
+        "相似变量",
+        "误差函数",
+        "振荡穿透深度和相位"
+      ],
+      "proofs": [
+        "Stokes第一问题相似解",
+        "Stokes第二问题复数解及实部"
+      ],
+      "changes": [
+        "对照课程大纲补充独立章节，包含定义、通俗解释、推导、例题与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-13",
+      "title": "量纲分析、相似与无量纲数",
+      "checked_concepts": [
+        "量纲与单位",
+        "维度矩阵及秩",
+        "Pi群",
+        "几何运动动力相似",
+        "Re、Fr、Ma、We"
+      ],
+      "proofs": [
+        "Buckingham Pi定理的单位归一化证明",
+        "阻力量纲组",
+        "控制方程无量纲化"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-14",
+      "title": "圆管层流与沿程阻力",
+      "checked_concepts": [
+        "圆柱坐标与环形面积元",
+        "压降与切向牵引",
+        "Darcy和Fanning定义",
+        "入口发展"
+      ],
+      "proofs": [
+        "圆管Poiseuille解",
+        "体积流量和平均速度",
+        "f_D等于64/Re"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-15",
+      "title": "湍流管流、粗糙度与局部损失",
+      "checked_concepts": [
+        "平均流与湍流",
+        "等效粗糙度",
+        "Darcy损失和局部系数",
+        "经验关联式",
+        "速度基准"
+      ],
+      "proofs": [
+        "突扩Borda–Carnot损失",
+        "局部系数基准转换",
+        "Colebrook极限辨析"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-16",
+      "title": "管网、泵曲线与工作点",
+      "checked_concepts": [
+        "节点质量守恒",
+        "节点总水头",
+        "串并联",
+        "泵扬程和效率",
+        "工作点与NPSH"
+      ],
+      "proofs": [
+        "管网约束",
+        "单调曲线工作点唯一性",
+        "局部稳定性",
+        "泵相似律"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-17",
+      "title": "边界层、位移厚度与分离",
+      "checked_concepts": [
+        "边界层和外缘速度",
+        "99%厚度",
+        "位移和动量厚度",
+        "形状因子",
+        "局部摩擦和分离"
+      ],
+      "proofs": [
+        "边界层尺度",
+        "动量积分方程",
+        "Blasius相似方程",
+        "局部平均摩擦关系"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-18",
+      "title": "阻力、升力与绕流",
+      "checked_concepts": [
+        "牵引积分",
+        "升阻方向与参考面积",
+        "环量符号",
+        "理想势流升力",
+        "模型阻力边界"
+      ],
+      "proofs": [
+        "表面力与外控制面等价",
+        "Kutta–Joukowski二维升力",
+        "无环量零阻力条件"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-19",
+      "title": "势流、流函数、环量与涡量",
+      "checked_concepts": [
+        "势函数",
+        "流函数",
+        "简单连通",
+        "环量和涡量",
+        "Laplace方程",
+        "叠加与边界条件"
+      ],
+      "proofs": [
+        "势存在的路径独立论证",
+        "流函数无散与等值线",
+        "通量差及正交",
+        "非定常伯努利"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-30",
+      "title": "涡量输运与 Kelvin 环量定理",
+      "checked_concepts": [
+        "物质闭曲线",
+        "正压流体与保守体力",
+        "涡量伸长与扩散",
+        "Kelvin与涡管"
+      ],
+      "proofs": [
+        "移动曲线环量求导",
+        "Kelvin环量守恒",
+        "不可压涡量方程"
+      ],
+      "changes": [
+        "对照课程大纲补充独立章节，包含定义、通俗解释、推导、例题与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-35",
+      "title": "稳定性与转捩：从扰动方程到能量判据",
+      "checked_concepts": [
+        "基流与扰动",
+        "线性稳定与非线性转捩",
+        "扰动能量",
+        "充分条件与临界值"
+      ],
+      "proofs": [
+        "扰动动量方程",
+        "扰动能量恒等式",
+        "平板Couette充分衰减判据"
+      ],
+      "changes": [
+        "对照课程大纲补充独立章节，包含定义、通俗解释、推导、例题与练习"
+      ],
+      "remaining_limits": [
+        "未展开完整Orr–Sommerfeld谱计算、非模态瞬态增长与不同几何的实验转捩图谱。"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-20",
+      "title": "湍流平均、雷诺应力与封闭",
+      "checked_concepts": [
+        "集合或时间平均",
+        "Reynolds分解",
+        "二阶相关和应力",
+        "湍动能",
+        "RANS、LES、DNS",
+        "耗散尺度"
+      ],
+      "proofs": [
+        "乘积平均恒等式",
+        "RANS动量式",
+        "Kolmogorov尺度的量纲推导"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-21",
+      "title": "声速、Mach 数与等熵流",
+      "checked_concepts": [
+        "小扰动声速",
+        "等熵偏导",
+        "比热比和比气体常数",
+        "Mach数",
+        "静态与停滞态"
+      ],
+      "proofs": [
+        "线性化质量动量得到波动方程",
+        "理想气体声速",
+        "等熵总静关系"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-22",
+      "title": "正激波与不可逆压缩",
+      "checked_concepts": [
+        "激波面与守恒跳跃",
+        "正激波",
+        "总温总压",
+        "熵条件",
+        "平凡与压缩解"
+      ],
+      "proofs": [
+        "三条守恒解出正激波关系",
+        "Ma下游关系",
+        "熵增及总压降低"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-23",
+      "title": "喷管、面积关系与壅塞",
+      "checked_concepts": [
+        "准一维",
+        "喉部与临界面积",
+        "总状态和背压",
+        "壅塞",
+        "面积Mach双分支"
+      ],
+      "proofs": [
+        "面积速度微分关系",
+        "质量流率极值与声速",
+        "临界流率和面积比"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-33",
+      "title": "可压缩流补章：膨胀波、摩擦与加热",
+      "checked_concepts": [
+        "Mach波和膨胀扇",
+        "Fanno流",
+        "Rayleigh流",
+        "不同机制的壅塞"
+      ],
+      "proofs": [
+        "Prandtl–Meyer微分关系和积分",
+        "Fanno向声速的熵方向",
+        "Rayleigh总温极值"
+      ],
+      "changes": [
+        "对照课程大纲补充独立章节，包含定义、通俗解释、推导、例题与练习"
+      ],
+      "remaining_limits": [
+        "未把一般斜激波多分支、特征线喷管设计和高焓反应流写成已掌握；这些仍属专门可压缩流课程。"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-24",
+      "title": "明渠、临界水深与水跃",
+      "checked_concepts": [
+        "明渠与静水近似",
+        "水深单位宽流量",
+        "比能与比力",
+        "Froude数",
+        "共轭水深",
+        "Manning经验式"
+      ],
+      "proofs": [
+        "浅水波速",
+        "临界比能",
+        "水跃共轭水深与能量损失"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-34",
+      "title": "重力波与毛细波：自由表面的色散关系",
+      "checked_concepts": [
+        "小振幅波",
+        "色散关系",
+        "相速度与群速度",
+        "深水浅水及张力尺度"
+      ],
+      "proofs": [
+        "线性化自由面条件",
+        "有限水深重力毛细波色散",
+        "深浅水极限和群速度"
+      ],
+      "changes": [
+        "对照课程大纲补充独立章节，包含定义、通俗解释、推导、例题与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-25",
+      "title": "非稳态流、水击与振荡尺度",
+      "checked_concepts": [
+        "非稳态和准稳态",
+        "有效波速",
+        "关阀时间",
+        "黏性扩散和振荡",
+        "Womersley与Strouhal"
+      ],
+      "proofs": [
+        "线性水击波与Joukowsky关系",
+        "往返时间",
+        "扩散及振荡尺度"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-26",
+      "title": "流动测量、相似实验与不确定度",
+      "checked_concepts": [
+        "测量链",
+        "校准、重复性和系统偏差",
+        "标准不确定度",
+        "协方差",
+        "Pitot和文丘里"
+      ],
+      "proofs": [
+        "Pitot速度关系",
+        "文丘里面积比",
+        "一阶不确定度传播与相关项"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-27",
+      "title": "CFD：离散、验证与确认",
+      "checked_concepts": [
+        "离散自由度",
+        "有限体积共享通量",
+        "一致性稳定性收敛",
+        "残差",
+        "验证和确认"
+      ],
+      "proofs": [
+        "全局守恒的面通量消去",
+        "迎风格式最大值稳定性",
+        "数值扩散",
+        "网格阶数估计"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-28",
+      "title": "综合建模：为输水系统列出完整账单",
+      "checked_concepts": [
+        "建模输入与输出",
+        "控制边界",
+        "静扬程和损失",
+        "轴功率电功率",
+        "适用与验证清单"
+      ],
+      "proofs": [
+        "完整管路账单推导",
+        "功率单位检查",
+        "流量极限和灵敏度"
+      ],
+      "changes": [
+        "重写前置定义、解释与逐步推导；核对保留的例题、练习和自测",
+        "区分定律、材料模型、数学结论及适用条件"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "fluid-mechanics-36",
+      "title": "应力、变形率与牛顿流体：从受力面到方程",
+      "checked_concepts": [
+        "面力与应力张量",
+        "Cauchy牵引定理",
+        "角动量与应力对称",
+        "变形率与刚体旋转",
+        "剪切黏度和体积黏度"
+      ],
+      "proofs": [
+        "四面体局部动量平衡推出Cauchy牵引定理",
+        "小体积角动量推出经典应力对称",
+        "间隔长度变化率推出对称/反对称分解",
+        "黏性耗散的平方和"
+      ],
+      "changes": [
+        "根据公开lecture notes细项补入独立专章，明确符号、条件、逐步推导和适用边界",
+        "独立复核补明四面体极限所需的场连续性和不跨应力跳跃界面。"
+      ],
+      "remaining_limits": [
+        "微极性与偶应力介质须扩展经典连续介质模型"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-37",
+      "title": "基本势流、镜像法与附加质量",
+      "checked_concepts": [
+        "极坐标速度势",
+        "源汇与偶极子",
+        "圆柱绕流与压力系数",
+        "镜像边界",
+        "球体非定常附加质量"
+      ],
+      "proofs": [
+        "源流量及源汇极限得到偶极子",
+        "圆柱边界验算和压力系数",
+        "同号源/反号涡镜像边界检查",
+        "球外动能积分与附加质量"
+      ],
+      "changes": [
+        "根据公开lecture notes细项补入独立专章，明确符号、条件、逐步推导和适用边界",
+        "独立复核镜像势对数自变量的无量纲化；球体动能积分与附加质量系数复算一致。"
+      ],
+      "remaining_limits": [
+        "一般六自由度水动力矩阵、船体辐射与薄翼/升力线专题未在本章展开"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-38",
+      "title": "自由界面、毛细压力与表面张力驱动流",
+      "checked_concepts": [
+        "运动学界面条件",
+        "Young–Laplace压力跳跃",
+        "毛细上升与接触角",
+        "Marangoni切向应力",
+        "Bond数与Capillary数"
+      ],
+      "proofs": [
+        "物质界面链式法则",
+        "球面力平衡与一般曲率虚功",
+        "毛细液柱力平衡",
+        "微小界面条切向平衡与线性Marangoni速度剖面"
+      ],
+      "changes": [
+        "根据公开lecture notes细项补入独立专章，明确符号、条件、逐步推导和适用边界",
+        "独立复核两相应力跳跃及Marangoni符号，并补明平行流所需的恒定厚度、黏度和表面张力梯度。"
+      ],
+      "remaining_limits": [
+        "动态接触角、表面活性剂输运和复杂两相界面需要专门模型"
+      ]
+    }
+  ],
+  "coverage_map": [
+    {
+      "reference_topics": "连续介质、物性、应力、运动学",
+      "lesson_ids": [
+        "fluid-mechanics-29",
+        "fluid-mechanics-01",
+        "fluid-mechanics-02",
+        "fluid-mechanics-06"
+      ]
+    },
+    {
+      "reference_topics": "静力、浮力、加速液体、表面张力",
+      "lesson_ids": [
+        "fluid-mechanics-03",
+        "fluid-mechanics-04",
+        "fluid-mechanics-05"
+      ]
+    },
+    {
+      "reference_topics": "质量、动量、角动量、能量、场方程",
+      "lesson_ids": [
+        "fluid-mechanics-07",
+        "fluid-mechanics-08",
+        "fluid-mechanics-09",
+        "fluid-mechanics-10",
+        "fluid-mechanics-11"
+      ]
+    },
+    {
+      "reference_topics": "黏性精确解、启动、润滑、相似分析、管流",
+      "lesson_ids": [
+        "fluid-mechanics-12",
+        "fluid-mechanics-31",
+        "fluid-mechanics-32",
+        "fluid-mechanics-13",
+        "fluid-mechanics-14",
+        "fluid-mechanics-15",
+        "fluid-mechanics-16"
+      ]
+    },
+    {
+      "reference_topics": "边界层、势流、升力、环量、稳定性、湍流",
+      "lesson_ids": [
+        "fluid-mechanics-17",
+        "fluid-mechanics-18",
+        "fluid-mechanics-19",
+        "fluid-mechanics-30",
+        "fluid-mechanics-35",
+        "fluid-mechanics-20"
+      ]
+    },
+    {
+      "reference_topics": "声速、激波、喷管、摩擦与热壅塞、明渠和水波",
+      "lesson_ids": [
+        "fluid-mechanics-21",
+        "fluid-mechanics-22",
+        "fluid-mechanics-23",
+        "fluid-mechanics-33",
+        "fluid-mechanics-24",
+        "fluid-mechanics-34"
+      ]
+    },
+    {
+      "reference_topics": "非稳态、测量、不确定度、数值计算及综合",
+      "lesson_ids": [
+        "fluid-mechanics-25",
+        "fluid-mechanics-26",
+        "fluid-mechanics-27",
+        "fluid-mechanics-28"
+      ]
+    },
+    {
+      "reference_topics": "MIT 2.20 lecture notes 对照：面力与应力张量、Cauchy牵引定理、角动量与应力对称、变形率与刚体旋转、剪切黏度和体积黏度",
+      "lesson_ids": [
+        "fluid-mechanics-36"
+      ]
+    },
+    {
+      "reference_topics": "MIT 2.20 lecture notes 对照：极坐标速度势、源汇与偶极子、圆柱绕流与压力系数、镜像边界、球体非定常附加质量",
+      "lesson_ids": [
+        "fluid-mechanics-37"
+      ]
+    },
+    {
+      "reference_topics": "MIT 2.20 lecture notes 对照：运动学界面条件、Young–Laplace压力跳跃、毛细上升与接触角、Marangoni切向应力、Bond数与Capillary数",
+      "lesson_ids": [
+        "fluid-mechanics-38"
+      ]
+    }
+  ]
+}

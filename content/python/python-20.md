@@ -3,7 +3,7 @@
   "id": "python-20",
   "title": "NumPy 数组、形状与广播",
   "group": "05 · 科学计算与数据",
-  "minutes": 25,
+  "minutes": 40,
   "level": "进阶",
   "tags": [
     "NumPy",
@@ -12,7 +12,8 @@
   ],
   "objectives": [
     "理解 shape 与 axis",
-    "判断广播是否合法"
+    "判断广播是否合法",
+    "定义 ndarray 的 shape、dtype、axis"
   ],
   "prerequisites": [
     "python-19"
@@ -29,9 +30,29 @@
     "answer": 0,
     "explanation": "最右维均为 3，缺失前导维视为 1，可广播到 (5,3)。"
   },
-  "lab": null
+  "lab": null,
+  "revision": "2026-09 · 定义、条件与论证逐章修订"
 }
 ---
+
+## 先给数组的每个维度命名
+`ndarray` 是 NumPy 的多维数组。**shape** 是各轴长度的元组；**ndim** 是轴数；**dtype** 描述元素的存储类型；**axis** 是轴编号。形状 (3,2) 只说明有三行两列，不自动说明“样本×特征”，数据含义必须另外约定。数组也可能是非连续内存视图，不能把所有数组都当连续副本。
+
+对 A 形状 (n,p)，令 $A_{ij}$ 为第 i 个样本第 j 个特征。沿 axis=0 求平均得到 $m_j=(1/n)\sum_i A_{ij}$，因此结果有 p 项；沿 axis=1 则每个样本得到一个平均，结果有 n 项。通俗地说，归约轴是被收起来的方向。
+
+## 广播是索引规则，不是“自动猜你的意思”
+A 为 (3,2)，b 为 (2,) 时，广播相加定义 $C_{ij}=A_{ij}+b_j$，结果 (3,2)。若希望给每行加一个值 r_i，应把 r 变成 (3,1)，得到 $C_{ij}=A_{ij}+r_i$。若预测为 (n,1)、真实目标为 (n,)，二者相减通常得到 (n,n)，是在每个预测与每个目标之间两两相减，而不是 n 个配对误差。
+
+```python
+import numpy as np
+prediction = np.array([[1.0], [2.0], [3.0]])
+target = np.array([1.0, 2.0, 4.0])
+assert (prediction - target).shape == (3, 3)
+residual = prediction[:, 0] - target
+assert residual.shape == (3,)
+assert np.allclose(residual, [0, 0, -1])
+```
+逐元素乘法 `*` 要求广播兼容；矩阵乘法 `@` 对内维求和。数学定义不同，形状恰好都合法也不能互换。[官方广播规则](https://numpy.org/doc/stable/user/basics.broadcasting.html) 可用于核对复杂形状。
 
 ## 数组为什么不同于列表
 Python 列表能混合保存各种对象，NumPy 数组通常用统一数据类型连续组织数值，更适合大规模数值运算。安装环境准备好后，可导入 numpy；本课不需要下载外部数据。向量化把一组运算交给数组库执行，语义上仍应能解释为逐元素或矩阵运算，而不是神秘的“自动加速”。

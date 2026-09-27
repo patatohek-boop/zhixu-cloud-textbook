@@ -3,7 +3,7 @@
   "id": "python-12",
   "title": "文件、路径与持久化",
   "group": "03 · 可靠的程序实践",
-  "minutes": 20,
+  "minutes": 30,
   "level": "基础",
   "tags": [
     "文件",
@@ -12,7 +12,8 @@
   ],
   "objectives": [
     "使用 pathlib 处理路径",
-    "用 with 管理文件"
+    "用 with 管理文件",
+    "定义路径、文件句柄与资源生命周期"
   ],
   "prerequisites": [
     "python-11"
@@ -29,9 +30,35 @@
     "answer": 1,
     "explanation": "上下文管理器负责资源生命周期，不替代数据校验。"
   },
-  "lab": null
+  "lab": null,
+  "revision": "2026-09 · 定义、条件与论证逐章修订"
 }
 ---
+
+## 从名字到文件内容还隔着什么
+**路径**标识文件系统中的位置；**当前工作目录**是相对路径的起点；**文件对象**是打开后用于读写和管理资源的运行时对象。路径存在不保证内容正确，也不保证下一刻仍存在。文本读取把字节按编码转为字符，二进制读取直接给出字节。
+
+**上下文管理器**提供进入与退出协议。`with open(...) as handle` 成功进入后，退出代码块时会调用资源清理，包括因普通异常退出的情形；文件对象的退出处理会关闭文件而不会默认吞掉异常。进程被强制终止、系统崩溃等情况不属于这项语言级保证。
+
+## 用临时文件验证两条路径
+```python
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+with TemporaryDirectory() as directory:
+    path = Path(directory) / "example.txt"
+    path.write_text("20\n", encoding="utf-8")
+    try:
+        with path.open(encoding="utf-8") as handle:
+            assert handle.readline().strip() == "20"
+            raise ValueError("模拟处理失败")
+    except ValueError:
+        pass
+    assert handle.closed
+```
+通俗地说，`with` 把“借资源—使用—归还”绑在一起，但不替你证明读到的数字正确。失败仍需要上层处理；例中只为了展示关闭行为才捕获这个人为异常。
+
+写模式 `w` 在打开成功时就可能截断已有文件，不是等 `write` 才覆盖。需要只新建时用 `x`。先检查存在再写不能消除并发竞争，重要文件应采用明确的创建或替换策略。
 
 ## 内存与磁盘的边界
 变量存在于运行中的进程内，程序结束后通常消失；文件把数据保存在磁盘上，供下次读取。读取文件前应明确路径、编码、格式和大小。路径只是位置描述，文件可能不存在、权限不足，内容也可能与扩展名不符。稳健程序不会把“文件名看起来正确”当作内容正确的证明。

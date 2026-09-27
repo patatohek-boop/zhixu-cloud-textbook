@@ -14,6 +14,31 @@
       "title": "MIT OCW 18.06SC · Linear Algebra",
       "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/syllabus/",
       "scope": "用于核对方程组、四个基本子空间、最小二乘、谱理论、正定性与 SVD 等课程主题；讲解和例题为原创。"
+    },
+    {
+      "title": "MIT OCW · 相似矩阵与Jordan形式讲义",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/6e1f793f6c25fd39e002c100e278bf1b_MIT18_06SCF11_Ses3.4sum.pdf",
+      "scope": "18.06SC Lecture 28，正文第1-4页：相似、Jordan块、相同特征值与特征空间维数未必相似。本文独立补全链基存在、最小多项式与零度序列判块。"
+    },
+    {
+      "title": "MIT OCW · 对称矩阵与正定性讲义",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/804ab1e53134741d2044d241b50a285e_MIT18_06SCF11_Ses3.1sum.pdf",
+      "scope": "18.06SC Lecture 25，正文第1-3页：实谱、正交谱、谱投影、主元符号与正定；本文补全紧致极值归纳、半正定全主子式与合同惯性证明。"
+    },
+    {
+      "title": "MIT OCW · 左右逆与伪逆讲义",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/0550c89b69c99e97dcbf52074e293308_MIT18_06SCF11_Ses3.8sum.pdf",
+      "scope": "18.06SC Lecture 33，正文第1-3页：左右逆的秩条件、典型公式、行空间到列空间的可逆对应、伪逆。"
+    },
+    {
+      "title": "MIT OCW · 图、网络与关联矩阵讲义",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/d71b25b942dd3dec0ede49d712deb4b0_MIT18_06SCF11_Ses1.12sum.pdf",
+      "scope": "18.06SC Lecture 12，正文第1-4页：关联矩阵、节点势、环流、树、Kirchhoff与加权网络；本文使用节点为行的转置约定，显式核对尺寸。"
+    },
+    {
+      "title": "MIT OCW · 复矩阵与FFT讲义",
+      "url": "https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/53f17d47bf99d26fdc472b3177c256a8_MIT18_06SCF11_Ses3.2sum.pdf",
+      "scope": "18.06SC Lecture 26，正文第1-4页：共轭内积、Hermitian、酉、单位根和FFT递推；正规谱定理为相关结构的独立证明扩展。"
     }
   ],
   "lessons": [
@@ -34,10 +59,12 @@
     "linear-algebra-15.md",
     "linear-algebra-16.md",
     "linear-algebra-17.md",
+    "linear-algebra-23.md",
     "linear-algebra-18.md",
     "linear-algebra-19.md",
     "linear-algebra-20.md",
     "linear-algebra-21.md",
+    "linear-algebra-24.md",
     "linear-algebra-22.md"
   ]
 }

@@ -4,7 +4,7 @@
   "enTitle": "Python & Scientific Computing",
   "icon": "⌘",
   "color": "#b37837",
-  "description": "从第一段程序走到可复现的科学计算项目。覆盖本科编程核心、数值与数据工具；并发和工程化以入门导读为边界。代码供复制到本机 Python 3.10+ 运行。",
+  "description": "从零建立对象、控制流和程序契约，再通过执行跟踪、不变量与归纳证明理解算法。包含递归排序、函数与对象协议、科学计算和可复现项目；并发与系统工程有明确范围。示例使用 Python 3.10+ 通用语法。",
   "prerequisites": [
     "基本四则运算",
     "愿意逐行运行和修改代码"
@@ -47,6 +47,7 @@
     "python-08.md",
     "python-09.md",
     "python-10.md",
+    "python-28.md",
     "python-11.md",
     "python-12.md",
     "python-13.md",
@@ -54,8 +55,10 @@
     "python-15.md",
     "python-16.md",
     "python-17.md",
+    "python-29.md",
     "python-18.md",
     "python-19.md",
+    "python-27.md",
     "python-20.md",
     "python-21.md",
     "python-22.md",

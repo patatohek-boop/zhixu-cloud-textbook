@@ -3,7 +3,7 @@
   "id": "machine-learning-08",
   "title": "梯度下降、学习率与数值检查",
   "group": "02 · 可靠评估与线性模型",
-  "minutes": 25,
+  "minutes": 45,
   "level": "基础",
   "tags": [
     "梯度下降",
@@ -12,7 +12,8 @@
   ],
   "objectives": [
     "手算一次更新",
-    "检查梯度与收敛"
+    "检查梯度与收敛",
+    "定义梯度下降、学习率和光滑性"
   ],
   "prerequisites": [
     "machine-learning-07"
@@ -29,9 +30,33 @@
     "answer": 1,
     "explanation": "梯度提供方向与局部变化信息，学习率调节实际步幅。"
   },
-  "lab": "gradient-descent"
+  "lab": "gradient-descent",
+  "revision": "2026-09 · 定义、条件与论证逐章修订"
 }
 ---
+
+## 算法参数不等于模型参数
+设 J 是实值可微目标，$\theta\in\mathbb R^p$ 是模型参数，$\eta>0$ 是学习率。第 t 步更新 $\theta_{t+1}=\theta_t-\eta\nabla J(\theta_t)$。**L-光滑**指梯度满足 $\|\nabla J(u)-\nabla J(v)\|\le L\|u-v\|$，L>0 控制曲率变化。它不表示函数值本身处处有界。
+
+通俗地说，光滑性限制“坡度能在多短距离内变多陡”，因而能把局部方向变成一个有限步长保证。
+
+## 定理：什么条件下这一步真的下降
+设整个连接线段上满足 L-光滑条件，令变化 d。用一元微积分沿线段积分：
+$$J(\theta+d)-J(\theta)=\int_0^1\nabla J(\theta+sd)^\top d\,ds.$$
+减去 $\nabla J(\theta)^\top d$，由柯西–施瓦茨和光滑性，余项不超过
+$\int_0^1Ls\|d\|^2ds=L\|d\|^2/2$。
+代入 $d=-\eta g$、g=∇J，得到
+$$J(\theta-\eta g)\le J(\theta)-\eta(1-L\eta/2)\|g\|^2.$$
+所以 $0<\eta<2/L$ 且 g≠0 时严格下降。它保证本步下降，不单独保证最优解存在、迭代点收敛或非凸全局最优。
+
+下文 $J(w)=(w-3)^2$ 有 L=2，并且误差满足 $e_{t+1}=(1-2\eta)e_t$。归纳为 $e_t=(1-2\eta)^te_0$，对任意初值收敛的条件是 $|1-2\eta|<1$，即 0<η<1。η=1 且初值非最优时仅振荡。
+
+## 随机梯度、Hessian 与 Newton 法
+若 $J(\theta)=n^{-1}\sum_i\ell_i(\theta)$，从 n 项中均匀随机取 I，令 $g_I=\nabla\ell_I$，则
+$$E[g_I\mid\theta]=\frac1n\sum_i\nabla\ell_i(\theta)=\nabla J(\theta).$$
+固定参数下均匀独立小批量平均同样无偏，方差随独立批量增大而下降。非均匀抽样未经权重修正不满足此式；无放回一个 epoch 内的条件关系也不能随便视为独立。
+
+二阶近似为 $J(\theta+d)\approx J(\theta)+g^\top d+\frac12d^\top Hd$。若 Hessian H 正定，令近似模型梯度 g+Hd=0，得到 Newton 步 $d=-H^{-1}g$，实际应解线性方程而不显式求逆。非凸 H 可能非正定，原函数也不等于近似，需要阻尼或线搜索。它不是“永远一步到最优”的方法。
 
 ## 训练是反复修正参数
 对可微目标 J，梯度下降使用

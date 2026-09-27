@@ -3,7 +3,7 @@
   "id": "machine-learning-16",
   "title": "高斯混合与 EM 算法",
   "group": "04 · 无监督学习",
-  "minutes": 25,
+  "minutes": 45,
   "level": "基础",
   "tags": [
     "GMM",
@@ -12,7 +12,8 @@
   ],
   "objectives": [
     "计算责任度",
-    "说明 EM 的局部性质"
+    "说明 EM 的局部性质",
+    "定义混合密度、潜变量和责任度"
   ],
   "prerequisites": [
     "machine-learning-15"
@@ -29,9 +30,41 @@
     "answer": 0,
     "explanation": "责任度结合先验混合权重与成分密度。"
   },
-  "lab": null
+  "lab": null,
+  "revision": "2026-09 · 定义、条件与论证逐章修订"
 }
 ---
+
+## 从混合概率开始，而不是先背 E/M 步
+潜变量 Z 表示未观测到的成分编号，$P(Z=k)=\pi_k$。给定 Z=k，X 的密度为高斯 $\mathcal N(x|\mu_k,\Sigma_k)$，故联合密度为 $\pi_k\mathcal N$；对 k 求和给观测密度。权重非负、总和为一，协方差正定，使密度有定义。责任度 $r_{ik}=P(Z_i=k|X_i=x_i)$ 由 Bayes 归一化得到，不是样本原有真实标签。
+
+通俗地说，每个点先按当前模型“暂分责任”，再用这些软权重估计每个组；软分组是一种计算分布，不是现实中存在半台设备。
+
+## 一般 EM 的单调性可以证明
+对有限潜变量，固定观测 x。取任意概率 q(z)，定义
+$$F(q,\theta)=\sum_zq(z)\log\frac{p_\theta(x,z)}{q(z)}.$$
+令 $r_\theta(z)=p_\theta(z|x)$，代入 $p_\theta(x,z)=p_\theta(x)r_\theta(z)$ 得
+$$\log p_\theta(x)=F(q,\theta)+D_{\mathrm{KL}}(q\|r_\theta),$$
+其中 $D_{\mathrm{KL}}(q\|r)=\sum_zq(z)\log[q(z)/r(z)]$。零概率项按连续极限处理，若 q>0 而 r=0 则 KL 为无穷。
+
+**KL 非负证明：**由 $\log t\le t-1$（对函数 t−1−log t 求导可知在 t=1 最小），对 q>0 的项取 t=r/q，
+$$-D_{\mathrm{KL}}(q\|r)=\sum q\log(r/q)\le\sum_{q>0}(r-q)\le0.$$
+因此 F 是对数似然下界。
+
+E 步取 $q=r_{\theta_{\mathrm{old}}}$，KL=0，下界接触当前似然。M 步选新参数使 F 不下降，于是
+$$\log p_{\theta_{\mathrm{new}}}(x)\ge F(q,\theta_{\mathrm{new}})
+\ge F(q,\theta_{\mathrm{old}})=\log p_{\theta_{\mathrm{old}}}(x).$$
+独立样本把上述式子求和即可。精确后验与不降低同一下界的 M 步是条件；近似算法不能无条件继承保证。
+
+## 高斯混合的 M 步从目标推导
+固定责任度，忽略与参数无关项，要最大化
+$$Q=\sum_{i,k}r_{ik}\left[\log\pi_k-\frac12\log|\Sigma_k|
+-\frac12(x_i-\mu_k)^\top\Sigma_k^{-1}(x_i-\mu_k)\right].$$
+令 $N_k=\sum_i r_{ik}>0$。权重项用乘子约束 $\sum_k\pi_k=1$，导数 $N_k/\pi_k-\lambda=0$；求和给 λ=n，故 π_k=N_k/n。均值导数为 $\Sigma_k^{-1}\sum_i r_{ik}(x_i-\mu_k)$，置零得加权均值。
+
+令 $A_k=\sum_i r_{ik}(x_i-\mu_k)(x_i-\mu_k)^\top$，用精度矩阵 B=Σ⁻¹，协方差部分为 $(N_k/2)\log|B|-\operatorname{tr}(BA_k)/2$。微分使用 $d\log|B|=\operatorname{tr}(B^{-1}dB)$，驻点为 $N_kB^{-1}=A_k$，故 Σ_k=A_k/N_k；若 A_k 奇异，正定条件失效，需约束或正则化，并说明优化目标相应改变。
+
+单调不意味着全局最大，似然甚至可能无有限上界；成分收缩到单点就是退化风险，不可用“收敛提示”替代模型检查。
 
 ## 群体可以重叠
 k-means 给每个点一个硬类别，但现实中的群体可能重叠。高斯混合模型把总体密度写成多个高斯分布的加权和：

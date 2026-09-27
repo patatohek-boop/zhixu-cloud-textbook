@@ -5,18 +5,19 @@
   "group": "03 · 描述与守恒",
   "summary": "从旋转喷头到叶轮，用力矩控制角动量。",
   "objectives": [
-    "使用角动量方程",
-    "理解欧拉透平方程的符号"
+    "准确解释关于固定点的角动量",
+    "在列明条件后复现本章推导，并用例题检验结论"
   ],
   "prerequisites": [
-    "前面各节；导数与积分基础"
+    "fluid-mechanics-29",
+    "fluid-mechanics-08"
   ],
   "tags": [
     "角动量与透平机械入门",
     "使用角动量方程",
     "理解欧拉透平方程的符号"
   ],
-  "minutes": 25,
+  "minutes": 40,
   "level": "基础",
   "quiz": {
     "question": "计算轴向力矩时需要哪一种速度分量？",
@@ -29,23 +30,32 @@
     "answer": 2,
     "explanation": "绕轴的单位质量角动量为 rVθ，Vθ 是绝对速度的周向分量。"
   },
-  "lab": null
+  "lab": null,
+  "revision": "2026-09 · 定义与推导修订"
 }
 ---
 
-## 旋转装置为什么传递功
-固定平板改变直线动量，叶轮则改变流体绕轴的角动量。转轴受到流体作用的力矩，力矩乘角速度形成机械功率。把流体看作携带“旋转趋势”的物质，比直接背记泵和涡轮公式更容易分清符号。
+## 严谨定义：相对于哪根轴
 
-绕固定轴的稳态角动量守恒，在一进一出、截面均匀的简化条件下为
-$$M_z=\dot m(r_2V_{\theta2}-r_1V_{\theta1}),$$
-其中 $V_\theta$ 是绝对速度的周向分量。力矩 $M_z$ 是设备对流体施加的力矩；流体对设备的力矩与之相反。通过轴线的径向力对该轴没有力矩，但并不意味着没有线动量变化。
+相对于固定惯性原点的位置为 $\mathbf r$，单位质量角动量为 $\mathbf r\times\mathbf V$。叉积的方向按右手规则，绕 $z$ 轴分量为 $rV_\theta$；这里 $r$ 是到轴的垂直距离，$V_\theta$ 是**绝对速度**的周向分量。力矩为 $\mathbf r\times\mathbf F$，单位 N·m。
 
-## 速度三角形与单位质量功
-叶片速度 $U=\Omega r$，绝对速度 $\mathbf V$、相对叶片速度 $\mathbf W$ 满足 $\mathbf V=\mathbf U+\mathbf W$。同一个速度三角形中不能混用不同坐标系的分量。
+叶片线速度为 $\mathbf U$，流体相对叶片速度为 $\mathbf W$，有 $\mathbf V=\mathbf U+\mathbf W$；刚体叶轮 $U=\Omega r$。本章约定 $M_z$ 和功率 $P$ 为转子**输入流体**的量，正方向与 $\Omega$ 一致。单位质量输入功 $w=P/\dot m$，单位 J/kg；泵的理想扬程为 $w/g$。
 
-转动部件对流体传递的理想单位质量功为
+## 通俗解释：叶轮给流体增加或取走旋转动量
+
+叶轮既可能把流体向周向“拨快”，也可能从原有旋流取出功。只看水是否朝径向流动还不够：力矩看的是绝对周向分量。速度三角形是三向量相加的图，不是三种独立的速度。
+
+## 推导：从力矩到欧拉透平方程
+
+对固定原点，质点角动量求导：$d(\mathbf r\times m\mathbf V)/dt=\mathbf V\times m\mathbf V+\mathbf r\times m\mathbf a=\mathbf r\times\mathbf F$，第一项为零。对系统求和，成对内力矩在经典无偶应力模型中抵消，得总外力矩等于系统角动量变化率。
+
+把 $b=\mathbf r\times\mathbf V$ 代入输运定理：
+$$\sum\mathbf M=\frac{d}{dt}\int_{CV}\rho(\mathbf r\times\mathbf V)dV+\int_{CS}\rho(\mathbf r\times\mathbf V)(\mathbf V\cdot\mathbf n)dA.$$
+对稳态或周期平均稳态叶轮取轴向分量，在一进一出、截面以代表性 $rV_\theta$ 描述时，$M_z=\dot m(r_2V_{\theta2}-r_1V_{\theta1})$。若分布明显不均匀，应保留积分，不能拿任意测点作截面代表。
+
+微小转角 $d\vartheta$ 中，转子做功为 $dW=M_zd\vartheta$，故 $P=M_z\Omega$。除以 $\dot m$ 并使用 $U_i=\Omega r_i$，得到
 $$w=U_2V_{\theta2}-U_1V_{\theta1}.$$
-这叫欧拉透平方程。泵和压气机向流体输入功时按这个约定常为正；涡轮从流体取功时流体所得功为负。真实装置还存在滑移、流动损失、泄漏和机械摩擦。
+这就是欧拉透平方程的守恒推导。泵对流体输入功常为正；涡轮按同一约定为负，涡轮对外输出功则取其相反数。该式决定能量交换的骨架，不独自确定叶片滑移、损失或效率。
 
 ## 例题：叶轮的力矩和功率
 某叶轮角速度为 $100\,\mathrm{rad/s}$，流量 $\dot m=2\,\mathrm{kg/s}$。入口 $r_1=0.10\,\mathrm m$、$V_{\theta1}=0$；出口 $r_2=0.20\,\mathrm m$、$V_{\theta2}=15\,\mathrm{m/s}$。

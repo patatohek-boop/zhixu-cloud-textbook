@@ -1,0 +1,937 @@
+{
+  "course_id": "thermodynamics",
+  "sources": [
+    {
+      "title": "MIT 16.050 Calendar",
+      "url": "https://ocw.mit.edu/courses/16-050-thermal-energy-fall-2002/pages/calendar/",
+      "coverage": "第二定律、气体与蒸汽循环、热化学、推进应用的主题交叉核对"
+    },
+    {
+      "title": "MIT Thermodynamics and Propulsion contents",
+      "url": "https://web.mit.edu/16.unified/www/FALL/thermodynamics/notes/notes.html",
+      "coverage": "系统、状态、控制体、熵、混合物、喷管与推进行为的先修链核对"
+    },
+    {
+      "title": "MIT 2.43 Advanced Thermodynamics syllabus",
+      "url": "https://ocw.mit.edu/courses/2-43-advanced-thermodynamics-spring-2024/pages/syllabus/",
+      "coverage": "仅用于界定势函数、多组分和平衡扩展方向；未宣称覆盖完整研究生课程"
+    },
+    {
+      "title": "MIT 5.60 Lecture 9 — Entropy",
+      "url": "https://ocw.mit.edu/courses/5-60-thermodynamics-kinetics-spring-2008/04d930432a17469f5684ef7d999e190d_5_60_lecture9.pdf",
+      "coverage": "实际阅读第1—3页：Carnot反证、可逆循环积分、熵状态函数和不可逆不等式；用于核对逻辑依赖，不移植原题。"
+    },
+    {
+      "title": "MIT 5.60 Lecture 14 — Multicomponent Systems",
+      "url": "https://ocw.mit.edu/courses/5-60-thermodynamics-kinetics-spring-2008/e763a06aa3b5de09cd6bfea6280f219c_5_60_lecture14.pdf",
+      "coverage": "实际阅读第2—4页：同组分化学势平衡、偏摩尔量、由广延性得到Euler关系。"
+    },
+    {
+      "title": "MIT 16.050 Part 1B — The Second Law",
+      "url": "https://ocw.mit.edu/courses/16-050-thermal-energy-fall-2002/resources/04_part1b/",
+      "coverage": "实读第二律公理表述、性质恒等式、理想气体熵差与可逆参照路径；记录时以资源页为稳定入口。"
+    }
+  ],
+  "added_topics": [
+    "真实气体性质：可测导数与节流温变",
+    "滞止性质、喷管堵塞与推进效率",
+    "熵的微观桥梁：计数、概率与宏观极限"
+  ],
+  "scope_limits": [
+    "物理定律基于实验；正文给出其工程推论的推导，不宣称以数学证明自然定律。",
+    "不覆盖完整非平衡统计力学、真实气体数据库构建和设备认证设计。",
+    "统计熵为明确假设下的基础桥梁；正则系综、配分函数和非平衡统计理论未完整覆盖。",
+    "理想吸收式制冷给三热库极限，具体溶液物性、精馏与吸收器设计需后续专题。",
+    "放气采用充分混合、理想气体、定比热与绝热近似；不含完整放空时间或外壁热容模型。",
+    "证明适用于同两个恒温热库与可逆参照装置；有限热源须分段或积分。",
+    "熵路径独立性限可由可逆路径连接的平衡态；不等于给任意非平衡瞬态单一温度。",
+    "分离功结论固定同温同压产品端态，理想混合且可逆；不包括具体分离工艺设计。"
+  ],
+  "records": [
+    {
+      "id": "thermodynamics-01",
+      "title": "从一杯热水开始：系统、状态与平衡",
+      "checked_concepts": [
+        "系统",
+        "环境",
+        "边界",
+        "闭口与控制体",
+        "孤立与绝热",
+        "状态函数",
+        "强度广延量",
+        "平衡",
+        "准静态与可逆",
+        "状态公设"
+      ],
+      "proofs": [
+        "广延性缩放及比性质不变的证明"
+      ],
+      "changes": [
+        "重写定义先于直觉的主体",
+        "补充有条件的分步论证并保留原算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-02",
+      "title": "温度、压力与测量基准",
+      "checked_concepts": [
+        "第零定律",
+        "热力学温标",
+        "摄氏与开尔文",
+        "绝压表压真空度",
+        "静水压",
+        "测量位置"
+      ],
+      "proofs": [
+        "静水微元受力推出dp/dz及积分"
+      ],
+      "changes": [
+        "重写定义先于直觉的主体",
+        "补充有条件的分步论证并保留原算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-03",
+      "title": "状态方程、理想气体与真实气体",
+      "checked_concepts": [
+        "物质的量",
+        "摩尔质量",
+        "状态方程",
+        "理想气体",
+        "比气体常数",
+        "压缩因子",
+        "对比温压",
+        "真实气体"
+      ],
+      "proofs": [
+        "摩尔式到质量式及压缩性系数推导"
+      ],
+      "changes": [
+        "重写定义先于直觉的主体",
+        "补充有条件的分步论证并保留原算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-04",
+      "title": "相变、干度与物性表的读法",
+      "checked_concepts": [
+        "纯物质",
+        "相",
+        "饱和",
+        "三相点临界点",
+        "干度",
+        "比焓与比熵",
+        "性质插值"
+      ],
+      "proofs": [
+        "两相质量加权公式与线性插值推导"
+      ],
+      "changes": [
+        "重写定义先于直觉的主体",
+        "补充有条件的分步论证并保留原算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-05",
+      "title": "热、功与闭口系统第一定律",
+      "checked_concepts": [
+        "热与功",
+        "内能动能势能",
+        "第一定律",
+        "边界功",
+        "状态函数与不完全微分",
+        "电功轴功"
+      ],
+      "proofs": [
+        "边界力位移积分",
+        "定容热与定压热及循环净功推导"
+      ],
+      "changes": [
+        "重写定义先于直觉的主体",
+        "补充有条件的分步论证并保留原算例与练习",
+        "明确内部压力代入边界功的准平衡条件；增加定容有电功反例"
+      ],
+      "remaining_limits": [],
+      "lecture_followup_2026_09_27": {
+        "status": "正文已补并执行数值复核",
+        "items": [
+          "明确内部压力代入边界功的准平衡条件；增加定容有电功反例"
+        ]
+      }
+    },
+    {
+      "id": "thermodynamics-06",
+      "title": "比热、理想气体过程与多变关系",
+      "checked_concepts": [
+        "比热偏导",
+        "理想气体热性质",
+        "焓",
+        "多变指数",
+        "等温",
+        "可逆绝热",
+        "变比热"
+      ],
+      "proofs": [
+        "Mayer关系",
+        "绝热幂律",
+        "多变功及n=1极限"
+      ],
+      "changes": [
+        "重写定义先于直觉的主体",
+        "补充有条件的分步论证并保留原算例与练习",
+        "补多变路径等效比热及吸放热分步判定，含n=1与定容边界"
+      ],
+      "remaining_limits": [],
+      "lecture_followup_2026_09_27": {
+        "status": "正文已补并执行数值复核",
+        "items": [
+          "补多变路径等效比热及吸放热分步判定，含n=1与定容边界"
+        ]
+      }
+    },
+    {
+      "id": "thermodynamics-07",
+      "title": "控制体：质量守恒与稳流能量方程",
+      "checked_concepts": [
+        "稳态",
+        "控制体质量",
+        "质量流率",
+        "流动功",
+        "焓流",
+        "储存能量",
+        "多进多出"
+      ],
+      "proofs": [
+        "由边界推入功导出非稳态控制体能量式及稳流特例"
+      ],
+      "changes": [
+        "重写定义先于直觉的主体",
+        "补充有条件的分步论证并保留原算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-08",
+      "title": "常见流动设备与非稳态充气",
+      "checked_concepts": [
+        "涡轮压气机泵",
+        "喷管扩压器",
+        "节流",
+        "混合器",
+        "非稳态充气",
+        "焓与内能零点"
+      ],
+      "proofs": [
+        "节流和喷管删项",
+        "绝热刚罐充气积分及泵功条件"
+      ],
+      "changes": [
+        "重写定义先于直觉的主体",
+        "补充有条件的分步论证并保留原算例与练习",
+        "补充分混合绝热刚罐放气质量-能量微分与状态关系，区分时间求解"
+      ],
+      "remaining_limits": [
+        "放气采用充分混合、理想气体、定比热与绝热近似；不含完整放空时间或外壁热容模型。"
+      ],
+      "lecture_followup_2026_09_27": {
+        "status": "正文已补并执行数值复核",
+        "items": [
+          "补充分混合绝热刚罐放气质量-能量微分与状态关系，区分时间求解"
+        ]
+      }
+    },
+    {
+      "id": "thermodynamics-09",
+      "title": "第二定律、热机与可逆性",
+      "checked_concepts": [
+        "热库",
+        "循环热机",
+        "热效率",
+        "Kelvin–Planck表述",
+        "Clausius表述",
+        "可逆性"
+      ],
+      "proofs": [
+        "两种第二定律表述等价的反证及循环效率"
+      ],
+      "changes": [
+        "先定义再解释，重建逐步推导",
+        "明确实验定律、模型推论和比较条件",
+        "保留原图、数值算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-10",
+      "title": "Carnot 循环与热泵极限",
+      "checked_concepts": [
+        "Carnot四过程",
+        "可逆热机定理",
+        "热力学温度",
+        "热效率上限",
+        "制冷与热泵COP"
+      ],
+      "proofs": [
+        "Carnot定理反证",
+        "理想气体循环热量比",
+        "COP上限"
+      ],
+      "changes": [
+        "先定义再解释，重建逐步推导",
+        "明确实验定律、模型推论和比较条件",
+        "保留原图、数值算例与练习",
+        "补三个热库串联的热力学温标比例构造，列出不使用熵作前提的证明链"
+      ],
+      "remaining_limits": [
+        "证明适用于同两个恒温热库与可逆参照装置；有限热源须分段或积分。"
+      ],
+      "lecture_followup_2026_09_27": {
+        "status": "正文已补并执行数值复核",
+        "items": [
+          "补三个热库串联的热力学温标比例构造，列出不使用熵作前提的证明链"
+        ]
+      }
+    },
+    {
+      "id": "thermodynamics-11",
+      "title": "熵：状态量、传递与产生",
+      "checked_concepts": [
+        "Clausius不等式",
+        "熵的路径独立性",
+        "熵传递",
+        "熵产生",
+        "理想气体熵差",
+        "孤立系统"
+      ],
+      "proofs": [
+        "辅助可逆循环导出Clausius不等式",
+        "熵存在性及气体对数式"
+      ],
+      "changes": [
+        "先定义再解释，重建逐步推导",
+        "明确实验定律、模型推论和比较条件",
+        "保留原图、数值算例与练习",
+        "补带符号辅助机热流抵消、可逆参照可达性条件与自由膨胀反例"
+      ],
+      "remaining_limits": [
+        "熵路径独立性限可由可逆路径连接的平衡态；不等于给任意非平衡瞬态单一温度。"
+      ],
+      "lecture_followup_2026_09_27": {
+        "status": "正文已补并执行数值复核",
+        "items": [
+          "补带符号辅助机热流抵消、可逆参照可达性条件与自由膨胀反例"
+        ]
+      }
+    },
+    {
+      "id": "thermodynamics-12",
+      "title": "控制体熵平衡与等熵效率",
+      "checked_concepts": [
+        "控制体熵积累",
+        "热熵流",
+        "质量熵流",
+        "熵产生率",
+        "等熵参照",
+        "涡轮与压气机效率"
+      ],
+      "proofs": [
+        "熵流平衡及dh=Tds在同压下推出效率不等式"
+      ],
+      "changes": [
+        "先定义再解释，重建逐步推导",
+        "明确实验定律、模型推论和比较条件",
+        "保留原图、数值算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-13",
+      "title": "火用：能量的利用价值与损失定位",
+      "checked_concepts": [
+        "环境参考",
+        "死态",
+        "有用功",
+        "闭口物理火用",
+        "流动火用",
+        "热火用",
+        "毁损与排出"
+      ],
+      "proofs": [
+        "从第一第二定律相减推导火用平衡及Gouy–Stodola关系"
+      ],
+      "changes": [
+        "先定义再解释，重建逐步推导",
+        "明确实验定律、模型推论和比较条件",
+        "保留原图、数值算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-14",
+      "title": "基本热力学关系、势函数与 Maxwell 关系",
+      "checked_concepts": [
+        "简单可压缩基本关系",
+        "Legendre变换",
+        "自然变量",
+        "四个热力学势",
+        "四个Maxwell关系",
+        "比热差"
+      ],
+      "proofs": [
+        "基本关系",
+        "混合偏导证明四个Maxwell关系及一般比热差"
+      ],
+      "changes": [
+        "先定义再解释，重建逐步推导",
+        "明确实验定律、模型推论和比较条件",
+        "保留原图、数值算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-15",
+      "title": "Rankine 蒸汽动力循环",
+      "checked_concepts": [
+        "Rankine状态编号",
+        "泵功",
+        "锅炉吸热",
+        "涡轮功",
+        "冷凝器排热",
+        "干度与物性"
+      ],
+      "proofs": [
+        "四设备守恒相加导出循环效率及理想出口状态算法"
+      ],
+      "changes": [
+        "先定义再解释，重建逐步推导",
+        "明确实验定律、模型推论和比较条件",
+        "保留原图、数值算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-16",
+      "title": "再热、回热与联合循环",
+      "checked_concepts": [
+        "再热",
+        "开放回热",
+        "闭式回热",
+        "抽汽分数",
+        "质量基准",
+        "联合循环",
+        "外部热输入"
+      ],
+      "proofs": [
+        "抽汽焓平衡",
+        "两级再热功热式及联合效率不可相加的推导"
+      ],
+      "changes": [
+        "先定义再解释，重建逐步推导",
+        "明确实验定律、模型推论和比较条件",
+        "保留原图、数值算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-17",
+      "title": "Brayton 循环与燃气轮机再生",
+      "checked_concepts": [
+        "Brayton四状态",
+        "压比",
+        "回功比",
+        "再生效能",
+        "净比功最优",
+        "级间冷却",
+        "Stirling循环",
+        "Ericsson循环",
+        "完美再生"
+      ],
+      "proofs": [
+        "循环效率约分",
+        "最大净功求导及两级最佳中间压力",
+        "内部再生热抵消后推导Carnot效率"
+      ],
+      "changes": [
+        "先定义再解释，重建逐步推导",
+        "明确实验定律、模型推论和比较条件",
+        "保留原图、数值算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-18",
+      "title": "Otto 与 Diesel：内燃机的空气标准模型",
+      "checked_concepts": [
+        "空气标准",
+        "压缩比",
+        "截止比",
+        "Otto与Diesel过程",
+        "平均有效压力",
+        "双燃烧循环"
+      ],
+      "proofs": [
+        "Otto和Diesel效率逐态推导及平均有效压力定义"
+      ],
+      "changes": [
+        "先定义再解释，重建逐步推导",
+        "明确实验定律、模型推论和比较条件",
+        "保留原图、数值算例与练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-19",
+      "title": "蒸气压缩制冷、热泵与工质选择",
+      "checked_concepts": [
+        "制冷四状态",
+        "蒸发与冷凝",
+        "过热过冷",
+        "节流干度",
+        "电驱COP",
+        "吸收式热驱COP"
+      ],
+      "proofs": [
+        "四设备焓差",
+        "节流后干度及三热库吸收制冷极限"
+      ],
+      "changes": [
+        "重建严格定义—通俗解释—逐步论证顺序",
+        "补足公式质量基准、状态参考与适用条件",
+        "保留并核对原有数值算例练习"
+      ],
+      "remaining_limits": [
+        "复杂真实混合物与设备级设计需进一步物性和专题资料"
+      ]
+    },
+    {
+      "id": "thermodynamics-20",
+      "title": "理想混合气体与混合熵",
+      "checked_concepts": [
+        "摩尔分数质量分数",
+        "Dalton分压",
+        "混合物气体常数",
+        "热性质加权",
+        "分压熵",
+        "混合熵"
+      ],
+      "proofs": [
+        "质量摩尔转换",
+        "Dalton模型与可逆分离膜参照的混合熵推导"
+      ],
+      "changes": [
+        "重建严格定义—通俗解释—逐步论证顺序",
+        "补足公式质量基准、状态参考与适用条件",
+        "保留并核对原有数值算例练习",
+        "补固定组成比热、闭口与稳流混合终温差异、指定端态最小分离功"
+      ],
+      "remaining_limits": [
+        "分离功结论固定同温同压产品端态，理想混合且可逆；不包括具体分离工艺设计。"
+      ],
+      "lecture_followup_2026_09_27": {
+        "status": "正文已补并执行数值复核",
+        "items": [
+          "补固定组成比热、闭口与稳流混合终温差异、指定端态最小分离功"
+        ]
+      }
+    },
+    {
+      "id": "thermodynamics-21",
+      "title": "湿空气、相对湿度与空气处理",
+      "checked_concepts": [
+        "湿空气",
+        "干空气基准",
+        "相对湿度",
+        "含湿量",
+        "露点湿球",
+        "焓湿图",
+        "盘管凝结"
+      ],
+      "proofs": [
+        "含湿量0.622系数",
+        "湿空气焓及盘管水分能量平衡"
+      ],
+      "changes": [
+        "重建严格定义—通俗解释—逐步论证顺序",
+        "补足公式质量基准、状态参考与适用条件",
+        "保留并核对原有数值算例练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-22",
+      "title": "燃烧计量、生成焓与绝热火焰温度",
+      "checked_concepts": [
+        "元素守恒",
+        "化学计量",
+        "过量空气与当量比",
+        "标准生成焓",
+        "反应焓",
+        "高低热值",
+        "绝热火焰温度"
+      ],
+      "proofs": [
+        "反应配平",
+        "Hess路径独立与火焰温度能量方程"
+      ],
+      "changes": [
+        "重建严格定义—通俗解释—逐步论证顺序",
+        "补足公式质量基准、状态参考与适用条件",
+        "保留并核对原有数值算例练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-23",
+      "title": "化学势、反应平衡与平衡常数",
+      "checked_concepts": [
+        "化学势",
+        "偏摩尔性质",
+        "反应进度",
+        "活度与标准态",
+        "反应商",
+        "平衡常数",
+        "稳定平衡",
+        "Gibbs–Duhem关系",
+        "广延Euler关系"
+      ],
+      "proofs": [
+        "恒温恒压G极小准则",
+        "反应商方向和平衡常数及van’t Hoff式",
+        "齐次广延性与全微分导出Gibbs–Duhem"
+      ],
+      "changes": [
+        "重建严格定义—通俗解释—逐步论证顺序",
+        "补足公式质量基准、状态参考与适用条件",
+        "保留并核对原有数值算例练习"
+      ],
+      "remaining_limits": [
+        "复杂真实混合物与设备级设计需进一步物性和专题资料"
+      ]
+    },
+    {
+      "id": "thermodynamics-24",
+      "title": "相平衡、Clapeyron 关系与稳定性边界",
+      "checked_concepts": [
+        "相平衡化学势",
+        "Clapeyron",
+        "Clausius–Clapeyron",
+        "Gibbs相律",
+        "稳定与亚稳",
+        "第三定律",
+        "绝对熵"
+      ],
+      "proofs": [
+        "相界斜率",
+        "近似积分",
+        "自由度计数及热容熵积分"
+      ],
+      "changes": [
+        "重建严格定义—通俗解释—逐步论证顺序",
+        "补足公式质量基准、状态参考与适用条件",
+        "保留并核对原有数值算例练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-25",
+      "title": "量热实验、传感器与不确定度",
+      "checked_concepts": [
+        "测量方程",
+        "热容与比热",
+        "系统偏差",
+        "标准不确定度",
+        "协方差",
+        "有效位数"
+      ],
+      "proofs": [
+        "量热能量平衡及一阶Taylor误差传播和相关温差抵消"
+      ],
+      "changes": [
+        "重建严格定义—通俗解释—逐步论证顺序",
+        "补足公式质量基准、状态参考与适用条件",
+        "保留并核对原有数值算例练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-26",
+      "title": "综合项目：从第一律到能量审计",
+      "checked_concepts": [
+        "审计边界",
+        "稳态残差",
+        "有用供热",
+        "能量效率",
+        "流动火用增量",
+        "产品火用效率",
+        "最坏工况"
+      ],
+      "proofs": [
+        "水加热焓熵积分",
+        "火用非负性及热泵等目标比较"
+      ],
+      "changes": [
+        "重建严格定义—通俗解释—逐步论证顺序",
+        "补足公式质量基准、状态参考与适用条件",
+        "保留并核对原有数值算例练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "thermodynamics-27",
+      "title": "真实气体性质：可测导数与节流温变",
+      "checked_concepts": [
+        "真实气体",
+        "热性质一致性",
+        "Joule–Thomson系数",
+        "反转温度",
+        "van der Waals模型"
+      ],
+      "proofs": [
+        "从基本关系推导du与dh及节流温度导数"
+      ],
+      "changes": [
+        "新增缺漏专题，包含定义、通俗解释、分步证明/推导、完整算例和两题解析"
+      ],
+      "remaining_limits": [
+        "为基础模型的完整教学单元；不覆盖相应研究生专题全部范围"
+      ]
+    },
+    {
+      "id": "thermodynamics-28",
+      "title": "滞止性质、喷管堵塞与推进效率",
+      "checked_concepts": [
+        "静态与滞止",
+        "声速",
+        "Mach数",
+        "临界压比",
+        "质量通量",
+        "推力",
+        "推进效率"
+      ],
+      "proofs": [
+        "总焓关系",
+        "等熵质量流极值与动量能量推进效率"
+      ],
+      "changes": [
+        "新增缺漏专题，包含定义、通俗解释、分步证明/推导、完整算例和两题解析"
+      ],
+      "remaining_limits": [
+        "为基础模型的完整教学单元；不覆盖相应研究生专题全部范围"
+      ]
+    },
+    {
+      "id": "thermodynamics-29",
+      "title": "熵的微观桥梁：计数、概率与宏观极限",
+      "checked_concepts": [
+        "微观态宏观态",
+        "等概率假设",
+        "Boltzmann熵",
+        "Gibbs熵",
+        "可加性",
+        "最概然分布",
+        "适用范围"
+      ],
+      "proofs": [
+        "独立态计数的熵可加性",
+        "二项分布最大项与混合计数"
+      ],
+      "changes": [
+        "新增缺漏专题，包含定义、通俗解释、分步证明/推导、完整算例和两题解析"
+      ],
+      "remaining_limits": [
+        "为基础模型的完整教学单元；不覆盖相应研究生专题全部范围"
+      ]
+    }
+  ],
+  "coverage_map": [
+    {
+      "reference_topics": "MIT Unified基本定义、状态、温压、第一定律、热与功、物性",
+      "lesson_ids": [
+        "thermodynamics-01",
+        "thermodynamics-02",
+        "thermodynamics-03",
+        "thermodynamics-04",
+        "thermodynamics-05",
+        "thermodynamics-06"
+      ],
+      "lesson_titles": [
+        "从一杯热水开始：系统、状态与平衡",
+        "温度、压力与测量基准",
+        "状态方程、理想气体与真实气体",
+        "相变、干度与物性表的读法",
+        "热、功与闭口系统第一定律",
+        "比热、理想气体过程与多变关系"
+      ]
+    },
+    {
+      "reference_topics": "MIT Unified控制体质量能量、设备与非稳态充气",
+      "lesson_ids": [
+        "thermodynamics-07",
+        "thermodynamics-08"
+      ],
+      "lesson_titles": [
+        "控制体：质量守恒与稳流能量方程",
+        "常见流动设备与非稳态充气"
+      ]
+    },
+    {
+      "reference_topics": "MIT16.050第二定律、可逆性、效率极限、熵及可用功",
+      "lesson_ids": [
+        "thermodynamics-09",
+        "thermodynamics-10",
+        "thermodynamics-11",
+        "thermodynamics-12",
+        "thermodynamics-13"
+      ],
+      "lesson_titles": [
+        "第二定律、热机与可逆性",
+        "Carnot 循环与热泵极限",
+        "熵：状态量、传递与产生",
+        "控制体熵平衡与等熵效率",
+        "火用：能量的利用价值与损失定位"
+      ]
+    },
+    {
+      "reference_topics": "性质关系与多组分热力学补充：势函数、Maxwell、真实气体",
+      "lesson_ids": [
+        "thermodynamics-14",
+        "thermodynamics-27"
+      ],
+      "lesson_titles": [
+        "基本热力学关系、势函数与 Maxwell 关系",
+        "真实气体性质：可测导数与节流温变"
+      ]
+    },
+    {
+      "reference_topics": "MIT16.050蒸汽动力、再热回热、联合循环",
+      "lesson_ids": [
+        "thermodynamics-15",
+        "thermodynamics-16"
+      ],
+      "lesson_titles": [
+        "Rankine 蒸汽动力循环",
+        "再热、回热与联合循环"
+      ]
+    },
+    {
+      "reference_topics": "MIT16.050气体动力与推进循环；另补理想再生循环",
+      "lesson_ids": [
+        "thermodynamics-17",
+        "thermodynamics-18",
+        "thermodynamics-28"
+      ],
+      "lesson_titles": [
+        "Brayton 循环与燃气轮机再生",
+        "Otto 与 Diesel：内燃机的空气标准模型",
+        "滞止性质、喷管堵塞与推进效率"
+      ]
+    },
+    {
+      "reference_topics": "本科工程制冷与热泵补充：蒸气压缩与吸收式热驱极限",
+      "lesson_ids": [
+        "thermodynamics-19"
+      ],
+      "lesson_titles": [
+        "蒸气压缩制冷、热泵与工质选择"
+      ]
+    },
+    {
+      "reference_topics": "MIT Unified混合熵；工程湿空气补充",
+      "lesson_ids": [
+        "thermodynamics-20",
+        "thermodynamics-21",
+        "thermodynamics-29"
+      ],
+      "lesson_titles": [
+        "理想混合气体与混合熵",
+        "湿空气、相对湿度与空气处理",
+        "熵的微观桥梁：计数、概率与宏观极限"
+      ]
+    },
+    {
+      "reference_topics": "MIT16.050热化学；反应平衡、相平衡与第三定律延伸",
+      "lesson_ids": [
+        "thermodynamics-22",
+        "thermodynamics-23",
+        "thermodynamics-24"
+      ],
+      "lesson_titles": [
+        "燃烧计量、生成焓与绝热火焰温度",
+        "化学势、反应平衡与平衡常数",
+        "相平衡、Clapeyron 关系与稳定性边界"
+      ]
+    },
+    {
+      "reference_topics": "课程方法补充：量热、不确定度和综合审计",
+      "lesson_ids": [
+        "thermodynamics-25",
+        "thermodynamics-26"
+      ],
+      "lesson_titles": [
+        "量热实验、传感器与不确定度",
+        "综合项目：从第一律到能量审计"
+      ]
+    }
+  ],
+  "latest_lecture_review": {
+    "date": "2026-09-27",
+    "method": "实际阅读具体讲义正文及公式页；按问题补正文。全部课文另做元数据、标题、链接和覆盖映射检查；不把本轮专项复核宣称为每个公式的新一轮独立证明。",
+    "deep_review_lesson_ids": [
+      "thermodynamics-05",
+      "thermodynamics-06",
+      "thermodynamics-07",
+      "thermodynamics-08",
+      "thermodynamics-09",
+      "thermodynamics-10",
+      "thermodynamics-11",
+      "thermodynamics-20",
+      "thermodynamics-23"
+    ],
+    "all_lesson_ids_checked_for_coverage": [
+      "thermodynamics-01",
+      "thermodynamics-02",
+      "thermodynamics-03",
+      "thermodynamics-04",
+      "thermodynamics-05",
+      "thermodynamics-06",
+      "thermodynamics-07",
+      "thermodynamics-08",
+      "thermodynamics-09",
+      "thermodynamics-10",
+      "thermodynamics-11",
+      "thermodynamics-12",
+      "thermodynamics-13",
+      "thermodynamics-14",
+      "thermodynamics-15",
+      "thermodynamics-16",
+      "thermodynamics-17",
+      "thermodynamics-18",
+      "thermodynamics-19",
+      "thermodynamics-20",
+      "thermodynamics-21",
+      "thermodynamics-22",
+      "thermodynamics-23",
+      "thermodynamics-24",
+      "thermodynamics-25",
+      "thermodynamics-26",
+      "thermodynamics-27",
+      "thermodynamics-28",
+      "thermodynamics-29"
+    ],
+    "verification": "tools/verify_thermal.py：守恒、符号、极限、经验式代入、Planck积分独立数值求积、标题与覆盖检查。经验关联式的数值复核不构成实验有效性验证。",
+    "access_limits": "MIT 2.005历史入口无法读取，采用MIT 5.60/16.050及IIT/NPTEL的实际讲义；NPTEL部分公式为图片，相关公式交叉核对大学公开实验论文。",
+    "verification_results": {
+      "thermal_courses_combined": {
+        "lessons": 60,
+        "audit_records": 60,
+        "structural_and_numerical_checks_passed": 335,
+        "body_formulas_katex_passed": 1801
+      },
+      "interpretation": "数学排版、数值代入与守恒检查已通过；不能据此声称所有经验模型在所有工况有效。"
+    }
+  }
+}
