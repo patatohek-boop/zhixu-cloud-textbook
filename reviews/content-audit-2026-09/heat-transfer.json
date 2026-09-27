@@ -1,0 +1,1004 @@
+{
+  "course_id": "heat-transfer",
+  "sources": [
+    {
+      "title": "MIT 2.51 Readings and topic sequence",
+      "url": "https://ocw.mit.edu/courses/2-51-intermediate-heat-and-mass-transfer-fall-2008/pages/readings/",
+      "coverage": "逐讲核对导热、边界层积分法、内部外部流动、相变、辐射和传质范围"
+    },
+    {
+      "title": "MIT 16 Unified thermal notes",
+      "url": "https://web.mit.edu/16.unified/www/FALL/thermodynamics/notes/notes.html",
+      "coverage": "导热热阻、肋片、瞬态、换热器与辐射的教学顺序和基本假设"
+    },
+    {
+      "title": "CSUN ME375 Convection coefficients II",
+      "url": "https://www.csun.edu/~lcaretto/me375/08-forced%20convection%20two.pdf",
+      "coverage": "核查层流平板、管内Nu、Gnielinski、自然对流及外流关联范围；正文推导与例题独立编写"
+    },
+    {
+      "title": "IIT/NPTEL Lecture 24 — Heat Transfer in Boiling",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/103103032/module6/lec24/1.html",
+      "coverage": "实读6.1：池沸腾分类、气泡半球受力和式6.1的毛细压。"
+    },
+    {
+      "title": "IIT/NPTEL Lecture 26 — Film Condensation",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/103103032/module6/lec26/1.html",
+      "coverage": "实读6.4及下一页：竖直膜流动量平衡、凝液通量、平均系数、膜温物性、Jakob数及膜Reynolds数。"
+    },
+    {
+      "title": "IIT/NPTEL Lecture 26 — Properties and Regime Checks",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/103103032/module6/lec26/2.html",
+      "coverage": "实读式6.8—6.12与正文，核对显热修正、物性温度和由凝液通量反查膜流。"
+    },
+    {
+      "title": "IIT/NPTEL Lecture 32 — Boiling Correlations",
+      "url": "https://archive.nptel.ac.in/content/storage2/courses/112101007/modules/lec32/1.5.html",
+      "coverage": "实读关联式分类和参数说明；公式图片抓取受限，Rohsenow和CHF公式另由下列原始实验论文交叉核对。"
+    },
+    {
+      "title": "Virginia Tech — Direct Measurement of Boiling Water Heat Flux (2013)",
+      "url": "https://vtechworks.lib.vt.edu/bitstream/handle/10919/23091/Thompson_JL_T_2013.pdf",
+      "coverage": "核对正文第2页式1—3、表面参数及CHF几何依赖；未把实验相关式当数学定理。"
+    },
+    {
+      "title": "MIT 16.050 Part 3 — Fundamentals of Heat Transfer",
+      "url": "https://ocw.mit.edu/courses/16-050-thermal-energy-fall-2002/87d9f4544b7fd64a77201382500d057c_10_part3.pdf",
+      "coverage": "实读HT-56—59：平衡腔辐射、Kirchhoff定律条件及两灰平壁交换；核对现有第20—22节。"
+    }
+  ],
+  "added_topics": [
+    "多维导热：矩形解析解、乘积解与唯一性",
+    "边界层积分法：从方程到可计算近似",
+    "扩散的两种边界：等摩尔逆扩散与Stefan流",
+    "圆柱横掠、管束与非圆通道的关联式选择",
+    "熔化与凝固：移动界面和Stefan条件"
+  ],
+  "scope_limits": [
+    "Fourier本构及经验关联式不声称由数学独立证明；证明针对明确模型的推论。",
+    "未覆盖完整湍流闭合、微纳非Fourier输运和复杂两相流设备设计。",
+    "圆管定热流Nu=48/11已推导；定壁温3.66给出边值问题、首根与Nu关系，完整入口区Graetz谱解未展开。",
+    "管束几何速度与查式要求已教，复杂排布全套经验系数和认证设计未穷尽。",
+    "新相变章给一相Stefan模型及小Ste近似，不涵盖完整凝固微结构和两相流。",
+    "CHF为条件化估计；不覆盖微通道、强制流动干涸数据库、界面稳定性全推导或设备安全定值。",
+    "完整推导限竖直等温板平滑层流；水平圆管、管束、蒸汽剪切与不凝气体仅说明边界，未给完整设计。",
+    "Planck作为给定物理规律；未推导量子模式计数，参与性介质光谱传输另见第22节范围。"
+  ],
+  "records": [
+    {
+      "id": "heat-transfer-01",
+      "title": "传热三方式与第一张能量流图",
+      "checked_concepts": [
+        "热量热流率热流密度",
+        "温度场",
+        "导热对流辐射",
+        "材料系数与换热系数",
+        "稳态能量"
+      ],
+      "proofs": [
+        "积分通量定义",
+        "总能量平衡和辐射交换条件"
+      ],
+      "changes": [
+        "重写先严谨定义后直觉解释的主体",
+        "补充微元守恒或解析证明、长度与单位基准",
+        "保留原有图示和例题练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-02",
+      "title": "导热方程、初始条件与边界条件",
+      "checked_concepts": [
+        "控制体",
+        "热扩散率",
+        "初始条件",
+        "三类边界",
+        "外法向",
+        "接触连续性",
+        "各向异性"
+      ],
+      "proofs": [
+        "微元守恒导出一般导热方程与无量纲扩散时间"
+      ],
+      "changes": [
+        "重写先严谨定义后直觉解释的主体",
+        "补充微元守恒或解析证明、长度与单位基准",
+        "保留原有图示和例题练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-03",
+      "title": "平壁热阻、复合墙与接触热阻",
+      "checked_concepts": [
+        "导热热阻",
+        "对流热阻",
+        "接触面比热阻",
+        "串并联",
+        "总传热系数",
+        "热桥"
+      ],
+      "proofs": [
+        "Fourier积分导出热阻",
+        "串并联与界面温度恢复"
+      ],
+      "changes": [
+        "重写先严谨定义后直觉解释的主体",
+        "补充微元守恒或解析证明、长度与单位基准",
+        "保留原有图示和例题练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-04",
+      "title": "圆柱与球壳：面积变化后的导热",
+      "checked_concepts": [
+        "径向导热",
+        "总热流与热流密度",
+        "圆柱球壳",
+        "内外面积",
+        "薄壁极限",
+        "对数平均面积"
+      ],
+      "proofs": [
+        "任意面积积分导出圆柱与球壳热阻及薄壁极限"
+      ],
+      "changes": [
+        "重写先严谨定义后直觉解释的主体",
+        "补充微元守恒或解析证明、长度与单位基准",
+        "保留原有图示和例题练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-05",
+      "title": "内热源与变导热系数",
+      "checked_concepts": [
+        "体积热源",
+        "半厚度",
+        "对称边界",
+        "最高温度",
+        "变k",
+        "热失稳"
+      ],
+      "proofs": [
+        "发热平板ODE两次积分",
+        "变k积分及稳定性线性化"
+      ],
+      "changes": [
+        "重写先严谨定义后直觉解释的主体",
+        "补充微元守恒或解析证明、长度与单位基准",
+        "保留原有图示和例题练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-06",
+      "title": "肋片效率与临界保温半径",
+      "checked_concepts": [
+        "肋片截面湿周",
+        "过余温度",
+        "效率效能",
+        "总体表面效率",
+        "端部条件",
+        "临界保温半径"
+      ],
+      "proofs": [
+        "微元平衡推导肋片ODE与解",
+        "临界半径求极值"
+      ],
+      "changes": [
+        "重写先严谨定义后直觉解释的主体",
+        "补充微元守恒或解析证明、长度与单位基准",
+        "保留原有图示和例题练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-07",
+      "title": "集总热容：小物体如何随时间冷却",
+      "checked_concepts": [
+        "集总温度",
+        "Biot数",
+        "热容",
+        "时间常数",
+        "指数响应",
+        "恒定发热",
+        "变环境"
+      ],
+      "proofs": [
+        "热阻比例",
+        "ODE分离变量及带恒定热源响应"
+      ],
+      "changes": [
+        "重写先严谨定义后直觉解释的主体",
+        "补充微元守恒或解析证明、长度与单位基准",
+        "保留原有图示和例题练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-08",
+      "title": "一维非稳态导热、特征值与图表",
+      "checked_concepts": [
+        "无量纲温度",
+        "Fourier数",
+        "平板半厚度",
+        "分离变量",
+        "特征值",
+        "正交性",
+        "级数系数",
+        "截断误差",
+        "圆柱Bessel正则解",
+        "球体正弦径向解",
+        "加权正交投影"
+      ],
+      "proofs": [
+        "平板模态ODE",
+        "Robin特征方程与初值投影积分",
+        "径向热方程导出圆柱球体特征方程及系数积分"
+      ],
+      "changes": [
+        "重写先严谨定义后直觉解释的主体",
+        "补充微元守恒或解析证明、长度与单位基准",
+        "保留原有图示和例题练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-09",
+      "title": "半无限体、热穿透与叠加原理",
+      "checked_concepts": [
+        "半无限体",
+        "相似变量",
+        "误差函数",
+        "热容率",
+        "接触温度",
+        "线性叠加",
+        "Duhamel积分"
+      ],
+      "proofs": [
+        "相似变换求解热方程",
+        "热流微分及接触热流匹配"
+      ],
+      "changes": [
+        "替换原概略主体为定义、直觉、步骤完整的论证",
+        "给出被删方程项与关联式数据性质",
+        "保留原图例与习题"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-10",
+      "title": "数值导热：差分、稳定性与网格检查",
+      "checked_concepts": [
+        "时间层",
+        "中心差分",
+        "截断误差",
+        "稳定性",
+        "隐式方程",
+        "守恒",
+        "网格收敛"
+      ],
+      "proofs": [
+        "Taylor展开离散",
+        "Fourier模态稳定性及隐式格式"
+      ],
+      "changes": [
+        "替换原概略主体为定义、直觉、步骤完整的论证",
+        "给出被删方程项与关联式数据性质",
+        "保留原图例与习题"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-11",
+      "title": "对流边界层与质量、动量、能量守恒",
+      "checked_concepts": [
+        "速度边界层",
+        "热边界层",
+        "无滑移",
+        "压力梯度",
+        "黏性扩散",
+        "热扩散",
+        "壁面热流"
+      ],
+      "proofs": [
+        "守恒方程经尺度删项得到边界层动量能量式"
+      ],
+      "changes": [
+        "替换原概略主体为定义、直觉、步骤完整的论证",
+        "给出被删方程项与关联式数据性质",
+        "保留原图例与习题"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-12",
+      "title": "Re、Pr、Nu、Gr、Ra：无量纲数的地图",
+      "checked_concepts": [
+        "Re",
+        "Pr",
+        "Pe",
+        "Nu",
+        "Bi",
+        "Gr",
+        "Ra",
+        "Ri",
+        "相似条件"
+      ],
+      "proofs": [
+        "无量纲化动量能量式及浮升惯性黏性比"
+      ],
+      "changes": [
+        "替换原概略主体为定义、直觉、步骤完整的论证",
+        "给出被删方程项与关联式数据性质",
+        "保留原图例与习题"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-13",
+      "title": "外部强迫对流：平板、圆柱与局部系数",
+      "checked_concepts": [
+        "当地平均系数",
+        "等温平板",
+        "相似解",
+        "转捩",
+        "圆柱与管束",
+        "经验关联式"
+      ],
+      "proofs": [
+        "当地到平均积分",
+        "Blasius温度相似式与系数来源"
+      ],
+      "changes": [
+        "替换原概略主体为定义、直觉、步骤完整的论证",
+        "给出被删方程项与关联式数据性质",
+        "保留原图例与习题"
+      ],
+      "remaining_limits": [
+        "湍流或转捩关联常数保留经验属性，不虚构解析证明"
+      ]
+    },
+    {
+      "id": "heat-transfer-14",
+      "title": "内部层流、入口段与主体温度",
+      "checked_concepts": [
+        "主体温度",
+        "流动与热充分发展",
+        "定热流定壁温",
+        "入口长度",
+        "水力直径",
+        "定壁温特征值边值问题",
+        "首模态Nu数值极限"
+      ],
+      "proofs": [
+        "截面携焓定义",
+        "轴向指数温升",
+        "圆管Nu=48/11推导",
+        "定壁温特征方程与Nu=λ²/2关系；独立数值求根λ=2.7043644"
+      ],
+      "changes": [
+        "替换原概略主体为定义、直觉、步骤完整的论证",
+        "给出被删方程项与关联式数据性质",
+        "保留原图例与习题"
+      ],
+      "remaining_limits": [
+        "给出充分发展定壁温Nu的边值问题和可复算第一特征根；完整入口区多模态Graetz解未逐项展开。"
+      ]
+    },
+    {
+      "id": "heat-transfer-15",
+      "title": "内部湍流、摩擦与泵功折中",
+      "checked_concepts": [
+        "湍流平均",
+        "Darcy与Fanning摩擦因子",
+        "Gnielinski经验式",
+        "Stanton数",
+        "泵功"
+      ],
+      "proofs": [
+        "管段动量推出Darcy压降",
+        "Reynolds类比的条件与功率代价"
+      ],
+      "changes": [
+        "替换原概略主体为定义、直觉、步骤完整的论证",
+        "给出被删方程项与关联式数据性质",
+        "保留原图例与习题"
+      ],
+      "remaining_limits": [
+        "湍流或转捩关联常数保留经验属性，不虚构解析证明"
+      ]
+    },
+    {
+      "id": "heat-transfer-16",
+      "title": "自然对流、稳定分层与混合对流",
+      "checked_concepts": [
+        "Boussinesq近似",
+        "浮升力",
+        "自然与混合对流",
+        "稳定分层",
+        "Rayleigh数",
+        "Richardson数"
+      ],
+      "proofs": [
+        "静水背景相减推出浮升项",
+        "尺度比及非线性热流"
+      ],
+      "changes": [
+        "替换原概略主体为定义、直觉、步骤完整的论证",
+        "给出被删方程项与关联式数据性质",
+        "保留原图例与习题"
+      ],
+      "remaining_limits": [
+        "湍流或转捩关联常数保留经验属性，不虚构解析证明"
+      ]
+    },
+    {
+      "id": "heat-transfer-17",
+      "title": "沸腾、临界热流与沸腾曲线",
+      "checked_concepts": [
+        "饱和与亚冷沸腾",
+        "壁面过热度",
+        "核态过渡膜态",
+        "临界热流",
+        "热流控制",
+        "汽化潜热"
+      ],
+      "proofs": [
+        "汽化率能量平衡与热流控制局部稳定性"
+      ],
+      "changes": [
+        "重建定义、直觉、实际推导和条件辨析",
+        "补足热容量率、光谱单位、质量通量等先修",
+        "保留原图、数值例题和练习",
+        "补气泡毛细压分步力学推导、Rohsenow及CHF条件化计算、Leidenfrost点与滞后"
+      ],
+      "remaining_limits": [
+        "CHF为条件化估计；不覆盖微通道、强制流动干涸数据库、界面稳定性全推导或设备安全定值。"
+      ],
+      "lecture_followup_2026_09_27": {
+        "status": "正文已补并执行数值复核",
+        "items": [
+          "补气泡毛细压分步力学推导、Rohsenow及CHF条件化计算、Leidenfrost点与滞后"
+        ]
+      }
+    },
+    {
+      "id": "heat-transfer-18",
+      "title": "凝结、液膜与相变换热器",
+      "checked_concepts": [
+        "膜状滴状凝结",
+        "液膜厚度",
+        "凝液线流率",
+        "膜Reynolds数",
+        "不凝气体",
+        "显热修正"
+      ],
+      "proofs": [
+        "液膜动量积分",
+        "质量与潜热平衡得到Nusselt四分之一次方式"
+      ],
+      "changes": [
+        "重建定义、直觉、实际推导和条件辨析",
+        "补足热容量率、光谱单位、质量通量等先修",
+        "保留原图、数值例题和练习",
+        "补膜温物性、Jakob数和显热修正证据类型，完整系数-凝液流率-Re反查例题"
+      ],
+      "remaining_limits": [
+        "完整推导限竖直等温板平滑层流；水平圆管、管束、蒸汽剪切与不凝气体仅说明边界，未给完整设计。"
+      ],
+      "lecture_followup_2026_09_27": {
+        "status": "正文已补并执行数值复核",
+        "items": [
+          "补膜温物性、Jakob数和显热修正证据类型，完整系数-凝液流率-Re反查例题"
+        ]
+      }
+    },
+    {
+      "id": "heat-transfer-19",
+      "title": "黑体辐射、光谱与太阳能",
+      "checked_concepts": [
+        "黑体",
+        "光谱发射力",
+        "总发射力",
+        "Planck定律",
+        "Stefan–Boltzmann",
+        "Wien位移",
+        "波长频率密度"
+      ],
+      "proofs": [
+        "Planck积分变量替换得到T四次方",
+        "谱峰微分"
+      ],
+      "changes": [
+        "重建定义、直觉、实际推导和条件辨析",
+        "补足热容量率、光谱单位、质量通量等先修",
+        "保留原图、数值例题和练习",
+        "补Planck积分系数求和、定义常数、波段辐射分数换元及数值题"
+      ],
+      "remaining_limits": [
+        "Planck量子定律作为物理基础输入，其量子统计起源不在本章证明",
+        "Planck作为给定物理规律；未推导量子模式计数，参与性介质光谱传输另见第22节范围。"
+      ],
+      "lecture_followup_2026_09_27": {
+        "status": "正文已补并执行数值复核",
+        "items": [
+          "补Planck积分系数求和、定义常数、波段辐射分数换元及数值题"
+        ]
+      }
+    },
+    {
+      "id": "heat-transfer-20",
+      "title": "表面辐射性质与 Kirchhoff 定律",
+      "checked_concepts": [
+        "吸收反射透射",
+        "光谱与方向性质",
+        "发射率",
+        "灰体",
+        "漫射",
+        "Kirchhoff适用条件"
+      ],
+      "proofs": [
+        "入射能量分配与平衡腔内逐波段详细平衡论证"
+      ],
+      "changes": [
+        "重建定义、直觉、实际推导和条件辨析",
+        "补足热容量率、光谱单位、质量通量等先修",
+        "保留原图、数值例题和练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-21",
+      "title": "角系数、几何遮挡与黑体交换",
+      "checked_concepts": [
+        "辐亮度",
+        "角系数",
+        "可见性",
+        "互易性",
+        "封闭求和",
+        "自视",
+        "黑体净交换"
+      ],
+      "proofs": [
+        "双面积积分的互易证明",
+        "半球归一化与黑体交换"
+      ],
+      "changes": [
+        "重建定义、直觉、实际推导和条件辨析",
+        "补足热容量率、光谱单位、质量通量等先修",
+        "保留原图、数值例题和练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-22",
+      "title": "灰体辐射网络与参与介质",
+      "checked_concepts": [
+        "辐照度",
+        "有效辐射度",
+        "表面空间阻力",
+        "灰体网络",
+        "辐射屏",
+        "参与介质",
+        "吸收系数"
+      ],
+      "proofs": [
+        "radiosity守恒",
+        "两灰板网络与一维吸收发射方程积分"
+      ],
+      "changes": [
+        "重建定义、直觉、实际推导和条件辨析",
+        "补足热容量率、光谱单位、质量通量等先修",
+        "保留原图、数值例题和练习"
+      ],
+      "remaining_limits": [
+        "不含完整散射辐射输运"
+      ]
+    },
+    {
+      "id": "heat-transfer-23",
+      "title": "换热器与对数平均温差法",
+      "checked_concepts": [
+        "换热量",
+        "热容量率",
+        "总传热系数面积",
+        "并流逆流",
+        "LMTD",
+        "修正因子",
+        "污垢"
+      ],
+      "proofs": [
+        "微段能量式积分导出对数平均温差及相等极限"
+      ],
+      "changes": [
+        "重建定义、直觉、实际推导和条件辨析",
+        "补足热容量率、光谱单位、质量通量等先修",
+        "保留原图、数值例题和练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-24",
+      "title": "效能–NTU 法：出口未知时如何计算",
+      "checked_concepts": [
+        "效能",
+        "最大换热量",
+        "NTU",
+        "热容量率比",
+        "逆流并流",
+        "相变极限"
+      ],
+      "proofs": [
+        "逆流端温关系导出效能式及Cr=1和并流公式"
+      ],
+      "changes": [
+        "重建定义、直觉、实际推导和条件辨析",
+        "补足热容量率、光谱单位、质量通量等先修",
+        "保留原图、数值例题和练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-25",
+      "title": "传热传质类比与蒸发耦合",
+      "checked_concepts": [
+        "质量分数",
+        "Fick扩散通量",
+        "整体对流通量",
+        "扩散系数",
+        "传质系数",
+        "ShScLe",
+        "湿球能量平衡"
+      ],
+      "proofs": [
+        "组分质量守恒",
+        "热质类比的方程条件与蒸发潜热账"
+      ],
+      "changes": [
+        "重建定义、直觉、实际推导和条件辨析",
+        "补足热容量率、光谱单位、质量通量等先修",
+        "保留原图、数值例题和练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-26",
+      "title": "综合设计：散热器、保温与可信验证",
+      "checked_concepts": [
+        "结温",
+        "允许热阻",
+        "热点",
+        "最坏工况",
+        "灵敏度",
+        "不确定度",
+        "验证与确认"
+      ],
+      "proofs": [
+        "总热阻约束",
+        "一阶敏感性及单热容阶跃峰温"
+      ],
+      "changes": [
+        "重建定义、直觉、实际推导和条件辨析",
+        "补足热容量率、光谱单位、质量通量等先修",
+        "保留原图、数值例题和练习"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "heat-transfer-27",
+      "title": "多维导热：矩形解析解、乘积解与唯一性",
+      "checked_concepts": [
+        "Laplace方程",
+        "边界值问题",
+        "Fourier正弦系数",
+        "多维乘积解",
+        "唯一性",
+        "纯热流兼容性"
+      ],
+      "proofs": [
+        "分离变量矩形解",
+        "瞬态乘积验算与能量法唯一性证明"
+      ],
+      "changes": [
+        "新增遗漏教学单元",
+        "包括定义、通俗解释、完整推导或经验证据类型、例题和两题解析"
+      ],
+      "remaining_limits": [
+        "边界、物性或相态改变须重新建模，未把理想模型当任意工况完整解"
+      ]
+    },
+    {
+      "id": "heat-transfer-28",
+      "title": "边界层积分法：从方程到可计算近似",
+      "checked_concepts": [
+        "积分守恒",
+        "动量厚度",
+        "热边界层积分",
+        "试探剖面",
+        "模型近似",
+        "误差比较"
+      ],
+      "proofs": [
+        "守恒式积分",
+        "二次剖面闭合及平方根厚度"
+      ],
+      "changes": [
+        "新增遗漏教学单元",
+        "包括定义、通俗解释、完整推导或经验证据类型、例题和两题解析"
+      ],
+      "remaining_limits": [
+        "边界、物性或相态改变须重新建模，未把理想模型当任意工况完整解"
+      ]
+    },
+    {
+      "id": "heat-transfer-29",
+      "title": "扩散的两种边界：等摩尔逆扩散与Stefan流",
+      "checked_concepts": [
+        "摩尔浓度",
+        "摩尔扩散通量",
+        "总摩尔通量",
+        "等摩尔逆扩散",
+        "静止载气",
+        "Stefan流",
+        "潜热耦合"
+      ],
+      "proofs": [
+        "一维组分守恒积分",
+        "线性和对数浓度驱动式"
+      ],
+      "changes": [
+        "新增遗漏教学单元",
+        "包括定义、通俗解释、完整推导或经验证据类型、例题和两题解析"
+      ],
+      "remaining_limits": [
+        "边界、物性或相态改变须重新建模，未把理想模型当任意工况完整解"
+      ]
+    },
+    {
+      "id": "heat-transfer-30",
+      "title": "圆柱横掠、管束与非圆通道的关联式选择",
+      "checked_concepts": [
+        "横掠圆柱",
+        "平均Nusselt数",
+        "管束最窄速度",
+        "非圆水力直径",
+        "受热湿周",
+        "关联范围"
+      ],
+      "proofs": [
+        "由连续性推导管束速度及几何水力直径；经验关联不伪证明"
+      ],
+      "changes": [
+        "新增遗漏教学单元",
+        "包括定义、通俗解释、完整推导或经验证据类型、例题和两题解析"
+      ],
+      "remaining_limits": [
+        "管束相关常数需按实际几何查证；圆柱经验式不声称有解析证明"
+      ]
+    },
+    {
+      "id": "heat-transfer-31",
+      "title": "熔化与凝固：移动界面和Stefan条件",
+      "checked_concepts": [
+        "移动相界",
+        "潜热",
+        "Stefan条件",
+        "Stefan数",
+        "准稳态近似",
+        "一相相似解"
+      ],
+      "proofs": [
+        "界面能量跳跃",
+        "平方根冻结深度及相似解参数方程"
+      ],
+      "changes": [
+        "新增遗漏教学单元",
+        "包括定义、通俗解释、完整推导或经验证据类型、例题和两题解析"
+      ],
+      "remaining_limits": [
+        "边界、物性或相态改变须重新建模，未把理想模型当任意工况完整解"
+      ]
+    }
+  ],
+  "coverage_map": [
+    {
+      "reference_topics": "MIT2.51传热方式、能量方程与边界条件",
+      "lesson_ids": [
+        "heat-transfer-01",
+        "heat-transfer-02"
+      ],
+      "lesson_titles": [
+        "传热三方式与第一张能量流图",
+        "导热方程、初始条件与边界条件"
+      ]
+    },
+    {
+      "reference_topics": "MIT2.51热阻、内热源、肋片及工程保温补充",
+      "lesson_ids": [
+        "heat-transfer-03",
+        "heat-transfer-04",
+        "heat-transfer-05",
+        "heat-transfer-06"
+      ],
+      "lesson_titles": [
+        "平壁热阻、复合墙与接触热阻",
+        "圆柱与球壳：面积变化后的导热",
+        "内热源与变导热系数",
+        "肋片效率与临界保温半径"
+      ]
+    },
+    {
+      "reference_topics": "MIT2.51集总热容、非稳态和半无限体",
+      "lesson_ids": [
+        "heat-transfer-07",
+        "heat-transfer-08",
+        "heat-transfer-09"
+      ],
+      "lesson_titles": [
+        "集总热容：小物体如何随时间冷却",
+        "一维非稳态导热、特征值与图表",
+        "半无限体、热穿透与叠加原理"
+      ]
+    },
+    {
+      "reference_topics": "MIT2.51多维导热与数值模拟",
+      "lesson_ids": [
+        "heat-transfer-10",
+        "heat-transfer-27"
+      ],
+      "lesson_titles": [
+        "数值导热：差分、稳定性与网格检查",
+        "多维导热：矩形解析解、乘积解与唯一性"
+      ]
+    },
+    {
+      "reference_topics": "MIT2.51对流守恒、层流边界层、无量纲与积分法",
+      "lesson_ids": [
+        "heat-transfer-11",
+        "heat-transfer-12",
+        "heat-transfer-13",
+        "heat-transfer-28"
+      ],
+      "lesson_titles": [
+        "对流边界层与质量、动量、能量守恒",
+        "Re、Pr、Nu、Gr、Ra：无量纲数的地图",
+        "外部强迫对流：平板、圆柱与局部系数",
+        "边界层积分法：从方程到可计算近似"
+      ]
+    },
+    {
+      "reference_topics": "MIT2.51内部流、湍流、非圆通道和横掠",
+      "lesson_ids": [
+        "heat-transfer-14",
+        "heat-transfer-15",
+        "heat-transfer-30"
+      ],
+      "lesson_titles": [
+        "内部层流、入口段与主体温度",
+        "内部湍流、摩擦与泵功折中",
+        "圆柱横掠、管束与非圆通道的关联式选择"
+      ]
+    },
+    {
+      "reference_topics": "MIT2.51自然对流与凝结；补沸腾和移动相界",
+      "lesson_ids": [
+        "heat-transfer-16",
+        "heat-transfer-17",
+        "heat-transfer-18",
+        "heat-transfer-31"
+      ],
+      "lesson_titles": [
+        "自然对流、稳定分层与混合对流",
+        "沸腾、临界热流与沸腾曲线",
+        "凝结、液膜与相变换热器",
+        "熔化与凝固：移动界面和Stefan条件"
+      ]
+    },
+    {
+      "reference_topics": "MIT2.51混合物扩散、组分守恒、类比和蒸发",
+      "lesson_ids": [
+        "heat-transfer-25",
+        "heat-transfer-29"
+      ],
+      "lesson_titles": [
+        "传热传质类比与蒸发耦合",
+        "扩散的两种边界：等摩尔逆扩散与Stefan流"
+      ]
+    },
+    {
+      "reference_topics": "MIT2.51黑体、角系数、灰体网络、光谱与太阳辐射",
+      "lesson_ids": [
+        "heat-transfer-19",
+        "heat-transfer-20",
+        "heat-transfer-21",
+        "heat-transfer-22"
+      ],
+      "lesson_titles": [
+        "黑体辐射、光谱与太阳能",
+        "表面辐射性质与 Kirchhoff 定律",
+        "角系数、几何遮挡与黑体交换",
+        "灰体辐射网络与参与介质"
+      ]
+    },
+    {
+      "reference_topics": "MIT2.51先修换热器主题的完整LMTD和NTU推导",
+      "lesson_ids": [
+        "heat-transfer-23",
+        "heat-transfer-24"
+      ],
+      "lesson_titles": [
+        "换热器与对数平均温差法",
+        "效能–NTU 法：出口未知时如何计算"
+      ]
+    },
+    {
+      "reference_topics": "课程方法补充：散热设计、误差、计算验证与模型确认",
+      "lesson_ids": [
+        "heat-transfer-26"
+      ],
+      "lesson_titles": [
+        "综合设计：散热器、保温与可信验证"
+      ]
+    }
+  ],
+  "latest_lecture_review": {
+    "date": "2026-09-27",
+    "method": "实际阅读具体讲义正文及公式页；按问题补正文。全部课文另做元数据、标题、链接和覆盖映射检查；不把本轮专项复核宣称为每个公式的新一轮独立证明。",
+    "deep_review_lesson_ids": [
+      "heat-transfer-17",
+      "heat-transfer-18",
+      "heat-transfer-19",
+      "heat-transfer-20",
+      "heat-transfer-21",
+      "heat-transfer-22"
+    ],
+    "all_lesson_ids_checked_for_coverage": [
+      "heat-transfer-01",
+      "heat-transfer-02",
+      "heat-transfer-03",
+      "heat-transfer-04",
+      "heat-transfer-05",
+      "heat-transfer-06",
+      "heat-transfer-07",
+      "heat-transfer-08",
+      "heat-transfer-09",
+      "heat-transfer-10",
+      "heat-transfer-11",
+      "heat-transfer-12",
+      "heat-transfer-13",
+      "heat-transfer-14",
+      "heat-transfer-15",
+      "heat-transfer-16",
+      "heat-transfer-17",
+      "heat-transfer-18",
+      "heat-transfer-19",
+      "heat-transfer-20",
+      "heat-transfer-21",
+      "heat-transfer-22",
+      "heat-transfer-23",
+      "heat-transfer-24",
+      "heat-transfer-25",
+      "heat-transfer-26",
+      "heat-transfer-27",
+      "heat-transfer-28",
+      "heat-transfer-29",
+      "heat-transfer-30",
+      "heat-transfer-31"
+    ],
+    "verification": "tools/verify_thermal.py：守恒、符号、极限、经验式代入、Planck积分独立数值求积、标题与覆盖检查。经验关联式的数值复核不构成实验有效性验证。",
+    "access_limits": "MIT 2.005历史入口无法读取，采用MIT 5.60/16.050及IIT/NPTEL的实际讲义；NPTEL部分公式为图片，相关公式交叉核对大学公开实验论文。",
+    "verification_results": {
+      "thermal_courses_combined": {
+        "lessons": 60,
+        "audit_records": 60,
+        "structural_and_numerical_checks_passed": 335,
+        "body_formulas_katex_passed": 1801
+      },
+      "interpretation": "数学排版、数值代入与守恒检查已通过；不能据此声称所有经验模型在所有工况有效。"
+    }
+  }
+}

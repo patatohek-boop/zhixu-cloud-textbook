@@ -4,7 +4,7 @@
   "enTitle": "Machine Learning",
   "icon": "◇",
   "color": "#5968a7",
-  "description": "从问题、数据和概率统计出发，理解监督学习、无监督学习与神经网络，建立可靠评估和部署意识。覆盖本科核心；现代生成模型、因果与强化学习等为有边界的高级导读。",
+  "description": "先从概率、统计与模型契约建立基础，再逐步推导监督、无监督与深度学习核心结论。新增似然与后验、感知机、GLM、有限样本泛化界及概率预测；高级专题逐项标明已证结论与后续范围。",
   "prerequisites": [
     "Python 基础与 NumPy 数组",
     "线性代数：向量、矩阵与特征值",
@@ -35,6 +35,11 @@
       "title": "Deep Learning 在线教材",
       "url": "https://www.deeplearningbook.org/",
       "scope": "神经网络与现代表示学习的进一步阅读"
+    },
+    {
+      "title": "Stanford CS229 官方大纲与讲义",
+      "url": "https://cs229.stanford.edu/syllabus-summer2020.html",
+      "scope": "补齐概率估计、感知机、GLM、学习理论与贝叶斯预测的结构映射；推导和例题为原创"
     }
   ],
   "lessons": [
@@ -42,14 +47,19 @@
     "machine-learning-02.md",
     "machine-learning-03.md",
     "machine-learning-04.md",
+    "machine-learning-31.md",
     "machine-learning-05.md",
     "machine-learning-06.md",
+    "machine-learning-34.md",
     "machine-learning-07.md",
     "machine-learning-08.md",
     "machine-learning-09.md",
     "machine-learning-10.md",
+    "machine-learning-32.md",
+    "machine-learning-33.md",
     "machine-learning-11.md",
     "machine-learning-12.md",
+    "machine-learning-35.md",
     "machine-learning-13.md",
     "machine-learning-14.md",
     "machine-learning-15.md",

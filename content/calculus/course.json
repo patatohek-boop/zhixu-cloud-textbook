@@ -19,28 +19,65 @@
       "title": "MIT OCW 18.02SC · Multivariable Calculus",
       "url": "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/pages/syllabus/",
       "scope": "用于核对多元微分、重积分与向量微积分核心主题。"
+    },
+    {
+      "title": "MIT OCW · 双曲函数定义与求导讲义",
+      "url": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/ce3200a4eb0a928bf282ed6bb833ae27_MIT18_01SCF10_Ses20a.pdf",
+      "scope": "18.01SC Session 20，正文第1页：指数定义、求导、双曲恒等式；用于复核calculus-29。"
+    },
+    {
+      "title": "MIT OCW · 三角幂积分解析",
+      "url": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/c05c05172bf0f7543b3c2daeaf308521_MIT18_01SCF10_ex71sol.pdf",
+      "scope": "18.01SC Session 71，正文第1页：正切幂的恒等式降幂和换元；据此核对积分技巧细项。"
+    },
+    {
+      "title": "MIT OCW · 三角替换练习解析",
+      "url": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/9f237b024ea01e7c287fd426785d87f7_MIT18_01SCF10_ex72sol.pdf",
+      "scope": "18.01SC Session 72，正文第1-2页：根式替换、代回及与直接换元比较。"
+    },
+    {
+      "title": "MIT OCW · 配方积分练习解析",
+      "url": "https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/526b157031c0316556de629bf69c099d_MIT18_01SCF10_ex73sol.pdf",
+      "scope": "18.01SC Session 73，正文第1页：平移配方后进行三角替换。"
+    },
+    {
+      "title": "MIT OCW · 转动惯量课程讲义",
+      "url": "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/a007cb2572c17b9bcfdcfae148902da4_MIT18_02SC_notes_26.pdf",
+      "scope": "18.02SC Session 52，正文第1-2页：到轴的距离平方、非均匀薄片密度、极惯量。"
+    },
+    {
+      "title": "MIT OCW · 多重积分换元讲义",
+      "url": "https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/53cab862607d9ad1abdab1a10013be9e_MIT18_02SC_MNotes_cv1.pdf",
+      "scope": "18.02SC Session 53，正文第1-3页：函数、区域、微元三项同步换元、Jacobian绝对值与逆向偏导。本文小盒体积误差及换参不变性证明另作独立补全。"
     }
   ],
   "lessons": [
     "calculus-01.md",
+    "calculus-25.md",
     "calculus-02.md",
     "calculus-03.md",
     "calculus-04.md",
     "calculus-05.md",
+    "calculus-28.md",
     "calculus-06.md",
     "calculus-07.md",
+    "calculus-29.md",
     "calculus-08.md",
     "calculus-09.md",
     "calculus-10.md",
+    "calculus-30.md",
     "calculus-11.md",
+    "calculus-26.md",
     "calculus-12.md",
     "calculus-13.md",
     "calculus-14.md",
     "calculus-15.md",
+    "calculus-27.md",
     "calculus-16.md",
     "calculus-17.md",
     "calculus-18.md",
     "calculus-19.md",
+    "calculus-31.md",
     "calculus-20.md",
     "calculus-21.md",
     "calculus-22.md",

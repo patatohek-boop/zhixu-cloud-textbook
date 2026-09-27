@@ -1,5 +1,6 @@
 """Validate Markdown lessons, generate a self-contained static data bundle. Python >=3.10."""
 import json, pathlib, re, sys
+from urllib.parse import urlparse
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 ORDER=['calculus','linear-algebra','thermodynamics','heat-transfer','fluid-mechanics','python','machine-learning']
 def build():
@@ -27,9 +28,49 @@ def build():
             assert q['explanation'].strip(), f'Missing quiz explanation: {filename}'
             chapters.append(lesson); count+=1; char_count+=len(re.findall(r'[\u4e00-\u9fff]',content))
         course['chapters']=chapters; courses.append(course)
+    version=json.loads((ROOT/'version.json').read_text(encoding='utf-8'))
+    baseline=json.loads((ROOT/'reviews/baseline-1.0.json').read_text(encoding='utf-8'))
+    assert set(baseline['lesson_ids']) <= ids, 'Existing lesson IDs must be preserved for learning records'
+    reviews=[]
+    lesson_course={l['id']:c['id'] for c in courses for l in c['chapters']}
+    for course in courses:
+        course_id=course['id']
+        audit=json.loads((ROOT/'reviews'/version['review_directory']/(course_id+'.json')).read_text(encoding='utf-8'))
+        assert audit['course_id']==course_id
+        records={r['id']:r for r in audit['records']}
+        expected={l['id'] for l in course['chapters']}
+        assert len(records)==len(audit['records']) and set(records)==expected, f'{course_id}: audit must cover every lesson exactly once'
+        for topic in audit['added_topics']:
+            assert isinstance(topic,str) and topic.strip() or isinstance(topic,dict) and topic.get('id') in expected and all(isinstance(topic.get(k),str) and topic[k].strip() for k in ('title','reason')), f'{course_id}: invalid added topic'
+        for source in audit['sources']:
+            parsed=urlparse(source['url'])
+            assert parsed.scheme=='https' and parsed.hostname and not parsed.username and not parsed.password, 'Audit source must be HTTPS without credentials'
+        covered=set()
+        for row in audit['coverage_map']:
+            assert row['reference_topics'] and row['lesson_ids'], f'{course_id}: empty coverage mapping'
+            assert set(row['lesson_ids']) <= expected, f'{course_id}: coverage mapping links to unknown lessons'
+            covered.update(row['lesson_ids'])
+        assert covered==expected, f'{course_id}: unmapped lessons: {expected-covered}'
+        for lesson in course['chapters']:
+            record=records[lesson['id']]
+            assert record['title']==lesson['title'], f'{lesson["id"]}: audit title is stale'
+            for field in ('checked_concepts','proofs','changes','remaining_limits'):
+                assert isinstance(record[field],list) and all(isinstance(s,str) and s.strip() for s in record[field]), f'{lesson["id"]}: invalid {field}'
+            assert record['checked_concepts'] and record['changes'], f'{lesson["id"]}: audit lacks substantive details'
+            for prerequisite in lesson['prerequisites']:
+                if re.fullmatch(r'[a-z]+(?:-[a-z]+)*-\d+',prerequisite):
+                    assert prerequisite in ids, f'{lesson["id"]}: unknown prerequisite {prerequisite}'
+            for linked_course, linked_lesson in re.findall(r'\]\(#/course/([a-z-]+)/([a-z-]+-\d+)\)',lesson['content']):
+                assert lesson_course.get(linked_lesson)==linked_course, f'{lesson["id"]}: broken lesson link {linked_lesson}'
+        audit['records']=[records[l['id']] for l in course['chapters']]
+        reviews.append(audit)
+    version.update(lessons=count,reviewed=sum(len(a['records']) for a in reviews),original_lessons=len(baseline['lesson_ids']),added_lessons=count-len(baseline['lesson_ids']))
     target=ROOT/'site/assets/data.js'; target.parent.mkdir(parents=True,exist_ok=True)
-    target.write_text('/* Generated from content/ by tools/build.py. Do not edit. */\nwindow.COURSES = '+json.dumps(courses,ensure_ascii=False,separators=(',',':'))+';\n',encoding='utf-8')
-    stats={'courses':len(courses),'lessons':count,'chinese_characters':char_count,'course_counts':{c['id']:len(c['chapters']) for c in courses}}
+    bundle='/* Generated from content/ and reviews/ by tools/build.py. Do not edit. */\n'
+    for name,value in [('COURSES',courses),('TEXTBOOK_VERSION',version),('CONTENT_REVIEW',reviews)]:
+        bundle+='window.'+name+' = '+json.dumps(value,ensure_ascii=False,separators=(',',':'))+';\n'
+    target.write_text(bundle,encoding='utf-8')
+    stats={'version':version['version'],'courses':len(courses),'lessons':count,'reviewed_lessons':version['reviewed'],'added_lessons':version['added_lessons'],'chinese_characters':char_count,'course_counts':{c['id']:len(c['chapters']) for c in courses}}
     (ROOT/'site/assets/content-stats.json').write_text(json.dumps(stats,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(stats,ensure_ascii=True,indent=2))
 if __name__=='__main__': build()

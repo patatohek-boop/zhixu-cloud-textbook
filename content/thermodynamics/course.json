@@ -4,7 +4,7 @@
   "enTitle": "Engineering Thermodynamics",
   "icon": "◒",
   "color": "#d97757",
-  "description": "从系统与性质出发，建立能量、熵与火用账本，分析动力循环、制冷热泵、混合物和反应。覆盖本科核心，明确理想模型与高级专题的边界。",
+  "description": "先给严格定义，再用直觉解释和逐步推导建立能量、熵、火用、循环、混合物与平衡。新增真实气体、喷管推进和统计熵；逐章审校明确条件与进阶边界。",
   "prerequisites": [
     "基础代数、对数与单位换算",
     "微积分中的导数和积分"
@@ -24,6 +24,21 @@
       "title": "MIT Thermodynamics and Propulsion — online notes",
       "url": "https://web.mit.edu/16.unified/www/FALL/thermodynamics/notes/notes.html",
       "scope": "系统与控制体、第一和第二定律、循环的概念与符号交叉核查。"
+    },
+    {
+      "title": "MIT 5.60 Lecture 9 — Entropy",
+      "url": "https://ocw.mit.edu/courses/5-60-thermodynamics-kinetics-spring-2008/04d930432a17469f5684ef7d999e190d_5_60_lecture9.pdf",
+      "scope": "实际阅读第1—3页：Carnot反证、可逆循环积分、熵状态函数和不可逆不等式；用于核对逻辑依赖，不移植原题。"
+    },
+    {
+      "title": "MIT 5.60 Lecture 14 — Multicomponent Systems",
+      "url": "https://ocw.mit.edu/courses/5-60-thermodynamics-kinetics-spring-2008/e763a06aa3b5de09cd6bfea6280f219c_5_60_lecture14.pdf",
+      "scope": "实际阅读第2—4页：同组分化学势平衡、偏摩尔量、由广延性得到Euler关系。"
+    },
+    {
+      "title": "MIT 16.050 Part 1B — The Second Law",
+      "url": "https://ocw.mit.edu/courses/16-050-thermal-energy-fall-2002/resources/04_part1b/",
+      "scope": "实读第二律公理表述、性质恒等式、理想气体熵差与可逆参照路径；记录时以资源页为稳定入口。"
     }
   ],
   "lessons": [
@@ -52,6 +67,9 @@
     "thermodynamics-23.md",
     "thermodynamics-24.md",
     "thermodynamics-25.md",
-    "thermodynamics-26.md"
+    "thermodynamics-26.md",
+    "thermodynamics-27.md",
+    "thermodynamics-28.md",
+    "thermodynamics-29.md"
   ]
 }

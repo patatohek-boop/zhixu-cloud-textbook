@@ -34,6 +34,8 @@ jobs:
           python tools/build.py
           node tools/validate.cjs
           node tools/test-learning-state.cjs
+          python tools/verify_fluid.py
+          python tools/verify_thermal.py
           python tools/security_check.py
       - name: Prepare Android platform
         run: |

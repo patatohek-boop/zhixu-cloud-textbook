@@ -27,6 +27,8 @@ jobs:
       - run: python tools/build.py
       - run: node tools/validate.cjs
       - run: node tools/test-learning-state.cjs
+      - run: python tools/verify_fluid.py
+      - run: python tools/verify_thermal.py
       - run: python tools/security_check.py
       - uses: actions/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b # v4
         with:

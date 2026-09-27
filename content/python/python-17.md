@@ -3,7 +3,7 @@
   "id": "python-17",
   "title": "数据类、类型注解与接口",
   "group": "04 · 抽象与工程基础",
-  "minutes": 20,
+  "minutes": 30,
   "level": "进阶",
   "tags": [
     "dataclass",
@@ -12,7 +12,8 @@
   ],
   "objectives": [
     "使用 dataclass",
-    "理解类型提示不自动验证"
+    "理解类型提示不自动验证",
+    "定义类型注解、静态检查与运行时验证"
   ],
   "prerequisites": [
     "python-16"
@@ -29,9 +30,31 @@
     "answer": 1,
     "explanation": "注解不是完整运行时验证，也不能代替测试和科学假设检查。"
   },
-  "lab": null
+  "lab": null,
+  "revision": "2026-09 · 定义、条件与论证逐章修订"
 }
 ---
+
+## 注解描述预期，不自动改变运行语义
+**类型注解**在接口中标记预期的数据类型；**静态检查**在不完整运行程序的情况下检查类型关系；**运行时校验**实际检查某次输入。三者用途不同。`def f(x: int) -> int` 本身不会插入拒绝字符串的检查，也不会证明整数代表摄氏度还是开尔文。
+
+`dataclass` 根据声明字段生成初始化、表示和比较等方法。`frozen=True` 通常阻止字段重新绑定，**不递归冻结字段指向的对象**。通俗地说，标签粘住了，不代表标签指向的盒子里面不能变。
+
+## 用一个反例划清冻结边界
+```python
+from dataclasses import dataclass, field
+
+@dataclass(frozen=True)
+class Record:
+    values: list[int] = field(default_factory=list)
+
+a, b = Record(), Record()
+a.values.append(3)
+assert a.values == [3] and b.values == []
+```
+这里 a 的字段绑定未变，只修改了它指向的列表，所以仍可 append。`default_factory=list` 在每次构造时调用工厂创建新列表；如果想表达不可变的整数序列，可以改用 `tuple[int, ...]`，并在边界检查元素和数值范围。
+
+`list[Measurement]` 限制的是接口意图，不能保证每条读数都满足物理条件。下文 `__post_init__` 添加了名称和有限性校验，但若契约要求名称一定是非空字符串，还应使用明确类型检查；不能把“真值非空”当作“确实是字符串”。
 
 ## 给数据一份明确说明
 当对象主要用来保存一组有名字的字段时，dataclass 可以减少初始化和打印等重复代码。类型注解说明接口意图，让编辑器和静态检查工具提前发现部分错误。它像容器上的标签，告诉读者预期装什么；默认情况下，它不会自动拦住所有不符合标签的物品。

@@ -67,4 +67,16 @@ check('Prototype property names and unknown routes are never mounted as labs',()
  for(const id of ['__proto__','constructor','toString','unknown'])assert.doesNotMatch(context.labsPage(id),/data-lab=/);
  assert.match(context.labsPage('derivative'),/data-lab="derivative"/);
 });
+check('The revision preserves notes and progress for every original lesson',()=>{
+ const context={window:{}};
+ vm.runInNewContext(fs.readFileSync(path.join(__dirname,'../site/assets/data.js'),'utf8'),context);
+ const currentLessons=Array.from(context.window.COURSES).flatMap(c=>Array.from(c.chapters));
+ const baseline=JSON.parse(fs.readFileSync(path.join(__dirname,'../reviews/baseline-1.0.json'),'utf8')).lesson_ids;
+ assert.equal(baseline.length,182);
+ const oldNotes=Object.fromEntries(baseline.map(id=>[id,'1.0 学习笔记 '+id]));
+ const result=stateApi.normalize({completed:baseline,bookmarks:baseline,notes:oldNotes,last:baseline[0]},currentLessons);
+ assert.deepEqual(result.completed,baseline);assert.deepEqual(result.bookmarks,baseline);
+ assert.equal(result.last,baseline[0]);assert.equal(Object.keys(result.notes).length,182);
+ for(const id of baseline)assert.equal(result.notes[id],oldNotes[id]);
+});
 console.log(`Validated ${tests} learning-state and routing security boundaries.`);

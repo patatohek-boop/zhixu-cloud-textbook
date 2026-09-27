@@ -26,7 +26,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class TextbookSmokeTest extends Instrumentation {
     private static final String RECORD_KEY = "zhixu-learning-v1";
     private static final String LESSON = "calculus-03";
-    private static final int TOTAL = 6;
+    private static final int TOTAL = 7;
+    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.1.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
     private Activity reader;
     private WebView web;
     private int number;
@@ -44,13 +45,14 @@ public final class TextbookSmokeTest extends Instrumentation {
         super.onStart();
         try {
             launchReader();
-            waitUntil("window.ZHIXU && window.ZHIXU.all.length === 182", "182 lessons did not become ready");
+            waitUntil(READY, "Revised textbook did not become ready");
             Object original = evaluate("localStorage.getItem('" + RECORD_KEY + "')");
             originalRecord = original instanceof String ? (String) original : null;
             capturedRecord = true;
             runCase("noDangerousPermissions", this::permissions);
             runCase("localOriginOnly", this::origins);
             runCase("readerAndFormulas", this::formulas);
+            runCase("revisionAndNavigation", this::revision);
             runCase("invalidRouteIsSafe", this::invalidRoute);
             runCase("backupRoundTripAndInjection", this::backups);
             runCase("notesSurviveRelaunch", this::relaunch);
@@ -153,6 +155,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     private void permissions() throws Exception {
         PackageInfo info = getTargetContext().getPackageManager().getPackageInfo(
             getTargetContext().getPackageName(), PackageManager.GET_PERMISSIONS);
+        require("1.1.0".equals(info.versionName) && info.versionCode == 2, "App version does not match the textbook revision");
         String[] requested = info.requestedPermissions == null ? new String[0] : info.requestedPermissions;
         for (String dangerous : new String[]{"android.permission.INTERNET", "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA", "android.permission.RECORD_AUDIO"})
@@ -213,6 +216,16 @@ public final class TextbookSmokeTest extends Instrumentation {
         waitUntil("document.querySelector('#note-text')", "Could not return to lesson");
     }
 
+    private void revision() throws Exception {
+        require(Boolean.TRUE.equals(evaluate("window.TEXTBOOK_VERSION.reviewed===window.ZHIXU.all.length && window.CONTENT_REVIEW.length===7")), "Incomplete chapter audit payload");
+        require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('#mobile-toc-list [data-scroll]').length>3 && !!document.querySelector('.prereq a')")), "Mobile reading navigation missing");
+        evaluate("location.hash='#/review/fluid-mechanics/fluid-mechanics-30'");
+        waitUntil("document.querySelector('#review-fluid-mechanics-30[open]')", "Chapter revision deep link failed");
+        require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.review-record').length===window.COURSES.filter(function(c){return c.id==='fluid-mechanics'})[0].chapters.length && document.querySelectorAll('.review-map a').length>30")), "Coverage map is incomplete");
+        evaluate("location.hash='#/course/calculus/calculus-03'");
+        waitUntil("document.querySelector('#note-text')", "Could not return from revision to lesson");
+    }
+
     private void backups() throws Exception {
         String raw = (String) evaluate("window.ZHIXU.exportBackup()");
         JSONObject backup = new JSONObject(raw);
@@ -243,7 +256,7 @@ public final class TextbookSmokeTest extends Instrumentation {
         runOnMainSync(() -> reader.finish());
         waitForIdleSync();
         launchReader();
-        waitUntil("window.ZHIXU && window.ZHIXU.all.length===182", "Reader failed to relaunch");
+        waitUntil(READY, "Reader failed to relaunch");
         JSONObject backup = new JSONObject((String) evaluate("window.ZHIXU.exportBackup()"));
         require("SMOKE_PERSISTED_NOTE".equals(backup.getJSONObject("notes").getString(LESSON)), "Saved note lost on relaunch");
     }

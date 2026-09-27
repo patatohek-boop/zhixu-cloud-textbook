@@ -1,14 +1,17 @@
 {
+  "version": "1.1.0",
   "courses": 7,
-  "lessons": 182,
-  "chinese_characters": 172937,
+  "lessons": 217,
+  "reviewed_lessons": 217,
+  "added_lessons": 35,
+  "chinese_characters": 241251,
   "course_counts": {
-    "calculus": 24,
-    "linear-algebra": 22,
-    "thermodynamics": 26,
-    "heat-transfer": 26,
-    "fluid-mechanics": 28,
-    "python": 26,
-    "machine-learning": 30
+    "calculus": 31,
+    "linear-algebra": 24,
+    "thermodynamics": 29,
+    "heat-transfer": 31,
+    "fluid-mechanics": 38,
+    "python": 29,
+    "machine-learning": 35
   }
 }

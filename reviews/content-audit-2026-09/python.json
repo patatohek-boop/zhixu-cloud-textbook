@@ -1,0 +1,1048 @@
+{
+  "course_id": "python",
+  "sources": [
+    {
+      "title": "Python 官方教程与语言参考",
+      "url": "https://docs.python.org/3/tutorial/",
+      "coverage": "表达式、控制流、函数、容器、模块、输入输出、异常、类、迭代、标准库、环境与浮点；逐章原创例题与语义推演"
+    },
+    {
+      "title": "Python 语言参考",
+      "url": "https://docs.python.org/3/reference/",
+      "coverage": "对象、名字绑定、表达式求值和复合语句的语义边界"
+    },
+    {
+      "title": "MIT 6.0001 syllabus",
+      "url": "https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/pages/syllabus/",
+      "coverage": "基础计算、分支循环、函数、容器、递归、调试、面向对象、效率、搜索排序"
+    },
+    {
+      "title": "NumPy 广播",
+      "url": "https://numpy.org/doc/stable/user/basics.broadcasting.html",
+      "coverage": "第20节数组广播条件与形状反例"
+    },
+    {
+      "title": "pandas Copy-on-Write",
+      "url": "https://pandas.pydata.org/docs/user_guide/copy_on_write.html",
+      "coverage": "第21节 pandas 3.0 写入行为"
+    },
+    {
+      "title": "Python 执行模型与复合语句",
+      "url": "https://docs.python.org/3/reference/executionmodel.html",
+      "coverage": "核对闭包名字绑定、作用域、异常传播和解释器语义"
+    },
+    {
+      "title": "Python 官方教程：特殊参数与实参展开",
+      "url": "https://docs.python.org/3/tutorial/controlflow.html",
+      "coverage": "已读4.9.3—4.9.5正文，核对 Python07 的绑定语义和非法调用",
+      "accessed": "2026-09-27"
+    },
+    {
+      "title": "Python 官方教程：异常",
+      "url": "https://docs.python.org/3/tutorial/errors.html",
+      "coverage": "已读8.3—8.7正文，核对处理器、else、异常链及finally边界",
+      "accessed": "2026-09-27"
+    },
+    {
+      "title": "Python 官方教程：类与继承",
+      "url": "https://docs.python.org/3/tutorial/classes.html",
+      "coverage": "已读9.3—9.5正文，核对实例状态、继承和方法查找",
+      "accessed": "2026-09-27"
+    }
+  ],
+  "records": [
+    {
+      "id": "python-01",
+      "title": "第一段程序：环境、交互式与脚本",
+      "checked_concepts": [
+        "区分源代码、解释器、进程与状态",
+        "表达式、语句与顺序执行",
+        "REPL 与脚本"
+      ],
+      "proofs": [
+        "逐行状态跟踪，不将语言规则称为数学定理"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-02",
+      "title": "变量、对象与基本类型",
+      "checked_concepts": [
+        "定义对象身份、类型、值和可变性",
+        "名字绑定与别名",
+        "浅复制与身份比较"
+      ],
+      "proofs": [
+        "共享引用与重新绑定的状态推演"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-03",
+      "title": "数值计算、浮点误差与单位",
+      "checked_concepts": [
+        "定义近似值的绝对误差和相对误差",
+        "二进制表示条件",
+        "量纲和容差"
+      ],
+      "proofs": [
+        "有限二进制小数的分母条件",
+        "圆面积一阶误差传播"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-04",
+      "title": "字符串、编码与格式化",
+      "checked_concepts": [
+        "区分码点、字节与显示字符",
+        "切片左右边界",
+        "编码解码契约"
+      ],
+      "proofs": [
+        "UTF-8 无损往返条件与切片索引跟踪"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-05",
+      "title": "条件分支与逻辑判断",
+      "checked_concepts": [
+        "定义条件真假与分支选择顺序",
+        "and/or 短路语义",
+        "区间覆盖与缺失值"
+      ],
+      "proofs": [
+        "互斥分支覆盖证明与短路执行跟踪"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-06",
+      "title": "循环、不变量与终止",
+      "checked_concepts": [
+        "定义循环不变量与递减量",
+        "初始化保持退出三步证明",
+        "浮点累计与数学求和区分"
+      ],
+      "proofs": [
+        "整数累计循环的部分正确性与终止性证明"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-07",
+      "title": "函数、参数与作用域",
+      "checked_concepts": [
+        "定义形参、实参、返回值和作用域",
+        "参数绑定与副作用契约",
+        "默认实参求值时机",
+        "新增函数签名、/ 与 * 限制、实参收集和展开以及绑定失败反例"
+      ],
+      "proofs": [
+        "可变默认参数的两次调用推演"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id",
+        "新增函数签名、/ 与 * 限制、实参收集和展开以及绑定失败反例"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-08",
+      "title": "列表、元组与序列",
+      "checked_concepts": [
+        "定义序列及可变性层级",
+        "排序稳定性和返回值",
+        "嵌套引用结构"
+      ],
+      "proofs": [
+        "重复引用导致联动修改的构造证明"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-09",
+      "title": "字典、集合与数据建模",
+      "checked_concepts": [
+        "定义映射、集合、可哈希性",
+        "相等对象与哈希一致性",
+        "频数不变量与粒度"
+      ],
+      "proofs": [
+        "字典计数算法的不变量证明"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-10",
+      "title": "推导式、迭代器与生成器",
+      "checked_concepts": [
+        "定义可迭代对象、迭代器和生成器协议",
+        "yield 与函数调用时机",
+        "惰性计算的状态和资源边界"
+      ],
+      "proofs": [
+        "生成器前缀和不变量及耗尽过程"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-28",
+      "title": "函数对象、闭包与装饰器",
+      "checked_concepts": [
+        "函数作为对象",
+        "闭包与名字查找时机",
+        "装饰器与参数转发"
+      ],
+      "proofs": [
+        "闭包共享绑定的执行推演",
+        "装饰器等价赋值与副作用计数"
+      ],
+      "changes": [
+        "针对官方课程映射发现的缺项新增完整学习单元",
+        "包含定义、具体实现、一般性论证、例题与解析",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-11",
+      "title": "模块、包与虚拟环境",
+      "checked_concepts": [
+        "定义模块、包和导入初始化",
+        "解释器环境与依赖位置",
+        "入口保护的控制流"
+      ],
+      "proofs": [
+        "直接执行与导入两条路径的逐步比较"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-12",
+      "title": "文件、路径与持久化",
+      "checked_concepts": [
+        "定义路径、文件句柄与资源生命周期",
+        "文本模式和二进制模式",
+        "with 的退出语义"
+      ],
+      "proofs": [
+        "正常返回与异常退出时的清理控制流"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-13",
+      "title": "CSV、JSON 与数据交换",
+      "checked_concepts": [
+        "定义序列化、反序列化和模式",
+        "CSV 字段与物理行区别",
+        "JSON 往返的类型前提"
+      ],
+      "proofs": [
+        "JSON 往返不恒等的反例与格式校验推演"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-14",
+      "title": "异常处理与输入契约",
+      "checked_concepts": [
+        "定义异常传播与处理器匹配",
+        "前置条件和恢复策略",
+        "finally 不覆盖返回值",
+        "修正 try-else 在 return/break/continue 提前离开时不执行",
+        "限定 finally 保证于普通控制流，补处理器顺序、异常层级和重新抛出"
+      ],
+      "proofs": [
+        "try/except/else/finally 路径逐项推演"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id",
+        "修正 try-else 在 return/break/continue 提前离开时不执行",
+        "限定 finally 保证于普通控制流，补处理器顺序、异常层级和重新抛出"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-15",
+      "title": "测试、调试与最小复现",
+      "checked_concepts": [
+        "区分测试实例、规格和一般性证明",
+        "测试输入的等价类与边界",
+        "反例定位"
+      ],
+      "proofs": [
+        "平均值区间性质的证明及测试不足反例"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-16",
+      "title": "类、对象与组合",
+      "checked_concepts": [
+        "定义类、实例、属性解析与方法绑定",
+        "实例不变量与副作用",
+        "继承可替换性与组合",
+        "新增可独立运行的继承、方法重写、super 与 isinstance 例题；明确单继承教学边界"
+      ],
+      "proofs": [
+        "每实例独立容器的构造推演与不变量保持"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id",
+        "新增可独立运行的继承、方法重写、super 与 isinstance 例题；明确单继承教学边界"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-17",
+      "title": "数据类、类型注解与接口",
+      "checked_concepts": [
+        "定义类型注解、静态检查与运行时验证",
+        "dataclass 自动生成方法",
+        "浅冻结和默认工厂"
+      ],
+      "proofs": [
+        "frozen 浅层限制的反例与默认工厂对象隔离"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-29",
+      "title": "对象协议、上下文管理与结构匹配",
+      "checked_concepts": [
+        "协议与特殊方法",
+        "上下文管理器的异常语义",
+        "结构匹配和模式绑定"
+      ],
+      "proofs": [
+        "迭代协议终止推演",
+        "上下文退出路径与异常抑制分析"
+      ],
+      "changes": [
+        "针对官方课程映射发现的缺项新增完整学习单元",
+        "包含定义、具体实现、一般性论证、例题与解析",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "描述符、元类和完整异步上下文协议保留为高级专题"
+      ]
+    },
+    {
+      "id": "python-18",
+      "title": "标准库工具箱与可靠随机性",
+      "checked_concepts": [
+        "定义伪随机状态、种子与抽样机制",
+        "样本标准差分母",
+        "时区与持续时间"
+      ],
+      "proofs": [
+        "同状态同调用的确定性推演",
+        "有放回和无放回样本空间比较"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-19",
+      "title": "算法、递归与计算复杂度",
+      "checked_concepts": [
+        "严格定义大 O 与输入规模",
+        "二分查找的下界不变量",
+        "递归前置条件与终止"
+      ],
+      "proofs": [
+        "二分首次位置的完整正确性证明",
+        "对数复杂度的区间缩减推导"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-27",
+      "title": "递归与分治：阶乘、插入排序和归并排序",
+      "checked_concepts": [
+        "递归与数学归纳法",
+        "排序正确性与稳定性",
+        "分治和复杂度递推"
+      ],
+      "proofs": [
+        "阶乘递归正确性和终止证明",
+        "插入排序不变量证明",
+        "归并排序归纳证明及 O(n log n) 推导"
+      ],
+      "changes": [
+        "针对官方课程映射发现的缺项新增完整学习单元",
+        "包含定义、具体实现、一般性论证、例题与解析",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-20",
+      "title": "NumPy 数组、形状与广播",
+      "checked_concepts": [
+        "定义 ndarray 的 shape、dtype、axis",
+        "广播索引语义",
+        "逐元素乘法和矩阵乘法"
+      ],
+      "proofs": [
+        "广播结果按索引推导与错误维度反例"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-21",
+      "title": "pandas 表格、缺失与连接",
+      "checked_concepts": [
+        "定义数据粒度、键、连接与聚合",
+        "缺失值不等于零",
+        "标签对齐与复制写入"
+      ],
+      "proofs": [
+        "连接行数乘法计数与加权均值恒等式"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-22",
+      "title": "Matplotlib 科学绘图",
+      "checked_concepts": [
+        "定义图形视觉编码、Figure 与 Axes",
+        "模型曲线与观测数据",
+        "误差条与对数坐标"
+      ],
+      "proofs": [
+        "冷却曲线端点、极限、单调性和凸性推导"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-23",
+      "title": "数值方法：求根、积分与微分方程",
+      "checked_concepts": [
+        "定义残差、解误差与截断误差",
+        "二分法前提和界",
+        "梯形法误差与欧拉稳定性"
+      ],
+      "proofs": [
+        "二分误差界归纳证明",
+        "复合梯形法二阶误差界",
+        "欧拉衰减条件推导"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "二分求根新增端点/容差/有限值检查、符号比较与浮点停滞提示",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-24",
+      "title": "性能、并发与异步导读",
+      "checked_concepts": [
+        "定义并发、并行和协作调度",
+        "竞态与不可分割操作",
+        "加速比的串行部分限制"
+      ],
+      "proofs": [
+        "Amdahl 上界推导",
+        "丢失更新的交错执行反例"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "并发为原理导读；未提供生产级任务取消、死锁与分布式一致性完整课程"
+      ]
+    },
+    {
+      "id": "python-25",
+      "title": "完整项目：实验记录分析器",
+      "checked_concepts": [
+        "定义记录契约与失败分区",
+        "分组不变量和计数守恒",
+        "CSV 物理行定位"
+      ],
+      "proofs": [
+        "每个已解析记录恰好进入有效组或错误列表的证明"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": []
+    },
+    {
+      "id": "python-26",
+      "title": "复现、版本管理与持续学习",
+      "checked_concepts": [
+        "定义版本快照与复现清单",
+        "哈希的证据边界",
+        "可重复运行与科学重复实验"
+      ],
+      "proofs": [
+        "相同输入摘要不能推出算法正确的反例"
+      ],
+      "changes": [
+        "前置本章专用的严格定义与输入条件",
+        "增加可逐步复核的语义推演、证明或反例",
+        "保留并核对原例题、自测与插图",
+        "按最终目录复核先修顺序与首次术语；已保留旧章节 id"
+      ],
+      "remaining_limits": [
+        "描述符、元类、C API、数据库、网络服务与分布式系统仅列进阶方向"
+      ]
+    }
+  ],
+  "added_topics": [
+    {
+      "id": "python-27",
+      "title": "递归与分治：阶乘、插入排序和归并排序",
+      "reason": "对照 MIT 6.0001 与 Python 官方教程识别缺项并补入适当先修位置"
+    },
+    {
+      "id": "python-28",
+      "title": "函数对象、闭包与装饰器",
+      "reason": "对照 MIT 6.0001 与 Python 官方教程识别缺项并补入适当先修位置"
+    },
+    {
+      "id": "python-29",
+      "title": "对象协议、上下文管理与结构匹配",
+      "reason": "对照 MIT 6.0001 与 Python 官方教程识别缺项并补入适当先修位置"
+    }
+  ],
+  "scope_limits": [
+    "课程定位为编程与科学计算核心；并发为导读，不宣称完整覆盖 Python 生态或系统工程。",
+    "特殊参数、单继承与super已有可运行例题；描述符、完整多继承MRO、元类、C扩展和高级异步不作为已完整覆盖内容。"
+  ],
+  "validation": {
+    "python_version": "3.10.10",
+    "numpy": "1.26.4",
+    "pandas": "2.3.3",
+    "matplotlib": "3.9.2",
+    "scikit_learn": "1.7.2",
+    "executable_blocks": [
+      {
+        "lesson_id": "python-01",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-02",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-03",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-04",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-04",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-05",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-05",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-06",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-06",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-07",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-07",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-07",
+        "block": 3,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-08",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-08",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-09",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-10",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-28",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-28",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-28",
+        "block": 3,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-11",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-12",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-12",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-13",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-13",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-14",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-14",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-15",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-16",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-16",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-17",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-17",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-29",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-29",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-29",
+        "block": 3,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-18",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-18",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-19",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-27",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-27",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-27",
+        "block": 3,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-20",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-20",
+        "block": 2,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-21",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-22",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-23",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-24",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-25",
+        "block": 1,
+        "passed": true
+      },
+      {
+        "lesson_id": "python-26",
+        "block": 1,
+        "passed": true
+      }
+    ],
+    "notes": [
+      "每个完整 Python 代码块在独立进程与临时目录执行，绘图使用非交互后端。",
+      "示例通过是具体可执行证据，不代替正文的数学证明。",
+      "pandas 3.0 Copy-on-Write 说明依据官方文档；本机代码运行环境是 pandas 2.3.3。"
+    ],
+    "numeric_and_contract_checks": [
+      "bisection square-root error",
+      "bisection input contract",
+      "sorting exhaustive small inputs (364)",
+      "constant squared-loss decomposition",
+      "Bayes alarm posterior",
+      "conditional expectation and total variance",
+      "conditional-mean squared-risk decomposition",
+      "BH step-up and Bonferroni example",
+      "Bernoulli MLE exact moments",
+      "least-squares gradient",
+      "normal-equation residual orthogonality",
+      "ridge stationary equation",
+      "L1 soft threshold -4",
+      "L1 soft threshold -1",
+      "L1 soft threshold 0",
+      "L1 soft threshold 0.5",
+      "L1 soft threshold 3",
+      "logistic p-y derivative",
+      "KL nonnegative example",
+      "PCA reconstruction spectral identity",
+      "GP predictive variance nonnegative",
+      "single-point GP posterior",
+      "linear-kernel GP and Bayesian regression equivalence",
+      "fairness conditional-rate example",
+      "finite-hypothesis bound numerical value",
+      "Poisson MLE gradient",
+      "Poisson first IRLS step",
+      "bounded exponential moment -3.0",
+      "bounded exponential moment -0.5",
+      "bounded exponential moment 0.5",
+      "bounded exponential moment 3.0",
+      "Bellman contraction example",
+      "attention permutation equivariance",
+      "EM lower-bound identity"
+    ],
+    "formula_rendering": {
+      "combined_courses": [
+        "python",
+        "machine-learning"
+      ],
+      "lessons": 64,
+      "formulas": 782,
+      "failures": 0,
+      "method": "用仓库内KaTeX解析全部公式，未以渲染通过代替数学核查"
+    },
+    "prerequisite_order": "所有同课程编号先修均在实际目录顺序之前",
+    "executed_block_count": 48,
+    "rerun": "python tools/verify_computing.py --report PATH",
+    "numeric_checks_scope": "34项为两课程联合检查集合，其中包括排序穷举、概率统计和机器学习恒等式；不是每门各有34个独立检查。",
+    "last_verified": "2026-09-27"
+  },
+  "coverage_map": [
+    {
+      "reference_topics": "Python 官方教程：解释器、表达式、基础类型、文本与浮点",
+      "lesson_ids": [
+        "python-01",
+        "python-02",
+        "python-03",
+        "python-04"
+      ]
+    },
+    {
+      "reference_topics": "MIT 6.0001：分支、迭代、函数分解和容器",
+      "lesson_ids": [
+        "python-05",
+        "python-06",
+        "python-07",
+        "python-08",
+        "python-09",
+        "python-10"
+      ]
+    },
+    {
+      "reference_topics": "MIT 6.0001：递归、效率、搜索与排序",
+      "lesson_ids": [
+        "python-19",
+        "python-27"
+      ]
+    },
+    {
+      "reference_topics": "Python 官方教程：模块包、环境、文件、格式、异常和测试",
+      "lesson_ids": [
+        "python-11",
+        "python-12",
+        "python-13",
+        "python-14",
+        "python-15"
+      ]
+    },
+    {
+      "reference_topics": "Python 官方教程与语言参考：类、继承/组合、迭代器、函数对象、闭包、上下文管理与模式匹配",
+      "lesson_ids": [
+        "python-10",
+        "python-16",
+        "python-17",
+        "python-28",
+        "python-29"
+      ]
+    },
+    {
+      "reference_topics": "Python 标准库：计数、随机实验、日志和时间的入门边界",
+      "lesson_ids": [
+        "python-18"
+      ]
+    },
+    {
+      "reference_topics": "NumPy/pandas/Matplotlib 官方指南：数组形状、广播、表格连接和科学图",
+      "lesson_ids": [
+        "python-20",
+        "python-21",
+        "python-22"
+      ]
+    },
+    {
+      "reference_topics": "科学计算延伸：二分、梯形、欧拉；并发入门；项目复现",
+      "lesson_ids": [
+        "python-23",
+        "python-24",
+        "python-25",
+        "python-26"
+      ]
+    },
+    {
+      "reference_topics": "官方教程正文4.9、8、9：特殊参数、参数展开、异常控制流、单继承与方法重写",
+      "lesson_ids": [
+        "python-07",
+        "python-14",
+        "python-16"
+      ]
+    }
+  ],
+  "review_date": "2026-09-27",
+  "review_method": "逐节读取原稿后，对全部旧章节增加针对性的严格定义、条件与论证，核对原例题和自测，再新增缺漏核心章；不是抽样审阅，也不是外部专家认证。",
+  "original_lessons_reviewed": 26,
+  "lessons_after_revision": 29,
+  "final_notes_review": {
+    "date": "2026-09-27",
+    "method": "保留前轮全章审阅记录，复核全部章节目录、先修、标题与coverage_map；本轮实际阅读官方讲义正文，集中检查概率统计与语言核心缺项，再运行所有完整代码和数学数值检查。",
+    "focused_lessons": [
+      "python-07",
+      "python-14",
+      "python-16"
+    ],
+    "external_pdf_access_limit": "本轮阅读官方教程正文，MIT课程目录仅作结构参考。"
+  }
+}
