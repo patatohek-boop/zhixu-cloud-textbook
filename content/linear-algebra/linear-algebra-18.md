@@ -35,23 +35,45 @@
 ---
 
 ## 严谨定义：完整 SVD、奇异值和左右方向
-对 $A\in\mathbb R^{m\times n}$，完整奇异值分解写 $A=U\Sigma V^\mathsf T$，其中 $U$ 是 $m$ 阶正交矩阵，$V$ 是 $n$ 阶正交矩阵，$\Sigma$ 是 $m\times n$ 非负对角型矩阵。正奇异值记 $\sigma_1\ge\cdots\ge\sigma_r>0$，余下对角为零；右方向 $v_i\in\mathbb R^n$，左方向 $u_i\in\mathbb R^m$，$Av_i=\sigma_i u_i$。这里 $r=\operatorname{rank}A$，要由证明得到。
+
+### 完整 SVD 的三种尺寸
+
+对 $A\in\mathbb R^{m\times n}$，完整奇异值分解写 $A=U\Sigma V^\mathsf T$，其中 $U$ 是 $m$ 阶正交矩阵，$V$ 是 $n$ 阶正交矩阵，$\Sigma$ 是 $m\times n$ 非负对角型矩阵。
+
+### 奇异值排序与左右方向
+
+正奇异值记 $\sigma_1\ge\cdots\ge\sigma_r>0$，余下对角为零；右方向 $v_i\in\mathbb R^n$，左方向 $u_i\in\mathbb R^m$，$Av_i=\sigma_i u_i$。这里 $r=\operatorname{rank}A$，要由证明得到。
 
 ## 通俗解释：输入和输出各自换一把正交尺子
 特征向量试图留在同一个方向，长方形矩阵甚至输入输出维数都不同。SVD 允许一边一套方向，中间只负责按非负长度伸缩，因此适用于任何矩阵。
 
 ## SVD 存在性的完整构造证明
-$B=A^\mathsf TA$ 对称且 $x^\mathsf TBx=\|Ax\|^2\ge0$。由[谱定理](#/course/linear-algebra/linear-algebra-15)，有标准正交特征基 $v_1,\ldots,v_n$、非负特征值。将正的排前面并写成 $\sigma_i^2$。对 $i\le r$ 定义 $u_i=Av_i/\sigma_i$。则
+
+### 第一步：对输入侧半正定矩阵用谱定理
+
+$B=A^\mathsf TA$ 对称且 $x^\mathsf TBx=\|Ax\|^2\ge0$。由[谱定理](#/course/linear-algebra/linear-algebra-15)，有标准正交特征基 $v_1,\ldots,v_n$、非负特征值。将正的排前面并写成 $\sigma_i^2$。
+
+### 第二步：构造输出侧的单位方向
+
+对 $i\le r$ 定义 $u_i=Av_i/\sigma_i$。则
 $$u_i^\mathsf Tu_j
 =\frac{v_i^\mathsf TA^\mathsf TAv_j}{\sigma_i\sigma_j}
 =\frac{\sigma_j^2}{\sigma_i\sigma_j}v_i^\mathsf Tv_j
 =\delta_{ij}.$$
-所以这些输出方向单位正交，特别地 $r\le m$。对零特征值方向，$\|Av_i\|^2=v_i^\mathsf TBv_i=0$，故 $Av_i=0$。任意 $x=\sum_i(v_i^\mathsf Tx)v_i$ 因而满足
+所以这些输出方向单位正交，特别地 $r\le m$。
+
+### 第三步：处理不能相除的零奇异方向
+
+对零特征值方向，$\|Av_i\|^2=v_i^\mathsf TBv_i=0$，故 $Av_i=0$。任意 $x=\sum_i(v_i^\mathsf Tx)v_i$ 因而满足
 $$Ax=\sum_{i=1}^r\sigma_i u_i(v_i^\mathsf Tx).$$
-所以列空间恰由 $u_1,\ldots,u_r$ 张成、其维数为 $r$。用基扩充后正交化将 $u_i$ 补成 $\mathbb R^m$ 的标准正交基，排成 $U$；$v_i$ 排成 $V$，上式便是 $A=U\Sigma V^\mathsf T$，证明完成。复数版把转置换成共轭转置，使用 Hermitian 谱定理同证。
+所以列空间恰由 $u_1,\ldots,u_r$ 张成、其维数为 $r$。
+
+### 第四步：补齐输出基并得到完整矩阵
+
+用基扩充后正交化将 $u_i$ 补成 $\mathbb R^m$ 的标准正交基，排成 $U$；$v_i$ 排成 $V$，上式便是 $A=U\Sigma V^\mathsf T$，证明完成。复数版把转置换成共轭转置，使用 Hermitian 谱定理同证。
 
 ## 长度、秩与四个空间的推论：证明
-由 $\|Ax\|^2=\sum_{i\le r}\sigma_i^2(v_i^\mathsf Tx)^2$，单位 $x$ 的最大输出长度是 $\sigma_1$，在 $v_1$ 取到。$v_{r+1},\ldots,v_n$ 构成零空间基；$v_1,\ldots,v_r$ 构成行空间基；$u_1,\ldots,u_r$ 是列空间基；其余 $u$ 是左零空间基。因为所有输出都与后者正交，这些结论直接还原四空间结构。
+若 $A=0$，全部方向输出为零，算子范数为零；下面涉及 $\sigma_1$ 的最大伸缩结论针对 $r\ge1$。由 $\|Ax\|^2=\sum_{i\le r}\sigma_i^2(v_i^\mathsf Tx)^2$，单位 $x$ 的最大输出长度是 $\sigma_1$，在 $v_1$ 取到。$v_{r+1},\ldots,v_n$ 构成零空间基；$v_1,\ldots,v_r$ 构成行空间基；$u_1,\ldots,u_r$ 是列空间基；其余 $u$ 是左零空间基。因为所有输出都与后者正交，这些结论直接还原四空间结构。
 
 若 $A$ 实对称，谱分解使 $A^\mathsf TA=A^2$ 的特征值为 $\lambda_i^2$，所以奇异值为 $|\lambda_i|$。一般矩阵则没有这种简单关系。
 
@@ -62,7 +84,15 @@ $$Ax=\sum_{i=1}^r\sigma_i u_i(v_i^\mathsf Tx).$$
 <figure class="teaching-figure"><a href="assets/diagrams/svd-ellipse.svg" target="_blank" rel="noopener" aria-label="打开大图：单位圆先经 Vᵀ 旋转后仍为圆，再被 Σ=diag(2,1) 变为半轴 2 与 1 的椭圆，最后经 U 旋转 30°。"><img src="assets/diagrams/svd-ellipse.svg" alt="单位圆先经 Vᵀ 旋转后仍为圆，再被 Σ=diag(2,1) 变为半轴 2 与 1 的椭圆，最后经 U 旋转 30°。" loading="lazy"></a><figcaption>单位圆先经 Vᵀ 旋转后仍为圆，再被 Σ=diag(2,1) 变为半轴 2 与 1 的椭圆，最后经 U 旋转 30°。<br><small>二维示例，Vᵀ=R(−30°)、U=R(30°)。三个阶段采用同一尺度 30 像素/单位。完整 SVD 也允许正交反射；本图用旋转便于理解。 · 点按图形可放大。</small></figcaption></figure>
 
 ## 逐步例题：一个长方形映射
-取三行两列矩阵，其两列分别为 $(3,0,0)$ 与 $(0,1,0)$。第一步求 $A^TA$，得到对角元素九与一的二阶矩阵。第二步奇异值为三与一，右奇异方向就是两个标准坐标方向。第三步把各方向映射后除以对应奇异值，得到输出空间中的第一、第二标准方向。第四步再补第三个单位方向形成完整输出基。
+取三行两列矩阵，其两列分别为 $(3,0,0)$ 与 $(0,1,0)$。
+
+第一步求 $A^TA$，得到对角元素九与一的二阶矩阵。
+
+第二步奇异值为三与一，右奇异方向就是两个标准坐标方向。
+
+第三步把各方向映射后除以对应奇异值，得到输出空间中的第一、第二标准方向。
+
+第四步再补第三个单位方向形成完整输出基。
 
 单位圆经过该映射变成三维空间中位于水平面的椭圆，长短半轴为三与一。第三个输出方向无法由任何输入产生，因此它位于左零空间。这个例子把列空间、左零空间与奇异值几何联系在一起。
 
