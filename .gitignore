@@ -16,3 +16,6 @@ android/**/build/
 *.apk
 *.aab
 *.idsig
+
+# Local editorial and build scratch files are not publication assets.
+work/
