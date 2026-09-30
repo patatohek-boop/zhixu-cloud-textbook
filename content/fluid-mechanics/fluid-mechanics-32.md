@@ -5,8 +5,8 @@
   "group": "04 · 从守恒到流场",
   "summary": "扩散初边值问题，把条件、定义和推导连成可复查的学习链。",
   "objectives": [
-    "准确区分并说明本章各概念",
-    "在明确假设下复现推导并解释条件失效的情形"
+    "为启动和振荡平板流分别列初值与边界值",
+    "由扩散方程推导相似尺度，并解释误差函数解没有有限传播前沿"
   ],
   "prerequisites": [
     "fluid-mechanics-31"
@@ -30,15 +30,27 @@
     "explanation": "指数因子控制振幅衰减，余弦中的空间项体现相位滞后。"
   },
   "lab": null,
-  "revision": "2026-09 · 缺漏补章"
+  "revision": "2026-09-28 · 概念分段与教学审读"
 }
 ---
 
 ## 严谨定义：时间边界条件也是问题的一部分
 
-半无限流体占据 $y>0$，速度 $\mathbf u=(u(y,t),0,0)$，壁面在 $y=0$。常物性、无压力梯度时，Navier–Stokes 化为 $u_t=\nu u_{yy}$。启动流初始为 $u(y,0)=0$，壁面从 $t=0$ 起取 $u(0,t)=U$，远处 $u(\infty,t)=0$。
+### 几何与控制方程
 
-相似变量是把多个变量合成一个无量纲变量，使解在不同时间具有同形状；这里定义 $\eta=y/(2\sqrt{\nu t})$。误差函数 $\operatorname{erf}(\eta)=\frac2{\sqrt\pi}\int_0^\eta e^{-s^2}ds$，$\operatorname{erfc}=1-\operatorname{erf}$。
+半无限流体占据 $y>0$，速度 $\mathbf u=(u(y,t),0,0)$，壁面在 $y=0$。常物性、无压力梯度时，Navier–Stokes 化为 $u_t=\nu u_{yy}$。
+
+### 初值与边界值
+
+启动流初始为 $u(y,0)=0$，壁面从 $t=0$ 起取 $u(0,t)=U$，远处 $u(\infty,t)=0$。
+
+### 相似变量
+
+相似变量是把多个变量合成一个无量纲变量，使解在不同时间具有同形状；这里定义 $\eta=y/(2\sqrt{\nu t})$。
+
+### 误差函数与互补误差函数
+
+误差函数 $\operatorname{erf}(\eta)=\frac2{\sqrt\pi}\int_0^\eta e^{-s^2}ds$，$\operatorname{erfc}=1-\operatorname{erf}$。
 
 ## 通俗解释：壁面运动的影响一层层扩散
 

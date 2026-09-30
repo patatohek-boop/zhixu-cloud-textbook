@@ -4,7 +4,7 @@
   "enTitle": "Machine Learning",
   "icon": "◇",
   "color": "#5968a7",
-  "description": "先从概率、统计与模型契约建立基础，再逐步推导监督、无监督与深度学习核心结论。新增似然与后验、感知机、GLM、有限样本泛化界及概率预测；高级专题逐项标明已证结论与后续范围。",
+  "description": "从概率统计、经典算法与深度学习起步，走向科学机器学习、传热反演、物理约束和可复现实验；先讲清概念与条件，再推导和实践。",
   "prerequisites": [
     "Python 基础与 NumPy 数组",
     "线性代数：向量、矩阵与特征值",
@@ -40,6 +40,121 @@
       "title": "Stanford CS229 官方大纲与讲义",
       "url": "https://cs229.stanford.edu/syllabus-summer2020.html",
       "scope": "补齐概率估计、感知机、GLM、学习理论与贝叶斯预测的结构映射；推导和例题为原创"
+    },
+    {
+      "title": "MIT 16.050: Dimensionless Numbers and Analysis of Results",
+      "url": "https://web.mit.edu/16.unified/www/FALL/thermodynamics/notes/node124.html",
+      "scope": "实际阅读正文：Biot定义、固体导热系数、内部均温极限；36无量纲推导与数值为原创"
+    },
+    {
+      "title": "NIST Technical Note 959: Calibration of Time Response of Thermometers",
+      "url": "https://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote959.pdf",
+      "scope": "实际阅读PDF第II节及动态响应讨论：介质/探头状态、安装条件、多指数响应与反演不稳定性；37一阶模型是明确假设下的简化"
+    },
+    {
+      "title": "NIST 2.3.6.1 Models for Instrument Calibration",
+      "url": "https://www.itl.nist.gov/div898/handbook/mpc/section3/mpc361.htm",
+      "scope": "实际阅读线性标定与截距讨论；未把两个参考点当作完整标定质量保证"
+    },
+    {
+      "title": "NIST 2.3.6.6 Calibration of Future Measurements",
+      "url": "https://itl.nist.gov/div898/handbook/mpc/section3/mpc366.htm",
+      "scope": "实际阅读逆标定公式；37自拟两点算例及误差梯度"
+    },
+    {
+      "title": "NIST 5.3.3.2 Randomized Block Designs",
+      "url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri332.htm",
+      "scope": "实际阅读区组定义、随机化与加性处理/区组模型；37原创日期混淆例"
+    },
+    {
+      "title": "NIST 1.3.3.1 Autocorrelation Plot",
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/autocopl.htm",
+      "scope": "实际阅读误差相关性、自相关局限及均值标准误条件；37有限样本协方差和为独立推导"
+    },
+    {
+      "title": "Ly et al.: A Tutorial on Fisher Information",
+      "url": "https://arxiv.org/pdf/1705.01064",
+      "scope": "实际阅读第1.2节得分平方期望定义及附录B无偏下界/渐近局限；38高斯前向模型信息、冷却灵敏度与下界证明为本课推导"
+    },
+    {
+      "title": "Andrew Stuart: The Bayesian Approach to Inverse Problems",
+      "url": "https://warwick.ac.uk/fac/sci/maths/research/events/2010-2011/non_symp_wksp/pdes/stuartnotes.pdf",
+      "scope": "实际阅读第1—5节中优化、先验、加权范数和Tikhonov联系；39只证明有限维线性条件，不声称无限维适定性"
+    },
+    {
+      "title": "Rasmussen and Williams: GPML Chapter 2",
+      "url": "https://gaussianprocess.org/gpml/chapters/RW2.pdf",
+      "scope": "实际阅读式2.20—2.24及Cholesky、潜在值/未来噪声说明；39—40预测不确定性边界"
+    },
+    {
+      "title": "Raissi and Karniadakis: Deep Multi-fidelity Gaussian Processes",
+      "url": "https://arxiv.org/pdf/1604.07484",
+      "scope": "实际阅读第3.1、4节经典AR1特例与联合核矩阵；40不教授或声称实现深层变换"
+    },
+    {
+      "title": "Sandia PyApprox: Multi-fidelity Modeling with Deep Gaussian Processes",
+      "url": "https://sandialabs.github.io/pyapprox/dgp_multifidelity_concept.html",
+      "scope": "实际阅读Classical AR1正文与常数缩放的局限；未照搬其基准图或实验数据"
+    },
+    {
+      "title": "NIST 5.3.3.3.1 Two-level Full Factorial Designs",
+      "url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri3331.htm",
+      "scope": "实际阅读标准排列、全因子与正交性质；41采用不同的原创二因素热阻表"
+    },
+    {
+      "title": "Peter Frazier: A Tutorial on Bayesian Optimization",
+      "url": "https://arxiv.org/pdf/1807.02811",
+      "scope": "实际阅读第4.1节EI定义/解析式及噪声限制；41转换为最小化并自行积分推导、给原创候选点例"
+    },
+    {
+      "title": "Raissi et al., Physics Informed Deep Learning author page",
+      "url": "https://maziarraissi.github.io/PINNs/",
+      "scope": "实际阅读continuous-time models、MSE_u/MSE_f、自动微分示例和有限配点范围；对应42/43/47"
+    },
+    {
+      "title": "Wang, Teng and Perdikaris, Understanding and mitigating gradient pathologies",
+      "url": "https://arxiv.org/html/2001.04536v1",
+      "scope": "实际阅读梯度刚性讨论及2.5梯度统计/学习率退火；对应43，不迁移论文性能倍数"
+    },
+    {
+      "title": "Rahaman et al., On the Spectral Bias of Neural Networks",
+      "url": "https://proceedings.mlr.press/v97/rahaman19a/rahaman19a.pdf",
+      "scope": "实际阅读ReLU分段线性分析和频率学习偏置范围；对应43，不宣称所有网络相同"
+    },
+    {
+      "title": "Volkwein, Model Reduction Using Proper Orthogonal Decomposition",
+      "url": "https://www.math.uni-konstanz.de/numerik/personen/volkwein/teaching/POD-Vorlesung.pdf",
+      "scope": "实际阅读第1节SVD/POD最优性、带权投影、1.3与热方程Example1.10；对应44"
+    },
+    {
+      "title": "Lu et al., DeepONet",
+      "url": "https://arxiv.org/pdf/1910.03193",
+      "scope": "实际阅读Theorem1的紧致/连续条件、Figure1固定输入传感器与自由输出位置、第2.1节分支/主干；对应45"
+    },
+    {
+      "title": "Li et al., Fourier Neural Operator for Parametric PDEs",
+      "url": "https://arxiv.org/pdf/2010.08895",
+      "scope": "实际阅读第3-4节积分层/频谱层、离散化和附录A.2；对应45，注意截断只发生于频谱分支"
+    },
+    {
+      "title": "NIST IR 8098, Calibration and Measurement Procedures for a High Magnification Thermal Camera",
+      "url": "https://nvlpubs.nist.gov/nistpubs/ir/2016/NIST.IR.8098.pdf",
+      "scope": "实际阅读第2/4/5节，特别是发射率测量假设、PSF、式19-20的反射背景校正；对应46"
+    },
+    {
+      "title": "scikit-learn, Cross-validation iterators for grouped data",
+      "url": "https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-iterators-for-grouped-data",
+      "scope": "实际阅读组内依赖与GroupKFold/LeaveOneGroupOut实验分组；对应46/47；示例代码仅用NumPy"
+    },
+    {
+      "title": "MIT Steven G. Johnson, Notes on Adjoint Methods",
+      "url": "https://math.mit.edu/~stevenj/18.336/adjoint.pdf",
+      "scope": "实际阅读第2/3/5节离散方程梯度和AD/迭代求解器讨论；对应43继续学习入口"
+    },
+    {
+      "title": "SciMLSensitivity official sensitivity algorithm manual",
+      "url": "https://docs.sciml.ai/SciMLSensitivity/stable/manual/differential_equation_sensitivities/",
+      "scope": "实际阅读continuous/discrete sensitivity分类；对应43，不宣称二者总是相同"
     }
   ],
   "lessons": [
@@ -77,6 +192,18 @@
     "machine-learning-27.md",
     "machine-learning-28.md",
     "machine-learning-29.md",
-    "machine-learning-30.md"
+    "machine-learning-30.md",
+    "machine-learning-36.md",
+    "machine-learning-37.md",
+    "machine-learning-38.md",
+    "machine-learning-39.md",
+    "machine-learning-40.md",
+    "machine-learning-41.md",
+    "machine-learning-42.md",
+    "machine-learning-43.md",
+    "machine-learning-44.md",
+    "machine-learning-45.md",
+    "machine-learning-46.md",
+    "machine-learning-47.md"
   ]
 }

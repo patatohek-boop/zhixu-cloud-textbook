@@ -26,8 +26,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class TextbookSmokeTest extends Instrumentation {
     private static final String RECORD_KEY = "zhixu-learning-v1";
     private static final String LESSON = "calculus-03";
-    private static final int TOTAL = 7;
-    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.1.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
+    private static final int TOTAL = 9;
+    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.2.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
     private Activity reader;
     private WebView web;
     private int number;
@@ -53,6 +53,8 @@ public final class TextbookSmokeTest extends Instrumentation {
             runCase("localOriginOnly", this::origins);
             runCase("readerAndFormulas", this::formulas);
             runCase("revisionAndNavigation", this::revision);
+            runCase("conceptNavigationAndMobileLayout", this::concepts);
+            runCase("researchRouteAndOfflineLabs", this::researchLabs);
             runCase("invalidRouteIsSafe", this::invalidRoute);
             runCase("backupRoundTripAndInjection", this::backups);
             runCase("notesSurviveRelaunch", this::relaunch);
@@ -155,7 +157,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     private void permissions() throws Exception {
         PackageInfo info = getTargetContext().getPackageManager().getPackageInfo(
             getTargetContext().getPackageName(), PackageManager.GET_PERMISSIONS);
-        require("1.1.0".equals(info.versionName) && info.versionCode == 2, "App version does not match the textbook revision");
+        require("1.2.0".equals(info.versionName) && info.versionCode == 3, "App version does not match the textbook revision");
         String[] requested = info.requestedPermissions == null ? new String[0] : info.requestedPermissions;
         for (String dangerous : new String[]{"android.permission.INTERNET", "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA", "android.permission.RECORD_AUDIO"})
@@ -188,6 +190,10 @@ public final class TextbookSmokeTest extends Instrumentation {
     }
 
     private void saveReaderScreenshot() throws Exception {
+        saveReaderScreenshot("reader-screen.png");
+    }
+
+    private void saveReaderScreenshot(String filename) throws Exception {
         CountDownLatch visualReady = new CountDownLatch(1);
         runOnMainSync(() -> web.postVisualStateCallback(SystemClock.uptimeMillis(), new WebView.VisualStateCallback() {
             @Override public void onComplete(long requestId) { visualReady.countDown(); }
@@ -199,7 +205,7 @@ public final class TextbookSmokeTest extends Instrumentation {
         require(automation != null, "Screenshot automation unavailable");
         Bitmap screenshot = automation.takeScreenshot();
         require(screenshot != null, "Reader screenshot unavailable");
-        File destination = new File(getTargetContext().getFilesDir(), "reader-screen.png");
+        File destination = new File(getTargetContext().getFilesDir(), filename);
         try (FileOutputStream output = new FileOutputStream(destination)) {
             require(screenshot.compress(Bitmap.CompressFormat.PNG, 100, output), "Reader screenshot encoding failed");
             output.flush();
@@ -208,12 +214,83 @@ public final class TextbookSmokeTest extends Instrumentation {
         }
     }
 
+    private void researchLabs() throws Exception {
+        evaluate("location.hash='#/research'");
+        waitUntil("document.querySelectorAll('.research-stage').length===6", "Research route failed offline");
+        require(Boolean.TRUE.equals(evaluate("Array.from(document.querySelectorAll('.research-lessons a')).every(function(a){var id=a.getAttribute('href').split('/').pop();return window.ZHIXU.all.some(function(l){return l.id===id})})")), "Research prerequisite link is broken");
+        require(Boolean.TRUE.equals(evaluate("window.COURSES.find(function(c){return c.id==='machine-learning'}).chapters.length===47")), "Research lessons missing from APK");
+        require(Boolean.TRUE.equals(evaluate("document.documentElement.scrollWidth<=window.innerWidth+1")), "Research route overflows the phone viewport");
+        for (String lab : new String[]{"heat-modes", "cooling-inverse", "experiment-design", "uncertainty-band", "physics-residual", "data-split"}) {
+            evaluate("location.hash='#/labs/" + lab + "'");
+            waitUntil("document.querySelector('[data-lab=" + lab + "] .lab-chart svg') && document.querySelector('.lab-result').textContent.length>10", "Offline lab missing: " + lab);
+            String before = (String) evaluate("document.querySelector('.lab-result').textContent");
+            evaluate("(function(){var input=document.querySelector('[data-param]');input.value=input.value===input.max?input.min:input.max;input.dispatchEvent(new Event('input',{bubbles:true}));return true})()");
+            String after = (String) evaluate("document.querySelector('.lab-result').textContent");
+            require(!before.equals(after), "Lab numerical output did not react: " + lab);
+            require(Boolean.TRUE.equals(evaluate("!(/NaN|Infinity/.test(document.querySelector('.lab-chart').innerHTML+document.querySelector('.lab-result').textContent))")), "Invalid graph numbers: " + lab);
+            require(Boolean.TRUE.equals(evaluate("document.documentElement.scrollWidth<=window.innerWidth+1")), "Lab overflows the phone viewport: " + lab);
+            evaluate("document.querySelector('.lab-reset').click()");
+            require(Boolean.TRUE.equals(evaluate("Array.from(document.querySelectorAll('[data-param]')).every(function(input){return Number(input.value)===Number(input.defaultValue)})")), "Lab reset failed: " + lab);
+            if ("heat-modes".equals(lab)) saveReaderScreenshot("research-screen.png");
+        }
+        evaluate("location.hash='#/course/machine-learning/machine-learning-42'");
+        waitUntil("document.querySelector('#lesson-body h3') && document.querySelectorAll('.katex').length>10", "PINN lesson did not render offline");
+        require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0")), "PINN formulas failed offline");
+        evaluate("location.hash='#/course/calculus/calculus-03'");
+        waitUntil("document.querySelector('#note-text')", "Could not return from research labs");
+    }
+
     private void invalidRoute() throws Exception {
         evaluate("window.__smokeError=0;window.addEventListener('error',function(){window.__smokeError++});location.hash='#/labs/__proto__'");
         waitUntil("document.querySelector('.labs-index')", "Invalid laboratory route broke the page");
         require(Boolean.TRUE.equals(evaluate("window.__smokeError===0")), "Invalid route raised an error");
         evaluate("location.hash='#/course/calculus/calculus-03'");
         waitUntil("document.querySelector('#note-text')", "Could not return to lesson");
+    }
+
+    private void concepts() throws Exception {
+        evaluate("location.hash='#/course/fluid-mechanics/fluid-mechanics-04'");
+        waitUntil("document.querySelector('#lesson-body h3') && document.querySelector('#lesson-body').textContent.includes('四分之一圆柱闸门')", "Segmented fluid lesson did not render");
+        require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('#mobile-toc-list .toc-concept').length===document.querySelectorAll('#lesson-body h3').length")), "Concepts are missing from mobile navigation");
+        evaluate("document.querySelector('.mobile-toc').open=true");
+        evaluate("document.querySelector('#mobile-toc-list .toc-concept').click()");
+        waitForConceptPosition();
+        require(Boolean.TRUE.equals(evaluate("location.hash==='#/course/fluid-mechanics/fluid-mechanics-04'")), "Concept navigation left the chapter");
+        require(Boolean.TRUE.equals(evaluate("document.documentElement.scrollWidth<=window.innerWidth+1")), "Lesson overflows the mobile viewport horizontally");
+        require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0")), "New fluid formulas failed to render");
+        saveReaderScreenshot("concept-screen.png");
+        evaluate("location.hash='#/course/calculus/calculus-03'");
+        waitUntil("document.querySelector('#note-text') && document.querySelector('#lesson-body').textContent.includes('导数')", "Could not return from concept test");
+    }
+
+    private void waitForConceptPosition() throws Exception {
+        long until = SystemClock.uptimeMillis() + 30_000;
+        double previousTop = Double.NaN;
+        double previousScroll = Double.NaN;
+        int stableIntervals = 0;
+        while (SystemClock.uptimeMillis() < until) {
+            JSONObject position = (JSONObject) evaluate("(function(){"
+                + "var heading=document.querySelector('#lesson-body h3'),toolbar=document.querySelector('.topbar');"
+                + "var rect=heading.getBoundingClientRect(),toolbarBottom=toolbar.getBoundingClientRect().bottom;"
+                + "var padding=parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)||0;"
+                + "var margin=parseFloat(getComputedStyle(heading).scrollMarginTop)||0;"
+                + "return {top:rect.top,scroll:window.scrollY,visible:rect.height>0&&rect.top>=toolbarBottom"
+                + "&&rect.bottom<=window.innerHeight&&Math.abs(rect.top-(padding+margin))<=1};})()");
+            double top = position.getDouble("top");
+            double scroll = position.getDouble("scroll");
+            // Coordinates and rounding tolerance are CSS pixels, independent of screen density.
+            // Require two stable polling intervals at the expected alignment before the screenshot.
+            if (position.getBoolean("visible") && Math.abs(top - previousTop) <= 0.5
+                    && Math.abs(scroll - previousScroll) <= 0.5) {
+                if (++stableIntervals >= 2) return;
+            } else {
+                stableIntervals = 0;
+            }
+            previousTop = top;
+            previousScroll = scroll;
+            SystemClock.sleep(150);
+        }
+        throw new AssertionError("Concept heading did not settle visibly below the toolbar");
     }
 
     private void revision() throws Exception {

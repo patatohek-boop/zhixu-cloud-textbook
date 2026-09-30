@@ -5,8 +5,8 @@
   "group": "07 · 可压缩与自由液面",
   "summary": "Mach波和膨胀扇，把条件、定义和推导连成可复查的学习链。",
   "objectives": [
-    "准确区分并说明本章各概念",
-    "在明确假设下复现推导并解释条件失效的情形"
+    "分别列 Prandtl–Meyer、Fanno 与 Rayleigh 模型的物理条件",
+    "沿各模型的守恒路径判断 Mach 数、熵和总状态变化"
   ],
   "prerequisites": [
     "fluid-mechanics-23"
@@ -30,13 +30,29 @@
     "explanation": "Fanno保持总焓但不等熵；Rayleigh允许热交换并忽略壁面摩擦。"
   },
   "lab": null,
-  "revision": "2026-09 · 缺漏补章"
+  "revision": "2026-09-28 · 概念分段与教学审读"
 }
 ---
 
 ## 严谨定义：不能混用的三种模型
 
-以下均使用定比热理想气体，$M=Ma$，$\gamma>1$。Prandtl–Meyer 膨胀扇描述二维超声速、无黏、等熵流绕凸角平滑转向；Fanno 模型描述等截面、稳态、绝热、有壁面摩擦的流动；Rayleigh 模型描述等截面、稳态、忽略壁面摩擦但可加热或冷却的流动。后两者均不可直接沿用喷管的全程等熵关系。
+### 共同物性与符号
+
+以下均使用定比热理想气体，$M=Ma$，$\gamma>1$。
+
+### Prandtl–Meyer：等熵转向
+
+Prandtl–Meyer 膨胀扇描述二维超声速、无黏、等熵流绕凸角平滑转向。
+
+### Fanno：绝热摩擦
+
+Fanno 模型描述等截面、稳态、绝热、有壁面摩擦的流动。
+
+### Rayleigh：无摩擦加热或冷却
+
+Rayleigh 模型描述等截面、稳态、忽略壁面摩擦但可加热或冷却的流动。后两者均不可直接沿用喷管的全程等熵关系。
+
+### 声速状态与熵条件
 
 声速状态以下标星号表示。熵增是物理第二定律的要求；守恒式和状态模型决定允许的变化路径。以下结论不是说真实发动机仅有一种机制，而是分别隔离各机制来理解。
 
@@ -46,7 +62,7 @@
 
 ## 推导一：超声速转弯膨胀
 
-在局部流向为 $x$ 的近均匀区域，对小扰动 $\delta u,\delta v$ 线性化不可旋、等熵流，连续式为 $(1-M^2)\delta u_x+\delta v_y=0$，无旋式为 $\delta v_x-\delta u_y=0$。设扰动沿波面法向坐标 $\xi=x\cos\beta+y\sin\beta$ 变化，消元得到 $\tan^2\beta=M^2-1$，且 $\delta v/\delta u=\tan\beta$。
+在局部流向为 $x$ 的近均匀区域，对小扰动 $\delta u,\delta v$ 线性化无旋、等熵流，连续式为 $(1-M^2)\delta u_x+\delta v_y=0$，无旋式为 $\delta v_x-\delta u_y=0$。设扰动沿波面法向坐标 $\xi=x\cos\beta+y\sin\beta$ 变化，消元得到 $\tan^2\beta=M^2-1$，且 $\delta v/\delta u=\tan\beta$。
 
 对膨胀方向取适当正号，速度转角微变 $d\theta=\delta v/V$，速率增量 $dV=\delta u$，故 $d\theta=\sqrt{M^2-1}\,dV/V$。总焓不变使 $T=T_0/[1+(\gamma-1)M^2/2]$；将 $V=M\sqrt{\gamma RT}$ 对数微分，得 $dV/V=dM/[M(1+(\gamma-1)M^2/2)]$。因此膨胀转角是函数 $\nu(M)$ 的增量，其中
 $$\nu(M)=\sqrt{\frac{\gamma+1}{\gamma-1}}\tan^{-1}\sqrt{\frac{\gamma-1}{\gamma+1}(M^2-1)}-\tan^{-1}\sqrt{M^2-1}.$$

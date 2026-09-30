@@ -35,27 +35,60 @@
 ---
 
 ## 严谨定义：四个空间分别住在哪里
-设 $A\in\mathbb R^{m\times n}$。列空间 $C(A)=\{Ax:x\in\mathbb R^n\}\subseteq\mathbb R^m$；零空间 $N(A)=\{x:Ax=0\}\subseteq\mathbb R^n$；行空间 $C(A^\mathsf T)\subseteq\mathbb R^n$；左零空间 $N(A^\mathsf T)\subseteq\mathbb R^m$。定义秩 $\operatorname{rank}A=\dim C(A)$，零度 $\operatorname{nullity}A=\dim N(A)$。主元数等于秩、行列秩相等都是需要证明的结论。
+
+### 矩阵尺寸与输入输出空间
+
+设 $A\in\mathbb R^{m\times n}$。
+
+### 列空间和零空间
+
+列空间 $C(A)=\{Ax:x\in\mathbb R^n\}\subseteq\mathbb R^m$；零空间 $N(A)=\{x:Ax=0\}\subseteq\mathbb R^n$；
+
+### 行空间与左零空间
+
+行空间 $C(A^\mathsf T)\subseteq\mathbb R^n$；左零空间 $N(A^\mathsf T)\subseteq\mathbb R^m$。
+
+### 秩与零度
+
+定义秩 $\operatorname{rank}A=\dim C(A)$，零度 $\operatorname{nullity}A=\dim N(A)$。主元数等于秩、行列秩相等都是需要证明的结论。
 
 ## 通俗解释：输入丢掉什么，输出缺少什么
 零空间是完全被机器抹去的输入变化，列空间是机器能产出的结果。它们属于不同侧，不可因为维数相同就把它们当同一个几何空间。
 
 ## 秩零度定理：基扩充证明
-选 $N(A)$ 的基 $z_1,\ldots,z_k$，由[基扩充定理](#/course/linear-algebra/linear-algebra-06)补成 $\mathbb R^n$ 的基 $z_1,\ldots,z_k,v_1,\ldots,v_{n-k}$。任何输入的 $z$ 部分被 $A$ 消去，因此 $Av_1,\ldots,Av_{n-k}$ 张成列空间。若 $\sum c_jAv_j=0$，则 $\sum c_jv_j$ 在零空间，可由 $z_i$ 表示；完整基无关迫使全部 $c_j=0$。所以这些像构成列空间基，得到
+选 $N(A)$ 的基 $z_1,\ldots,z_k$，由[基扩充定理](#/course/linear-algebra/linear-algebra-06)补成 $\mathbb R^n$ 的基 $z_1,\ldots,z_k,v_1,\ldots,v_{n-k}$。
+
+### 第一步：扩充后的像张成列空间
+
+任何输入的 $z$ 部分被 $A$ 消去，因此 $Av_1,\ldots,Av_{n-k}$ 张成列空间。
+
+### 第二步：证明这些像线性无关
+
+若 $\sum c_jAv_j=0$，则 $\sum c_jv_j$ 在零空间，可由 $z_i$ 表示；完整基无关迫使全部 $c_j=0$。所以这些像构成列空间基，得到
 $$\operatorname{rank}A+\dim N(A)=n.$$
 
 ## 行列秩相等和主元列：证明
 消元等价于左乘可逆矩阵 $E$ 得阶梯形 $R=EA$。可逆映射 $E$ 不改变列向量的线性关系，所以 $A,R$ 的对应列有相同依赖关系。在 $R$ 中 $r$ 个主元列无关，所有其余列由它们组合，因此列秩为 $r$；原矩阵对应主元列才是 $C(A)$ 的基。
 
+### 行秩与列秩为何相等
+
 行操作只对行作可逆组合，行空间不变。$R$ 的非零行由不同首非零位置可知无关，且显然张成行空间，所以行秩也为 $r$。这证明 $\operatorname{rank}A=\operatorname{rank}A^\mathsf T$。对 $A^\mathsf T$ 应用秩零度定理，得到 $\dim N(A^\mathsf T)=m-r$。
 
 ## 正交补与相容性的证明
-向量 $x$ 满足 $Ax=0$，当且仅当与每一行点积为零，等价于与行空间全部向量正交。因此 $N(A)=C(A^\mathsf T)^\perp$；同理 $N(A^\mathsf T)=C(A)^\perp$。由[正交分解定理](#/course/linear-algebra/linear-algebra-10)，$C(A)=(N(A^\mathsf T))^\perp$。故 $Ax=b$ 有解，当且仅当所有 $y$ 满足 $A^\mathsf Ty=0$ 时都有 $y^\mathsf Tb=0$。
+这里实向量的点积为 $u^\mathsf Tv=\sum_i u_iv_i$，点积为零称正交；$W^\perp$ 表示与 $W$ 中每个向量都正交的向量集合。向量 $x$ 满足 $Ax=0$，当且仅当与每一行点积为零，等价于与行空间全部向量正交。因此 $N(A)=C(A^\mathsf T)^\perp$；同理 $N(A^\mathsf T)=C(A)^\perp$。由[正交分解定理](#/course/linear-algebra/linear-algebra-10)，$C(A)=(N(A^\mathsf T))^\perp$。故 $Ax=b$ 有解，当且仅当所有 $y$ 满足 $A^\mathsf Ty=0$ 时都有 $y^\mathsf Tb=0$。
 
 **边界实例。** 满列秩保证齐次解唯一，不保证所有右端可达：$A=(1,0)^\mathsf T$ 满列秩，却不可能生成 $(0,1)^\mathsf T$。满行秩才保证每个输出可达，方阵时两条件合流为可逆。
 
 ## 逐步例题：一个压缩信息的矩阵
-取 $A=\begin{pmatrix}1&2&3\\2&4&6\end{pmatrix}$。第一步注意第二行是第一行两倍，所以秩为一。第二步列空间由 $(1,2)$ 张成，行空间由 $(1,2,3)$ 张成。第三步解零空间，方程是 $x+2y+3z=0$，取自由变量分别得到基 $(-2,1,0)$ 与 $(-3,0,1)$，维数为二。第四步解左零空间，条件为 $u+2v=0$，可取基 $(-2,1)$，维数为一。
+取 $A=\begin{pmatrix}1&2&3\\2&4&6\end{pmatrix}$。
+
+第一步注意第二行是第一行两倍，所以秩为一。
+
+第二步列空间由 $(1,2)$ 张成，行空间由 $(1,2,3)$ 张成。
+
+第三步解零空间，方程是 $x+2y+3z=0$，取自由变量分别得到基 $(-2,1,0)$ 与 $(-3,0,1)$，维数为二。
+
+第四步解左零空间，条件为 $u+2v=0$，可取基 $(-2,1)$，维数为一。
 
 检查秩零度：输入维数为三，一加二等于三；输出维数为二，一加一等于二。两个等式同时核对，是检查是否把空间放错位置的好方法。
 

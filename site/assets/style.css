@@ -17,3 +17,15 @@
 @media(max-width:1180px){.mobile-toc{display:block;border:1px solid var(--line);border-radius:8px;margin:20px 0 30px;padding:15px 18px;background:var(--paper)}.mobile-toc summary{cursor:pointer;font-size:14px;font-weight:600}.mobile-toc nav{padding-top:12px;font-size:14px;line-height:1.7}.mobile-toc a{display:block;padding:5px 0;color:var(--muted)}.mobile-toc nav>strong{display:none}}
 @media(max-width:540px){.topbar nav{gap:9px}.topbar nav a{font-size:12px}.review-map{padding:13px}.review-record summary,.review-record-body{padding:15px}.review-tabs{gap:7px}.review-tabs a{padding:8px 10px;font-size:13px}.review-map th,.review-map td{padding:10px 8px}.review-map table{font-size:13px}.review-course ul{padding-left:21px}.home-footer>span{display:block;line-height:1.8}}
 @media print{.mobile-toc,.revision-link{display:none!important}}
+
+/* Concept-level navigation and a visible reading hierarchy on narrow screens. */
+.prose h2,.prose h3{scroll-margin-top:12px}
+.prose h3{font-weight:650;padding-left:12px;border-left:3px solid var(--line)}
+.prose h2+h3{margin-top:20px}
+.prose h3+p{margin-top:0}
+.toc a.toc-section{font-weight:600;color:var(--ink);margin-top:18px}
+.toc a.toc-concept{font-size:12px;padding-left:12px;margin-top:8px;border-left:1px solid var(--line)}
+.mobile-toc a.toc-section{font-weight:600;color:var(--ink);margin-top:9px}
+.mobile-toc a.toc-concept{padding-left:14px;border-left:1px solid var(--line);font-size:13px}
+.mobile-toc nav{max-height:55dvh;overflow-y:auto;overscroll-behavior:contain}
+@media(max-width:640px){.prose h3{margin-top:29px;padding-left:10px}.prose h2{margin-top:40px}.prose p{margin-bottom:1.2em}}

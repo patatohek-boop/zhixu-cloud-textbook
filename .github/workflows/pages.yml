@@ -27,6 +27,8 @@ jobs:
       - run: python tools/build.py
       - run: node tools/validate.cjs
       - run: node tools/test-learning-state.cjs
+      - run: node tools/test-research-labs.cjs
+      - run: python tools/verify_research_foundations.py
       - run: python tools/verify_fluid.py
       - run: python tools/verify_thermal.py
       - run: python tools/security_check.py

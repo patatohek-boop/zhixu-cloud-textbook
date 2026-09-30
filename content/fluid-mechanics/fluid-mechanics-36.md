@@ -5,9 +5,8 @@
   "group": "04 · 从守恒到流场",
   "summary": "定义每一个应力分量，证明牵引和对称关系，再区分变形、旋转与材料本构。",
   "objectives": [
-    "说明面力与应力张量的定义、条件与物理意义",
-    "说明Cauchy牵引定理的定义、条件与物理意义",
-    "说明角动量与应力对称的定义、条件与物理意义"
+    "按面方向和力方向解释张量指标并执行一次牵引计算",
+    "区分由守恒推出的应力性质与实验本构，验证变形、旋转和耗散"
   ],
   "prerequisites": [
     "fluid-mechanics-06",
@@ -20,7 +19,7 @@
     "变形率与刚体旋转",
     "剪切黏度和体积黏度"
   ],
-  "minutes": 65,
+  "minutes": 70,
   "level": "基础",
   "quiz": {
     "question": "纯刚体转动的牛顿黏性应力如何？",
@@ -33,17 +32,35 @@
     "explanation": "牛顿黏性应力由对称变形率决定，不能把单个速度梯度直接当一般剪切率。"
   },
   "lab": null,
-  "revision": "2026-09 · 讲义对照补充"
+  "revision": "2026-09-28 · 概念分段与教学审读"
 }
 ---
 
 ## 严谨定义：应力需要说明两个方向
 
+### 牵引、法向与切向分量
+
 在流体内想象切出一个小面。外侧流体作用于所选一侧的单位面积力称为**牵引向量** $\mathbf t(\mathbf n)$，其中单位法线 $\mathbf n$ 指向所选体积外侧，单位为 Pa。$\mathbf t\cdot\mathbf n$ 是法向应力，$\mathbf t-(\mathbf t\cdot\mathbf n)\mathbf n$ 是切向牵引。压力取压缩为正，所以静止简单流体有 $\mathbf t=-p\mathbf n$。
 
-在直角坐标中，定义 $\sigma_{ij}$ 为“法线沿第 $j$ 轴的面上，牵引沿第 $i$ 轴的分量”。例如 $\sigma_{12}$ 是 $y$ 法向面上的 $x$ 向力密度。把九个分量组成矩阵 $\boldsymbol\sigma$，就得到二阶应力张量；**张量**在这里是把面法线线性映射为牵引的物理对象，换坐标时矩阵分量会相应变化，不是九个任意互不相关的数。
+### 应力分量的两个指标
 
-记 $\partial_j u_i=\partial u_i/\partial x_j$；重复指标意味着从1到3求和，例如 $\sigma_{ij}n_j=\sum_{j=1}^3\sigma_{ij}n_j$。$\delta_{ij}$ 为 Kronecker 符号，同指标时为1，否则为0；矩阵形式就是单位矩阵 $\mathbf I$。**迹** $\operatorname{tr}\mathbf A$ 是方阵对角线元素之和。
+在直角坐标中，定义 $\sigma_{ij}$ 为“法线沿第 $j$ 轴的面上，牵引沿第 $i$ 轴的分量”。例如 $\sigma_{12}$ 是 $y$ 法向面上的 $x$ 向力密度。
+
+### 张量与坐标表示
+
+把九个分量组成矩阵 $\boldsymbol\sigma$，就得到二阶应力张量；**张量**在这里是把面法线线性映射为牵引的物理对象，换坐标时矩阵分量会相应变化，不是九个任意互不相关的数。
+
+### 偏导与重复指标求和
+
+记 $\partial_j u_i=\partial u_i/\partial x_j$；重复指标意味着从1到3求和，例如 $\sigma_{ij}n_j=\sum_{j=1}^3\sigma_{ij}n_j$。
+
+### 单位矩阵与 Kronecker 符号
+
+$\delta_{ij}$ 为 Kronecker 符号，同指标时为1，否则为0；矩阵形式就是单位矩阵 $\mathbf I$。
+
+### 矩阵的迹
+
+**迹** $\operatorname{tr}\mathbf A$ 是方阵对角线元素之和。
 
 ## 通俗解释：先说明在哪个面上，再说明往哪边推
 
@@ -51,10 +68,21 @@
 
 ## 证明一：为什么任意面的牵引等于应力矩阵乘法线
 
-采用经典连续介质假设：面力由该处状态和面法线决定，考察点邻域内的应力、体积力与加速度连续且有界，内部没有额外的表面质量，且不跨越应力跳跃界面。先用极薄的小柱跨过同一点的两侧面。两大面面积为 $A$，侧面面积和体积随厚度趋零；动量平衡除以 $A$ 后取极限，得到 $\mathbf t(-\mathbf n)=-\mathbf t(\mathbf n)$。
+### 第一步：列清局部假设并证明反向牵引
 
-再取三面与坐标面平行、第四面法线为 $\mathbf n$ 的小四面体。先令三个 $n_j>0$。斜面面积为 $A$，三个坐标面的投影面积分别为 $A n_j$，其外法线为 $-\mathbf e_j$。特征边长为 $\epsilon$ 时，面力是 $O(\epsilon^2)$，体积力和惯性是 $O(\epsilon^3)$。动量方程除以 $A$ 并令 $\epsilon\to0$，得到
+采用经典连续介质假设：面力由该处状态和面法线决定，考察点邻域内的应力、体积力与加速度连续且有界，内部没有额外的表面质量，且不跨越应力跳跃界面。
+
+先用极薄的小柱跨过同一点的两侧面。两大面面积为 $A$，侧面面积和体积随厚度趋零；动量平衡除以 $A$ 后取极限，得到 $\mathbf t(-\mathbf n)=-\mathbf t(\mathbf n)$。
+
+### 第二步：对小四面体写动量平衡
+
+再取三面与坐标面平行、第四面法线为 $\mathbf n$ 的小四面体。先令三个 $n_j>0$。斜面面积为 $A$，三个坐标面的投影面积分别为 $A n_j$，其外法线为 $-\mathbf e_j$。
+
+特征边长为 $\epsilon$ 时，面力是 $O(\epsilon^2)$，体积力和惯性是 $O(\epsilon^3)$。动量方程除以 $A$ 并令 $\epsilon\to0$，得到
 $$\mathbf t(\mathbf n)-\sum_{j=1}^3 n_j\mathbf t(\mathbf e_j)=0.$$
+
+### 第三步：从分量式回到矩阵式
+
 取第 $i$ 分量即 $t_i=\sigma_{ij}n_j$。其他法线象限可用对应正负坐标面并结合反向牵引关系处理；零分量由连续极限得到。因此 $\mathbf t=\boldsymbol\sigma\mathbf n$。这是一条由局部动量平衡推出的结论，尚未使用牛顿黏性本构。
 
 ## 证明二：应力对称来自角动量守恒
@@ -67,7 +95,12 @@ $$\mathbf t(\mathbf n)-\sum_{j=1}^3 n_j\mathbf t(\mathbf e_j)=0.$$
 
 相邻两个质点的间隔 $\mathbf r$ 足够小时，其相对速度一阶为 $\dot{\mathbf r}=\mathbf A\mathbf r$，$A_{ij}=\partial_j u_i$。把矩阵唯一拆成
 $$\mathbf D=\frac{\mathbf A+\mathbf A^T}{2},\qquad \mathbf W=\frac{\mathbf A-\mathbf A^T}{2},\qquad\mathbf A=\mathbf D+\mathbf W.$$
+
+### 检验：哪一部分改变质点间距离
+
 因为反对称矩阵满足 $\mathbf r^T\mathbf W\mathbf r=0$，有 $d|\mathbf r|^2/dt=2\mathbf r^T\mathbf D\mathbf r$。因此 $\mathbf D$ 决定局部长度和夹角的变化率，称**变形率张量**；$\mathbf W$ 只对应瞬时刚体旋转。逐分量比较可得 $\mathbf W\mathbf r=(\boldsymbol\omega/2)\times\mathbf r$，局部刚体角速度等于涡量的一半。
+
+### 反例比较：剪切与纯转动
 
 例如简单剪切 $\mathbf u=(ay,0,0)$ 中，$D_{12}=D_{21}=a/2$，$\omega_z=-a$，既有变形也有旋转。纯刚体转动 $\mathbf u=(-\Omega y,\Omega x,0)$ 则 $\mathbf D=0$、$\omega_z=2\Omega$；速度梯度非零并不必然产生牛顿黏性应力。
 

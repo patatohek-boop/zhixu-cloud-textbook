@@ -5,12 +5,13 @@
   "group": "05 · 管路与外流",
   "summary": "从表面压力和剪切积分，走到工程升阻系数。",
   "objectives": [
-    "准确解释牵引积分",
-    "在列明条件后复现本章推导，并用例题检验结论"
+    "明确升阻力方向、参考面积和环量正号",
+    "列明理想模型条件解释 Kutta–Joukowski 关系及其局限"
   ],
   "prerequisites": [
     "fluid-mechanics-29",
-    "fluid-mechanics-17"
+    "fluid-mechanics-17",
+    "fluid-mechanics-19"
   ],
   "tags": [
     "阻力、升力与绕流",
@@ -31,13 +32,21 @@
     "explanation": "等时到达是误说；速度和压力分布由运动方程、几何、边界与流动状态共同确定。"
   },
   "lab": null,
-  "revision": "2026-09 · 定义与推导修订"
+  "revision": "2026-09-28 · 概念分段与教学审读"
 }
 ---
 
 ## 严谨定义：先约定方向和面积
 
-设来流沿 $+x$，向上为 $+y$。物体外法线为 $\mathbf n_b$，流体对物体的力为 $\mathbf F=\int_{S_b}(-p\mathbf n_b+\boldsymbol\tau\mathbf n_b)dA$。其 $x$ 分量叫阻力 $D$，$y$ 分量叫升力 $L$。系数定义为 $C_D=D/(\rho U_\infty^2A/2)$、$C_L=L/(\rho U_\infty^2A/2)$，必须指定参考面积 $A$。
+### 升阻力的方向约定
+
+设来流沿 $+x$，向上为 $+y$。物体外法线为 $\mathbf n_b$，流体对物体的力为 $\mathbf F=\int_{S_b}(-p\mathbf n_b+\boldsymbol\tau\mathbf n_b)dA$。其 $x$ 分量叫阻力 $D$，$y$ 分量叫升力 $L$。
+
+### 升阻力系数与参考面积
+
+系数定义为 $C_D=D/(\rho U_\infty^2A/2)$、$C_L=L/(\rho U_\infty^2A/2)$，必须指定参考面积 $A$。
+
+### 环量符号与单位翼展升力
 
 二维环量 $\Gamma=\oint\mathbf u\cdot d\mathbf l$ 取逆时针为正。单位翼展升力记为 $L'$，单位 N/m。对于以下理想外流模型，带符号的结论是 $L'=-\rho U_\infty\Gamma$；只讨论大小时才写 $|L'|=\rho U_\infty|\Gamma|$。
 

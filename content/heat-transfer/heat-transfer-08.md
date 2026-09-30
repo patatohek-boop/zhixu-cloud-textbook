@@ -3,7 +3,7 @@
   "id": "heat-transfer-08",
   "title": "一维非稳态导热、特征值与图表",
   "group": "03 · 非稳态与数值",
-  "minutes": 35,
+  "minutes": 45,
   "level": "基础",
   "tags": [
     "Fourier",
@@ -13,7 +13,8 @@
   "objectives": [
     "严谨定义并区分无量纲温度、Fourier数、平板半厚度",
     "逐步完成平板模态ODE、Robin特征方程与初值投影积分",
-    "从边界和单位检查模型并解原算例"
+    "从边界和单位检查模型并解原算例",
+    "用二分区间求第一特征根，并以初值检验一项截断"
   ],
   "prerequisites": [
     "集总热容：小物体如何随时间冷却"
@@ -36,7 +37,15 @@
 
 ## 严谨定义与记号
 
-半厚度 $L$ 的无限平板初温均匀 $T_i$，两侧突然与相同恒温流体 $T_\infty$ 对流。定义无量纲温差 $\theta=(T-T_\infty)/(T_i-T_\infty)$、坐标 $X=x/L$、Fourier数 $Fo=\alpha t/L^2$、$Bi=hL/k$。本节长度为**半厚度**，不是任意采用集总模型的 $V/A_s$。
+### 几何与初始、边界条件
+
+半厚度 $L$ 的无限平板初温均匀 $T_i$，两侧突然与相同恒温流体 $T_\infty$ 对流。
+
+### 无量纲温差、时间与长度
+
+定义无量纲温差 $\theta=(T-T_\infty)/(T_i-T_\infty)$、坐标 $X=x/L$、Fourier数 $Fo=\alpha t/L^2$、$Bi=hL/k$。本节长度为**半厚度**，不是任意采用集总模型的 $V/A_s$。
+
+### 模态、特征值与叠加
 
 **模态**是一种空间形状乘以时间衰减；**特征值**是满足全部边界条件而允许存在的模态参数。初值需要叠加多个模态，系数由正交投影确定，而非随意设为1。
 
@@ -46,15 +55,27 @@
 
 ## 逐步证明：平板级数从何而来
 
-方程 $\theta_{Fo}=\theta_{XX}$；中心对称 $\theta_X(0)=0$，表面对流 $-\theta_X(1)=Bi\theta(1)$。设 $\theta=F(X)G(Fo)$，分离得 $F''/F=G'/G=-\lambda^2$。于是 $G=e^{-\lambda^2Fo}$，$F=A\cos\lambda X+B\sin\lambda X$。中心条件消去 $B$，表面条件给
+### 第一步：分离空间形状与时间衰减
+
+方程 $\theta_{Fo}=\theta_{XX}$；中心对称 $\theta_X(0)=0$，表面对流 $-\theta_X(1)=Bi\theta(1)$。设 $\theta=F(X)G(Fo)$，分离得 $F''/F=G'/G=-\lambda^2$。于是 $G=e^{-\lambda^2Fo}$，$F=A\cos\lambda X+B\sin\lambda X$。
+
+### 第二步：让模态满足两端边界
+
+中心条件消去 $B$，表面条件给
 
 $$\lambda\sin\lambda=Bi\cos\lambda\quad\Rightarrow\quad\lambda\tan\lambda=Bi.$$
 
-不同特征根 $\lambda_m,\lambda_n$ 的方程相乘相减后积分，边界项因相同对称与Robin条件消失，得 $(\lambda_n^2-\lambda_m^2)\int_0^1F_mF_n dX=0$。故不同模态正交，可以将初值1投影：
+### 第三步：正交性与初值投影
+
+把 $F_n''+\lambda_n^2F_n=0$ 乘 $F_m$，把 $F_m''+\lambda_m^2F_m=0$ 乘 $F_n$，相减后从0积分到1，微分项变成端点项 $[F_mF_n'-F_nF_m']_0^1$。
+
+中心处两导数为零；表面处每个模态都有 $F_n'=-BiF_n$，两个乘积也恰好抵消。所以端点项为零，留下 $(\lambda_n^2-\lambda_m^2)\int_0^1F_mF_n dX=0$。故不同模态正交，可以将初值1投影：
 
 $$A_n=\frac{\int_0^1\cos(\lambda_nX)dX}{\int_0^1\cos^2(\lambda_nX)dX}=\frac{4\sin\lambda_n}{2\lambda_n+\sin2\lambda_n}.$$
 
-最后
+### 第四步：把所有模态叠加
+
+将带有投影系数的模态相加，得到
 
 $$\theta(X,Fo)=\sum_{n=1}^{\infty}A_n e^{-\lambda_n^2Fo}\cos(\lambda_nX).$$
 
@@ -67,12 +88,19 @@ $$\theta(X,Fo)=\sum_{n=1}^{\infty}A_n e^{-\lambda_n^2Fo}\cos(\lambda_nX).$$
 模型要求常物性、一维、均匀初温、恒定 $h,T_\infty$、无内热源。圆柱和球体因径向面积变化有不同特征方程，不能套平板根；新增多维章说明适当边界下的乘积解。
 
 
-
 ## 补足圆柱和球体：几何如何改变特征方程
 
 径向热方程为 $T_t=\alpha r^{-m}\partial_r(r^mT_r)$，无限长圆柱m=1、球体m=2。令 $X=r/R,Fo=\alpha t/R^2,Bi=hR/k$，分离后的空间方程为 $(X^mF')'+\lambda^2X^mF=0$，中心要求有界，表面 $-F'(1)=BiF(1)$。
 
-圆柱的正则解为 $F=J_0(\lambda X)$。这里 $J_0$是满足 $z^2J_0''+zJ_0'+z^2J_0=0$且在零点有限、$J_0(0)=1$的Bessel函数，$J_1=-J_0'$。代入表面条件得到 $\lambda J_1(\lambda)=BiJ_0(\lambda)$。球体可令 $Y=XF$，方程变为 $Y''+\lambda^2Y=0$，中心有界选 $F=\sin(\lambda X)/(\lambda X)$；表面条件整理为 $1-\lambda\cot\lambda=Bi$。
+### 圆柱的Bessel函数
+
+圆柱的正则解为 $F=J_0(\lambda X)$。这里 $J_0$是满足 $z^2J_0''+zJ_0'+z^2J_0=0$且在零点有限、$J_0(0)=1$的Bessel函数，$J_1=-J_0'$。代入表面条件得到 $\lambda J_1(\lambda)=BiJ_0(\lambda)$。
+
+### 球体的径向变换
+
+球体可令 $Y=XF$，方程变为 $Y''+\lambda^2Y=0$，中心有界选 $F=\sin(\lambda X)/(\lambda X)$；表面条件整理为 $1-\lambda\cot\lambda=Bi$。
+
+### 体积权重与系数
 
 两种情况下，时间项都是 $e^{-\lambda_n^2Fo}$，但投影内积须带体积权重 $X^m$。均匀初值给
 
@@ -83,10 +111,29 @@ $$A_n=\frac{\int_0^1X^mF_n(X)dX}{\int_0^1X^mF_n^2(X)dX}.$$
 ## 一步步算一个例子
 
 给定平板 Bi=1，第一特征值 λ₁≈0.8603、A₁≈1.119，取 Fo=0.5。
+
 1. 中心 X=0，cos0=1。
 2. 中心温差比 θ₀≈1.119exp(−0.8603²×0.5)≈0.773。
 3. 初温 100 ℃、环境 20 ℃，中心温度约 20+80×0.773=81.84 ℃。
 4. 表面 X=1 的温差比还要乘 cos0.8603≈0.652，约为 0.504，对应 60.3 ℃。中心与表面明显不同，单温模型不适合。
+
+## 从边界条件实际求一个特征根
+
+表面对流边界 $-\theta_X(1)=Bi\theta(1)$ 把温度与其法向导数联系起来，这种线性混合条件也叫 **Robin边界**。它给出的方程 $f(\lambda)=\lambda\tan\lambda-Bi=0$ 需要求根；特征值不是另一个任意输入物性。
+
+以 $Bi=1$ 为例，第一根在 $0<\lambda<\pi/2$。在这个区间 $f'(\lambda)=\tan\lambda+\lambda\sec^2\lambda>0$，所以至多有一个根；$f(0)=-1$，接近 $\pi/2$ 时趋于正无穷，因此这个根存在且唯一。
+
+1. 先试 $\lambda=0.8$，得到 $f\approx-0.1763$；试0.9得 $f\approx0.1341$，故第一根在0.8—0.9。
+2. 每次取区间中点，只保留函数异号的半区间，反复进行，得到 $\lambda_1\approx0.860334$。这是二分法，不依赖初猜的导数迭代。
+3. 将根代入投影公式，而不是直接设系数为1：$A_1=4\sin\lambda_1/(2\lambda_1+\sin2\lambda_1)\approx1.1191$。之所以可能大于1，是因为初始时刻还由其他模态共同拼出常数1。
+
+**练习 3**　为什么不能把上述第一项解直接用于 $Fo=0$ 的中心温度？
+
+<details><summary>查看解析</summary>
+
+此时第一项给中心温差比 $A_1\approx1.1191$，而初始条件应为1。早期被略去的模态尚未衰减，需要共同满足初值。对于所需时刻，应增加模态项数比较输出，而不是仅凭第一项看起来平滑就接受。
+
+</details>
 
 ## 再深一层：把知识连接起来
 
@@ -121,3 +168,9 @@ t=Fo L²/α=0.5×0.0004/10⁻⁵=20 s。尺寸平方控制内部扩散时间。
 ## 继续阅读
 
 本章为原创中文讲解与教学例题；课程范围与模型条件参考[MIT 2.51 Intermediate Heat and Mass Transfer — syllabus](https://ocw.mit.edu/courses/2-51-intermediate-heat-and-mass-transfer-fall-2008/pages/syllabus/)。课程资料页列出进一步阅读入口，原课程的高级内容需要另外系统学习。
+
+## 从本节走向研究
+
+先把初始温度分解为不同空间尺度的波，再观察高频分量为何衰减得更快。新实验采用两端固定为 20°C 的均匀杆；这与本节对流边界特征值问题的边界条件不同，不能直接互换特征值。
+
+[打开引导可视化实验](#/labs/heat-modes)；相关的估参、测量与验证步骤见 [科研学习路线](#/research)。

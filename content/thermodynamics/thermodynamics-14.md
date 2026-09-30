@@ -3,7 +3,7 @@
   "id": "thermodynamics-14",
   "title": "基本热力学关系、势函数与 Maxwell 关系",
   "group": "04 · 性质与循环",
-  "minutes": 38,
+  "minutes": 44,
   "level": "进阶",
   "tags": [
     "热力学势",
@@ -36,7 +36,11 @@
 
 ## 严谨定义与记号
 
+### 物质模型与四个热力学势
+
 这里研究固定组成、局部平衡、只考虑体积功的简单可压缩物质。用质量比性质：$u,h,a,g$ 分别为内能、焓、Helmholtz 自由能、Gibbs 自由能，均为 J/kg，定义 $h=u+pv$、$a=u-Ts$、$g=u+pv-Ts$。$s$ 为 J/(kg·K)，$v$ 为 m³/kg。
+
+### 自然变量与Legendre变换
 
 函数的**自然变量**是其完整微分直接使用的独立变量，例如 $u(s,v)$。将 $u$ 换成 $h=u+pv$，是用与 $v$ 共轭的变量 $p$ 替换 $v$，称 Legendre 变换；并非只给同一函数换个名字。偏导下标表示保持不变的量，不能省略。
 
@@ -48,7 +52,13 @@
 
 用可逆参照过程连接相邻平衡态，第一律 $du=\delta q_{rev}-p\,dv$，熵定义 $\delta q_{rev}=Tds$，因此 $du=Tds-pdv$。两边都是状态函数微分，所得关系适用于这些平衡性质，与真实过程是否可逆无关。
 
-分别对定义做乘积微分并消去项：
+### 对定义逐项微分
+
+先看焓：$dh=d(u+pv)=du+p\,dv+v\,dp$。代入 $du=Tds-pdv$ 后，两个 $p\,dv$ 项抵消，剩 $dh=Tds+vdp$。
+
+再看 Helmholtz 自由能：$da=d(u-Ts)=du-Tds-sdT$。代入同一个内能微分后，两个 $Tds$ 项抵消，剩 $da=-sdT-pdv$。
+
+最后用 $g=h-Ts$，有 $dg=dh-Tds-sdT=-sdT+vdp$。三个结果整理为：
 
 $$dh=Tds+vdp,\qquad da=-sdT-pdv,\qquad dg=-sdT+vdp.$$
 
@@ -68,17 +78,35 @@ $$\left(\frac{\partial s}{\partial v}\right)_T=\left(\frac{\partial p}{\partial 
 
 ## 推导三：一般物质的比热差
 
-由 $du=Tds-pdv$，固定 $v$ 得 $s_T|_v=c_v/T$；链式法则在固定 $p$ 下给 $s_T|_p=c_v/T+(s_v|_T)(v_T|_p)$，而左边为 $c_p/T$。代入 Maxwell 关系，再由 $dv=v_T|_p\,dT+v_p|_T\,dp=0$ 得 $p_T|_v=-v_T|_p/v_p|_T$，所以
+### 第一步：把两种比热写成熵的导数
+
+由 $du=Tds-pdv$，固定 $v$ 得 $(\partial s/\partial T)_v=c_v/T$。由 $dh=Tds+vdp$，固定 $p$ 得 $(\partial s/\partial T)_p=c_p/T$。
+
+### 第二步：同一个熵函数换约束
+
+把熵看作 $s(T,v)$，但沿固定压力的状态曲线变化。链式法则给
+
+$$\left(\frac{\partial s}{\partial T}\right)_p=\left(\frac{\partial s}{\partial T}\right)_v+\left(\frac{\partial s}{\partial v}\right)_T\left(\frac{\partial v}{\partial T}\right)_p.$$
+
+代入第一步，再乘 $T$，有 $c_p-c_v=T(\partial s/\partial v)_T(\partial v/\partial T)_p$。Maxwell关系将难测的熵导数换成 $(\partial p/\partial T)_v$。
+
+### 第三步：用状态方程的导数消去压力项
+
+固定 $v$ 时，$dv=(\partial v/\partial T)_p dT+(\partial v/\partial p)_T dp=0$，所以
+
+$$(\partial p/\partial T)_v=-\frac{(\partial v/\partial T)_p}{(\partial v/\partial p)_T}.$$
+
+将它代入第二步，得到
 
 $$c_p-c_v=-T\frac{[(\partial v/\partial T)_p]^2}{(\partial v/\partial p)_T}=\frac{Tv\alpha_v^2}{\kappa_T}.$$
 
 这里体膨胀系数 $\alpha_v=(1/v)(\partial v/\partial T)_p$，等温压缩系数 $\kappa_T=-(1/v)(\partial v/\partial p)_T$；稳定可压缩物质通常 $\kappa_T>0$。理想气体代入 $\alpha_v=1/T,\kappa_T=1/p$ 恢复 $c_p-c_v=R$。
 
 
-
 ## 一步步算一个例子
 
 理想气体 v=RT/p，在固定压力下 (∂v/∂T)_p=R/p。
+
 1. Maxwell 关系给出 (∂s/∂p)_T=−R/p。
 2. 沿等温过程积分，Δs=−R ln(p₂/p₁)。
 3. 空气 R=0.287 kJ/(kg·K)，压力加倍时 Δs=−0.287 ln2=−0.1989 kJ/(kg·K)。

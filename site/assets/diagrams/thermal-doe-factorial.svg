@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 560" role="img" aria-labelledby="title desc">
+  <title id="title">二因素全因子设计中的交互作用</title>
+  <desc id="desc">四角为合成热阻。低风速低功率六，高风速低功率四，低风速高功率八，高风速高功率二，单位开尔文每瓦。低功率时增加风速降低二，高功率时降低六；功率的平均主效应为零，但两条边的效应分别为正二和负二。</desc>
+  <rect width="660" height="560" rx="16" fill="#f6f8fa"/>
+  <g font-family="sans-serif" fill="#233642" text-anchor="middle">
+    <text x="330" y="42" font-size="24" font-weight="700">主效应为零，不代表没有影响</text>
+    <text x="330" y="76" font-size="18">二水平全因子 · 合成热阻 R / (K/W)</text>
+    <path d="M165 178H495M165 390H495" fill="none" stroke="#176c5b" stroke-width="4"/>
+    <path d="M165 178V390M495 178V390" fill="none" stroke="#386faf" stroke-width="3" stroke-dasharray="8 6"/>
+    <rect x="232" y="151" width="196" height="50" rx="8" fill="#e3f0eb"/>
+    <text x="330" y="183" font-size="22" fill="#155f52">风速效应 −6</text>
+    <rect x="232" y="365" width="196" height="50" rx="8" fill="#e3f0eb"/>
+    <text x="330" y="397" font-size="22" fill="#155f52">风速效应 −2</text>
+    <g fill="#ffffff" stroke="#b3c4cf" stroke-width="2">
+      <circle cx="165" cy="178" r="37"/><circle cx="495" cy="178" r="37"/>
+      <circle cx="165" cy="390" r="37"/><circle cx="495" cy="390" r="37"/>
+    </g>
+    <g font-size="29" font-weight="700"><text x="165" y="188">8</text><text x="495" y="188">2</text><text x="165" y="400">6</text><text x="495" y="400">4</text></g>
+    <text x="70" y="167" font-size="20">高功率</text><text x="70" y="192" font-size="18">x₂ = +1</text>
+    <text x="70" y="380" font-size="20">低功率</text><text x="70" y="406" font-size="18">x₂ = −1</text>
+    <rect x="82" y="258" width="166" height="52" rx="8" fill="#e7eef8"/>
+    <text x="165" y="291" font-size="21" fill="#285e9b">功率效应 +2</text>
+    <rect x="412" y="258" width="166" height="52" rx="8" fill="#e7eef8"/>
+    <text x="495" y="291" font-size="21" fill="#285e9b">功率效应 −2</text>
+    <text x="165" y="453" font-size="21">低风速 x₁ = −1</text><text x="495" y="453" font-size="21">高风速 x₁ = +1</text>
+    <text x="330" y="504" font-size="20">功率的平均效应：( +2 − 2 ) / 2 = 0</text>
+    <text x="330" y="535" font-size="18">比较条件效应，才能看见被平均抵消的交互。</text>
+  </g>
+</svg>
