@@ -4,7 +4,7 @@
   "enTitle": "Fluid Mechanics",
   "icon": "≈",
   "color": "#287b96",
-  "description": "从明确的定义与先修桥梁出发，逐步推导守恒、黏性流、环量、可压缩流与自由表面模型。",
+  "description": "从连续介质与守恒基础，走向流动换热仿真：网格、离散、湍流、近壁处理、共轭传热及验证，全流程串联实验与 AI。",
   "prerequisites": [
     "基本力学与单位",
     "单变量微积分；向量基础"
@@ -34,6 +34,26 @@
       "title": "MIT 1.060 · Engineering Mechanics II lecture notes",
       "url": "https://ocw.mit.edu/courses/1-060-engineering-mechanics-ii-spring-2006/pages/lecture-notes/",
       "scope": "本科静水曲面受力、管流损失与计算练习的主题核对"
+    },
+    {
+      "title": "NASA CFD Verification and Validation",
+      "url": "https://www.grc.nasa.gov/www/wind/valid/tutorial/tutorial.html",
+      "scope": "验证、网格收敛和实验确认"
+    },
+    {
+      "title": "Turbulence Modeling Resource",
+      "url": "https://tmbwg.github.io/turbmodels/",
+      "scope": "SST、SA 等模型的原始定义与变体"
+    },
+    {
+      "title": "CFD Direct General Principles",
+      "url": "https://doc.cfd.direct/notes/cfd-general-principles/",
+      "scope": "有限体积、离散、耦合与求解"
+    },
+    {
+      "title": "OpenFOAM Foundation 13 User Guide",
+      "url": "https://doc.cfd.direct/openfoam/user-guide-v13/backwardstep",
+      "scope": "版本化的软件入门流程；等温流动"
     }
   ],
   "lessons": [
@@ -74,6 +94,30 @@
     "fluid-mechanics-25.md",
     "fluid-mechanics-26.md",
     "fluid-mechanics-27.md",
-    "fluid-mechanics-28.md"
+    "fluid-mechanics-28.md",
+    "fluid-mechanics-39.md",
+    "fluid-mechanics-40.md",
+    "fluid-mechanics-41.md",
+    "fluid-mechanics-42.md",
+    "fluid-mechanics-43.md",
+    "fluid-mechanics-44.md",
+    "fluid-mechanics-45.md",
+    "fluid-mechanics-46.md",
+    "fluid-mechanics-47.md",
+    "fluid-mechanics-48.md",
+    "fluid-mechanics-49.md",
+    "fluid-mechanics-50.md",
+    "fluid-mechanics-51.md",
+    "fluid-mechanics-52.md",
+    "fluid-mechanics-53.md",
+    "fluid-mechanics-54.md",
+    "fluid-mechanics-55.md",
+    "fluid-mechanics-56.md",
+    "fluid-mechanics-57.md",
+    "fluid-mechanics-58.md",
+    "fluid-mechanics-59.md",
+    "fluid-mechanics-60.md",
+    "fluid-mechanics-61.md",
+    "fluid-mechanics-62.md"
   ]
 }

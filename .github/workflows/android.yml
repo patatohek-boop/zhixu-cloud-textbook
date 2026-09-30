@@ -35,6 +35,8 @@ jobs:
           node tools/validate.cjs
           node tools/test-learning-state.cjs
           node tools/test-research-labs.cjs
+          node tools/test-cfd-labs.cjs
+          python tools/verify_cfd.py
           python tools/verify_research_foundations.py
           python tools/verify_fluid.py
           python tools/verify_thermal.py
@@ -104,6 +106,8 @@ jobs:
           test -s work/android-concepts.png
           adb exec-out run-as app.zhixu.textbook cat files/research-screen.png > work/android-research.png
           test -s work/android-research.png
+          adb exec-out run-as app.zhixu.textbook cat files/simulation-screen.png > work/android-simulation.png
+          test -s work/android-simulation.png
           adb shell am start -W -n app.zhixu.textbook/.MainActivity
           sleep 15
           adb exec-out screencap -p > work/android-home.png
@@ -116,6 +120,7 @@ jobs:
             work/android-reader.png
             work/android-concepts.png
             work/android-research.png
+            work/android-simulation.png
             work/android-home.png
             work/emulator.log
             work/android-logcat.txt

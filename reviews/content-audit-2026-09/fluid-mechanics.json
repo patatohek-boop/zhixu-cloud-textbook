@@ -45,6 +45,26 @@
       "title": "MIT 1.060 · Engineering Mechanics II lecture notes",
       "url": "https://ocw.mit.edu/courses/1-060-engineering-mechanics-ii-spring-2006/pages/lecture-notes/",
       "coverage": "本科静水曲面受力、管流损失与计算练习的主题核对"
+    },
+    {
+      "title": "NASA CFD Verification and Validation",
+      "url": "https://www.grc.nasa.gov/www/wind/valid/tutorial/tutorial.html",
+      "coverage": "验证、网格收敛和实验确认"
+    },
+    {
+      "title": "Turbulence Modeling Resource",
+      "url": "https://tmbwg.github.io/turbmodels/",
+      "coverage": "SST、SA 等模型的原始定义与变体"
+    },
+    {
+      "title": "CFD Direct General Principles",
+      "url": "https://doc.cfd.direct/notes/cfd-general-principles/",
+      "coverage": "有限体积、离散、耦合与求解"
+    },
+    {
+      "title": "OpenFOAM Foundation 13 User Guide",
+      "url": "https://doc.cfd.direct/openfoam/user-guide-v13/backwardstep",
+      "coverage": "版本化的软件入门流程；等温流动"
     }
   ],
   "added_topics": [
@@ -57,12 +77,133 @@
     "稳定性与转捩：从扰动方程到能量判据",
     "应力、变形率与牛顿流体：从受力面到方程",
     "基本势流、镜像法与附加质量",
-    "自由界面、毛细压力与表面张力驱动流"
+    "自由界面、毛细压力与表面张力驱动流",
+    {
+      "id": "fluid-mechanics-39",
+      "title": "仿真问题契约与全流程",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-40",
+      "title": "控制方程与热流耦合",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-41",
+      "title": "无量纲尺度与模型判断",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-42",
+      "title": "几何、网格与贴壁层",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-43",
+      "title": "边界条件与初始场",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-44",
+      "title": "有限体积与守恒通量",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-45",
+      "title": "离散格式、稳定性与数值扩散",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-46",
+      "title": "压力速度耦合：SIMPLE 与投影",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-47",
+      "title": "RANS、Reynolds 应力与闭合",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-48",
+      "title": "k–ε 模型与入口湍流量",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-49",
+      "title": "k–ω、SST 与 SA 选型",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-50",
+      "title": "近壁模型与 y⁺",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-51",
+      "title": "DNS、LES、DES 与转捩",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-52",
+      "title": "湍流热流与湍流 Prandtl 数",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-53",
+      "title": "共轭传热、接触热阻与辐射",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-54",
+      "title": "求解监测、收敛与非稳态",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-55",
+      "title": "后处理：热量、Nu、压降与泵功",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-56",
+      "title": "验证、确认与不确定度：GCI",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-57",
+      "title": "完整案例：层流加热圆管",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-58",
+      "title": "完整案例：湍流加热通道",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-59",
+      "title": "完整案例：共轭散热与自然对流",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-60",
+      "title": "仿真与实验对齐：走向 AI 研究",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-61",
+      "title": "可运行项目：从零实现有限体积",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    },
+    {
+      "id": "fluid-mechanics-62",
+      "title": "软件实操与综合交付",
+      "reason": "补齐流动换热仿真的全流程学习链及验证方法"
+    }
   ],
   "scope_limits": [
     "完整组织本科通用流体力学核心链，并补充部分进阶解析模型；不宣称穷尽全部流体研究分支。",
     "薄翼与三维升力线设计、船舶波浪辐射、复杂非牛顿/多相本构、气动声学和高温非平衡流属于进一步专项课程；本版提供相应基础而非完整专业设计课程。",
-    "湍流关联式与工程系数均需结合适用条件和物性资料；不存在由守恒方程直接证明所有经验常数的做法。"
+    "湍流关联式与工程系数均需结合适用条件和物性资料；不存在由守恒方程直接证明所有经验常数的做法。",
+    "新增24课覆盖单相流动换热主流程；沸腾多相、燃烧、高焓可压缩、流固结构和伴随优化仍需专门课程。"
   ],
   "records": [
     {
@@ -917,6 +1058,487 @@
       "remaining_limits": [
         "动态接触角、表面活性剂输运和复杂两相界面需要专门模型"
       ]
+    },
+    {
+      "id": "fluid-mechanics-39",
+      "title": "仿真问题契约与全流程",
+      "checked_concepts": [
+        "物理问题",
+        "数学模型",
+        "数值解",
+        "关注量"
+      ],
+      "proofs": [
+        "整体能量预算"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-40",
+      "title": "控制方程与热流耦合",
+      "checked_concepts": [
+        "连续性",
+        "动量",
+        "能量",
+        "Boussinesq近似"
+      ],
+      "proofs": [
+        "由内能方程约化温度方程"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-41",
+      "title": "无量纲尺度与模型判断",
+      "checked_concepts": [
+        "Re",
+        "Pr",
+        "Pe",
+        "Ra",
+        "Ri",
+        "Br"
+      ],
+      "proofs": [
+        "对流扩散方程无量纲化"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-42",
+      "title": "几何、网格与贴壁层",
+      "checked_concepts": [
+        "计算域",
+        "质量指标",
+        "膨胀层",
+        "首中心"
+      ],
+      "proofs": [
+        "等比贴壁层总厚度"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-43",
+      "title": "边界条件与初始场",
+      "checked_concepts": [
+        "Dirichlet",
+        "Neumann",
+        "Robin",
+        "压力基准"
+      ],
+      "proofs": [
+        "全 Neumann 热问题的相容性"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-44",
+      "title": "有限体积与守恒通量",
+      "checked_concepts": [
+        "控制体",
+        "面通量",
+        "线性化",
+        "半单元边界"
+      ],
+      "proofs": [
+        "内部面通量成对抵消"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-45",
+      "title": "离散格式、稳定性与数值扩散",
+      "checked_concepts": [
+        "一致性",
+        "稳定性",
+        "有界性",
+        "数值扩散"
+      ],
+      "proofs": [
+        "迎风修正方程与显式凸组合条件"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-46",
+      "title": "压力速度耦合：SIMPLE 与投影",
+      "checked_concepts": [
+        "连续约束",
+        "压力修正",
+        "交错与同位网格"
+      ],
+      "proofs": [
+        "投影法压力 Poisson 方程"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-47",
+      "title": "RANS、Reynolds 应力与闭合",
+      "checked_concepts": [
+        "平均",
+        "脉动",
+        "Reynolds应力",
+        "涡黏假设"
+      ],
+      "proofs": [
+        "Reynolds平均及非负模型产能"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-48",
+      "title": "k–ε 模型与入口湍流量",
+      "checked_concepts": [
+        "k",
+        "耗散率",
+        "标准模型",
+        "RNG与realizable"
+      ],
+      "proofs": [
+        "涡黏量纲与入口估计"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-49",
+      "title": "k–ω、SST 与 SA 选型",
+      "checked_concepts": [
+        "比耗散率",
+        "混合函数",
+        "剪切应力限制",
+        "SA"
+      ],
+      "proofs": [
+        "SST涡黏限制不等式"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-50",
+      "title": "近壁模型与 y⁺",
+      "checked_concepts": [
+        "摩擦速度",
+        "黏性底层",
+        "对数律",
+        "壁函数"
+      ],
+      "proofs": [
+        "线性近壁律和首中心估计"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-51",
+      "title": "DNS、LES、DES 与转捩",
+      "checked_concepts": [
+        "滤波",
+        "亚格子闭合",
+        "混合模型",
+        "统计平均"
+      ],
+      "proofs": [
+        "Kolmogorov尺度估计与相关时间误差"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-52",
+      "title": "湍流热流与湍流 Prandtl 数",
+      "checked_concepts": [
+        "湍流热通量",
+        "梯度扩散",
+        "分子与湍流Pr"
+      ],
+      "proofs": [
+        "平均能量方程与有效导热"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-53",
+      "title": "共轭传热、接触热阻与辐射",
+      "checked_concepts": [
+        "界面守恒",
+        "接触温跳",
+        "热阻",
+        "辐射"
+      ],
+      "proofs": [
+        "串联热阻与辐射等效系数"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-54",
+      "title": "求解监测、收敛与非稳态",
+      "checked_concepts": [
+        "残差",
+        "代数误差",
+        "松弛",
+        "时间尺度"
+      ],
+      "proofs": [
+        "残差误差关系与条件数界"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-55",
+      "title": "后处理：热量、Nu、压降与泵功",
+      "checked_concepts": [
+        "混合温度",
+        "局部换热系数",
+        "Darcy摩擦",
+        "泵功"
+      ],
+      "proofs": [
+        "焓流平均与压降功率"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-56",
+      "title": "验证、确认与不确定度：GCI",
+      "checked_concepts": [
+        "代码验证",
+        "解验证",
+        "实验确认",
+        "Richardson与GCI"
+      ],
+      "proofs": [
+        "三网格外推与制造解源项"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-57",
+      "title": "完整案例：层流加热圆管",
+      "checked_concepts": [
+        "充分发展",
+        "恒热流",
+        "入口效应",
+        "解析验证"
+      ],
+      "proofs": [
+        "抛物线速度及 Nu=48/11 的完整推导"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-58",
+      "title": "完整案例：湍流加热通道",
+      "checked_concepts": [
+        "三维通道",
+        "入口湍流",
+        "匹配网格",
+        "敏感性"
+      ],
+      "proofs": [
+        "总功率与混合出口温升"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "三维软件案例为待执行规格；本次未运行完整 CFD 求解器或进行实验确认"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-59",
+      "title": "完整案例：共轭散热与自然对流",
+      "checked_concepts": [
+        "体积热源",
+        "接触",
+        "热点",
+        "浮力",
+        "辐射"
+      ],
+      "proofs": [
+        "热阻热容启动模型"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "三维软件案例为待执行规格；本次未运行完整 CFD 求解器或进行实验确认"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-60",
+      "title": "仿真与实验对齐：走向 AI 研究",
+      "checked_concepts": [
+        "观测算子",
+        "传感器响应",
+        "可辨识性",
+        "数据划分"
+      ],
+      "proofs": [
+        "一阶探头响应与总热阻非唯一性"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-61",
+      "title": "可运行项目：从零实现有限体积",
+      "checked_concepts": [
+        "三对角求解",
+        "面通量",
+        "解析误差",
+        "网格阶数"
+      ],
+      "proofs": [
+        "一维输运解析解与守恒矩阵组装"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "教学模型适用范围见正文，不能替代具体设备验证"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-62",
+      "title": "软件实操与综合交付",
+      "checked_concepts": [
+        "OpenFOAM版本",
+        "案例目录",
+        "量纲",
+        "复现清单"
+      ],
+      "proofs": [
+        "运动学压力向物理压差的转换"
+      ],
+      "changes": [
+        "新增严谨定义、条件、通俗解释、数值例题和展开式习题解析",
+        "区分物理模型假设、可推导关系与未执行的软件案例"
+      ],
+      "remaining_limits": [
+        "三维软件案例为待执行规格；本次未运行完整 CFD 求解器或进行实验确认"
+      ]
     }
   ],
   "coverage_map": [
@@ -1014,6 +1636,60 @@
         "fluid-mechanics-04",
         "fluid-mechanics-15",
         "fluid-mechanics-28"
+      ]
+    },
+    {
+      "reference_topics": "09 · 仿真问题与前处理：物理问题、数学模型、数值解、关注量；连续性、动量、能量、Boussinesq近似；Re、Pr、Pe、Ra、Ri、Br；计算域、质量指标、膨胀层、首中心；Dirichlet、Neumann、Robin、压力基准",
+      "lesson_ids": [
+        "fluid-mechanics-39",
+        "fluid-mechanics-40",
+        "fluid-mechanics-41",
+        "fluid-mechanics-42",
+        "fluid-mechanics-43"
+      ]
+    },
+    {
+      "reference_topics": "10 · 离散与压力速度耦合：控制体、面通量、线性化、半单元边界；一致性、稳定性、有界性、数值扩散；连续约束、压力修正、交错与同位网格",
+      "lesson_ids": [
+        "fluid-mechanics-44",
+        "fluid-mechanics-45",
+        "fluid-mechanics-46"
+      ]
+    },
+    {
+      "reference_topics": "11 · 湍流与近壁传热：平均、脉动、Reynolds应力、涡黏假设；k、耗散率、标准模型、RNG与realizable；比耗散率、混合函数、剪切应力限制、SA；摩擦速度、黏性底层、对数律、壁函数；滤波、亚格子闭合、混合模型、统计平均；湍流热通量、梯度扩散、分子与湍流Pr",
+      "lesson_ids": [
+        "fluid-mechanics-47",
+        "fluid-mechanics-48",
+        "fluid-mechanics-49",
+        "fluid-mechanics-50",
+        "fluid-mechanics-51",
+        "fluid-mechanics-52"
+      ]
+    },
+    {
+      "reference_topics": "12 · 多物理与可信度：界面守恒、接触温跳、热阻、辐射；残差、代数误差、松弛、时间尺度；混合温度、局部换热系数、Darcy摩擦、泵功；代码验证、解验证、实验确认、Richardson与GCI",
+      "lesson_ids": [
+        "fluid-mechanics-53",
+        "fluid-mechanics-54",
+        "fluid-mechanics-55",
+        "fluid-mechanics-56"
+      ]
+    },
+    {
+      "reference_topics": "13 · 完整案例与实验：充分发展、恒热流、入口效应、解析验证；三维通道、入口湍流、匹配网格、敏感性；体积热源、接触、热点、浮力、辐射；观测算子、传感器响应、可辨识性、数据划分",
+      "lesson_ids": [
+        "fluid-mechanics-57",
+        "fluid-mechanics-58",
+        "fluid-mechanics-59",
+        "fluid-mechanics-60"
+      ]
+    },
+    {
+      "reference_topics": "14 · 程序与软件实操：三对角求解、面通量、解析误差、网格阶数；OpenFOAM版本、案例目录、量纲、复现清单",
+      "lesson_ids": [
+        "fluid-mechanics-61",
+        "fluid-mechanics-62"
       ]
     }
   ]

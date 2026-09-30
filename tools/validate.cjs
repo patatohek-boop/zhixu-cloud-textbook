@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),asse
 const root=path.resolve(__dirname,'..'),ctx={window:{}};
 vm.runInNewContext(fs.readFileSync(path.join(root,'site/assets/data.js'),'utf8'),ctx);
 const katex=require(path.join(root,'site/assets/vendor/katex/katex.min.js'));
-const {LABS}=require(path.join(root,'site/assets/labs.js'));
+const {LABS}=require(path.join(root,'site/assets/cfd-labs.js'));
 let count=0,formulas=0,errors=[];
 for(const course of ctx.window.COURSES)for(const l of course.chapters){
  count++;

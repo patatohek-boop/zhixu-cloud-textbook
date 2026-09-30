@@ -1,0 +1,16 @@
+/* A full route through 24 independently linked lessons. */
+(()=>{'use strict';
+ const ranges=[
+  [39,43,'把物理问题写清楚','仿真要回答什么？边界是否真的代表实验？','交付问题契约：几何、单位、工质、热源、边界、关注量、先验估计和验证资料。','cfd-yplus'],
+  [44,46,'理解软件在求解什么','守恒、稳定、准确和迭代收敛有什么区别？','手写单元通量平衡；解释格式与压力速度耦合，检查网格 Péclet 数。','cfd-upwind'],
+  [47,52,'选择湍流与近壁模型','哪些关系能推导，哪些依赖经验闭合？','说明为何选择 RANS/LES；记录模型变体、入口湍流、近壁方法、y⁺ 和热流闭合。','cfd-yplus'],
+  [53,56,'让温度与误差都有账可查','残差很小，为什么热点仍可能不可信？','提交质量和热量收支、监测历史、三网格研究、时间步检查及适用范围。','cfd-grid'],
+  [57,60,'做完案例，再对齐实验','解析解、模拟场和传感器读数怎样比较？','完成加热圆管、湍流通道和共轭散热案例设计；把观测算子与独立实验列入验证计划。','cfd-cht'],
+  [61,62,'复算程序，交付研究','别人能从输入重建你的结论吗？','运行有限体积程序，提交误差与通量表；按明确版本练习软件，保存案例和复算说明。','cfd-upwind']
+ ];
+ const stages=ranges.map(([a,b,title,question,deliverable,lab])=>({title,question,deliverable,lab,ids:Array.from({length:b-a+1},(_,i)=>'fluid-mechanics-'+(a+i))}));
+ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ function render(courses,completed=[]){const lessons=new Map(courses.flatMap(c=>c.chapters.map(l=>[l.id,l]))),first=stages.flatMap(s=>s.ids).find(id=>!completed.includes(id))||'fluid-mechanics-39';
+ return `<main class="page research-page" id="main" tabindex="-1"><header class="research-hero"><div class="eyebrow">FLOW · HEAT · SIMULATION</div><h1>从物理问题，到可信的仿真。</h1><p class="lead">24 节专项课，把控制方程、网格、湍流模型、流固换热、验证与实验串成完整学习流程。先严谨定义，再通俗解释；用推导和可运行程序核对图像。</p><div class="button-row"><a class="primary" href="#/course/fluid-mechanics/${first}">开始流动换热仿真 →</a><a class="secondary" href="#/course/fluid-mechanics">查看流体力学全目录</a></div><p class="muted small">基础篇 38 节＋仿真专项 24 节；4 个新交互实验。课程结构与离线 App 保持一致。</p></header><section class="wide-note"><h2>先修桥梁</h2><p>先回看 <a class="text-link" href="#/course/fluid-mechanics/fluid-mechanics-27">数值流体基础</a>、<a class="text-link" href="#/course/heat-transfer">传热学</a>与<a class="text-link" href="#/course/linear-algebra">线性代数</a>。不熟悉代码时，从<a class="text-link" href="#/course/python">Python 基础</a>开始。</p><p>数学关系提供推导；湍流闭合说明经验假设与适用范围。交互图为教学模型，完整三维案例需在选定软件中执行并验证。</p></section><div class="research-stages">${stages.map((s,i)=>`<section class="research-stage simulation-stage" aria-labelledby="simulation-stage-${i}"><div class="research-stage-label"><span>阶段 ${i+1}</span><span>${s.ids.filter(id=>completed.includes(id)).length} / ${s.ids.length} 节已记录完成</span></div><h2 id="simulation-stage-${i}">${s.title}</h2><p class="research-question">${s.question}</p><nav class="research-lessons" aria-label="仿真阶段${i+1}课文">${s.ids.map(id=>`<a href="#/course/fluid-mechanics/${id}"><span class="research-check" aria-label="${completed.includes(id)?'已记录完成':'未记录完成'}">${completed.includes(id)?'✓':'○'}</span>${esc(lessons.get(id)?.title||id)}</a>`).join('')}</nav><a class="research-lab-link" href="#/labs/${s.lab}">配合交互实验理解 →</a><div class="research-deliverable"><b>这一阶段应交出的成果</b><p>${s.deliverable}</p></div></section>`).join('')}</div><section class="wide-note"><h2>向 AI × 传热 × 实验继续</h2><p>保留几何、边界、模型、网格与质量标签，把仿真变成有来源的数据。先验证传统求解与测量，再做代理、反演、实验设计和物理约束学习。</p><a class="text-link" href="#/research">进入研究路线 →</a></section><section class="wide-note"><h2>覆盖范围</h2><p>重点是单相连续介质流动换热。多相与相变、燃烧、高焓可压缩、复杂参与性辐射、流固结构和伴随优化需继续专门学习。完成标记只记录阅读进度，不代表工程资质或独立实验验证。</p></section></main>`;}
+ window.SimulationGuide=Object.freeze({render,stages});
+})();

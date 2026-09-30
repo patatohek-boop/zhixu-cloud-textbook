@@ -26,8 +26,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class TextbookSmokeTest extends Instrumentation {
     private static final String RECORD_KEY = "zhixu-learning-v1";
     private static final String LESSON = "calculus-03";
-    private static final int TOTAL = 9;
-    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.2.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
+    private static final int TOTAL = 10;
+    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.3.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
     private Activity reader;
     private WebView web;
     private int number;
@@ -55,6 +55,7 @@ public final class TextbookSmokeTest extends Instrumentation {
             runCase("revisionAndNavigation", this::revision);
             runCase("conceptNavigationAndMobileLayout", this::concepts);
             runCase("researchRouteAndOfflineLabs", this::researchLabs);
+            runCase("simulationAndOfflineLabs", this::simulationLabs);
             runCase("invalidRouteIsSafe", this::invalidRoute);
             runCase("backupRoundTripAndInjection", this::backups);
             runCase("notesSurviveRelaunch", this::relaunch);
@@ -157,7 +158,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     private void permissions() throws Exception {
         PackageInfo info = getTargetContext().getPackageManager().getPackageInfo(
             getTargetContext().getPackageName(), PackageManager.GET_PERMISSIONS);
-        require("1.2.0".equals(info.versionName) && info.versionCode == 3, "App version does not match the textbook revision");
+        require("1.3.0".equals(info.versionName) && info.versionCode == 4, "App version does not match the textbook revision");
         String[] requested = info.requestedPermissions == null ? new String[0] : info.requestedPermissions;
         for (String dangerous : new String[]{"android.permission.INTERNET", "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA", "android.permission.RECORD_AUDIO"})
@@ -212,6 +213,24 @@ public final class TextbookSmokeTest extends Instrumentation {
         } finally {
             screenshot.recycle();
         }
+    }
+
+    private void simulationLabs() throws Exception {
+        evaluate("location.hash='#/simulation'");
+        waitUntil("document.querySelectorAll('.simulation-stage').length===6", "Simulation route failed offline");
+        require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.simulation-stage .research-lessons a').length===24 && window.COURSES.find(c=>c.id==='fluid-mechanics').chapters.length===62")), "CFD lessons missing");
+        for (String lab : new String[]{"cfd-upwind", "cfd-yplus", "cfd-grid", "cfd-cht"}) {
+            evaluate("location.hash='#/labs/" + lab + "'");
+            waitUntil("document.querySelector('.lab-result') && document.querySelector('.lab-chart svg')", "CFD lab missing");
+            Object before = evaluate("document.querySelector('.lab-result').textContent");
+            evaluate("(function(){var e=document.querySelector('[data-param]');e.value=e.max;e.dispatchEvent(new Event('input',{bubbles:true}));})()");
+            require(!before.equals(evaluate("document.querySelector('.lab-result').textContent")), "CFD control does not update");
+            require(Boolean.TRUE.equals(evaluate("!/NaN|Infinity|undefined/.test(document.querySelector('.lab-result').textContent) && document.documentElement.scrollWidth<=innerWidth+1")), "CFD output or layout invalid");
+            if ("cfd-cht".equals(lab)) saveReaderScreenshot("simulation-screen.png");
+        }
+        evaluate("location.hash='#/course/fluid-mechanics/fluid-mechanics-57'");
+        waitUntil("document.querySelector('#lesson-body') && document.querySelector('#lesson-body').textContent.includes('48/11')", "Pipe derivation missing");
+        require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0 && document.querySelectorAll('#lesson-body .katex').length>20")), "CFD formula rendering failed");
     }
 
     private void researchLabs() throws Exception {
