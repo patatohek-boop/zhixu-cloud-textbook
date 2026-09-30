@@ -56,7 +56,11 @@ $C$ 对称半正定，[Rayleigh 商定理](#/course/linear-algebra/linear-algebr
 
 ### 多个方向的总方差上界
 
-更一般地，令 $Q$ 有 $k$ 个正交列，保留方差和为 $\operatorname{tr}(Q^\mathsf TCQ)$。写 $C=V\Lambda V^\mathsf T$，令 $w_i=\|Q^\mathsf Tv_i\|^2$，则 $0\le w_i\le1$、$\sum_iw_i=k$。因此 $\sum_i\lambda_iw_i\le\sum_{i=1}^k\lambda_i$：把分配给较小特征值的权重移到尚未满一的较大特征值，和不会减小。前 $k$ 个特征方向取到上界，证明整体子空间最优性。
+更一般地，令 $Q$ 有 $k$ 个**单位正交列**，即 $Q^\mathsf TQ=I_k$，保留方差和为 $\operatorname{tr}(Q^\mathsf TCQ)$。写 $C=V\Lambda V^\mathsf T$，令 $w_i=\|Q^\mathsf Tv_i\|^2$，由于 $QQ^\mathsf T$ 是正交投影，单位向量投影后的长度不超过 1，所以 $0\le w_i\le1$；又由迹的循环性质，$\sum_iw_i=\operatorname{tr}(Q^\mathsf TQ)=k$。
+
+因此 $\sum_i\lambda_iw_i\le\sum_{i=1}^k\lambda_i$：把分配给较小特征值的权重移到尚未满一的较大特征值，和不会减小。前 $k$ 个特征方向取到上界，证明整体子空间最优性。
+
+单位长度条件不可缺少。例如 $C=I_2$，只取一列 $Q=(2,0)^\mathsf T$，则 $\operatorname{tr}(Q^\mathsf TCQ)=4$，大于最大特征值 1；任意缩放列向量并不表示保留了更多方差。
 
 ## 最佳低秩近似：谱范数的完整证明
 令 $p=\min(m,n)$，奇异值补零并按 $\sigma_1\ge\cdots\ge\sigma_p\ge0$ 排序。先证明 $0\le k<p$ 的情形；若 $k\ge p$，取 $B=A$ 已有零误差。若 $k$ 已不小于 $\operatorname{rank}A$，截断也精确重构。设 $\operatorname{rank}B\le k$，考虑 $V_{k+1}=\operatorname{span}(v_1,\ldots,v_{k+1})$。$B$ 限制到这个 $k+1$ 维空间，像维数至多 $k$，秩零度定理给一个单位 $x\in V_{k+1}$ 满足 $Bx=0$。于是
