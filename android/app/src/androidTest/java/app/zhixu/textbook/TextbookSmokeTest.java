@@ -234,7 +234,10 @@ public final class TextbookSmokeTest extends Instrumentation {
             if ("heat-modes".equals(lab)) saveReaderScreenshot("research-screen.png");
         }
         evaluate("location.hash='#/course/machine-learning/machine-learning-42'");
-        waitUntil("document.querySelector('#lesson-body h3') && document.querySelectorAll('.katex').length>10", "PINN lesson did not render offline");
+        // Lesson 42 contains exactly nine displayed formulas; require all of them in the correct lesson.
+        waitUntil("window.ZHIXU.state.last==='machine-learning-42' && document.querySelector('#lesson-body h3')"
+            + " && document.querySelector('#main h1').textContent==='PINN：把热方程写进学习目标'"
+            + " && document.querySelectorAll('#lesson-body .katex').length===9", "PINN lesson did not render offline");
         require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0")), "PINN formulas failed offline");
         evaluate("location.hash='#/course/calculus/calculus-03'");
         waitUntil("document.querySelector('#note-text')", "Could not return from research labs");
