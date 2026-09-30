@@ -34,6 +34,8 @@ jobs:
           python tools/build.py
           node tools/validate.cjs
           node tools/test-learning-state.cjs
+          node tools/test-research-labs.cjs
+          python tools/verify_research_foundations.py
           python tools/verify_fluid.py
           python tools/verify_thermal.py
           python tools/security_check.py
@@ -98,6 +100,10 @@ jobs:
           grep -q ZHIXU_SMOKE_SUCCESS work/android-smoke.txt
           adb exec-out run-as app.zhixu.textbook cat files/reader-screen.png > work/android-reader.png
           test -s work/android-reader.png
+          adb exec-out run-as app.zhixu.textbook cat files/concept-screen.png > work/android-concepts.png
+          test -s work/android-concepts.png
+          adb exec-out run-as app.zhixu.textbook cat files/research-screen.png > work/android-research.png
+          test -s work/android-research.png
           adb shell am start -W -n app.zhixu.textbook/.MainActivity
           sleep 15
           adb exec-out screencap -p > work/android-home.png
@@ -108,6 +114,8 @@ jobs:
           path: |
             work/android-smoke.txt
             work/android-reader.png
+            work/android-concepts.png
+            work/android-research.png
             work/android-home.png
             work/emulator.log
             work/android-logcat.txt

@@ -3,7 +3,7 @@
   "id": "python-11",
   "title": "模块、包与虚拟环境",
   "group": "03 · 可靠的程序实践",
-  "minutes": 30,
+  "minutes": 50,
   "level": "基础",
   "tags": [
     "模块",
@@ -31,17 +31,29 @@
     "explanation": "__name__ 在直接运行时为 __main__，可据此控制程序入口。"
   },
   "lab": null,
-  "revision": "2026-09 · 定义、条件与论证逐章修订"
+  "revision": "2026-09-28 · 概念分段、教学先修与练习复核"
 }
 ---
 
 ## 先定义组织层级
-**模块**是具有独立名字空间的代码组织单位，常由一个 `.py` 文件实现，也可能来自内建或扩展模块。**包**是可包含子模块的模块；普通包常用 `__init__.py`，命名空间包允许没有该文件。**导入**负责寻找、初始化并提供模块对象，通常会用 `sys.modules` 缓存已载入的模块。
+**模块**是具有独立名字空间的代码组织单位，常由一个 `.py` 文件实现，也可能来自内建或扩展模块。
+
+### 包组织多个模块
+
+**包**是可包含子模块的模块；普通包常用 `__init__.py`，命名空间包允许没有该文件。
+
+### 导入会执行初始化
+
+**导入**负责寻找、初始化并提供模块对象，通常会用 `sys.modules` 缓存已载入的模块。
 
 **虚拟环境**是一组解释器入口和隔离的第三方包位置，它不隔离操作系统权限，也不把不可信代码变安全。通俗地说，它像给项目分开工具柜，不是给程序建防护墙。
 
 ## 入口保护为什么有效
-在普通的 `python conversions.py` 运行方式中，文件的 `__name__` 为 `"__main__"`，函数定义先创建对象，末尾条件为真，所以调用 `main()`。在另一个程序首次 `import conversions` 时，同样先执行顶层定义，但 `__name__` 为模块名 `"conversions"`，末尾条件为假，所以不启动示例计算。
+在普通的 `python conversions.py` 运行方式中，文件的 `__name__` 为 `"__main__"`，函数定义先创建对象，末尾条件为真，所以调用 `main()`。
+
+### 被其他模块导入时
+
+在另一个程序首次 `import conversions` 时，同样先执行顶层定义，但 `__name__` 为模块名 `"conversions"`，末尾条件为假，所以不启动示例计算。
 
 注意：保护的只是缩进在条件里的行为；写在它上方的顶层 `print`、文件写入或网络请求仍会在首次导入时发生。不要误以为添加这一行便消除了全部导入副作用。
 
@@ -78,6 +90,50 @@ if __name__ == "__main__":
 同一电脑可能同时安装系统 Python、项目虚拟环境和其他工具附带的解释器。编辑器选择的解释器与终端默认命令可能不同，因此“已经安装包却导入失败”首先应检查二者是否一致。可查看 sys.executable，确认实际启动路径。
 安装依赖后还应记录版本，尤其当代码依赖某个接口行为时。更新依赖前阅读变更说明，在独立环境运行项目检查，再决定是否更新主环境。把整个环境目录复制到另一台电脑通常不如按依赖说明重建可靠。
 模块之间应尽量保持依赖方向清楚。两个模块互相导入并在顶层使用尚未完成初始化的对象，可能造成循环导入问题。提取共同的数据结构或接口到第三个模块，往往比调整导入顺序更能解决设计上的纠缠。
+
+## 为后面的科学计算课准备同一个环境
+
+NumPy、pandas、Matplotlib 与 scikit-learn 是第三方包，和 `math`、`csv` 等标准库不同。请先把终端切换到存放课程脚本的项目文件夹，创建环境。创建本身不需要下载第三方包；下面的安装步骤需要网络或事先准备好的包。
+
+### 第一步：创建项目环境
+
+在系统终端运行 `python -m venv .venv`。若本机入口是 `py` 或 `python3`，此处使用第1节已确认的命令。`.venv` 是项目文件夹中保存这个环境的位置。
+
+### 第二步：明确使用该环境的解释器安装
+
+Windows PowerShell：
+
+```text
+.\.venv\Scripts\python.exe -m pip install numpy pandas matplotlib scikit-learn
+```
+
+macOS/Linux：
+
+```text
+./.venv/bin/python -m pip install numpy pandas matplotlib scikit-learn
+```
+
+这种写法直接指定环境里的解释器，无需先激活，也不会因另一个同名 `pip` 把库装进其他环境。发行包名 `scikit-learn` 对应代码中的导入名 `sklearn`，二者拼写不同。
+
+### 第三步：核对入口、导入和版本
+
+把下面保存为 `check_science.py`。Windows 用 `.\.venv\Scripts\python.exe check_science.py`，macOS/Linux 用 `./.venv/bin/python check_science.py`；后面科学课脚本也沿用这同一个入口。
+
+```python
+import sys
+import numpy as np
+import pandas as pd
+import matplotlib
+import sklearn
+
+print("解释器:", sys.executable)
+print("NumPy:", np.__version__)
+print("pandas:", pd.__version__)
+print("Matplotlib:", matplotlib.__version__)
+print("scikit-learn:", sklearn.__version__)
+```
+
+若出现 `ModuleNotFoundError`，先核对报错的导入名和 `sys.executable`，再用同一解释器的 `-m pip show 包名` 检查安装。不要先到处重复安装。运行成功后用该解释器的 `-m pip freeze > requirements.txt` 保存本次解析到的版本；这个文件记录实际环境，不能保证任意 Python 版本和操作系统都兼容。环境机制与命令依据见 [Python 官方虚拟环境教程](https://docs.python.org/3/tutorial/venv.html)。
 
 ## 练习
 1. 为什么模块的输入提示应放在 main 中而非顶层？

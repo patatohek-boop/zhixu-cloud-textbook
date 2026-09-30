@@ -2,7 +2,7 @@
 
 面向初学者、可以持续修订的中文云教材。包含微积分、线性代数、工程热力学、传热学、流体力学、Python 学习和机器学习。
 
-当前源码为 2026 年 9 月 28 日 1.2.0 修订版，共 217 节（保留原有 182 节及1.1.0新增的35节）。本轮逐篇改善概念分段、先修顺序与推导步骤，并修复教学审读发现的具体问题。正文约 26.2 万汉字，配有定义、通俗解释、证明或推导、例题与解析练习、28 张示意图和 11 个交互实验。公式、代码、元数据另计；准确统计见 `site/assets/content-stats.json`。
+当前源码为 2026 年 9 月 30 日 1.2.0 修订版，共 229 节。保留已有 217 节的稳定编号与教学审读修订，新增 12 节 AI × 传热与实验进阶课，机器学习共 47 节。正文提供严谨定义、通俗解释、条件与证明／推导、完整算例和解析练习；配有 29 张原创示意图、17 个交互实验，以及串联先修与研究任务的专项路线。准确字数和课程统计见 `site/assets/content-stats.json`。
 
 **覆盖定位：本科核心知识体系与部分高级主题导读。尚未经过外部专业教师逐章审校，不宣称穷尽七个学科所有知识。** 关键工程、科研或考试结论请结合引用资料核验。每科标注结构参考和延伸阅读；本站并非 MIT、Stanford 或北航的官方教材或翻译。
 
@@ -23,6 +23,8 @@ python -m http.server 8765 --directory site
 安卓离线 App：[已发布的正式 APK](https://github.com/patatohek-boop/zhixu-cloud-textbook/releases)。源码版本与已发布版本可能不同，请以发布页的版本号和检查结果为准。安装、备份迁移和持续构建说明见 [ANDROID.md](ANDROID.md)。
 
 - 课程书架、分组目录、前后课导航、先修关系与学习路线。
+- [AI × 传热与实验研究路线](https://patatohek-boop.github.io/zhixu-cloud-textbook/#/research)：测量与标定、可辨识性、贝叶斯反演、GP 与多保真、实验设计、PINN、POD、神经算子、热像与可复现项目。
+- 六个引导实验连接热模态、冷却反演、Fisher 信息、不确定性区间、物理残差和按实验批次验证；先预测，再分步观察与复算。
 - 全文搜索、公式排版、代码复制、折叠例题解析、即时自测反馈。
 - 导数、积分、矩阵、梯度、卡诺热机、导热、冷却、伯努利、回归、梯度下降与 Python 循环等交互实验。
 - 手机竖屏阅读、可展开目录、深浅色主题、字号调整、专注模式与打印。
@@ -48,6 +50,7 @@ python -m http.server 8765 --directory site
 python tools/build.py
 node tools/validate.cjs
 node tools/test-learning-state.cjs
+node tools/test-research-labs.cjs
 python tools/verify_fluid.py
 python tools/verify_thermal.py
 python tools/security_check.py
@@ -76,6 +79,7 @@ content/               可维护的课文与课程元数据
 site/index.html        网站入口
 site/assets/app.js     阅读、搜索与学习记录
 site/assets/labs.js    数学与工程交互实验
+site/assets/research-guide.js  AI 传热研究路线
 site/assets/diagrams/  原创教学示意图
 site/assets/vendor/    公式、Markdown、安全过滤组件及其许可
 tools/build.py         内容校验与生成
@@ -89,7 +93,7 @@ version.json          网站与离线教材的统一内容版本
 
 用小而清晰的更新改善教材：先严谨定义，再通俗解释；定理先列假设，再写证明，标明每一步所用结论，并给例题、练习与解析。物理经验定律不能包装成数学定理，模型推导应列假设、边界与量纲。编程规则应区分语言保证与实现细节。来源应具体到讲义或章节，不把目录占位、证明思路或高级导读标成完整证明。
 
-本轮具体发现与处理见 [教学审读报告](reviews/teaching-review-2026-09-28.md)。更新记录见 [CHANGELOG.md](CHANGELOG.md)，内容审校说明见 [CONTENT_REVIEW.md](CONTENT_REVIEW.md)。第三方组件许可见 [THIRD_PARTY.md](THIRD_PARTY.md) 及对应许可文件。教材内容的后续公开许可由仓库所有者决定。
+逐章修订见 [教学审读报告](reviews/teaching-review-2026-09-28.md)，新增研究方向和可视化见 [AI 传热扩展核对记录](reviews/research-review-2026-09-30.md)。更新记录见 [CHANGELOG.md](CHANGELOG.md)，内容审校说明见 [CONTENT_REVIEW.md](CONTENT_REVIEW.md)。第三方组件许可见 [THIRD_PARTY.md](THIRD_PARTY.md) 及对应许可文件。教材内容的后续公开许可由仓库所有者决定。
 
 ## 安全与笔记隐私
 

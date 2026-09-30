@@ -38,7 +38,13 @@
 
 ## 严谨定义与记号
 
-真实气体在给定区域用平衡状态方程 $p=p(T,v)$ 描述；比内能 $u$、比焓 $h=u+pv$ 不一定只依赖温度。定容比热 $c_v=(\partial u/\partial T)_v$，定压比热 $c_p=(\partial h/\partial T)_p$。Joule–Thomson系数 $\mu_{JT}=(\partial T/\partial p)_h$，单位K/Pa，描述等焓小压降的温度响应，不是流体黏度。
+### 真实气体状态与热性质
+
+真实气体在给定区域用平衡状态方程 $p=p(T,v)$ 描述；比内能 $u$、比焓 $h=u+pv$ 不一定只依赖温度。定容比热 $c_v=(\partial u/\partial T)_v$，定压比热 $c_p=(\partial h/\partial T)_p$。
+
+### 等焓温度响应与反转曲线
+
+Joule–Thomson系数 $\mu_{JT}=(\partial T/\partial p)_h$，单位K/Pa，描述等焓小压降的温度响应，不是流体黏度。
 
 反转曲线是 $\mu_{JT}=0$ 的状态集合；它不是“某种气体永远冷却或永远升温”的分界温度常数，通常也随压力改变。
 

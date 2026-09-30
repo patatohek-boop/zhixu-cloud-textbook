@@ -1,0 +1,56 @@
+/* Local, keyboard-operable research labs. Existing .lab-* hooks stay compatible. */
+.research-lab { --lab-orange: #bd7148; overflow-wrap: anywhere; }
+.research-lab .lab-chart { min-width: 0; margin-top: 18px; }
+.research-lab .lab-chart > .lab-visual + .lab-visual { margin-top: 15px; }
+.research-lab .lab-visual { max-width: 100%; height: auto; }
+.research-lab .lab-chart-label { margin: 6px 0 18px; font-size: 13px; color: var(--muted); }
+.research-lab .lab-chart-label:last-child { margin-bottom: 0; }
+.research-lab .lab-prediction { border: 1px solid var(--line); border-radius: 9px; background: var(--bg); }
+.research-lab .lab-prediction summary { padding: 12px 14px; cursor: pointer; font-size: 14px; font-weight: 600; }
+.research-lab .lab-prediction p { padding: 0 14px 13px; margin: 0; font-size: 14px; }
+.research-lab .lab-controls { gap: 14px 22px; }
+.research-lab .lab-controls label { min-width: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; }
+.research-lab .lab-controls label > span { display: inline; padding-right: 6px; }
+.research-lab .lab-controls output { padding-left: 7px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.research-lab .lab-controls input[type=range] { display: block; width: 100%; min-height: 42px; height: 42px; margin: 1px 0; touch-action: pan-y; }
+.research-lab .lab-controls small { display: block; font-size: 12px; line-height: 1.6; color: var(--muted); clear: both; }
+.research-lab .lab-transport { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 16px 0 0; }
+.research-lab button { min-height: 44px; white-space: normal; }
+.research-lab .lab-play { border-color: var(--accent); color: var(--accent); }
+.research-lab .lab-play[aria-pressed=true] { background: var(--soft); }
+.research-lab .lab-play-state { flex-basis: 100%; font-size: 12px; color: var(--muted); }
+.research-lab .lab-result { line-height: 1.8; font-variant-numeric: tabular-nums; }
+.research-lab .lab-legend { font-size: 13px; line-height: 1.8; }
+.research-lab .lab-story { margin-top: 22px; padding: 16px; border: 1px solid var(--line); border-radius: 10px; }
+.research-lab .lab-step-header { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; }
+.research-lab .lab-step-count { color: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: .07em; }
+.research-lab .lab-step-header > div { display: flex; gap: 8px; }
+.research-lab .lab-step-header button { width: 44px; padding: 7px; }
+.research-lab .lab-story h3 { font-size: 17px; }
+.research-lab .lab-step-body { font-size: 14px; margin-bottom: 12px; }
+.research-lab .lab-formula { border-left: 3px solid var(--accent); background: var(--bg); padding: 10px 12px; font-family: "Cambria Math", "STIX Two Math", Georgia, serif; font-size: 16px; line-height: 1.7; overflow-wrap: anywhere; }
+.research-lab .lab-preset { font-size: 13px; }
+.research-lab .lab-assumptions { line-height: 1.85; padding-top: 7px; }
+.research-lab .lab-sources { border-top: 1px solid var(--line); margin-top: 16px; padding-top: 12px; font-size: 12px; color: var(--muted); }
+.research-lab .lab-sources summary { min-height: 36px; cursor: pointer; }
+.research-lab .lab-sources ul { padding-left: 20px; margin: 8px 0 0; }
+.research-lab .lab-sources a { text-decoration: underline; text-underline-offset: 3px; }
+.research-lab .lab-sources p { margin: 0; }
+@media (max-width: 540px) {
+ .research-lab.lab-card { padding: 16px 12px; }
+ .research-lab .lab-controls { grid-template-columns: 1fr; gap: 10px; }
+ .research-lab .lab-transport { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+ .research-lab .lab-play-state { grid-column: 1 / -1; }
+ .research-lab .lab-story { padding: 13px; }
+ .research-lab .lab-prediction summary { padding: 12px; }
+ .research-lab .lab-preset { width: 100%; }
+ .research-lab .lab-formula { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+ .research-lab, .research-lab * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+@media print {
+ .research-lab .lab-transport, .research-lab .lab-step-header button, .research-lab .lab-preset { display: none !important; }
+ .research-lab .lab-prediction p { display: block !important; }
+ .research-lab .lab-story { break-inside: avoid; }
+}

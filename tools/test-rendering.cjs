@@ -2,7 +2,7 @@ const {JSDOM,VirtualConsole}=require(process.env.ZHIXU_JSDOM_MODULE || 'jsdom');
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'../site');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const scripts=[...html.matchAll(/<script defer src="([^"]+)"/g)].map(x=>x[1]);
+const scripts=[...html.matchAll(/<script defer src="([^"]+)"/g)].map(x=>x[1].split('?')[0]);
 const hostile='</textarea><img src=x onerror="alert(1)"><script>alert(1)</script>';
 function app(hash='',stored,android=false){
  const dom=new JSDOM(html,{url:(android?'https://appassets.androidplatform.net/assets/www/index.html':'https://example.test/textbook/')+hash,runScripts:'outside-only',virtualConsole:new VirtualConsole()});
@@ -52,12 +52,32 @@ for(const course of w.COURSES)for(const l of course.chapters){
  for(const s of [l.content,l.quiz.question,...l.quiz.options,l.quiz.explanation]){
   const fragment=JSDOM.fragment(w.ZHIXU.markdown(s));
   assert.equal(fragment.querySelectorAll('.math-error').length,0,l.id);
+  const textNodes=fragment.ownerDocument.createTreeWalker(fragment,4);
+  let textNode;
+  while((textNode=textNodes.nextNode())){
+   if(textNode.parentElement?.closest('pre,code,.katex,math'))continue;
+   assert.ok(!textNode.nodeValue.includes('**'),l.id+' has unparsed bold delimiters: '+textNode.nodeValue.trim());
+  }
   formulas+=fragment.querySelectorAll('.katex').length;
  }
 }
 assert.equal(lessons,w.TEXTBOOK_VERSION.lessons);assert.ok(lessons>182);
 assert.ok(formulas>1265,'The expanded textbook must retain and extend the original mathematical content');
-assert.equal(w.TEXTBOOK_VERSION.version,'1.1.0');
+assert.equal(w.TEXTBOOK_VERSION.version,'1.2.0');
+w.location.hash='#/course/fluid-mechanics/fluid-mechanics-04';w.dispatchEvent(new w.HashChangeEvent('hashchange'));
+const conceptHeadings=[...d.querySelectorAll('#lesson-body h3')];
+assert.ok(conceptHeadings.some(h=>h.textContent.includes('压力中心')));
+assert.equal(d.querySelectorAll('#toc .toc-concept').length,conceptHeadings.length);
+assert.equal(d.querySelectorAll('#mobile-toc-list .toc-concept').length,conceptHeadings.length);
+assert.equal(new Set([...d.querySelectorAll('#lesson-body h2, #lesson-body h3')].map(h=>h.id)).size,d.querySelectorAll('#lesson-body h2, #lesson-body h3').length);
+let scrolledTo;
+w.HTMLElement.prototype.scrollIntoView=function(){scrolledTo=this.id;};
+const conceptLink=d.querySelector('#mobile-toc-list .toc-concept');
+conceptLink.click();
+assert.equal(scrolledTo,conceptLink.dataset.scroll);
+assert.equal(w.location.hash,'#/course/fluid-mechanics/fluid-mechanics-04','concept navigation must stay in the current lesson');
+assert.match(d.getElementById(scrolledTo).textContent,/形心/);
+w.HTMLElement.prototype.scrollIntoView=()=>{};
 w.location.hash='#/review/fluid-mechanics/fluid-mechanics-30';w.dispatchEvent(new w.HashChangeEvent('hashchange'));
 assert.ok(d.querySelector('#review-fluid-mechanics-30').open);
 assert.equal(d.querySelectorAll('.review-record').length,w.COURSES.find(c=>c.id==='fluid-mechanics').chapters.length);
@@ -74,6 +94,29 @@ for(const course of w.COURSES){
  const review=w.CONTENT_REVIEW.find(a=>a.course_id===course.id);
  for(const t of review.added_topics)assert.ok(d.querySelector('#main').textContent.includes(typeof t==='string'?t:t.title));
 }
+// The research route must resolve every prerequisite and preserve shared progress.
+w.location.hash='#/research';w.dispatchEvent(new w.HashChangeEvent('hashchange'));
+assert.equal(d.querySelectorAll('.research-stage').length,6);
+assert.ok(d.querySelector('[data-nav=research]').classList.contains('active'));
+for(const stage of w.ResearchGuide.stages){
+ for(const id of stage.ids)assert.ok(w.ZHIXU.all.some(l=>l.id===id),'Missing research prerequisite '+id);
+ assert.ok(Object.hasOwn(w.LABS,stage.lab),'Missing research lab '+stage.lab);
+}
+for(const a of d.querySelectorAll('.research-lessons a')){
+ const [,course,id]=a.getAttribute('href').split('/').slice(1);
+ assert.ok(w.COURSES.some(c=>c.id===course&&c.chapters.some(l=>l.id===id)),'Broken research route '+a.href);
+}
+const record=w.ZHIXU.all.find(l=>l.id==='machine-learning-36');
+const originalTitle=record.title;
+const source=w.COURSES.find(c=>c.id==='machine-learning').chapters.find(l=>l.id===record.id);
+source.title=hostile;w.dispatchEvent(new w.HashChangeEvent('hashchange'));
+assert.equal(d.querySelectorAll('.research-page img,.research-page script').length,0);
+assert.ok(d.querySelector('.research-page').textContent.includes(hostile));
+source.title=originalTitle;
+const progress=JSON.parse(w.ZHIXU.exportBackup());progress.completed.push('machine-learning-36');
+assert.equal(w.ZHIXU.importBackup(progress).ok,true);
+assert.equal(d.querySelector('a[href="#/course/machine-learning/machine-learning-36"] .research-check').textContent,'✓');
+assert.equal(d.querySelector('.research-hero .primary').getAttribute('href'),'#/course/machine-learning/machine-learning-37');
 w.location.hash='#/notebook';w.dispatchEvent(new w.HashChangeEvent('hashchange'));
 assert.equal(d.querySelectorAll('.saved-row img,.saved-row script').length,0);
 assert.ok(d.querySelector('.saved-row').textContent.includes(hostile));

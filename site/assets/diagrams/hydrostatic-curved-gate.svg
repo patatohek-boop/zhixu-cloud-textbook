@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="450" viewBox="0 0 820 450" role="img" aria-labelledby="title desc">
+<title id="title">四分之一圆柱闸门的静水分力</title><desc id="desc">自由液面过圆心，水在四分之一圆弧内侧。水平分力向右，竖直分力向下，压力微元沿各处半径。</desc>
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#236d89"/></marker><marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#bf602d"/></marker></defs>
+<rect width="820" height="450" rx="12" fill="#f7fbfc"/>
+<g font-family="sans-serif" fill="#173c4a" font-size="19">
+<text x="30" y="34" font-size="23" font-weight="bold">先分方向，再合成压力</text>
+<path d="M82 94H322A240 240 0 0 1 82 334Z" fill="#d8eef5"/>
+<path d="M82 94H350" stroke="#236d89" stroke-width="2" marker-end="url(#a)"/>
+<path d="M82 94V377" stroke="#236d89" stroke-width="2" marker-end="url(#a)"/>
+<path d="M322 94A240 240 0 0 1 82 334" stroke="#173c4a" stroke-width="5" fill="none"/>
+<text x="50" y="84">O</text><text x="358" y="100">x</text><text x="52" y="390">h</text><text x="120" y="80">自由液面 p = 0（表压）</text>
+<text x="111" y="158">水</text><text x="292" y="299">大气</text>
+<path d="M82 94L251.7 263.7" stroke="#86a6b1" stroke-dasharray="5 5"/>
+<text x="172" y="174">R</text>
+<g stroke="#236d89" stroke-width="3" marker-end="url(#a)"><path d="M302 186L326 196"/><path d="M252 264L286 298"/><path d="M174 316L190 355"/></g>
+<g stroke="#bf602d" stroke-width="3" marker-end="url(#b)"><path d="M184 254H371"/><path d="M184 254V386"/></g>
+<circle cx="184" cy="254" r="5" fill="#bf602d"/>
+<path d="M184 254L82 94" stroke="#bf602d" stroke-dasharray="4 5"/>
+<text x="300" y="243" fill="#a04b21">Fₓ →</text><text x="196" y="380" fill="#a04b21">Fₕ ↓</text>
+<path d="M82 254H173M184 94V242" stroke="#7d99a5" stroke-dasharray="4 4"/>
+<text x="24" y="258" font-size="16">2R/3</text>
+<g transform="translate(422 114)"><text y="0" font-weight="bold">水平分力</text><text y="34">投影为高 R、宽 b 的矩形</text><text y="66">Fₓ = ρgbR² / 2</text><text y="116" font-weight="bold">竖直分力</text><text y="150">上方液柱为四分之一圆柱</text><text y="182">Fₕ = ρgπR²b / 4，向下</text><text y="235" font-size="17">宽度 b 垂直于纸面。</text><text y="267" font-size="17">力的方向取决于水在哪一侧。</text></g>
+<text x="30" y="426" font-size="16" fill="#536f7b">每个微元压力沿半径，合力作用线也通过圆心；用这一点检查作用线。</text>
+</g></svg>

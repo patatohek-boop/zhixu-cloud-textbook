@@ -1,5 +1,5 @@
 """Validate Markdown lessons, generate a self-contained static data bundle. Python >=3.10."""
-import json, pathlib, re, sys
+import hashlib, json, pathlib, re, sys
 from urllib.parse import urlparse
 ROOT=pathlib.Path(__file__).resolve().parents[1]
 ORDER=['calculus','linear-algebra','thermodynamics','heat-transfer','fluid-mechanics','python','machine-learning']
@@ -28,6 +28,13 @@ def build():
             assert q['explanation'].strip(), f'Missing quiz explanation: {filename}'
             chapters.append(lesson); count+=1; char_count+=len(re.findall(r'[\u4e00-\u9fff]',content))
         course['chapters']=chapters; courses.append(course)
+    # Keep the standalone research companion identical to the runnable lesson.
+    research=next((l for c in courses for l in c['chapters'] if l['id']=='machine-learning-47'),None)
+    if research:
+        examples=re.findall(r'```python\s*\n(.*?)```',research['content'],re.S)
+        assert len(examples)==1, 'Research companion needs exactly one complete source example'
+        companion=ROOT/'examples/thermal-ai/cooling_research.py'
+        assert companion.is_file() and companion.read_text(encoding='utf-8').strip()==examples[0].strip(), 'Research companion is out of sync with lesson 47'
     version=json.loads((ROOT/'version.json').read_text(encoding='utf-8'))
     baseline=json.loads((ROOT/'reviews/baseline-1.0.json').read_text(encoding='utf-8'))
     assert set(baseline['lesson_ids']) <= ids, 'Existing lesson IDs must be preserved for learning records'
@@ -69,8 +76,17 @@ def build():
     bundle='/* Generated from content/ and reviews/ by tools/build.py. Do not edit. */\n'
     for name,value in [('COURSES',courses),('TEXTBOOK_VERSION',version),('CONTENT_REVIEW',reviews)]:
         bundle+='window.'+name+' = '+json.dumps(value,ensure_ascii=False,separators=(',',':'))+';\n'
-    target.write_text(bundle,encoding='utf-8')
+    target.write_text(bundle,encoding='utf-8',newline='\n')
     stats={'version':version['version'],'courses':len(courses),'lessons':count,'reviewed_lessons':version['reviewed'],'added_lessons':version['added_lessons'],'chinese_characters':char_count,'course_counts':{c['id']:len(c['chapters']) for c in courses}}
-    (ROOT/'site/assets/content-stats.json').write_text(json.dumps(stats,ensure_ascii=False,indent=2),encoding='utf-8')
+    (ROOT/'site/assets/content-stats.json').write_text(json.dumps(stats,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
+    # Content-addressed resource queries prevent mixing old reader code with new lessons.
+    # Normalize text line endings so Windows and Linux builds produce identical HTML.
+    entry=ROOT/'site/index.html'
+    def version_asset(match):
+        asset=ROOT/'site'/match.group(2)
+        digest=hashlib.sha256(asset.read_bytes().replace(b'\r\n',b'\n')).hexdigest()[:12]
+        return match.group(1)+match.group(2)+'?v='+digest+'"'
+    html=re.sub(r'((?:src|href)=")(assets/[^"?]+\.(?:js|css))(?:\?v=[a-f0-9]+)?"',version_asset,entry.read_text(encoding='utf-8'))
+    entry.write_text(html,encoding='utf-8',newline='\n')
     print(json.dumps(stats,ensure_ascii=True,indent=2))
 if __name__=='__main__': build()

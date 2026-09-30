@@ -1,5 +1,6 @@
 """Copy the verified static textbook into APK assets with a small Android-only adapter."""
 import pathlib
+import re
 import shutil
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -21,7 +22,8 @@ for relative in expected:
     shutil.copyfile(source, dest)
 entry = target / 'index.html'
 html = entry.read_text(encoding='utf-8')
-assert '<script defer src="assets/app.js"></script>' in html
-html = html.replace('<script defer src="assets/app.js"></script>', '<script defer src="assets/android-adapter.js"></script><script defer src="assets/app.js"></script>')
-entry.write_text(html, encoding='utf-8')
+reader_script = re.search(r'<script defer src="assets/app\.js(?:\?v=[a-f0-9]+)?"></script>', html)
+assert reader_script, 'Reader script missing'
+html = html.replace(reader_script.group(0), '<script defer src="assets/android-adapter.js"></script>' + reader_script.group(0))
+entry.write_text(html, encoding='utf-8', newline='\n')
 print('Bundled', len(expected), 'offline textbook files into Android assets.')

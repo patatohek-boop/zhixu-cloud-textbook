@@ -36,8 +36,12 @@ def check():
     assert entry.metas.get('referrer') == 'no-referrer', 'Unexpected referrer policy'
     for src in entry.scripts:
         assert src.startswith('assets/') and '..' not in src and ':' not in src, f'Unexpected script source: {src}'
-        assert (ROOT / 'site' / src).is_file(), f'Missing script: {src}'
-    assert entry.scripts.index('assets/learning-state.js') < entry.scripts.index('assets/app.js')
+        asset = ROOT / 'site' / urlparse(src).path
+        assert asset.is_file(), f'Missing script: {src}'
+        digest = hashlib.sha256(asset.read_bytes().replace(b'\r\n', b'\n')).hexdigest()[:12]
+        assert urlparse(src).query == 'v=' + digest, f'Stale script version: {src}'
+    script_paths = [urlparse(src).path for src in entry.scripts]
+    assert script_paths.index('assets/learning-state.js') < script_paths.index('assets/app.js')
 
     workflow = (ROOT / '.github/workflows/pages.yml').read_text(encoding='utf-8')
     actions = re.findall(r'uses:\s+(\S+)', workflow)

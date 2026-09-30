@@ -29,6 +29,11 @@
       "title": "MIT 2.20 · Marine Hydrodynamics lecture notes",
       "url": "https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/pages/lecture-notes/",
       "scope": "逐项核对应力与材料关系、基本势流、镜像法、附加质量及界面边界；不表示覆盖全部海洋工程专题"
+    },
+    {
+      "title": "MIT 1.060 · Engineering Mechanics II lecture notes",
+      "url": "https://ocw.mit.edu/courses/1-060-engineering-mechanics-ii-spring-2006/pages/lecture-notes/",
+      "scope": "本科静水曲面受力、管流损失与计算练习的主题核对"
     }
   ],
   "lessons": [
@@ -46,6 +51,7 @@
     "fluid-mechanics-36.md",
     "fluid-mechanics-11.md",
     "fluid-mechanics-12.md",
+    "fluid-mechanics-19.md",
     "fluid-mechanics-38.md",
     "fluid-mechanics-31.md",
     "fluid-mechanics-32.md",
@@ -55,7 +61,6 @@
     "fluid-mechanics-16.md",
     "fluid-mechanics-17.md",
     "fluid-mechanics-18.md",
-    "fluid-mechanics-19.md",
     "fluid-mechanics-37.md",
     "fluid-mechanics-30.md",
     "fluid-mechanics-35.md",

@@ -143,4 +143,35 @@ ma=1000*.1**3*angular*radial
 close('37 sphere added mass via quadrature',ma,2*math.pi/3)
 close('38 signed saddle capillary pressure',.03*(1/.002+1/(-.004)),7.5)
 close('38 Marangoni flux via profile quadrature',simpson(lambda y:.2/.01*y,0,.0001),1e-7)
+
+# Pedagogical worked examples: compute from differential forces and solve the
+# implicit friction equation with bisection, independently of the printed
+# fixed-point iteration. These numerical checks are not theorem proofs.
+rho,g,R,b=1000.,9.81,1.,2.
+force_x=simpson(lambda angle:rho*g*R*math.sin(angle)*math.cos(angle)*b*R,0,math.pi/2)
+force_h=simpson(lambda angle:rho*g*R*math.sin(angle)**2*b*R,0,math.pi/2)
+close('04 curved gate horizontal differential-force integral',force_x,9810.)
+close('04 curved gate vertical differential-force integral',force_h,15409.511965857935)
+close('04 curved gate resultant',math.hypot(force_x,force_h),18267.,.0001)
+close('04 curved gate resultant line through circle centre',(2*R/3)/(4*R/(3*math.pi)),force_h/force_x)
+roughness,diameter,Re=.00005,.05,100000.
+def colebrook_residual(factor):
+    return 1/math.sqrt(factor)+2*math.log10(roughness/(3.7*diameter)+2.51/(Re*math.sqrt(factor)))
+lo,hi=.01,.04
+assert colebrook_residual(lo)*colebrook_residual(hi)<0
+for _ in range(60):
+    mid=(lo+hi)/2
+    if colebrook_residual(mid)>0:lo=mid
+    else:hi=mid
+factor=(lo+hi)/2
+close('15 Colebrook root by independent bisection',factor,.022174535944515076)
+close('15 Colebrook loss with common velocity basis',(factor*20/.05+3)*2**2/(2*g),2.419941769)
+iteration=1/math.sqrt(.02)
+for _ in range(5):iteration=-2*math.log10(roughness/(3.7*diameter)+2.51*iteration/Re)
+assert abs(iteration+2*math.log10(roughness/(3.7*diameter)+2.51*iteration/Re))<2e-7
+checks.append('15 fifth fixed-point iterate has the stated residual')
+close('17 linear-profile displacement integral',simpson(lambda s:1-s,0,1),.5)
+close('17 linear-profile momentum integral',simpson(lambda s:s*(1-s),0,1),1/6)
+close('17 quadratic-profile displacement integral',simpson(lambda s:1-(2*s-s*s),0,1),1/3)
+close('17 quadratic-profile momentum integral',simpson(lambda s:(2*s-s*s)*(1-2*s+s*s),0,1),2/15)
 print(json.dumps({'status':'passed','checks':len(checks),'details':checks},ensure_ascii=True,indent=2))
