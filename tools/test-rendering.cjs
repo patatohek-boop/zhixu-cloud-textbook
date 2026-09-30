@@ -63,7 +63,23 @@ for(const course of w.COURSES)for(const l of course.chapters){
 }
 assert.equal(lessons,w.TEXTBOOK_VERSION.lessons);assert.ok(lessons>182);
 assert.ok(formulas>1265,'The expanded textbook must retain and extend the original mathematical content');
-assert.equal(w.TEXTBOOK_VERSION.version,'1.2.0');
+assert.equal(w.TEXTBOOK_VERSION.version,'1.3.0');
+w.location.hash='#/simulation';w.dispatchEvent(new w.HashChangeEvent('hashchange'));
+assert.equal(d.querySelectorAll('.simulation-stage').length,6);
+assert.equal(d.querySelectorAll('.simulation-stage .research-lessons a').length,24);
+assert.ok(d.querySelector('[data-nav=simulation]').classList.contains('active'));
+for(const stage of w.SimulationGuide.stages)for(const id of stage.ids)assert.ok(w.ZHIXU.all.some(l=>l.id===id));
+for(const id of ['cfd-upwind','cfd-yplus','cfd-grid','cfd-cht']){
+ w.location.hash='#/labs/'+id;w.dispatchEvent(new w.HashChangeEvent('hashchange'));
+ assert.ok(d.querySelector('.lab-chart svg'));
+ const before=d.querySelector('.lab-result').textContent,input=d.querySelector('[data-param]');
+ input.value=input.max;input.dispatchEvent(new w.Event('input'));
+ assert.notEqual(d.querySelector('.lab-result').textContent,before);
+ assert.ok(!/NaN|Infinity|undefined/.test(d.querySelector('.lab-result').textContent));
+ d.querySelector('.lab-next').click();assert.match(d.querySelector('.lab-step-count').textContent,/2 \/ 3/);
+ d.querySelector('.lab-preset').click();d.querySelector('.lab-reset').click();
+ assert.equal(d.querySelector('.lab-result').textContent,before);
+}
 w.location.hash='#/course/fluid-mechanics/fluid-mechanics-04';w.dispatchEvent(new w.HashChangeEvent('hashchange'));
 const conceptHeadings=[...d.querySelectorAll('#lesson-body h3')];
 assert.ok(conceptHeadings.some(h=>h.textContent.includes('压力中心')));

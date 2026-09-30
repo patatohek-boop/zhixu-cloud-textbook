@@ -35,6 +35,10 @@ def build():
         assert len(examples)==1, 'Research companion needs exactly one complete source example'
         companion=ROOT/'examples/thermal-ai/cooling_research.py'
         assert companion.is_file() and companion.read_text(encoding='utf-8').strip()==examples[0].strip(), 'Research companion is out of sync with lesson 47'
+    cfd=next((l for c in courses for l in c['chapters'] if l['id']=='fluid-mechanics-61'),None)
+    if cfd:
+        examples=re.findall(r'```python\s*\n(.*?)```',cfd['content'],re.S)
+        assert len(examples)==1 and (ROOT/'examples/cfd/transport_fvm.py').read_text(encoding='utf-8').strip()==examples[0].strip(), 'CFD companion out of sync'
     version=json.loads((ROOT/'version.json').read_text(encoding='utf-8'))
     baseline=json.loads((ROOT/'reviews/baseline-1.0.json').read_text(encoding='utf-8'))
     assert set(baseline['lesson_ids']) <= ids, 'Existing lesson IDs must be preserved for learning records'
