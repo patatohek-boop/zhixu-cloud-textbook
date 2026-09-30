@@ -105,7 +105,9 @@ $$\det(H_k+\varepsilon I)=\sum_{S\subseteq\{1,\ldots,k\}}\varepsilon^{k-|S|}\det
 ## 二次优化与凸性的证明
 $F(x)=\tfrac12x^\mathsf THx-b^\mathsf Tx$ 在正定 $H$ 下有 $x_*=H^{-1}b$。代入 $x=x_*+h$，一次项抵消，得 $F(x)-F(x_*)=\tfrac12h^\mathsf THh$，所以唯一全局极小。若 $H$ 只有半正定，需另检查 $b$ 是否与零空间正交，否则沿零空间某方向线性项可趋负无穷。
 
-对凸开集上的 $C^2$ 函数，沿任意两点的线段 $\phi(t)=f(x+t(y-x))$ 有 $\phi''=(y-x)^\mathsf TH(x+t(y-x))(y-x)\ge0$；单变量凸性定理使 $f$ 凸。这给出了 Hessian 判别的全局依据与区域条件。
+对凸开集上的 $C^2$ 函数，**若区域内每一点的 Hessian $H(x)=\nabla^2f(x)$ 都半正定**，沿任意两点的线段 $\phi(t)=f(x+t(y-x))$ 有 $\phi''=(y-x)^\mathsf TH(x+t(y-x))(y-x)\ge0$；单变量凸性定理使 $f$ 凸。这给出了 Hessian 判别的全局依据与区域条件。
+
+不能省略“处处半正定”：例如 $f(x)=-x^2$ 在实数轴上属于 $C^2$，但 $f^{\prime\prime}=-2<0$，它不是凸函数；仅在一个点检查 Hessian，也不能推出整个区域上的凸性。
 
 ## 逐步例题：判断并求最小值
 考虑 $H=\begin{pmatrix}2&1\\1&2\end{pmatrix}$ 与目标 $f(x)=\frac12x^THx-b^Tx$，其中 $b=(3,3)$。

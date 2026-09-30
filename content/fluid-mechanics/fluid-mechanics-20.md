@@ -47,7 +47,9 @@
 
 ### 雷诺应力与湍动能
 
-雷诺应力定义为 $R_{ij}=-\rho\overline{u_i'u_j'}$；湍动能为 $k=\tfrac12\overline{u_i'u_i'}$（重复 $i$ 求和），单位 $\mathrm{m^2/s^2}$。
+本教材统一记速度脉动相关张量为 $R_{ij}=\overline{u_i'u_j'}$，单位 $\mathrm{m^2/s^2}$；动量方程中的雷诺应力贡献为 $\tau^R_{ij}=-\rho R_{ij}$，单位 Pa。文献也可能把带负号和密度的量直接记作 $R_{ij}$，阅读时应先检查约定。
+
+湍动能为 $k=\tfrac12\overline{u_i'u_i'}$（重复 $i$ 求和），单位 $\mathrm{m^2/s^2}$。
 
 ### 耗散率及单位
 

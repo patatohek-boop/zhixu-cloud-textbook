@@ -1,10 +1,10 @@
 {
-  "version": "1.3.0",
+  "version": "1.3.1",
   "courses": 7,
   "lessons": 253,
   "reviewed_lessons": 253,
   "added_lessons": 71,
-  "chinese_characters": 313665,
+  "chinese_characters": 314366,
   "course_counts": {
     "calculus": 31,
     "linear-algebra": 24,

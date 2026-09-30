@@ -33,6 +33,14 @@ assert.match(LABS.carnot.draw({hot:600,cold:300}).result,/50\.0%/);
 assert.match(LABS.conduction.draw({k:2,L:.1,hot:100,cold:20}).result,/1600\.0/);
 assert.match(LABS.bernoulli.draw({v:2,ratio:.5}).result,/6\.000 kPa/);
 assert.match(LABS['gradient-descent'].draw({rate:.5,start:3,steps:1}).result,/w = 0\.00000/);
+for(const rate of [.1,.5,1,1.5]){
+ const result=LABS['gradient-descent'].draw({rate,start:0,steps:8}).result;
+ assert.match(result,/所有迭代保持 w=0/);
+ assert.doesNotMatch(result,/振荡|发散/);
+}
+assert.match(LABS['gradient-descent'].draw({rate:1,start:2,steps:8}).result,/等幅振荡/);
+assert.match(LABS['gradient-descent'].draw({rate:.5,start:2,steps:0}).result,/尚未迭代/);
+assert.match(LABS.matrix.draw({a:0,b:0,c:0,d:0}).result,/线或点/);
 const html=fs.readFileSync(path.join(root,'site/index.html'),'utf8');
 for(const m of html.matchAll(/(?:src|href)="(assets\/[^"?#]+)"/g))assert.ok(fs.existsSync(path.join(root,'site',m[1])),`Missing asset ${m[1]}`);
 if(errors.length){console.error(errors.join('\n'));process.exitCode=1;}

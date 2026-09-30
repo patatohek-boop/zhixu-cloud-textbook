@@ -67,6 +67,7 @@ import csv
 import io
 import json
 import math
+import statistics
 
 def analyze(text):
     groups = {}
@@ -90,7 +91,7 @@ def analyze(text):
             errors.append({"line": line_no, "reason": str(exc)})
     summary = [
         {"sensor": sensor, "count": len(values),
-         "mean_c": math.fsum(values) / len(values)}
+         "mean_c": statistics.mean(values)}
         for sensor, values in sorted(groups.items())
     ]
     return {"summary": summary, "errors": errors}
@@ -117,10 +118,12 @@ DictReader 把每行转成按表头命名的字典。程序先检查表头契约
 
 最后按传感器名称排序，生成稳定输出，便于人工检查与版本比较。
 
+均值使用标准库 `statistics.mean`。输入均为有限数，不代表直接求和也不会溢出：两个 `1e308` 的均值可表示为 `1e308`，但先用 `math.fsum` 求和会溢出。`fsum` 改善求和精度，并不扩展浮点数的范围；这里用 `mean` 避免该中间求和溢出。结果仍是有限精度数值，不能据此认为计算没有舍入误差。
+
 预期 A 有两个有效值，均值为 21；B 有一个有效值，均值为 24；第 5 行被记录为无效。错误数量是报告的一部分，使用者应先看到数据损失，再解释平均值。这里使用 CSV 解析器的 line_num，记录的是该逻辑记录结束所在的物理行号；多行字段的起点需要另外记录。
 
 ## 如何继续工程化
-下一步把输入换为 pathlib 读取文件，用 argparse 指定输入与输出路径，把函数放到模块，并用 unittest 检查空输入、缺列、空名称、NaN 和正常记录。大型数据不必保存每组全部读数，可维护数量与累计和；若还要方差，应采用数值稳定的在线算法。
+下一步把输入换为 pathlib 读取文件，用 argparse 指定输入与输出路径，把函数放到模块，并用 unittest 检查空输入、缺列、空名称、NaN 和正常记录。大型数据不必保存每组全部读数，可采用经过溢出与精度分析的在线均值算法；不能直接假定累计和总能表示；若还要方差，应采用数值稳定的在线算法。
 
 当前版本对字段顺序要求严格，且没有时间戳、重复观测识别或单位转换。它们是明确的扩展方向，不是已经实现的能力。先把小项目的契约与测试稳定下来，再加新功能，维护成本会更可控。课程中的程序应被当作可验证的学习对象，而不是未经验证直接控制真实设备的软件。
 

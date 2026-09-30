@@ -170,6 +170,8 @@ def verify() -> list[dict]:
 
 
 def main():
+    from verify_audit_errata import verify as verify_errata
+    verify_errata()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", type=Path, help="Optionally save the complete numerical results.")
     arguments = parser.parse_args()
