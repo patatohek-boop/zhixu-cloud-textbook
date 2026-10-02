@@ -115,6 +115,17 @@ def check_heat_transfer():
     close(reynolds, 2.70478839899, "condensation film Reynolds number")
     check(reynolds < 30 < reynolds*100**.75 < 1800,
           "height change exits smooth-film assumption")
+    # A reciprocal direction-selective gray surface: alpha(theta)=epsilon(theta).
+    # Normal illumination and hemispherical emission average different channels.
+    directional = lambda angle: .2+.6*math.cos(angle)**2
+    hemisphere = simpson(lambda angle: 2*directional(angle)*math.cos(angle)*math.sin(angle), 0, math.pi/2)
+    close(hemisphere, .5, "gray directional hemispherical emissivity")
+    close(directional(0), .8, "gray surface normal-incidence absorptivity")
+    check(abs(directional(0)-hemisphere) > .29, "grayness alone does not match angular averages")
+    isotropic_absorption = simpson(lambda angle: 2*directional(angle)*math.cos(angle)*math.sin(angle), 0, math.pi/2)
+    close(isotropic_absorption, hemisphere, "isotropic blackbody angular compatibility")
+    diffuse_gray = simpson(lambda angle: 2*.8*math.cos(angle)*math.sin(angle), 0, math.pi/2)
+    close(diffuse_gray, .8, "diffuse-gray direction-independent limit")
     # Quadrature is independent of the series used in the lesson.
     spectrum = lambda z: z**3/math.expm1(z) if z else 0
     integral = simpson(spectrum, 0, 60)

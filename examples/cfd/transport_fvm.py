@@ -9,7 +9,11 @@ from pathlib import Path
 def exact(x, pe):
     if pe == 0:
         return x
-    return (math.exp(pe * (x - 1)) - math.exp(-pe)) / (-math.expm1(-pe))
+    if pe < 1e-8:
+        # First-order Taylor limit; also avoids dividing subnormal numbers.
+        return x + 0.5 * pe * x * (x - 1)
+    # Protect BOTH differences from cancellation and keep exponents nonpositive.
+    return math.exp(pe * (x - 1)) * (-math.expm1(-pe * x)) / (-math.expm1(-pe))
 
 
 def solve(cells=20, pe=10.0, scheme="upwind"):

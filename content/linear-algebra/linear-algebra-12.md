@@ -80,7 +80,11 @@ Householder 方法使用 $H=I-2uu^\mathsf T$、$\|u\|=1$。直接相乘 $H^\math
 
 ### 选择反射方向并消去下方分量
 
-给非零向量 $a$，选 $\alpha=-\operatorname{sign}(a_1)\|a\|$（$a_1=0$ 时取正号约定），令 $u=(a-\alpha e_1)/\|a-\alpha e_1\|$，代入可验 $Ha=\alpha e_1$。对后续子列重复即可三角化，得到 QR。这个构造说明数值库为什么能不用经典正交化也得到相同类型分解。
+给非零向量 $a$，选 $\alpha=-\operatorname{sign}(a_1)\|a\|$（$a_1=0$ 时取正号约定），令 $u=(a-\alpha e_1)/\|a-\alpha e_1\|$，代入可验 $Ha=\alpha e_1$。对后续子列重复即可三角化。取薄形式得到 $A=Q_0R_0$，其中 $Q_0\in\mathbb R^{m\times n}$、$Q_0^\mathsf TQ_0=I_n$，$R_0\in\mathbb R^{n\times n}$ 为上三角；反射产生的对角元可以为负，所以这一步尚未满足前文“对角正”的约定。
+
+### 把反射结果归一化为正对角
+
+满列秩保证每个 $(R_0)_{ii}\ne0$。令 $D=\operatorname{diag}(\operatorname{sign}((R_0)_{11}),\ldots,\operatorname{sign}((R_0)_{nn}))$，则 $D^2=I_n$。取 $Q=Q_0D$、$R=DR_0$，有 $QR=Q_0D^2R_0=A$、$Q^\mathsf TQ=I_n$，且 $r_{ii}=|(R_0)_{ii}|>0$。也就是同时翻转 $Q_0$ 对应列和 $R_0$ 对应行的符号，不改变乘积。这才与本节定义的正对角薄 QR 一致；未经这一步的数值库输出仍是有效的未归一化 QR。
 
 **边界。** 近相关列的剩余很小，浮点误差可能破坏正交性；理论中的“非零”不等于计算中可靠可分辨，必要时使用带主元 QR 或 SVD。
 

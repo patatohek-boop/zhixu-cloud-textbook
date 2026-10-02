@@ -1,6 +1,32 @@
 const assert=require('node:assert/strict');
 const {CFD_MATH:M,LABS}=require('../site/assets/cfd-labs.js');
 assert.equal(Object.keys(LABS).length,21);
+// Independent integral-series ratio: (exp(z)-1)/z = sum z^j/(j+1)!.
+// This oracle neither subtracts nearby exponentials nor uses the production branch.
+function integralSeries(z){
+ let total=1,term=1;
+ for(let j=1;j<=600;j++){
+  term*=z/(j+1);total+=term;
+  if(term<=Number.EPSILON*total/4)return total;
+ }
+ throw new Error('Reference series did not converge');
+}
+let referenceChecks=0;
+for(const pe of [0,Number.MIN_VALUE,1e-310,1e-17,1e-12,1e-8*(1-Number.EPSILON),1e-8,1e-8*(1+Number.EPSILON),1e-6,.1,1,5,10,60,100]){
+ let previous=-1;
+ for(const x of [0,1e-12,.01,.25,.5,.75,.99,1-Number.EPSILON/2,1]){
+  const expected=x*integralSeries(pe*x)/integralSeries(pe),actual=M.exact(x,pe);
+  assert.ok(Number.isFinite(actual)&&actual>=0&&actual<=1,`bounded exact x=${x}, Pe=${pe}`);
+  assert.ok(Math.abs(actual-expected)<=2e-14*Math.abs(expected)+1e-320,`exact x=${x}, Pe=${pe}: ${actual} != ${expected}`);
+  assert.ok(actual>=previous,`monotone exact Pe=${pe}`);previous=actual;referenceChecks++;
+ }
+ assert.equal(M.exact(0,pe),0);assert.equal(M.exact(1,pe),1);
+}
+for(const n of [10,20,40,80]){
+ const coarse=M.transport(n,1e-6,'central').l2,fine=M.transport(n*2,1e-6,'central').l2;
+ const order=Math.log2(coarse/fine);
+ assert.ok(order>1.99&&order<2.01,`small-Pe convergence N=${n}: ${order}`);
+}
 for(const scheme of ['central','upwind']){
  for(const n of [5,20,80])for(const pe of [0,1,10,60]){
   const m=M.transport(n,pe,scheme);assert.ok(m.balance<1e-10);
@@ -22,4 +48,5 @@ for(const [id,lab] of Object.entries(LABS).filter(([id])=>id.startsWith('cfd-'))
  const visit=(i,values)=>{if(i===lab.controls.length){const out=lab.draw(values);assert.ok(!/NaN|Infinity|undefined/.test(out.svg+out.result+out.legend),id);assert.ok(out.svg.startsWith('<svg'));return;}const c=lab.controls[i];for(const value of [c[2],c[3],c[5]])visit(i+1,{...values,[c[0]]:value});};
  visit(0,{});assert.equal(lab.guide.steps.length,3);assert.ok(lab.animation.key);
 }
+console.log(`CFD exact: ${referenceChecks} independent reference checks passed.`);
 console.log('CFD labs: 4 models; 108 control combinations; analytic identities and failure cases passed.');
