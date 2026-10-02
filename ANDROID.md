@@ -1,6 +1,6 @@
 # 安卓 App
 
-应用名称：知序云教材。包名：`app.zhixu.textbook`。当前源码构建目标：1.3.2（versionCode 6）。适用 Android 8.0 及以上、具有较新 Android System WebView 的设备；请通过应用商店更新网页组件。
+应用名称：知序云教材。包名：`app.zhixu.textbook`。当前源码构建目标：1.4.0（versionCode 7）；正式发布状态以 Releases 为准。适用 Android 8.0 及以上、具有较新 Android System WebView 的设备；请通过应用商店更新网页组件。
 
 ## 学习体验增强分支说明
 

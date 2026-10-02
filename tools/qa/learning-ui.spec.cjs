@@ -74,3 +74,19 @@ test('every new diagram can be enlarged to readable labels without leaving the l
   await page.getByRole('button',{name:'关闭大图',exact:true}).click();await expect(page.locator('#figure-dialog')).not.toBeVisible();await expect(link).toBeFocused();expect(new URL(page.url()).hash).toBe(hash);if(guide.id==='python-20'){await link.press('Enter');await expect(page.locator('#figure-dialog')).toBeVisible();await page.keyboard.press('Escape');await expect(page.locator('#figure-dialog')).not.toBeVisible();await expect(link).toBeFocused();}
  }
 });
+
+test('tiered practice reveals verified solutions without automatic grading',async({page},info)=>{
+ const capture=['width-320','width-390','width-1440'].includes(info.project.name);await open(page,'#/path');
+ const guides=await page.evaluate(()=>LEARNING_GUIDES.map(g=>({id:g.id,course:ZHIXU.all.find(l=>l.id===g.id).course.id})));
+ for(const guide of guides){
+  await open(page,'#/course/'+guide.course+'/'+guide.id);const practice=page.locator('.mastery-practice');await expect(practice).toBeVisible();await expect(practice.locator('.mastery-card')).toHaveCount(3);await expect(practice.locator('.mastery-intro')).toContainText('不会自动评分');
+  const first=practice.locator('.mastery-answer').first();await expect(first).not.toHaveAttribute('open','');await first.locator('summary').click();await expect(first).toHaveAttribute('open','');await expect(first.locator('.mastery-solution')).toBeVisible();await first.locator('summary').click();await expect(first).not.toHaveAttribute('open','');
+  await practice.locator('details').evaluateAll(xs=>xs.forEach(d=>d.open=true));await noOverflow(page,guide.id+' exercise solutions');await expect(page.locator('.math-error')).toHaveCount(0);await expect(practice.locator('[data-answer],input')).toHaveCount(0);
+  if(capture&&['calculus-03','fluid-mechanics-01','python-07','machine-learning-07'].includes(guide.id)){
+   const card=practice.locator('.mastery-card').last();await card.screenshot({style:cleanCaptureChrome,path:info.outputPath(guide.id+'-mastery.png')});await card.locator('summary').scrollIntoViewIfNeeded();await page.screenshot({path:info.outputPath(guide.id+'-mastery-real-viewport.png'),fullPage:false});
+  }
+ }
+ await open(page,'#/course/calculus/calculus-03');const summary=page.locator('.mastery-answer summary').first();await summary.focus();await summary.press('Enter');await expect(page.locator('.mastery-answer').first()).toHaveAttribute('open','');await summary.press('Enter');await expect(page.locator('.mastery-answer').first()).not.toHaveAttribute('open','');
+ await page.locator('.mastery-answer').first().evaluate(d=>d.open=true);const solutionParagraph=page.locator('.mastery-solution p').first();const initialSize=await solutionParagraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize));await page.locator('#font-up').click();await page.locator('#font-up').click();expect(await solutionParagraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(initialSize);await noOverflow(page,'enlarged practice solution font');
+ await page.locator('#theme').click();await page.locator('.mastery-answer').evaluateAll(xs=>xs.forEach(d=>d.open=true));await noOverflow(page,'dark practice');if(capture)await page.locator('.mastery-card').first().screenshot({style:cleanCaptureChrome,path:info.outputPath('mastery-dark.png')});
+});

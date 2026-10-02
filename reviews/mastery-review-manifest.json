@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-02",
+  "status": "All 78 question/solution pairs individually reviewed and independently cross-checked before integration.",
+  "files": [
+    {
+      "scope": "thermal",
+      "exercises": 18,
+      "reviewed_source_sha256": "e7a1bc21e77ea02854511e30ab14aa096d143b99642495786ed2fc806e6d5b30",
+      "integrated_sha256": "31192981bbfb5207ab68039295f4364d5e763f9dcdddb8b7a4a3ce7d2e941ace",
+      "integration_change": "Only explicit prerequisite lesson links added; question, solution and review fields unchanged."
+    },
+    {
+      "scope": "computing",
+      "exercises": 24,
+      "reviewed_source_sha256": "27c67a6dc334e3f6469470adeb248c0f956808de7f33e04ad91033a4db28131b",
+      "integrated_sha256": "60347e060ce439fb1b324f3c89a74eb56d90a3f36d5de55027eeb81d839df833",
+      "integration_change": "Only explicit prerequisite lesson links added; question, solution and review fields unchanged."
+    },
+    {
+      "scope": "fluid",
+      "exercises": 12,
+      "reviewed_source_sha256": "7411937a82824e18fdb55e04d9285995c70dec37ddf96aac04cb96d3cc4ad169",
+      "integrated_sha256": "cca33b5d0c3acee9b14d1acde0d55ad5847d6ef63114c568077b80e0382573bc",
+      "integration_change": "Only explicit prerequisite lesson links added; question, solution and review fields unchanged."
+    },
+    {
+      "scope": "math",
+      "exercises": 24,
+      "reviewed_source_sha256": "3096ecae8a3234865849339321eecb4e8f9330b0bc5b2e5384f6af47625222cf",
+      "integrated_sha256": "31f565c8d125545edfcaf0a2c8524caa4979ac826615253f4828d80197eb3970",
+      "integration_change": "Only explicit prerequisite lesson links added; question, solution and review fields unchanged."
+    }
+  ]
+}

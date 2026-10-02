@@ -26,8 +26,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class TextbookSmokeTest extends Instrumentation {
     private static final String RECORD_KEY = "zhixu-learning-v1";
     private static final String LESSON = "calculus-03";
-    private static final int TOTAL = 12;
-    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.3.2' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
+    private static final int TOTAL = 13;
+    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.4.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
     private Activity reader;
     private WebView web;
     private int number;
@@ -58,6 +58,7 @@ public final class TextbookSmokeTest extends Instrumentation {
             runCase("simulationAndOfflineLabs", this::simulationLabs);
             runCase("knowledgeFrameworkAndFoundationLabs", this::learningFramework);
             runCase("conceptStoriesOffline", this::conceptStories);
+            runCase("tieredPracticeOffline", this::masteryPractice);
             runCase("invalidRouteIsSafe", this::invalidRoute);
             runCase("backupRoundTripAndInjection", this::backups);
             runCase("notesSurviveRelaunch", this::relaunch);
@@ -160,7 +161,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     private void permissions() throws Exception {
         PackageInfo info = getTargetContext().getPackageManager().getPackageInfo(
             getTargetContext().getPackageName(), PackageManager.GET_PERMISSIONS);
-        require("1.3.2".equals(info.versionName) && info.versionCode == 6, "App version does not match the textbook revision");
+        require("1.4.0".equals(info.versionName) && info.versionCode == 7, "App version does not match the textbook revision");
         String[] requested = info.requestedPermissions == null ? new String[0] : info.requestedPermissions;
         for (String dangerous : new String[]{"android.permission.INTERNET", "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA", "android.permission.RECORD_AUDIO"})
@@ -308,6 +309,25 @@ public final class TextbookSmokeTest extends Instrumentation {
         saveReaderScreenshot("concept-story-screen.png");
         evaluate("location.hash='#/course/calculus/calculus-03'");
         waitUntil("document.querySelector('#note-text')", "Could not return from concept stories");
+    }
+
+    private void masteryPractice() throws Exception {
+        require(Boolean.TRUE.equals(evaluate("window.MASTERY_EXERCISES.length>=78 && window.TEXTBOOK_VERSION.mastery_lessons===26")), "Mastery exercises missing offline");
+        String[] lessons = {"calculus/calculus-03", "fluid-mechanics/fluid-mechanics-01", "python/python-07", "machine-learning/machine-learning-07"};
+        for (String lesson : lessons) {
+            String lessonId = lesson.substring(lesson.indexOf('/') + 1);
+            evaluate("location.hash='#/course/" + lesson + "'");
+            waitUntil("window.ZHIXU.state.last==='" + lessonId + "' && document.querySelectorAll('.mastery-card').length===3", "Mastery lesson failed offline: " + lesson);
+            require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.mastery-answer[open]').length===0 && document.querySelector('.mastery-intro').textContent.includes('不会自动评分')")), "Practice must begin without revealed answers or false grading claims");
+            evaluate("document.querySelector('.mastery-answer summary').click()");
+            require(Boolean.TRUE.equals(evaluate("document.querySelector('.mastery-answer').open && document.querySelectorAll('.mastery-checkpoints li').length>=6")), "Practice solution or self-check missing");
+            evaluate("document.querySelector('.mastery-answer summary').click()");
+            require(Boolean.TRUE.equals(evaluate("!document.querySelector('.mastery-answer').open")), "Repeated disclosure failed");
+            evaluate("document.querySelectorAll('.mastery-answer').forEach(function(e){e.open=true})");
+            require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0 && document.documentElement.scrollWidth<=innerWidth+1 && document.querySelectorAll('.mastery-card [data-answer],.mastery-card input').length===0")), "Practice formulas, mobile layout or grading contract failed");
+        }
+        evaluate("document.querySelector('.mastery-card').scrollIntoView({block:'start',behavior:'instant'})");
+        saveReaderScreenshot("mastery-practice-screen.png");
     }
 
     private void invalidRoute() throws Exception {

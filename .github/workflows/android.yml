@@ -47,6 +47,8 @@ jobs:
           node tools/test-foundation-labs.cjs
           node tools/test-concept-stories.cjs
           node tools/test-knowledge-map.cjs
+          node tools/test-mastery-exercises.cjs
+          python tools/verify_final_review.py
           python tools/test-learning-preservation.py
           python tools/test-offline-learning.py
           python tools/verify_cfd.py
@@ -125,6 +127,8 @@ jobs:
           test -s work/android-knowledge-map.png
           adb exec-out run-as app.zhixu.textbook cat files/concept-story-screen.png > work/android-concept-story.png
           test -s work/android-concept-story.png
+          adb exec-out run-as app.zhixu.textbook cat files/mastery-practice-screen.png > work/android-mastery-practice.png
+          test -s work/android-mastery-practice.png
           adb shell am start -W -n app.zhixu.textbook/.MainActivity
           sleep 15
           adb exec-out screencap -p > work/android-home.png
@@ -140,6 +144,7 @@ jobs:
             work/android-simulation.png
             work/android-knowledge-map.png
             work/android-concept-story.png
+            work/android-mastery-practice.png
             work/android-home.png
             work/emulator.log
             work/android-logcat.txt

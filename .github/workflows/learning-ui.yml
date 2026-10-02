@@ -24,10 +24,24 @@ jobs:
         run: |
           python tools/build.py
           node tools/test-knowledge-map.cjs
+          node tools/test-mastery-exercises.cjs
+          python tools/verify_final_review.py
           python tools/test-learning-preservation.py
           node tools/test-foundation-labs.cjs
           node tools/test-concept-stories.cjs
           python tools/test-offline-learning.py
+      - name: Install pinned numerical audit dependencies
+        run: python -m pip install -r tools/qa/requirements.txt
+      - name: Independently recalculate mathematics and computing examples
+        run: |
+          python tools/verify_math.py
+          python tools/verify_computing.py
+          python tools/verify_research_physics.py
+          python tools/verify_audit_errata.py
+          python tools/mastery/verify_math.py
+          python tools/mastery/verify_thermal.py
+          python tools/mastery/verify_fluid.py
+          python tools/mastery/verify_computing.py
       - name: Install pinned development-only test tools
         working-directory: tools/qa
         run: npm ci --ignore-scripts
@@ -38,6 +52,7 @@ jobs:
         run: |
           ZHIXU_JSDOM_MODULE="$PWD/tools/qa/node_modules/jsdom" node tools/test-rendering.cjs
           ZHIXU_JSDOM_MODULE="$PWD/tools/qa/node_modules/jsdom" node tools/test-learning-experience.cjs
+          ZHIXU_JSDOM_MODULE="$PWD/tools/qa/node_modules/jsdom" node tools/test-mastery-exercises.cjs --dom
           ZHIXU_JSDOM_MODULE="$PWD/tools/qa/node_modules/jsdom" node tools/test-concept-stories.cjs --dom
           cd tools/qa
           npm test

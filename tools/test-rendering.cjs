@@ -49,7 +49,8 @@ for(const payload of attacks){
 let formulas=0,lessons=0;
 for(const course of w.COURSES)for(const l of course.chapters){
  lessons++;
- for(const s of [l.content,l.quiz.question,...l.quiz.options,l.quiz.explanation]){
+ const practice=(w.MASTERY_EXERCISES||[]).filter(e=>e.lessonId===l.id);
+ for(const s of [l.content,l.quiz.question,...l.quiz.options,l.quiz.explanation,...practice.flatMap(e=>[e.prompt,e.solution,e.technique,e.pitfall,...e.checkpoints])]){
   const fragment=JSDOM.fragment(w.ZHIXU.markdown(s));
   assert.equal(fragment.querySelectorAll('.math-error').length,0,l.id);
   const textNodes=fragment.ownerDocument.createTreeWalker(fragment,4);
