@@ -15,6 +15,17 @@ async function open(page,hash){
  },hash);
 }
 async function noOverflow(page,label){await page.evaluate(()=>document.fonts.ready);const result=await page.evaluate(()=>({width:innerWidth,html:document.documentElement.scrollWidth,body:document.body.scrollWidth}));expect(result.html,label).toBeLessThanOrEqual(result.width+1);expect(result.body,label).toBeLessThanOrEqual(result.width+1);}
+async function horizontalScroll(page,regions,label,required,capturePath){
+ for(let i=0;i<await regions.count();i++){
+  const region=regions.nth(i);const overflow=await region.evaluate(el=>el.scrollWidth>el.clientWidth+4);if(!overflow)continue;
+  await region.scrollIntoViewIfNeeded();await region.hover();const before=await region.evaluate(el=>el.scrollLeft);
+  await page.mouse.wheel(260,0);await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' scrolls to reveal its right side'}).toBeGreaterThan(before);
+  const after=await region.evaluate(el=>el.scrollLeft);if(capturePath)await region.screenshot({style:cleanCaptureChrome,path:capturePath});
+  await region.hover();await page.mouse.wheel(-260,0);await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' scrolls back'}).toBeLessThan(after);
+  console.log(label+': real horizontal wheel scroll and return passed');return;
+ }
+ expect(required,label+' should include an overflowing mobile region').toBe(false);
+}
 test('all routes, layered maps, lesson links and readable widths',async({page},info)=>{
  const capture=['width-390','width-1440'].includes(info.project.name);const errors=[];page.on('pageerror',e=>errors.push(e.message));await open(page,'#/map');
  const data=await page.evaluate(()=>({courses:COURSES.map(c=>({id:c.id,lessons:c.chapters.map(l=>l.id)})),guides:LEARNING_GUIDES.map(g=>g.id)}));
@@ -82,6 +93,14 @@ test('tiered practice reveals verified solutions without automatic grading',asyn
   await open(page,'#/course/'+guide.course+'/'+guide.id);const practice=page.locator('.mastery-practice');await expect(practice).toBeVisible();await expect(practice.locator('.mastery-card')).toHaveCount(3);await expect(practice.locator('.mastery-intro')).toContainText('不会自动评分');
   const first=practice.locator('.mastery-answer').first();await expect(first).not.toHaveAttribute('open','');await first.locator('summary').click();await expect(first).toHaveAttribute('open','');await expect(first.locator('.mastery-solution')).toBeVisible();await first.locator('summary').click();await expect(first).not.toHaveAttribute('open','');
   await practice.locator('details').evaluateAll(xs=>xs.forEach(d=>d.open=true));await noOverflow(page,guide.id+' exercise solutions');await expect(page.locator('.math-error')).toHaveCount(0);await expect(practice.locator('[data-answer],input')).toHaveCount(0);
+  if(guide.id==='fluid-mechanics-01'||guide.id==='python-07'){
+   const kind=guide.id==='fluid-mechanics-01'?'.katex-display':'pre';
+   await horizontalScroll(page,practice.locator(kind),guide.id+' '+info.project.name,['width-320','width-390'].includes(info.project.name),capture?info.outputPath(guide.id+'-horizontally-scrolled.png'):null);
+  }
+  if(guide.id==='python-07'){
+   const spacing=await practice.locator('pre').evaluateAll(xs=>xs.map(pre=>{const code=pre.querySelector('code'),button=pre.querySelector('.copy-code'),walker=document.createTreeWalker(code,NodeFilter.SHOW_TEXT);const first=walker.nextNode();const range=document.createRange();range.setStart(first,0);range.setEnd(first,1);return {firstLine:range.getBoundingClientRect().top,buttonBottom:button.getBoundingClientRect().bottom};}));
+   for(const box of spacing)expect(box.firstLine,'Copy control leaves the first code line unobstructed').toBeGreaterThanOrEqual(box.buttonBottom+4);
+  }
   if(capture&&['calculus-03','fluid-mechanics-01','python-07','machine-learning-07'].includes(guide.id)){
    const card=practice.locator('.mastery-card').last();await card.screenshot({style:cleanCaptureChrome,path:info.outputPath(guide.id+'-mastery.png')});await card.locator('summary').scrollIntoViewIfNeeded();await page.screenshot({path:info.outputPath(guide.id+'-mastery-real-viewport.png'),fullPage:false});
   }
