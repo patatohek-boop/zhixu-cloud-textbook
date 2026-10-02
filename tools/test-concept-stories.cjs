@@ -15,6 +15,14 @@ check('six original scene/lesson mappings are unique and the render contract is 
  for(const id of C.sceneIds){const s=C.stories[id];assert.equal(C.lessonMap[s.lessonId],id);assert.equal(C.render(id),C.render(s.lessonId));assert.match(C.render(id),new RegExp(`data-story-id="${id}"`));assert.match(C.render(id),/<h2 class="story-title">/);assert.match(C.render(id),/<svg/);assert.ok(s.assumptions.length>40);assert.ok(s.steps.length>=5);}
  for(const bad of [null,'missing','constructor','__proto__','toString',{},undefined]){assert.equal(C.render(bad),'');assert.equal(C.getFrame(bad),null);}
 });
+check('plain-language parameter names and cooling temperature axis remain visible',()=>{
+ const cooling=C.stories['cooling-time'].assumptions;
+ for(const name of ['半径 r','密度 ρ','比热容 c','导热系数 k','表面换热系数 h','毕奥数 Bi'])assert.ok(cooling.includes(name),name);
+ for(const name of ['导热面积 A','厚度 L₁','导热系数 k₁','厚度 L₂'])assert.ok(C.stories['wall-resistance'].assumptions.includes(name),name);
+ assert.ok(C.stories['control-volume'].assumptions.includes('横截面积 A'));
+ assert.ok(C.stories['regression-fit'].assumptions.includes('斜率为 w、截距为 b'));
+ for(const position of [0,.5,2,2.5,4])assert.ok(C.getFrame('cooling-time',position).graph.includes('温度 / °C'));
+});
 check('closed-system account keeps work input negative and conserves every revealed amount',()=>{
  for(let p=0;p<=4;p+=.03125){const m=M.energyState(p);near(m.q,-m.heatOut);near(m.w,-m.workIn);near(m.delta,m.q-m.w);near(m.workIn,m.heatOut+m.delta);near(m.balanceError,0);assert.ok(m.delta>=0);}
  const final=M.energyState(4);near(final.q,-1.2);near(final.w,-6);near(final.delta,4.8);assert.match(C.stories['energy-account'].assumptions,/不表示先通电、后散热/);
