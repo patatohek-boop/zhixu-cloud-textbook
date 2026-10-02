@@ -1,0 +1,100 @@
+[
+  {
+    "id": "python-01",
+    "required": [],
+    "recommended": [],
+    "mainline": true,
+    "why": "分清脚本文本、运行状态和屏幕输出，能从头复现一次数值更新。",
+    "checkpoint": "不运行代码也能逐行预测温度更新的输出，并解释缺少初始化为什么报错。"
+  },
+  {
+    "id": "python-06",
+    "required": [
+      "python-05"
+    ],
+    "recommended": [
+      "python-01",
+      "python-08"
+    ],
+    "mainline": true,
+    "why": "把一组实验读数变成可检查的筛选、计数与累计过程。",
+    "checkpoint": "独立写出循环状态表、正确处理空输入，并说出每轮保持的关系。"
+  },
+  {
+    "id": "python-07",
+    "required": [
+      "python-02"
+    ],
+    "recommended": [
+      "python-06",
+      "python-14"
+    ],
+    "mainline": true,
+    "why": "让计算通过参数接收输入，通过返回值进入下一步，减少隐藏状态。",
+    "checkpoint": "写出温升函数并区分参数、局部名字、返回值和打印副作用。"
+  },
+  {
+    "id": "python-20",
+    "required": [
+      "python-08",
+      "python-11"
+    ],
+    "recommended": [
+      "python-03",
+      "linear-algebra-03"
+    ],
+    "mainline": true,
+    "why": "用样本与特征的含义判断数组形状，防止合法但错误的广播。",
+    "checkpoint": "标注三行两列数据的轴，预测两种均值形状，并修正配对残差的广播陷阱。"
+  },
+  {
+    "id": "machine-learning-01",
+    "required": [],
+    "recommended": [
+      "python-01"
+    ],
+    "mainline": true,
+    "why": "先把研究问题写成可用信息、预测目标、基线和独立评价，再选择模型。",
+    "checkpoint": "不使用测试答案训练，手算常数基线的训练与测试 MSE 并解释单位。"
+  },
+  {
+    "id": "machine-learning-04",
+    "required": [
+      "linear-algebra-03",
+      "calculus-04"
+    ],
+    "recommended": [
+      "machine-learning-01",
+      "calculus-15"
+    ],
+    "mainline": true,
+    "why": "把批量预测读成矩阵运算，把参数调整读成链式法则。",
+    "checkpoint": "手算一次前向预测、两参数梯度和更新后损失，并举出步长过大的反例。"
+  },
+  {
+    "id": "machine-learning-05",
+    "required": [
+      "machine-learning-01"
+    ],
+    "recommended": [
+      "python-20"
+    ],
+    "mainline": true,
+    "why": "让预处理、调参和测试模拟真实可获得的信息，避免虚假的泛化成绩。",
+    "checkpoint": "只用训练数据拟合变换，画出允许的信息流，并按设备或时间选择正确划分。"
+  },
+  {
+    "id": "machine-learning-07",
+    "required": [
+      "machine-learning-04"
+    ],
+    "recommended": [
+      "machine-learning-01",
+      "machine-learning-05",
+      "machine-learning-06"
+    ],
+    "mainline": true,
+    "why": "把拟合公式落实为可复算的预测和残差，区分训练拟合、外推与泛化。",
+    "checkpoint": "手算一元最小二乘和训练 MSE，冻结参数后计算新样本误差，并说清其证据边界。"
+  }
+]

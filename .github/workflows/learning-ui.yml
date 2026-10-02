@@ -1,0 +1,52 @@
+name: Learning interface checks
+on:
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: learning-ui-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  browser-layout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Build and verify learning relations
+        run: |
+          python tools/build.py
+          node tools/test-knowledge-map.cjs
+          python tools/test-learning-preservation.py
+          node tools/test-foundation-labs.cjs
+          node tools/test-concept-stories.cjs
+          python tools/test-offline-learning.py
+      - name: Install pinned development-only test tools
+        working-directory: tools/qa
+        run: npm ci --ignore-scripts
+      - name: Install Chromium for isolated browser tests
+        working-directory: tools/qa
+        run: npx playwright install --with-deps chromium
+      - name: Full DOM and browser rendering checks
+        run: |
+          ZHIXU_JSDOM_MODULE="$PWD/tools/qa/node_modules/jsdom" node tools/test-rendering.cjs
+          ZHIXU_JSDOM_MODULE="$PWD/tools/qa/node_modules/jsdom" node tools/test-learning-experience.cjs
+          ZHIXU_JSDOM_MODULE="$PWD/tools/qa/node_modules/jsdom" node tools/test-concept-stories.cjs --dom
+          cd tools/qa
+          npm test
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: learning-ui-screenshots-and-report
+          path: |
+            work/learning-ui-results/
+            work/learning-ui-report/
+          if-no-files-found: warn
+          retention-days: 14

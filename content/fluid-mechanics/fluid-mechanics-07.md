@@ -34,6 +34,51 @@
   "revision": "2026-09-28 · 概念分段与教学审读"
 }
 ---
+## 水箱里多了水，是流体“产生”了质量吗？
+
+把水箱及其进出口圈为固定控制体，里面的水一直在换。质量增加可以只是流入比流出多。守恒说同一批物质的质量不被创造；控制体里的存量却可以改变。**别把“没有创造”误读为“没有积累”。**
+
+### 三种量的单位不同
+
+$m_{CV}$（kg）是此刻控制体内的质量；$Q$（m³/s）是体积流量；$\dot m$（kg/s）是质量流量。截面密度均匀时 $\dot m=\rho Q$。热力学常用 $Q$ 表示热量，而本流体课用它表示体积流量，不能跨课程直接照搬字母含义。
+
+在控制面每一点，取垂直于表面、指向控制体外的单位向量 $\mathbf n$，称为外法线方向。$\mathbf u$ 是当地流速向量，$\mathbf u\cdot\mathbf n$ 是向外的法向速度。出口 $\mathbf u\cdot\mathbf n>0$，入口 $\mathbf u\cdot\mathbf n<0$。若另把 $\dot m_{in},\dot m_{out}$ 定义为各自**正的大小**，质量账便是
+
+$$\frac{dm_{CV}}{dt}=\sum\dot m_{in}-\sum\dot m_{out}.$$
+
+用外法线统一积分时入口已经带负号，不能再人为减去一次。符号形式可以不同，含义必须一致。
+
+<figure class="teaching-figure"><a href="assets/diagrams/learn-fluid-mechanics-07.svg" target="_blank" rel="noopener" aria-label="打开大图：水箱进水6升每分钟、出水2升每分钟，存量每分钟增加4升，水位每分钟升高2厘米"><img src="assets/diagrams/learn-fluid-mechanics-07.svg" alt="水箱进水6升每分钟、出水2升每分钟，存量每分钟增加4升，水位每分钟升高2厘米" loading="lazy"></a><figcaption>本例进出口流量为给定常数；若出流受水位控制，必须重新建立随水位变化的流量关系。 · 点按图形可放大</figcaption></figure>
+
+### 从一小片流体推出流量式
+
+均匀法向速度为 $\bar u$，截面积为 $A$。经过 $dt$，流体走过距离 $\bar u\,dt$，扫过体积 $dV=A\bar u\,dt$；乘密度得到 $dm=\rho A\bar u\,dt$。所以 $Q=A\bar u$，$\dot m=\rho A\bar u$。若速度不均匀，要先对截面积分求 $Q=\int_Au_n\,dA$，不能用中心最大速度代替平均速度。
+
+稳态只让 $dm_{CV}/dt=0$。单进单出、无泄漏时得到 $\rho_1A_1\bar u_1=\rho_2A_2\bar u_2$；再增加“两端密度相同”条件，才约去 $\rho$ 得 $A_1\bar u_1=A_2\bar u_2$。
+
+### 完整数值例：多久升高 10 cm？
+
+竖直等截面水箱面积 $A_t=0.20\,\mathrm{m^2}$，进水 $6.0\,\mathrm{L/min}$，出水 $2.0\,\mathrm{L/min}$。假设这段时间流量恒定、无溢流无泄漏，水密度固定为 $1000\,\mathrm{kg/m^3}$。
+
+1. 净体积流入 $4.0\,\mathrm{L/min}=0.0040\,\mathrm{m^3/min}=6.667\times10^{-5}\,\mathrm{m^3/s}$
+2. 箱内水质量 $m=\rho A_tH$，故 $dm/dt=\rho A_t\,dH/dt$，其中 $H$ 是水深（m）
+3. 代入质量守恒并约去相同密度：$dH/dt=(Q_{in}-Q_{out})/A_t=3.333\times10^{-4}\,\mathrm{m/s}=2.0\,\mathrm{cm/min}$
+4. 升高 $10\,\mathrm{cm}$ 需要 $10/2.0=5.0\,\mathrm{min}$，新增体积 $A_t\Delta H=0.020\,\mathrm{m^3}=20\,\mathrm L$，新增质量为 20 kg
+5. 反查 $5\times(6-2)=20$ L，与几何体积一致
+
+若出口是靠水位压差自行排水，水位升高会改变出口流量，此时应把 $Q_{out}(H)$ 代回方程，不能把本例直线增长外推到任意时刻。
+
+### 立即自检：气体入口体积流量一定等于出口吗？
+
+<details><summary>从质量式判断，再看答案</summary>
+
+不一定。稳态、无泄漏、单进单出的条件保证质量流量相等；若出口密度只有入口一半，则出口体积流量必须是入口两倍。只有进一步确认两端密度相同，才能说体积流量相等。
+
+</details>
+
+**本节过关动作：** 给每个端口标流向，先写带积累项的方程，再决定能否删掉它。能量怎样随流体运输，接着读[稳流能量方程](#/course/thermodynamics/thermodynamics-07)；求收缩后的压力时读[伯努利与损失](#/course/fluid-mechanics/fluid-mechanics-10)。
+
+<details class="advanced-reading"><summary>展开完整讲解：严谨定义、推导与原有练习</summary>
 
 ## 严谨定义：先画边界，再谈守恒
 
@@ -89,4 +134,6 @@ $A=\pi D^2/4=0.007854\,\mathrm{m^2}$，$Q=A\bar u=0.01571\,\mathrm{m^3/s}$。
 <details><summary>查看解析</summary>
 
 由质量守恒可得 $u_2=2u_1$。体积流量加倍，但质量流量不变。
+</details>
+
 </details>

@@ -1,0 +1,129 @@
+[
+  {
+    "id": "thermodynamics-01",
+    "required": [],
+    "recommended": [
+      "calculus-01"
+    ],
+    "mainline": true,
+    "why": "先选研究对象和边界，再分清状态量、过程量、总量与比性质",
+    "checkpoint": "能为三个日常设备画边界，并说明闭口为什么不等于绝热"
+  },
+  {
+    "id": "thermodynamics-05",
+    "required": [
+      "thermodynamics-01"
+    ],
+    "recommended": [
+      "thermodynamics-03",
+      "thermodynamics-06",
+      "calculus-07"
+    ],
+    "mainline": true,
+    "why": "在热、功同时进出时算清闭口系统储能变化",
+    "checkpoint": "能先按实际方向写正负号，列出电功、边界功和热量，再用第一律复核"
+  },
+  {
+    "id": "thermodynamics-07",
+    "required": [
+      "thermodynamics-05",
+      "fluid-mechanics-07"
+    ],
+    "recommended": [
+      "thermodynamics-06"
+    ],
+    "mainline": true,
+    "why": "给有进出口的设备建立质量与能量账，解释为什么使用焓",
+    "checkpoint": "能区分焓流与内能储存，按理由删去稳态项，并算出热水器出口温度"
+  },
+  {
+    "id": "heat-transfer-01",
+    "required": [
+      "thermodynamics-05"
+    ],
+    "recommended": [
+      "thermodynamics-02",
+      "calculus-03"
+    ],
+    "mainline": true,
+    "why": "识别同一物体的导热、对流、辐射路径，并区分能量与功率",
+    "checkpoint": "能从带单位的各条热流得到净储能率，说明对流系数和辐射模型的条件"
+  },
+  {
+    "id": "heat-transfer-03",
+    "required": [
+      "heat-transfer-01"
+    ],
+    "recommended": [
+      "heat-transfer-02",
+      "calculus-07"
+    ],
+    "mainline": true,
+    "why": "把稳态一维墙的温差转换为热流，并恢复界面温度",
+    "checkpoint": "能依据已知空气或壁面温度选择节点，正确串并联热阻并验算每段温降"
+  },
+  {
+    "id": "heat-transfer-07",
+    "required": [
+      "heat-transfer-01"
+    ],
+    "recommended": [
+      "heat-transfer-03",
+      "calculus-24"
+    ],
+    "mainline": true,
+    "why": "判断固体能否近似为一个温度，再求冷却到目标温度的时间",
+    "checkpoint": "能按几何求V/As，区分Bi与时间常数，并用初值和长期极限检验指数解"
+  },
+  {
+    "id": "fluid-mechanics-01",
+    "required": [],
+    "recommended": [
+      "fluid-mechanics-29"
+    ],
+    "mainline": true,
+    "why": "把日常体积和质量变成带单位的局部场与整体量",
+    "checkpoint": "能区分质量、重量、密度、黏度，并对不均匀液体作正确的体积加权"
+  },
+  {
+    "id": "fluid-mechanics-06",
+    "required": [
+      "fluid-mechanics-01",
+      "calculus-15"
+    ],
+    "recommended": [
+      "fluid-mechanics-29",
+      "calculus-04"
+    ],
+    "mainline": true,
+    "why": "解释稳态流动中质点为什么仍会加速",
+    "checkpoint": "能用链式法则分开局部与对流加速度，逐项检查单位及速度场的物理条件"
+  },
+  {
+    "id": "fluid-mechanics-07",
+    "required": [
+      "fluid-mechanics-01"
+    ],
+    "recommended": [
+      "fluid-mechanics-06",
+      "calculus-07"
+    ],
+    "mainline": true,
+    "why": "把同一批流体的质量守恒转换成固定区域的积累与通量",
+    "checkpoint": "能画外法线，统一入口出口正负号，并从完整质量式推得水位变化和连续性"
+  },
+  {
+    "id": "fluid-mechanics-10",
+    "required": [
+      "fluid-mechanics-07"
+    ],
+    "recommended": [
+      "fluid-mechanics-06",
+      "fluid-mechanics-03",
+      "thermodynamics-07"
+    ],
+    "mainline": true,
+    "why": "在条件允许时连接压力、速度和高度，并为真实管路加上损失",
+    "checkpoint": "能先用连续性求速度，说明伯努利条件，再区分加速压差与耗散压差"
+  }
+]

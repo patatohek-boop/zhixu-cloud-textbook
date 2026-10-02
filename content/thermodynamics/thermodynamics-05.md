@@ -33,6 +33,50 @@
   "lab": null
 }
 ---
+## 先看能量流向，再给公式里的量写正负号
+
+同一杯水可以被热水浴加热，也可以被电阻加热。水最后升温，并不说明进入它的能量都叫“热”。**跨边界的方式决定热或功的分类；内能变化只记净结果。** 本节先把边界圈住气体以及内部电阻，固定这条边界后再记账。
+
+### 一张小账单需要的量
+
+$Q$ 为本过程热量（kJ），进入系统为正；$W$ 为本过程总功（kJ），系统对外做功为正。$\Delta U=U_2-U_1$（kJ）是内能变化。符号 $\dot Q,\dot W$ 带点时表示速率，用 kW；速率乘时间才是能量。这里的 $W$ 是变量，单位 $\mathrm W$ 才是瓦。
+
+热力学第一定律是物理规律。把它用于无明显整体速度、高度变化的闭口系统，才有
+
+$$\Delta U=Q-W.$$
+
+这条式子不要求理想气体，也不要求过程可逆。若物体被加速或抬高，应回到 $\Delta U+\Delta KE+\Delta PE=Q-W$。其中 $KE$、$PE$ 分别表示物体整体运动的动能和重力势能。
+
+<figure class="teaching-figure"><a href="assets/diagrams/learn-thermodynamics-05.svg" target="_blank" rel="noopener" aria-label="打开大图：电功输入6.0千焦，热量流出1.2千焦，系统内能增加4.8千焦"><img src="assets/diagrams/learn-thermodynamics-05.svg" alt="电功输入6.0千焦，热量流出1.2千焦，系统内能增加4.8千焦" loading="lazy"></a><figcaption>先画实际方向，再翻译成代数符号：输入电功在本课记为负功，放热记为负热。 · 点按图形可放大</figcaption></figure>
+
+### 为什么压缩输入功会让内能增加？
+
+外力把活塞压入，体积变化 $dV<0$。以正的抵抗压力 $p_b$ 计算，$\delta W_b=p_b\,dV<0$。代入第一律是**减去一个负数**，所以功输入增加系统能量。别为迎合直觉擅自把公式改成 $Q+W$；先看该书把哪个方向定义为正。
+
+如果同时有边界功、电功和轴功，就先合成 $W=W_b+W_{elec}+W_{shaft}$。这一步能防止“刚性罐没有功”的常见漏项：刚性仅使 $W_b=0$。
+
+### 完整数值例：电加热同时散热
+
+刚性密闭罐内电阻功率为 $300\,\mathrm W$，通电 $20\,\mathrm s$；同期向环境散热 $1.2\,\mathrm{kJ}$。取罐内气体与电阻为系统，忽略电阻储能变化、整体动位能变化以及其他能量通道。
+
+1. 电功输入大小 $300\times20=6000\,\mathrm J=6.0\,\mathrm{kJ}$；按本书约定 $W_{elec}=-6.0\,\mathrm{kJ}$
+2. 体积不变，所以 $W_b=0$；热向外，所以 $Q=-1.2\,\mathrm{kJ}$
+3. $\Delta U=-1.2-(-6.0)=4.8\,\mathrm{kJ}$
+4. 若气体质量为 $0.20\,\mathrm{kg}$，可用理想气体模型，且定容比热 $c_v=0.72\,\mathrm{kJ/(kg\cdot K)}$ 可近似视为常数，则 $\Delta T=\Delta U/(mc_v)=33.3\,\mathrm K$
+
+先由守恒得到 $4.8\,\mathrm{kJ}$，再加物性模型才换成温升。输入 $6.0=1.2+4.8$：一部分流出，另一部分储存，账能对上。若电阻热容不小，$4.8\,\mathrm{kJ}$ 是整个系统的储能变化，不能全算给气体。
+
+### 立即自检：温度升高，能断定吸热吗？
+
+<details><summary>先举反例，再看答案</summary>
+
+不能。绝热压缩或绝热搅拌都可以输入功，使内能与温度升高，而 $Q=0$。上面的罐甚至在净放热，仍因电功输入更多而升温。必须看边界和传递方式，不能由温度变化反推热量正负。
+
+</details>
+
+**本节过关动作：** 把例题散热改为 $7.0\,\mathrm{kJ}$，先预测，再验证 $\Delta U=-1.0\,\mathrm{kJ}$。要把内能变化算成温度，补学[理想气体性质](#/course/thermodynamics/thermodynamics-03)和[比热](#/course/thermodynamics/thermodynamics-06)。
+
+<details class="advanced-reading"><summary>展开完整讲解：严谨定义、推导与原有练习</summary>
 
 ## 严谨定义与记号
 
@@ -118,3 +162,5 @@ $p$ 用 Pa、$V$ 用 m³ 时功为 J；kPa·m³=kJ。热流率 $\dot Q=dQ/dt$、
 ## 继续阅读
 
 本章为原创中文讲解与教学例题；课程范围与模型条件参考[MIT 16.050 Thermal Energy — syllabus](https://ocw.mit.edu/courses/16-050-thermal-energy-fall-2002/pages/syllabus/)。课程资料页列出进一步阅读入口，原课程的高级内容需要另外系统学习。
+
+</details>

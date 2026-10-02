@@ -33,6 +33,59 @@
   "lab": null
 }
 ---
+## 为什么水流出热水器时，能量项要写焓？
+
+闭口系统追踪同一份物质。热水器却不断换水，既要统计空间里存了多少能量，也要统计**水流带走多少能量**。先把固定控制体画在设备外壳和进出口截面上；箭头经过这条线，才属于外部交换。
+
+### 先读懂这四种不同单位
+
+- $\dot m$（kg/s）：每秒流过多少质量，不是圈内总质量 $m$（kg）
+- $h=u+pv$（J/kg 或 kJ/kg）：单位质量的焓；$v=1/\rho$（m³/kg）
+- $\dot m h$（W 或 kW）：焓流率；kg/s 乘 kJ/kg 正好是 kJ/s=kW
+- $c$（m/s）：流速；$c^2/2$（J/kg）是比动能，不能直接与以 kJ/kg 计的 $h$ 相加
+
+这里 $h$ 表示**比焓**；传热课程也用 $h$ 表示对流换热系数，含义与单位完全不同。
+
+### 把容易漏掉的压力功补出来
+
+在 $dt$ 内流入 $dm=\rho A c\,dt$，对应体积 $dV=dm/\rho=v\,dm$。上游压力作用力为 $pA$，推动距离 $c\,dt$，做功
+
+$$\delta W_{push}=pA(c\,dt)=p\,dV=pv\,dm.$$
+
+流入物质携带内能 $u\,dm$，加上边界压力推入功就是 $(u+pv)dm=h\,dm$。**焓是为整理流入流出项定义的组合量，不是凭空增加的能量。** 写了 $\dot m h$ 后，不能再把 $pAc$ 另加一遍。
+
+<figure class="teaching-figure"><a href="assets/diagrams/learn-thermodynamics-07.svg" target="_blank" rel="noopener" aria-label="打开大图：水流带焓穿过控制面，电功输入2.20千瓦，向外散热0.10千瓦，水流焓增率2.10千瓦"><img src="assets/diagrams/learn-thermodynamics-07.svg" alt="水流带焓穿过控制面，电功输入2.20千瓦，向外散热0.10千瓦，水流焓增率2.10千瓦" loading="lazy"></a><figcaption>固定控制体稳态运行：圈内能量不积累，输入净功率成为出口相对入口的焓增。 · 点按图形可放大</figcaption></figure>
+
+### 从完整账单到热水器简式，每删一项都说理由
+
+采用固定控制体、单进单出、端口性质近似均匀。若达到稳态，空间内质量和能量不再积累，所以 $\dot m_1=\dot m_2=\dot m$。再忽略进出口动能与高度差，得到
+
+$$\dot Q-\dot W_s=\dot m(h_2-h_1).$$
+
+$\dot Q$ 热进入为正，$\dot W_s$ 表示除进出口压力推流功外的功率，例如电功和轴功，向外输出为正。**稳态只删储存率；绝热才删热传递项。** 水在设备中一边流一边被加热，仍然完全可能是稳态。
+
+### 完整数值例：电热水器有散热时
+
+取含电阻的整台设备为控制体。水的质量流率 $0.050\,\mathrm{kg/s}$，电功率输入 $2.20\,\mathrm{kW}$，向环境散热 $0.10\,\mathrm{kW}$。水入口 $20.0\,{}^\circ\mathrm C$，出口压力近似入口压力；把水视为常比热、近似不可压缩液体，$c_p=4.20\,\mathrm{kJ/(kg\cdot K)}$，忽略动位能变化。
+
+1. $\dot Q=-0.10\,\mathrm{kW}$，$\dot W_s=-2.20\,\mathrm{kW}$
+2. 流体焓增率 $\dot m\Delta h=-0.10-(-2.20)=2.10\,\mathrm{kW}$
+3. 每千克焓增 $\Delta h=2.10/0.050=42.0\,\mathrm{kJ/kg}$
+4. 在所述压力与物性近似下 $\Delta h\approx c_p\Delta T$，故 $\Delta T=42.0/4.20=10.0\,\mathrm K$，出口为 $30.0\,{}^\circ\mathrm C$
+
+检查：每秒 $0.050$ kg 水，各增加 $42.0$ kJ/kg，合计 $2.10$ kJ/s。若显著改变液体压力，焓差一般还要保留压力贡献，不能只算 $c_p\Delta T$。
+
+### 立即自检：流量恒定的充气罐是稳态吗？
+
+<details><summary>先判断圈内存量，再看答案</summary>
+
+通常不是。入口流率恒定、出口为零，质量仍在积累：$dm_{cv}/dt=\dot m_{in}>0$。罐内能量也一般改变，必须保留储存项。储存在控制体内的是内能加宏观动位能；进出口用焓，不代表罐内储存项改为 $mh$。
+
+</details>
+
+**本节过关动作：** 分别画出“设备刚启动”与“出口温度已稳定”的边界账单，指出哪一项从非零变成零。质量通量不熟时补[控制体与质量守恒](#/course/fluid-mechanics/fluid-mechanics-07)。
+
+<details class="advanced-reading"><summary>展开完整讲解：严谨定义、推导与原有练习</summary>
 
 ## 严谨定义与记号
 
@@ -113,3 +166,5 @@ $$\dot Q-\dot W_s=\dot m\left[h_2-h_1+\frac{c_2^2-c_1^2}{2}+g(z_2-z_1)\right].$$
 ## 继续阅读
 
 本章为原创中文讲解与教学例题；课程范围与模型条件参考[MIT 16.050 Thermal Energy — syllabus](https://ocw.mit.edu/courses/16-050-thermal-energy-fall-2002/pages/syllabus/)。课程资料页列出进一步阅读入口，原课程的高级内容需要另外系统学习。
+
+</details>

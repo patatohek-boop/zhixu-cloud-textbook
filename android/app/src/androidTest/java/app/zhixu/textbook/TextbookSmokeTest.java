@@ -26,7 +26,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class TextbookSmokeTest extends Instrumentation {
     private static final String RECORD_KEY = "zhixu-learning-v1";
     private static final String LESSON = "calculus-03";
-    private static final int TOTAL = 10;
+    private static final int TOTAL = 12;
     private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.3.2' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
     private Activity reader;
     private WebView web;
@@ -56,6 +56,8 @@ public final class TextbookSmokeTest extends Instrumentation {
             runCase("conceptNavigationAndMobileLayout", this::concepts);
             runCase("researchRouteAndOfflineLabs", this::researchLabs);
             runCase("simulationAndOfflineLabs", this::simulationLabs);
+            runCase("knowledgeFrameworkAndFoundationLabs", this::learningFramework);
+            runCase("conceptStoriesOffline", this::conceptStories);
             runCase("invalidRouteIsSafe", this::invalidRoute);
             runCase("backupRoundTripAndInjection", this::backups);
             runCase("notesSurviveRelaunch", this::relaunch);
@@ -260,6 +262,52 @@ public final class TextbookSmokeTest extends Instrumentation {
         require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0")), "PINN formulas failed offline");
         evaluate("location.hash='#/course/calculus/calculus-03'");
         waitUntil("document.querySelector('#note-text')", "Could not return from research labs");
+    }
+
+    private void learningFramework() throws Exception {
+        require(Boolean.TRUE.equals(evaluate("window.LEARNING_GUIDES.length===26 && !!window.KnowledgeMap")), "Learning framework assets missing offline");
+        evaluate("location.hash='#/map'");
+        waitUntil("document.querySelectorAll('.map-course-card').length===7", "Seven-course framework failed offline");
+        String[] courseIds = {"calculus", "linear-algebra", "thermodynamics", "heat-transfer", "fluid-mechanics", "python", "machine-learning"};
+        for (String course : courseIds) {
+            evaluate("location.hash='#/map/" + course + "'");
+            waitUntil("document.querySelectorAll('[data-node-id]').length===window.COURSES.find(function(c){return c.id==='" + course + "'}).chapters.length", "Incomplete offline map: " + course);
+            require(Boolean.TRUE.equals(evaluate("document.documentElement.scrollWidth<=innerWidth+1")), "Course map overflows mobile viewport: " + course);
+        }
+        evaluate("location.hash='#/map/calculus/calculus-03'");
+        waitUntil("document.querySelector('.dependency-current') && document.querySelector('.dependency-current').textContent.includes('导数')", "Local dependency graph missing");
+        saveReaderScreenshot("knowledge-map-screen.png");
+        evaluate("location.hash='#/path'");
+        waitUntil("document.querySelectorAll('.core-route>li').length===26", "Core path incomplete offline");
+        evaluate("location.hash='#/course/calculus/calculus-03'");
+        waitUntil("document.querySelector('#reading-depth') && document.querySelector('details.advanced-reading')", "Progressive reading controls missing");
+        require(Boolean.TRUE.equals(evaluate("(function(){var heading=document.querySelector('details.advanced-reading h2');document.querySelector('[data-scroll=\"'+heading.id+'\"]').click();return heading.closest('details').open && document.activeElement===heading})()")), "TOC did not open and focus an original proof");
+        evaluate("document.querySelector('#lesson-body figure a').click()");
+        waitUntil("window.FigureViewer.isOpen() && document.querySelector('.figure-enlarged').complete", "Offline diagram enlargement failed");
+        require(Boolean.TRUE.equals(evaluate("document.querySelector('.figure-enlarged').naturalWidth>0")), "Offline enlarged diagram failed to load");
+        require(Boolean.TRUE.equals(evaluate("window.ZHIXU.handleBack() && !window.FigureViewer.isOpen() && location.hash==='#/course/calculus/calculus-03'")), "Android back did not close the enlarged figure in place");
+        for (String lab : new String[]{"foundation-energy", "foundation-projection", "foundation-mass"}) {
+            evaluate("location.hash='#/labs/" + lab + "'");
+            waitUntil("document.querySelector('[data-lab=\"" + lab + "\"] .lab-chart svg')", "Foundation lab unavailable offline: " + lab);
+            require(Boolean.TRUE.equals(evaluate("(function(){var el=document.querySelector('[data-param]'),before=document.querySelector('.lab-result').textContent;el.value=Number(el.value)===Number(el.max)?el.min:el.max;el.dispatchEvent(new Event('input'));return document.querySelector('.lab-result').textContent!==before})()")), "Foundation controls did not update: " + lab);
+            require(Boolean.TRUE.equals(evaluate("document.documentElement.scrollWidth<=innerWidth+1")), "Foundation lab overflows mobile viewport: " + lab);
+        }
+    }
+
+    private void conceptStories() throws Exception {
+        String[] lessons = {"thermodynamics/thermodynamics-05", "heat-transfer/heat-transfer-03", "heat-transfer/heat-transfer-07", "fluid-mechanics/fluid-mechanics-07", "python/python-06", "machine-learning/machine-learning-07"};
+        for (String lesson : lessons) {
+            evaluate("location.hash='#/course/" + lesson + "'");
+            String lessonId = lesson.substring(lesson.indexOf('/') + 1);
+            waitUntil("window.ZHIXU.state.last==='" + lessonId + "' && document.querySelector('.article-head h1').textContent===window.ZHIXU.all.find(function(l){return l.id==='" + lessonId + "'}).title && document.querySelector('.concept-story svg') && document.querySelector('[data-story-action=next]')", "Concept story failed offline: " + lesson);
+            require(Boolean.TRUE.equals(evaluate("(function(){var el=document.querySelector('.concept-story'),before=el.textContent;el.querySelector('[data-story-action=next]').click();return el.textContent!==before})()")), "Story step did not change the explanation: " + lesson);
+            require(Boolean.TRUE.equals(evaluate("document.documentElement.scrollWidth<=innerWidth+1 && document.querySelectorAll('.math-error').length===0")), "Story layout or formula failed: " + lesson);
+            evaluate("document.querySelector('[data-story-action=replay]').click()");
+        }
+        evaluate("document.querySelector('.concept-story').scrollIntoView({block:'start',behavior:'instant'})");
+        saveReaderScreenshot("concept-story-screen.png");
+        evaluate("location.hash='#/course/calculus/calculus-03'");
+        waitUntil("document.querySelector('#note-text')", "Could not return from concept stories");
     }
 
     private void invalidRoute() throws Exception {

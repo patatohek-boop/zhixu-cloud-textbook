@@ -4,6 +4,7 @@ const root=path.resolve(__dirname,'..'),ctx={window:{}};
 vm.runInNewContext(fs.readFileSync(path.join(root,'site/assets/data.js'),'utf8'),ctx);
 const katex=require(path.join(root,'site/assets/vendor/katex/katex.min.js'));
 const {LABS}=require(path.join(root,'site/assets/cfd-labs.js'));
+require(path.join(root,'site/assets/foundation-labs.js'));
 let count=0,formulas=0,errors=[];
 for(const course of ctx.window.COURSES)for(const l of course.chapters){
  count++;
@@ -16,7 +17,7 @@ for(const course of ctx.window.COURSES)for(const l of course.chapters){
    catch(e){errors.push(`${l.id}: ${m[0]} => ${e.message}`);}
   }
  }
- assert.equal((l.content.match(/<details>/g)||[]).length,(l.content.match(/<\/details>/g)||[]).length,`${l.id}: details mismatch`);
+ assert.equal((l.content.match(/<details\b[^>]*>/g)||[]).length,(l.content.match(/<\/details>/g)||[]).length,`${l.id}: details mismatch`);
 }
 for(const [id,lab]of Object.entries(LABS)){
  const values=Object.fromEntries(lab.controls.map(c=>[c[0],c[5]]));

@@ -29,6 +29,10 @@ jobs:
       - run: node tools/test-learning-state.cjs
       - run: node tools/test-research-labs.cjs
       - run: node tools/test-cfd-labs.cjs
+      - run: node tools/test-foundation-labs.cjs
+      - run: node tools/test-concept-stories.cjs
+      - run: node tools/test-knowledge-map.cjs
+      - run: python tools/test-learning-preservation.py
       - run: python tools/verify_cfd.py
       - run: python tools/verify_research_foundations.py
       - run: python tools/verify_fluid.py
