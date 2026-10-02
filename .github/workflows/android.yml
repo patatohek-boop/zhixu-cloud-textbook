@@ -129,6 +129,8 @@ jobs:
           test -s work/android-concept-story.png
           adb exec-out run-as app.zhixu.textbook cat files/mastery-practice-screen.png > work/android-mastery-practice.png
           test -s work/android-mastery-practice.png
+          adb exec-out run-as app.zhixu.textbook cat files/horizontal-formula-screen.png > work/android-horizontal-formula.png
+          test -s work/android-horizontal-formula.png
           adb shell am start -W -n app.zhixu.textbook/.MainActivity
           sleep 15
           adb exec-out screencap -p > work/android-home.png
@@ -145,6 +147,7 @@ jobs:
             work/android-knowledge-map.png
             work/android-concept-story.png
             work/android-mastery-practice.png
+            work/android-horizontal-formula.png
             work/android-home.png
             work/emulator.log
             work/android-logcat.txt

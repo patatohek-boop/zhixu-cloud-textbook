@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import org.json.JSONObject;
@@ -325,9 +326,48 @@ public final class TextbookSmokeTest extends Instrumentation {
             require(Boolean.TRUE.equals(evaluate("!document.querySelector('.mastery-answer').open")), "Repeated disclosure failed");
             evaluate("document.querySelectorAll('.mastery-answer').forEach(function(e){e.open=true})");
             require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0 && document.documentElement.scrollWidth<=innerWidth+1 && document.querySelectorAll('.mastery-card [data-answer],.mastery-card input').length===0")), "Practice formulas, mobile layout or grading contract failed");
+            if ("fluid-mechanics-01".equals(lessonId)) formulaTouchScroll();
         }
         evaluate("document.querySelector('.mastery-card').scrollIntoView({block:'start',behavior:'instant'})");
         saveReaderScreenshot("mastery-practice-screen.png");
+    }
+
+    private void formulaTouchScroll() throws Exception {
+        require(Boolean.TRUE.equals(evaluate("(function(){var e=Array.from(document.querySelectorAll('.mastery-card .katex-display')).find(function(x){return x.scrollWidth>x.clientWidth+4});if(!e)return false;e.id='native-scroll-formula';e.scrollIntoView({block:'center',behavior:'instant'});return true})()")), "No overflowing formula available for native touch check");
+        waitUntil("(function(){var r=document.querySelector('#native-scroll-formula').getBoundingClientRect();return r.top>0&&r.bottom<innerHeight})()", "Touch formula is not visible");
+        for (int i=0; i<4; i++) {
+            swipeFormula(true);
+            if (Boolean.TRUE.equals(evaluate("(function(){var e=document.querySelector('#native-scroll-formula');return e.scrollWidth-e.clientWidth-e.scrollLeft<=1})()"))) break;
+        }
+        waitUntil("(function(){var e=document.querySelector('#native-scroll-formula'),r=e.getBoundingClientRect();return e.scrollLeft>0&&e.scrollWidth-e.clientWidth-e.scrollLeft<=1&&e.firstElementChild.getBoundingClientRect().right<=r.right+1})()", "Native touch cannot reveal formula's rightmost symbols");
+        saveReaderScreenshot("horizontal-formula-screen.png");
+        for (int i=0; i<4; i++) {
+            swipeFormula(false);
+            if (Boolean.TRUE.equals(evaluate("document.querySelector('#native-scroll-formula').scrollLeft<=1"))) break;
+        }
+        waitUntil("document.querySelector('#native-scroll-formula').scrollLeft<=1", "Native touch cannot return to formula's left edge");
+    }
+
+    private void swipeFormula(boolean towardsRightEdge) throws Exception {
+        JSONObject box = (JSONObject) evaluate("(function(){var e=document.querySelector('#native-scroll-formula'),r=e.getBoundingClientRect();return {left:r.left,right:r.right,y:r.top+r.height/2,viewport:innerWidth}})()");
+        int[] location = new int[2]; int[] width = new int[1];
+        runOnMainSync(() -> { web.getLocationOnScreen(location); width[0]=web.getWidth(); });
+        double scale = width[0] / box.getDouble("viewport");
+        float left = (float)(location[0]+(box.getDouble("left")+12)*scale);
+        float right = (float)(location[0]+(box.getDouble("right")-12)*scale);
+        float y = (float)(location[1]+box.getDouble("y")*scale);
+        float start = towardsRightEdge ? right : left, end = towardsRightEdge ? left : right;
+        long down = SystemClock.uptimeMillis();
+        MotionEvent event = MotionEvent.obtain(down, down, MotionEvent.ACTION_DOWN, start, y, 0);
+        sendPointerSync(event); event.recycle();
+        for (int i=1; i<=12; i++) {
+            SystemClock.sleep(16);
+            event = MotionEvent.obtain(down, SystemClock.uptimeMillis(), MotionEvent.ACTION_MOVE, start+(end-start)*i/12f, y, 0);
+            sendPointerSync(event); event.recycle();
+        }
+        event = MotionEvent.obtain(down, SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, end, y, 0);
+        sendPointerSync(event); event.recycle();
+        SystemClock.sleep(250);
     }
 
     private void invalidRoute() throws Exception {

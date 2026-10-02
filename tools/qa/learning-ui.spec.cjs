@@ -15,19 +15,31 @@ async function open(page,hash){
  },hash);
 }
 async function noOverflow(page,label){await page.evaluate(()=>document.fonts.ready);const result=await page.evaluate(()=>({width:innerWidth,html:document.documentElement.scrollWidth,body:document.body.scrollWidth}));expect(result.html,label).toBeLessThanOrEqual(result.width+1);expect(result.body,label).toBeLessThanOrEqual(result.width+1);}
+async function wheelToEdge(page,region,direction,label){
+ const state=()=>region.evaluate(el=>{const r=el.getBoundingClientRect(),x=r.x+r.width/2,y=r.y+r.height/2,hit=document.elementFromPoint(x,y);return {left:el.scrollLeft,max:el.scrollWidth-el.clientWidth,width:el.clientWidth,scrollWidth:el.scrollWidth,overflow:getComputedStyle(el).overflowX,box:{x:r.x,y:r.y,width:r.width,height:r.height},visible:r.top>=0&&r.bottom<=innerHeight,hitInside:!!hit&&(hit===el||el.contains(hit)),hit:hit?.tagName+'.'+hit?.className};});
+ for(let pulse=0;pulse<4;pulse++){
+  await region.scrollIntoViewIfNeeded();await region.hover();await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
+  const before=await state();console.log(label+' pulse '+pulse+' '+JSON.stringify(before));expect(before.visible,label+' target is visible').toBe(true);expect(before.hitInside,label+' pointer hits the intended scroll region').toBe(true);
+  await page.mouse.wheel(direction*1000,0);
+  // Let native scrolling settle visually. This never assigns a scroll position.
+  await region.evaluate(el=>new Promise(resolve=>{let last=el.scrollLeft,stable=0,frames=0;function tick(){const now=el.scrollLeft;stable=Math.abs(now-last)<.1?stable+1:0;last=now;if(stable>=3||++frames>=45)resolve();else requestAnimationFrame(tick);}requestAnimationFrame(tick);}));
+  const after=await state();console.log(label+' observed '+JSON.stringify(after));if(direction>0?after.max-after.left<=1:after.left<=1)return;
+ }
+ const last=await state();expect(direction>0?last.max-last.left:last.left,label+' must reach the requested edge with real wheel input: '+JSON.stringify(last)).toBeLessThanOrEqual(1);
+}
 async function horizontalScroll(page,regions,label,required,capturePath){
  for(let i=0;i<await regions.count();i++){
   const region=regions.nth(i);const overflow=await region.evaluate(el=>el.scrollWidth>el.clientWidth+4);if(!overflow)continue;
   await region.scrollIntoViewIfNeeded();await region.hover();const before=await region.evaluate(el=>el.scrollLeft);
   console.log(label+' region '+i+' '+JSON.stringify(await region.evaluate(el=>({width:el.clientWidth,scrollWidth:el.scrollWidth,overflow:getComputedStyle(el).overflowX,childWidth:el.firstElementChild?.getBoundingClientRect().width}))));
-  await page.mouse.wheel(10000,0);await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' scrolls to reveal its right side'}).toBeGreaterThan(before);
+  await wheelToEdge(page,region,1,label+' forward');await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' scrolls to reveal its right side'}).toBeGreaterThan(before);
   await expect.poll(()=>region.evaluate(el=>el.scrollWidth-el.clientWidth-el.scrollLeft),{message:label+' reaches the actual right edge'}).toBeLessThanOrEqual(1);
   if(await region.evaluate(el=>el.classList.contains('katex-display'))){
    const edges=await region.evaluate(el=>({container:el.getBoundingClientRect().right,formula:el.querySelector(':scope > .katex').getBoundingClientRect().right}));
    expect(edges.formula,label+' final symbols are in view').toBeLessThanOrEqual(edges.container+1);
   }
   if(capturePath)await region.screenshot({style:cleanCaptureChrome,path:capturePath});
-  await region.hover();await page.mouse.wheel(-10000,0);await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' returns to the left edge'}).toBeLessThanOrEqual(1);
+  await wheelToEdge(page,region,-1,label+' backward');await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' returns to the left edge'}).toBeLessThanOrEqual(1);
   console.log(label+': real horizontal wheel reaches both ends passed');return;
  }
  expect(required,label+' should include an overflowing mobile region').toBe(false);
