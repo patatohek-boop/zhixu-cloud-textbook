@@ -19,10 +19,16 @@ async function horizontalScroll(page,regions,label,required,capturePath){
  for(let i=0;i<await regions.count();i++){
   const region=regions.nth(i);const overflow=await region.evaluate(el=>el.scrollWidth>el.clientWidth+4);if(!overflow)continue;
   await region.scrollIntoViewIfNeeded();await region.hover();const before=await region.evaluate(el=>el.scrollLeft);
-  await page.mouse.wheel(260,0);await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' scrolls to reveal its right side'}).toBeGreaterThan(before);
-  const after=await region.evaluate(el=>el.scrollLeft);if(capturePath)await region.screenshot({style:cleanCaptureChrome,path:capturePath});
-  await region.hover();await page.mouse.wheel(-260,0);await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' scrolls back'}).toBeLessThan(after);
-  console.log(label+': real horizontal wheel scroll and return passed');return;
+  console.log(label+' region '+i+' '+JSON.stringify(await region.evaluate(el=>({width:el.clientWidth,scrollWidth:el.scrollWidth,overflow:getComputedStyle(el).overflowX,childWidth:el.firstElementChild?.getBoundingClientRect().width}))));
+  await page.mouse.wheel(10000,0);await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' scrolls to reveal its right side'}).toBeGreaterThan(before);
+  await expect.poll(()=>region.evaluate(el=>el.scrollWidth-el.clientWidth-el.scrollLeft),{message:label+' reaches the actual right edge'}).toBeLessThanOrEqual(1);
+  if(await region.evaluate(el=>el.classList.contains('katex-display'))){
+   const edges=await region.evaluate(el=>({container:el.getBoundingClientRect().right,formula:el.querySelector(':scope > .katex').getBoundingClientRect().right}));
+   expect(edges.formula,label+' final symbols are in view').toBeLessThanOrEqual(edges.container+1);
+  }
+  if(capturePath)await region.screenshot({style:cleanCaptureChrome,path:capturePath});
+  await region.hover();await page.mouse.wheel(-10000,0);await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' returns to the left edge'}).toBeLessThanOrEqual(1);
+  console.log(label+': real horizontal wheel reaches both ends passed');return;
  }
  expect(required,label+' should include an overflowing mobile region').toBe(false);
 }
