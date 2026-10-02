@@ -128,6 +128,43 @@ B = s.Matrix([[-1, 0, 1], [1, -1, 0], [0, 1, -1]])
 checked("triangle cycle flow", B*s.ones(3, 1) == s.zeros(3, 1))
 checked("grounded network potential", B*B.T*s.Matrix([s.Rational(1, 3), -s.Rational(1, 3), 0]) == s.Matrix([1, -1, 0]))
 
+# 2026-10 audit regressions: independently reproduce the clarified edge cases.
+# Thin QR with signed Householder-style diagonal, followed by the stated D fix.
+Q0 = s.Matrix([[-1, 0], [0, 0], [0, 1]])
+R0 = s.Matrix([[-2, 3], [0, 4]])
+D = s.diag(*[s.sign(R0[i, i]) for i in range(R0.rows)])
+Q, R = Q0*D, D*R0
+checked("QR signed-diagonal normalization preserves product", Q*R == Q0*R0)
+checked("QR normalization preserves thin orthogonality", Q.T*Q == s.eye(2))
+checked("QR normalized diagonal positive", all(R[i, i] > 0 for i in range(2)))
+
+# Wide A has a zero-padded right singular direction that the row space of B may use.
+A = s.Matrix([[3, 0, 0], [0, 2, 0]])
+P = s.diag(0, 0, 1)
+weights = [(P*s.eye(3)[:, i]).dot(P*s.eye(3)[:, i]) for i in range(3)]
+checked("wide-matrix full right-basis weight sum", sum(weights) == P.rank() == 1)
+checked("wide-matrix thin weight sum need not equal rank", sum(weights[:2]) == 0)
+checked("wide-matrix zero-padded energy identity", (A*P).norm()**2 == sum(v*w for v, w in zip([9, 4, 0], weights)))
+
+# Polynomial Jordan powers must include k=0 and lambda=0 without negative powers.
+for size in (1, 2, 4):
+ for eigenvalue in (0, s.Rational(1, 2), -2):
+  nilpotent = block(size)
+  J = eigenvalue*s.eye(size)+nilpotent
+  for power in range(size+2):
+   expansion = s.zeros(size)
+   for j in range(min(power, size-1)+1):
+    scalar = 1 if power == j else eigenvalue**(power-j)
+    expansion += s.binomial(power, j)*scalar*nilpotent**j
+   checked(f"Jordan polynomial power r={size}, lambda={eigenvalue}, k={power}", expansion == J**power)
+
+# Nonlinear inverse: the Jacobian inverse is evaluated at the preimage, not x.
+H = s.Matrix([s.exp(x), y+x*x])
+Hinv = s.Matrix([s.log(u), v-s.log(u)**2])
+preimage_jacobian = H.jacobian([x, y]).subs({x: s.log(u), y: v-s.log(u)**2})
+checked("inverse Jacobian evaluated at preimage", s.simplify(Hinv.jacobian([u, v])-preimage_jacobian.inv()) == s.zeros(2))
+checked("inverse Jacobian evaluation point matters", Hinv.jacobian([u, v]).subs({u: s.E, v: 1}) != H.jacobian([x, y]).subs({x: s.E, y: 1}).inv())
+
 # Render directly from editable source, not possibly stale site/assets/data.js.
 node_code = r'''
 const fs=require('node:fs'), path=require('node:path');

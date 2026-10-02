@@ -53,7 +53,7 @@ $Pe\ge0$ 为整段区域的 Péclet 数，$\phi$ 是无量纲标量。扩散系�
 
 $$\phi(x)=\frac{e^{Pe x}-1}{e^{Pe}-1}\quad(Pe>0),\qquad \phi(x)=x\quad(Pe=0).$$
 
-程序把指数表达式的分子分母同乘 $e^{-Pe}$，并用 `expm1` 处理接近零的差，减少上溢和消减误差。恒定通量为 $J=-Pe/(e^{Pe}-1)$；在 $Pe\to0$ 时趋于 $-1$。
+程序将解析解改写为 $e^{Pe(x-1)}(1-e^{-Pe x})/(1-e^{-Pe})$，分子和分母的指数差都用 `expm1` 计算，避免只保护分母而在分子发生消减误差。所有指数非正，也避免上溢。对于 $0<Pe<10^{-8}$，使用一阶展开 $\phi=x+Pe\,x(x-1)/2+O(Pe^2)$；该极限分支也避免次正规浮点数相除造成精度损失。恒定通量为 $J=-Pe/(e^{Pe}-1)$；在 $Pe\to0$ 时趋于 $-1$。
 
  **通俗解释** ：流向右，右端却规定较高的浓度或温度。扩散试图向左传播信息，对流把它推回右边，最后会在右端形成很陡的变化层。网格不够细时，这正是格式容易暴露问题的地方。
 
@@ -86,7 +86,11 @@ from pathlib import Path
 def exact(x, pe):
     if pe == 0:
         return x
-    return (math.exp(pe * (x - 1)) - math.exp(-pe)) / (-math.expm1(-pe))
+    if pe < 1e-8:
+        # First-order Taylor limit; also avoids dividing subnormal numbers.
+        return x + 0.5 * pe * x * (x - 1)
+    # Protect BOTH differences from cancellation and keep exponents nonpositive.
+    return math.exp(pe * (x - 1)) * (-math.expm1(-pe * x)) / (-math.expm1(-pe))
 
 
 def solve(cells=20, pe=10.0, scheme="upwind"):

@@ -77,8 +77,13 @@ $$\|A-B\|_F^2=\|(A-B)P\|_F^2+\|A(I-P)\|_F^2
 
 ### 第二步：最多保留前 k 个方向的能量
 
-写 SVD 得 $\|AP\|_F^2=\sum_i\sigma_i^2\|Pv_i\|^2$。这些权重在 $[0,1]$、总和为 $r\le k$，上一段的权重论证给 $\|AP\|_F^2\le\sum_{i=1}^k\sigma_i^2$。因此任何秩至多 $k$ 的 $B$ 都满足
-$\|A-B\|_F^2\ge\sum_{i>k}\sigma_i^2$。
+仍先取 $0\le k<p$。使用完整右奇异向量组 $v_1,\ldots,v_n$，它是 $\mathbb R^n$ 的标准正交基；若 $n>p$，仅为本段求和约定 $\sigma_{p+1}=\cdots=\sigma_n=0$。由 $A^\mathsf TA$ 的谱分解和迹的循环性质，
+$$\|AP\|_F^2=\operatorname{tr}(PA^\mathsf TAP)
+=\sum_{i=1}^n\sigma_i^2\|Pv_i\|^2.$$
+令 $w_i=\|Pv_i\|^2$，则 $0\le w_i\le1$，而完整基给
+$$\sum_{i=1}^n w_i=\operatorname{tr}(P)=r\le k.$$
+因此与前面的权重论证相同，$\|AP\|_F^2\le\sum_{i=1}^k\sigma_i^2$。这里必须对完整的 $n$ 个右奇异向量求权重和；只对 $p=\min(m,n)$ 个方向求和，在宽矩阵情形只能保证不超过 $r$，未必等于 $r$。于是任何秩至多 $k$ 的 $B$ 都满足
+$\|A-B\|_F^2\ge\sum_{i=k+1}^p\sigma_i^2$。$k\ge p$ 时仍由 $B=A$ 得零误差。
 
 ### 第三步：截断达到下界
 

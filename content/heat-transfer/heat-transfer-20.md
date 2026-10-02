@@ -60,11 +60,13 @@
 
 ### 总吸收率与总发射率的不同权重
 
-总量却由不同权重积分：
+总量却由不同权重积分。下式的 $\alpha_\lambda$ 已按实际入射辐射的方向与偏振分布加权，$\varepsilon_\lambda$ 则按半球出射功率定义；两者要使用同一材料状态和温度。互易通道上的相等，只有在角度与偏振平均相容时，才能直接写成这两个光谱总量相等：
 
 $$\alpha=\frac{\int_0^\infty\alpha_\lambda G_\lambda d\lambda}{\int_0^\infty G_\lambda d\lambda},\qquad\varepsilon=\frac{\int_0^\infty\varepsilon_\lambda E_{b,\lambda}(T_s)d\lambda}{\sigma T_s^4}.$$
 
-$G_\lambda$是入射光谱。即使每个波段 $\alpha_\lambda=\varepsilon_\lambda$，若太阳入射权重与表面自身黑体谱权重不同，总 $\alpha$ 与总 $\varepsilon$仍可不同。灰体或相容的同温黑体入射才可简化为总量相等。
+$G_\lambda$ 是入射光谱。在上述角度与偏振平均相容、每个波段 $\alpha_\lambda=\varepsilon_\lambda$ 的前提下，若太阳入射权重与表面自身黑体谱权重不同，总 $\alpha$ 与总 $\varepsilon$ 仍可不同。
+
+常用的充分条件有两种：其一，通常互易表面接受同温黑体场的各向同性辐射，光谱和方向权重均相容；其二，采用吸收与发射性质均与方向无关的漫灰表面模型，相关全波段内性质近似常数，权重差异不再影响总量。两种条件下均可令总 $\alpha=\varepsilon$。仅说明“灰体”只消除了波长依赖，不自动保证实际入射与半球出射的角度平均相同；定向入射到有方向选择性的灰表面时，仍须分别加权。
 
 ## 实际数据的条件
 

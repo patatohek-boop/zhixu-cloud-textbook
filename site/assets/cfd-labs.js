@@ -4,7 +4,12 @@
  const LABS=root.LABS || require('./labs.js').LABS;
  const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const C={green:'#157862',blue:'#377fcc',orange:'#c76a21',purple:'#8755b1'};
- const exact=(x,pe)=>pe===0?x:(Math.exp(pe*(x-1))-Math.exp(-pe))/(-Math.expm1(-pe));
+ function exact(x,pe){
+  if(pe===0)return x;
+  // Taylor limit also avoids dividing subnormal values; match the Python example.
+  if(pe<1e-8)return x+.5*pe*x*(x-1);
+  return Math.exp(pe*(x-1))*(-Math.expm1(-pe*x))/(-Math.expm1(-pe));
+ }
  function transport(n,pe,scheme){
   if(!Number.isInteger(n)||n<2||n>10000||!Number.isFinite(pe)||pe<0||pe>100||!['central','upwind'].includes(scheme))throw new RangeError('Invalid transport parameters');
   const west=Array(n).fill(0),diag=Array(n).fill(0),east=Array(n).fill(0),rhs=Array(n).fill(0),a=n+(scheme==='upwind'?pe:pe/2),b=-n+(scheme==='central'?pe/2:0);
