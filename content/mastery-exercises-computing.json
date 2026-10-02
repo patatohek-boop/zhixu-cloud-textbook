@@ -1,0 +1,565 @@
+[
+  {
+    "id": "mastery-python-01-01",
+    "courseId": "python",
+    "lessonId": "python-01",
+    "type": "执行追踪",
+    "level": "基础理解",
+    "prompt": "在一个全新的 Python 进程中执行下面程序，不先运行，写出每次输出及程序结束时两个名字的值。\n```python\nstart_c = 18\ncurrent_c = start_c\ncurrent_c = current_c + 4\nprint(start_c)\nprint(current_c)\ncurrent_c = current_c - 1\n```\n最后一行是否会自动显示新的温度？",
+    "solution": "第一行让 `start_c` 对应整数 18，第二行让 `current_c` 也对应 18。加 4 后只把 `current_c` 更新为对应整数 22，`start_c` 仍对应 18；原来的整数 18 没有被修改。\n\n两次输出依次是 `18`、`22`。最后一行执行后 `start_c` 为 18、`current_c` 为 21；它是赋值语句，没有打印，因此屏幕不会自动多出 `21`。这里的数值是摄氏温度，不是温升。",
+    "checkpoints": [
+      "逐条说明赋值右侧使用哪个旧值",
+      "区分最后状态与打印时状态",
+      "两个输出为18和22，最终current_c为21"
+    ],
+    "pitfall": "不要把最后的变量值写成此前已经发生的输出",
+    "verification": "CPython独立运行，捕获stdout为18\n22\n，并检查最终绑定18、21",
+    "knowledgePoints": [
+      "顺序执行",
+      "赋值与重新绑定",
+      "状态与输出"
+    ],
+    "technique": "建立“读旧值—算新值—绑定—输出”四列跟踪表"
+  },
+  {
+    "id": "mastery-python-01-02",
+    "courseId": "python",
+    "lessonId": "python-01",
+    "type": "排错与复现",
+    "level": "常规应用",
+    "prompt": "同学在交互式窗口中先执行过 `total_min = 12`，随后执行下面两行，得到 20。他把这两行单独保存为 `study.py`，从新进程运行却失败。\n```python\ntotal_min = total_min + 8\nprint(total_min)\n```\n指出首次失败的位置和异常名称；改成从头运行便能得到 20 的完整脚本。再说明只在编辑器改了第一行但尚未保存，会不会改变磁盘上脚本的新运行结果。",
+    "solution": "失败在第一行右侧读取 `total_min` 时，因为新进程没有这个名字，异常为 `NameError`；第二行还没执行。\n\n完整脚本为：\n```python\ntotal_min = 12\ntotal_min = total_min + 8\nprint(total_min)\n```\n输出为 `20`。初始化必须是文件的一部分，不能依赖交互式窗口的历史。运行磁盘文件时，未保存的编辑不会进入本次计算；应先保存，再用同一个确认过的解释器运行 `study.py`。",
+    "checkpoints": [
+      "识别NameError发生在右侧求值阶段",
+      "将初始化放入脚本",
+      "区分编辑缓冲区、磁盘文件和运行进程"
+    ],
+    "pitfall": "运行成功的交互式片段可能隐藏着旧变量依赖",
+    "verification": "分别在空命名空间运行错误片段与修复脚本；错误为NameError，修复stdout为20",
+    "knowledgePoints": [
+      "干净进程",
+      "名字定义",
+      "保存与执行"
+    ],
+    "technique": "先清空隐含环境，再补齐显式输入"
+  },
+  {
+    "id": "mastery-python-01-03",
+    "courseId": "python",
+    "lessonId": "python-01",
+    "type": "编程与状态设计",
+    "level": "综合提高",
+    "prompt": "只使用赋值、加减法和 `print` 写一个完整脚本：实验起始温度为 25 ℃，先下降 7 ℃，再上升 3 ℃。要求保留起始温度，依次打印起始温度、结束温度、相对起始的有符号温差。给出预期三行输出。再把起始值改成 30，预测哪些输出改变，哪些不变，并说明原因。本题给定温度变化，不是在建立真实加热模型。",
+    "solution": "一个实现为：\n```python\nstart_c = 25\ncurrent_c = start_c\ncurrent_c = current_c - 7\ncurrent_c = current_c + 3\nchange_c = current_c - start_c\nprint(start_c)\nprint(current_c)\nprint(change_c)\n```\n输出依次为 `25`、`21`、`-4`。温差定义为结束减开始，负号表示净降温。\n\n把唯一的起始赋值改为 30 后，输出为 `30`、`26`、`-4`。起始和结束温度一起增加 5 ℃，净变化仍为 $-7+3=-4$ ℃。先保留起始名字，再更新另一个名字，才能直接比较两个时刻。",
+    "checkpoints": [
+      "原始输入不能被更新覆盖",
+      "温差采用结束减开始",
+      "两次运行分别为25/21/-4与30/26/-4"
+    ],
+    "pitfall": "若一直覆盖唯一的温度名字，最后就缺少可比较的起始值",
+    "verification": "对两个起始值逐次执行，stdout与代数start-7+3独立比对",
+    "knowledgePoints": [
+      "输入处理输出",
+      "保留原始状态",
+      "有符号差值"
+    ],
+    "technique": "保存参照值，利用整体平移不改变温差的性质检查程序"
+  },
+  {
+    "id": "mastery-python-06-01",
+    "courseId": "python",
+    "lessonId": "python-06",
+    "type": "循环状态追踪",
+    "level": "基础理解",
+    "prompt": "输入是有限整数列表 `[0, 20, 19, 24]`。下列程序计算不低于 20 的读数平均值。填写每轮结束的 `(total, count)`，再写输出。\n```python\nvalues = [0, 20, 19, 24]\ntotal = 0\ncount = 0\nfor value in values:\n    if value >= 20:\n        total += value\n        count += 1\nif count > 0:\n    print(total / count)\nelse:\n    print(\"没有达标读数\")\n```\n若输入改为 `[0, 19]`，输出什么？",
+    "solution": "处理 0、20、19、24 后的状态依次为 `(0, 0)`、`(20, 1)`、`(20, 1)`、`(44, 2)`。所以输出 `22.0`。\n\n分子与分母都只包括达标的 20、24。0 是有效整数读数，只因未达到阈值而不参与该平均；它不是缺失值。\n\n输入 `[0, 19]` 时最终为 `(0, 0)`，走 `else` 输出“没有达标读数”，不执行除法。",
+    "checkpoints": [
+      "状态只在条件为真时同时更新",
+      "阈值等号20应被计入",
+      "空选择不执行除零"
+    ],
+    "pitfall": "不能用全部输入长度4作为筛选后的平均分母",
+    "verification": "独立循环记录4个中间态并运行无达标分支，检查输出22.0与文本",
+    "knowledgePoints": [
+      "条件与循环",
+      "累计和计数",
+      "边界处理"
+    ],
+    "technique": "先列每轮账本，再检查分子分母描述同一批数据"
+  },
+  {
+    "id": "mastery-python-06-02",
+    "courseId": "python",
+    "lessonId": "python-06",
+    "type": "程序纠错",
+    "level": "常规应用",
+    "prompt": "目标仍是平均所有不低于 20 的整数读数。下列程序在 `[18, 20, 22]` 上给出错误结果。\n```python\nvalues = [18, 20, 22]\ntotal = 0\ncount = 0\nfor value in values:\n    count = 0\n    if value >= 20:\n        total += value\n        count += 1\nprint(total / count)\n```\n说明它实际打印什么，修复累计与空输入问题，并分别给出 `[18, 20, 22]`、`[]`、`[18, 19]`、`[20]` 的预期行为。",
+    "solution": "第三轮开始又把 `count` 清零，所以最终 `total=42`、`count=1`，错误输出 `42.0`。两个累计量的历史范围已不一致。\n\n修复后：\n```python\nvalues = [18, 20, 22]\ntotal = 0\ncount = 0\nfor value in values:\n    if value >= 20:\n        total += value\n        count += 1\nif count > 0:\n    print(total / count)\nelse:\n    print(\"没有达标读数\")\n```\n四种输入依次输出 `21.0`、“没有达标读数”、“没有达标读数”、`20.0`。每轮开始时，两个变量分别是此前达标整数的和与个数；初始化必须放在循环外。整数求和是精确的，最终除法得到浮点结果。",
+    "checkpoints": [
+      "指出循环内重置count的具体后果",
+      "同时修复空输入与全不达标",
+      "四个边界预期均正确"
+    ],
+    "pitfall": "只删掉错误初始化仍没有处理count为零的路径",
+    "verification": "错误程序实际输出42.0；修复程序对4种输入独立执行验证",
+    "knowledgePoints": [
+      "循环不变量",
+      "初始化位置",
+      "空结果契约"
+    ],
+    "technique": "用正常、空集、全不达标、单元素四类样例区分错误实现"
+  },
+  {
+    "id": "mastery-python-06-03",
+    "courseId": "python",
+    "lessonId": "python-06",
+    "type": "状态机编程",
+    "level": "综合提高",
+    "prompt": "给定按时间排列的有限整数读数 `[18, 21, 22, 19, 23, 24, 25, 18]`，求连续不低于 20 的最长段包含多少个读数。只需输出长度，不需输出位置；空列表的结果约定为 0。使用一次 `for` 循环，不排序、不修改输入，解释为何“累计所有达标数量”不能完成任务。",
+    "solution": "需要区分“以当前读数结尾的连续长度”和“到目前为止的最长长度”：\n```python\nvalues = [18, 21, 22, 19, 23, 24, 25, 18]\nstreak = 0\nlongest = 0\nfor value in values:\n    if value >= 20:\n        streak += 1\n    else:\n        streak = 0\n    if streak > longest:\n        longest = streak\nprint(longest)\n```\n每轮后的 `streak` 为 0、1、2、0、1、2、3、0；`longest` 为 0、1、2、2、2、2、3、3，最终输出 `3`。\n\n不变量：处理完前 $k$ 项后，`streak` 是这个前缀末尾连续达标的长度，`longest` 是此前所有连续达标段的最大长度。失败读数只把当前段清零，不抹去历史最大值。空输入不进入循环，输出 0；`[20,20]` 输出 2；全部不达标输出 0。累计达标总数会得到 5，丢失了“连续”的时间结构。",
+    "checkpoints": [
+      "使用当前段与历史最大两种状态",
+      "不达标时只清零streak",
+      "正确处理空输入与等于阈值"
+    ],
+    "pitfall": "排序会改变连续段，累计达标总数也不能代替最长连续长度",
+    "verification": "对给定样本核对全部中间态；对长度0到6、取值19/20的127种输入与独立分段参考比较",
+    "knowledgePoints": [
+      "循环状态",
+      "连续段",
+      "最大值更新",
+      "不变量"
+    ],
+    "technique": "为不同历史信息分别设置状态，并用归纳解释一次更新"
+  },
+  {
+    "id": "mastery-python-07-01",
+    "courseId": "python",
+    "lessonId": "python-07",
+    "type": "调用与输出追踪",
+    "level": "基础理解",
+    "prompt": "预测完整输出，并分别说明调用前后外层 `value`、函数内同名形参和 `result` 的含义。\n```python\ndef shift(value, offset):\n    value = value + offset\n    print(value)\n    return value\n\nvalue = 10\nresult = shift(value, 3)\nprint(value)\nprint(result + 1)\n```\n若仅删除函数里的 `return value`，三次打印及最终状态会怎样改变？",
+    "solution": "原程序依次打印 `13`、`10`、`14`。传入整数 10 后，函数只让内部的同名变量 `value` 改为对应 13，外部 `value` 仍为 10；原来的整数对象没有被改变。`return` 交回 13，因此 `result=13`。\n\n删除 `return` 后，函数内仍打印 13，但默认返回 `None`；随后打印外层的 10；最后求 `result + 1` 时发生 `TypeError`，第三次 `print` 无法完成。错误发生前 `result` 为 `None`，不会因为屏幕出现 13 就自动得到这个数。",
+    "checkpoints": [
+      "输出按执行顺序为13、10、14",
+      "局部重绑定不影响外层整数名字",
+      "删除return后是TypeError而不是输出None+1"
+    ],
+    "pitfall": "看到函数打印了一个数，不代表调用表达式返回这个数",
+    "verification": "独立捕获原程序stdout与无return版本异常前stdout；验证TypeError",
+    "knowledgePoints": [
+      "参数绑定",
+      "局部作用域",
+      "返回值与副作用"
+    ],
+    "technique": "按调用栈区分名字，再追踪调用表达式的返回对象"
+  },
+  {
+    "id": "mastery-python-07-02",
+    "courseId": "python",
+    "lessonId": "python-07",
+    "type": "默认参数纠错",
+    "level": "常规应用",
+    "prompt": "下面两次调用之后，`first` 和 `second` 分别是什么？它们是否为同一列表？修复接口，使未传 `items` 的每次调用使用新列表；若调用者明确传入一个列表，则约定追加到该列表并返回它。\n```python\ndef record(value, items=[]):\n    items.append(value)\n    return items\n\nfirst = record(2)\nsecond = record(5)\n```\n为“默认调用互不影响”和“明确传入列表会修改原列表”分别写检查。",
+    "solution": "原程序两个名字最终都看到 `[2,5]`，且 `first is second` 为真。默认表达式在定义函数时只求值一次；第一次返回的列表会被第二次调用继续修改。\n\n修复与检查：\n```python\ndef record(value, items=None):\n    if items is None:\n        items = []\n    items.append(value)\n    return items\n\nfirst = record(2)\nsecond = record(5)\nassert first == [2]\nassert second == [5]\nassert first is not second\nprovided = [9]\nreturned = record(7, provided)\nassert returned is provided\nassert provided == [9, 7]\n```\n`None` 在本接口中表示未提供列表；显式传入列表时的修改是题设允许的副作用。若想禁止修改调用者列表，需另行约定函数是否允许修改输入，并在需要时复制，不能把两种承诺混在一起。",
+    "checkpoints": [
+      "默认列表仅创建一次",
+      "用is None而非真假判断决定新建",
+      "保留显式列表的身份与修改约定"
+    ],
+    "pitfall": "用if not items会把调用者明确传入的空列表也换掉，违反本题契约",
+    "verification": "运行原版与修复版；另检验显式空列表仍是返回对象",
+    "knowledgePoints": [
+      "可变默认参数",
+      "对象别名",
+      "输入契约"
+    ],
+    "technique": "先明确何时共享，使用哨兵区分省略与明确提供"
+  },
+  {
+    "id": "mastery-python-07-03",
+    "courseId": "python",
+    "lessonId": "python-07",
+    "type": "函数设计与边界测试",
+    "level": "综合提高",
+    "prompt": "实现 `mean_at_least(values, *, threshold=20)`。输入为有限整数列表及整数阈值；返回所有不低于阈值的读数平均值，无达标值则返回 `None`，不得修改输入或在函数里打印。给出 `[18,20,22]`、阈值改为 22、空列表的结果；说明 `mean_at_least([20], 19)` 是否符合签名。测试调用后原列表不变。",
+    "solution": "计算与展示分开，分子分母使用同一筛选条件：\n```python\ndef mean_at_least(values, *, threshold=20):\n    total = 0\n    count = 0\n    for value in values:\n        if value >= threshold:\n            total += value\n            count += 1\n    if count == 0:\n        return None\n    return total / count\n\nreadings = [18, 20, 22]\nassert mean_at_least(readings) == 21.0\nassert mean_at_least(readings, threshold=22) == 22.0\nassert mean_at_least([]) is None\nassert mean_at_least([18, 19]) is None\nassert mean_at_least([0], threshold=0) == 0.0\nassert readings == [18, 20, 22]\n```\n`*` 后的阈值只能按关键字提供，故 `mean_at_least([20], 19)` 在绑定参数阶段产生 `TypeError`；应写 `threshold=19`。`None` 表示没有可计算的平均，不能返回 0 冒充读数零的平均。此实现只承诺题设整数输入，并未宣称全面验证外部文本或异常数值。",
+    "checkpoints": [
+      "实现关键字参数接口",
+      "空选择返回None且有效零返回0.0",
+      "无打印和输入修改",
+      "覆盖默认、边界、空输入与非法调用方式"
+    ],
+    "pitfall": "用if result判断是否有结果会再次把有效平均0.0误当缺失",
+    "verification": "对长度0到5、取值0/19/20/22的1365种列表与阈值0/20/22比较独立过滤均值，检查输入不变与位置调用TypeError",
+    "knowledgePoints": [
+      "函数签名",
+      "返回契约",
+      "循环与函数组合",
+      "纯计算"
+    ],
+    "technique": "先列契约和边界测试，再把可证明的累计过程封装为函数"
+  },
+  {
+    "id": "mastery-python-20-01",
+    "courseId": "python",
+    "lessonId": "python-20",
+    "type": "形状与轴计算",
+    "level": "基础理解",
+    "prompt": "两次测量、三个传感器的同单位温度数据为（均为摄氏度）：\n```python\nimport numpy as np\nreadings = np.array([[10.0, 20.0, 30.0],\n                     [14.0, 22.0, 28.0]])\noffsets = np.array([1.0, -2.0, 0.0])\ncorrected = readings + offsets\n```\n不先运行，写出三个对象的形状、校正后的全部元素，以及 `corrected.mean(axis=0)`、`corrected.mean(axis=1)` 的值、形状与含义。校正量是独立标定已知值。",
+    "solution": "`readings` 为 `(2,3)`，`offsets` 为 `(3,)`，广播时可看成 `(1,3)`，所以 `corrected` 为 `(2,3)`：\n```text\n[[11, 18, 30],\n [15, 20, 28]]\n```\n沿轴 0 收起两个时刻，得到各传感器平均 `[13,19,29]`，形状 `(3,)`。\n\n沿轴 1 收起三个传感器，得到两次测量的跨传感器平均 `[59/3,21]`，约 `[19.6667,21]`，形状 `(2,)`。相加新建结果数组，`readings` 的原始数据不变。能否对不同传感器取平均还取决于其物理量和单位是否相容；本题均为同单位温度。",
+    "checkpoints": [
+      "广播按最右维对齐",
+      "均值轴是被归约的轴",
+      "写明元素含义而不只写shape"
+    ],
+    "pitfall": "axis=0不是“保留第0轴”，它表示沿第0轴归约",
+    "verification": "NumPy独立运算并与逐列/逐行有理数均值比较",
+    "knowledgePoints": [
+      "shape",
+      "广播",
+      "axis",
+      "单位"
+    ],
+    "technique": "先标轴的实际意义，再按索引公式逐项核算"
+  },
+  {
+    "id": "mastery-python-20-02",
+    "courseId": "python",
+    "lessonId": "python-20",
+    "type": "广播排错与指标计算",
+    "level": "常规应用",
+    "prompt": "同一批三个样本，预测为列数组，真实值为一维数组：\n```python\nimport numpy as np\nprediction = np.array([[1.0], [3.0], [4.0]])\ntarget = np.array([2.0, 2.0, 5.0])\nresidual = prediction - target\nmse = np.mean(residual ** 2)\n```\n程序不报错。写出 `residual` 的形状和全部数值、该程序的 MSE，再修成逐样本配对的 MSE，给出正确结果。说明修正前为什么不能只看两个数组的元素数量相同。",
+    "solution": "`(3,1)` 与 `(3,)` 按 `(3,1)`、`(1,3)` 广播，得到 `(3,3)`：\n```text\n[[-1, -1, -4],\n [ 1,  1, -2],\n [ 2,  2, -1]]\n```\n九项平方和为 33，错误的 MSE 为 $33/9=11/3\\approx3.6667$。它平均了所有预测与所有目标的两两差。\n\n确认行顺序确实对应同一批样本后，改为：\n```python\nimport numpy as np\nprediction = np.array([[1.0], [3.0], [4.0]])\ntarget = np.array([2.0, 2.0, 5.0])\nresidual = prediction[:, 0] - target\nassert residual.shape == (3,)\nmse = np.mean(residual ** 2)\nassert np.isclose(mse, 1.0)\n```\n配对残差是 `[-1,1,-1]`，MSE 为 1。形状兼容仅保证运算合法，不保证样本配对语义正确。",
+    "checkpoints": [
+      "写出3×3全部残差而非只说广播错",
+      "区分33/9与3/3",
+      "确认样本顺序后显式取列"
+    ],
+    "pitfall": "盲目squeeze或reshape无法修复行序错位，先确认样本身份",
+    "verification": "NumPy核算9项残差与错误11/3；独立zip逐样本计算正确MSE=1",
+    "knowledgePoints": [
+      "广播陷阱",
+      "配对残差",
+      "MSE归约"
+    ],
+    "technique": "利用输出形状与一个手算元素暴露静默错误"
+  },
+  {
+    "id": "mastery-python-20-03",
+    "courseId": "python",
+    "lessonId": "python-20",
+    "type": "数组流程设计",
+    "level": "综合提高",
+    "prompt": "本题所有原始温度都以摄氏度记录，校正量和漂移均为摄氏温差数值（与开尔文温差数值相同）。三次测量、两个传感器的原始温度为 `[[20,23],[24,28],[31,32]]`。独立标定得到各传感器需加的校正量 `[1,-2]`；三次测量又分别有已知的公共漂移 `[0,1,3]`，应从对应行两列同时减去。写 NumPy 代码，保留原数组不变，得到校正数组、各传感器均值和各时刻均值。解释为什么漂移应写成 `(3,1)`；若先做 `work = raw` 再原地修改，为什么不能保护原始数据？",
+    "solution": "列校正按传感器对齐，行漂移要增加一个长度为 1 的末轴：\n```python\nimport numpy as np\nraw = np.array([[20.0, 23.0], [24.0, 28.0], [31.0, 32.0]])\nsaved = raw.copy()\noffsets = np.array([1.0, -2.0])\ndrift = np.array([0.0, 1.0, 3.0])\nwork = raw.copy()\nwork += offsets\nwork -= drift[:, None]\nby_sensor = work.mean(axis=0)\nby_time = work.mean(axis=1)\nassert np.array_equal(raw, saved)\nassert np.allclose(work, [[21, 21], [24, 25], [29, 27]])\nassert np.allclose(by_sensor, [74 / 3, 73 / 3])\nassert np.allclose(by_time, [21, 24.5, 28])\n```\n`drift[:, None]` 为 `(3,1)`，广播到 `(3,2)` 时每行的一个值用于两列；`(3,)` 不能与 `(3,2)` 直接按目标语义相减。\n\n`work = raw` 只增加同一数组的别名，后续 `+=`、`-=` 会修改共享数组；本题用 `copy()` 隔离工作数组。题设校正量来自独立标定，若实际要从数据估计，则须另遵守训练/测试边界。",
+    "checkpoints": [
+      "区别按列和按行的广播",
+      "使用显式副本保护原始数组",
+      "两种均值都有正确值和含义"
+    ],
+    "pitfall": "重新赋一个名字不是复制数据；形状(3,)也不代表列向量",
+    "verification": "NumPy结果逐元素与Python双循环参考比较，检查原始数组字节未改变",
+    "knowledgePoints": [
+      "数组副本",
+      "原地更新",
+      "行列广播",
+      "归约"
+    ],
+    "technique": "画行列校正的索引式，再实现并保留原始数据回归检查"
+  },
+  {
+    "id": "mastery-machine-learning-01-01",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-01",
+    "type": "基线手算",
+    "level": "基础理解",
+    "prompt": "训练实验的目标温度为 2、4、9 ℃，模型只能预测一个常数。按训练平方损失求最优常数与训练 MSE。锁定这个常数后，两个新实验的目标是 3、8 ℃，求测试 MSE、RMSE 并写单位。不能用新实验答案重新选择常数。",
+    "solution": "训练均值为 $c=(2+4+9)/3=5$ ℃。训练残差为 $-3,-1,4$，平方和为 $9+1+16=26$，因此训练 MSE 为 $26/3\\approx8.6667\\ ({}^\\circ\\mathrm C)^2$。\n\n冻结 $c=5$ 后，新实验残差为 $-2,3$，测试 MSE 为 $(4+9)/2=6.5\\ ({}^\\circ\\mathrm C)^2$，RMSE 为 $\\sqrt{6.5}\\approx2.5495\\ {}^\\circ\\mathrm C$。\n\n均值最优由平方和分解得出：任意其他常数 $a$ 的训练平方和等于 $26+3(a-5)^2$。两点测试分数只是这两个新实验上的经验结果，不是每个未来样本的误差保证。",
+    "checkpoints": [
+      "用训练均值5而非测试均值5.5",
+      "训练与测试各用自己的样本数",
+      "MSE平方单位、RMSE原单位"
+    ],
+    "pitfall": "测试集均值即使能降低测试平方误差，也不能作为已冻结模型的参数",
+    "verification": "Fraction精确核算训练26/3、测试13/2；平方和分解检验多个候选常数",
+    "knowledgePoints": [
+      "常数基线",
+      "平方损失",
+      "训练与测试",
+      "指标单位"
+    ],
+    "technique": "先冻结学习结果，再单独计算评价表",
+    "prerequisites": [
+      "machine-learning-06"
+    ]
+  },
+  {
+    "id": "mastery-machine-learning-01-02",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-01",
+    "type": "指标比较与解释",
+    "level": "常规应用",
+    "prompt": "两个事先固定的模型在同一测试集上评价。目标为 `[0,0,0,10]`，模型 A 预测 `[0,0,0,0]`，模型 B 预测 `[3,3,3,7]`，单位相同。分别计算 MAE、MSE 和 RMSE。哪个按 MAE 更好，哪个按 MSE 更好？能否看过结果后临时挑一个让自己模型获胜的指标，再声称它是预设主指标？",
+    "solution": "A 的绝对误差为 0、0、0、10，MAE 为 $10/4=2.5$；平方误差为 0、0、0、100，MSE 为 25，RMSE 为 5。\n\nB 的绝对误差均为 3，MAE 为 3；平方误差均为 9，MSE 为 9，RMSE 为 3。\n\n因此 A 的 MAE 更小，B 的 MSE 与 RMSE 更小。平方损失对单次大误差给予更高代价，所以会更强烈地惩罚 A 的那一次误差。MSE 和 RMSE 的排序相同，因为平方根在非负数上递增。\n\n应在评价前按错误后果确定主指标，也可透明报告补充指标。事后换指标是探索性选择，不能假称预设；这四个样本也不足以证明总体优劣。",
+    "checkpoints": [
+      "六个指标数值全部正确",
+      "解释MAE与MSE排序不同的原因",
+      "MSE与RMSE在同一数据上排序相同",
+      "披露事后指标选择"
+    ],
+    "pitfall": "“只错一个样本”不等于代价小，误差大小同样重要",
+    "verification": "用逐项列表和NumPy两条路径核算A=(2.5,25,5)、B=(3,9,3)",
+    "knowledgePoints": [
+      "损失选择",
+      "误差代价",
+      "评估协议"
+    ],
+    "technique": "把逐样本误差先展开，再按预设代价聚合",
+    "prerequisites": [
+      "machine-learning-06"
+    ]
+  },
+  {
+    "id": "mastery-machine-learning-01-03",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-01",
+    "type": "任务定义与信息诊断",
+    "level": "综合提高",
+    "prompt": "目标是在冷却实验启动时，预测十分钟后温度。每次实验可记录：①启动温度；②启动时环境温度；③第十分钟温度；④整条十分钟曲线的平均温度；⑤实验编号。同一试件可做多次实验。现在研究者要声称能预测从未见过的新试件。\n\n写出任务说明、可用特征、标签、至少一个基线、划分单位和一个带单位指标；说明③④为什么不能作启动时特征，实验编号的主要作用是什么。假如总共只有一个试件，能否用很多时刻替代新试件测试？",
+    "solution": "任务说明：在实验启动时，用当时已知条件，预测一个未参与训练和方案选择的新试件在十分钟后的温度。\n\n①②在启动时可得，可作为特征；③是标签；④使用未来十分钟数据，启动时不可得，属于未来信息。实验编号主要用于追踪和按实验归组；还必须记录试件编号。任意编号通常不应被当成有距离意义的连续物理特征。\n\n可用训练标签均值作常数基线，也可预先规定以启动温度为持续性基线；若已有物理模型则另列物理基线。以 ℃ 为单位报告独立测试试件的温度 RMSE，同时明确每个试件或实验的权重。\n\n按试件划分，使同一试件的全部实验及派生样本只在一个集合内；训练部分内部再按适当分组选择方案。测试标签在方案冻结后才用于评价。只有一个试件时，增加时间点不能建立新试件证据，应报告仅支持该试件内的检查，并取得独立试件数据后再检验外推主张。",
+    "checkpoints": [
+      "预测时刻、对象、输出明确",
+      "正确排除未来标签及未来汇总",
+      "新试件任务必须按试件隔离",
+      "把帧数和独立试件数分开"
+    ],
+    "pitfall": "只删掉目标列③仍保留未来汇总④，同样会泄漏",
+    "verification": "逐字段检查生成时间；用集合包含关系验证run层分组弱于试件层分组，未把任何测试数据用于学习",
+    "knowledgePoints": [
+      "任务契约",
+      "特征可用性",
+      "样本单位",
+      "基线与评价"
+    ],
+    "technique": "先问预测时知道什么，再问未来究竟新在哪里"
+  },
+  {
+    "id": "mastery-machine-learning-04-01",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-04",
+    "type": "矩阵前向计算",
+    "level": "基础理解",
+    "prompt": "设两条无量纲样本按行组成 $X=\\begin{bmatrix}1&2\\\\3&-1\\end{bmatrix}$，权重 $w=(2,-1)^\\top$，截距 $b=1$，目标 $y=(2,4)^\\top$。求 $\\hat y=Xw+b\\mathbf1$、误差信号 $e=\\hat y-y$ 与 $J=\\|e\\|^2/(2n)$，其中 $n=2$。写出每个量的形状，并解释 $Xw$ 为什么不是逐元素乘法。",
+    "solution": "$X$ 是 $2\\times2$，$w,y,\\hat y,e$ 均为二维列向量，$b,J$ 是标量。\n\n逐行内积得到 $Xw=(1\\cdot2+2(-1),\\ 3\\cdot2+(-1)(-1))^\\top=(0,7)^\\top$，所以 $\\hat y=(1,8)^\\top$，$e=(-1,4)^\\top$。\n\n$J=(1+16)/(2\\times2)=17/4=4.25$。它是平均平方误差的一半，MSE 本身为 $17/2=8.5$。\n\n每行的两个特征先与权重对应相乘再求和，才得到每样本一个预测；逐元素乘法会保留两个特征方向，没有完成求和。",
+    "checkpoints": [
+      "矩阵行对应样本",
+      "预测1、8与误差-1、4",
+      "不能漏掉损失的2n分母"
+    ],
+    "pitfall": "把半MSE当MSE会在后续梯度中造成二倍因子错误",
+    "verification": "独立标量内积与NumPy矩阵乘法比较，Fraction核算17/4",
+    "knowledgePoints": [
+      "矩阵形状",
+      "内积",
+      "截距",
+      "损失缩放"
+    ],
+    "technique": "先展开一行预测，再写批量矩阵式"
+  },
+  {
+    "id": "mastery-machine-learning-04-02",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-04",
+    "type": "梯度排错与更新",
+    "level": "常规应用",
+    "prompt": "仍取 $X=\\begin{bmatrix}1&2\\\\3&-1\\end{bmatrix}$、$w=(2,-1)^\\top$、$b=1$、$y=(2,4)^\\top$，目标为 $J=\\|Xw+b\\mathbf1-y\\|^2/(2n)$，$n=2$。有人写出 $g_w=Xe/n$，理由是结果也有两个分量。判断并改正；求 $g_b$，按学习率0.1同时更新 $w,b$，再重新计算损失。",
+    "solution": "旧误差信号为 $e=(-1,4)^\\top$。逐分量链式法则给 $\\partial J/\\partial w_j=\\sum_i e_iX_{ij}/n$，所以必须是 $g_w=X^\\top e/n=(11,-6)^\\top/2=(5.5,-3)^\\top$。错误写法得到 $(3.5,-3.5)^\\top$；这个例子恰好样本数等于特征数，形状检查不能发现错误。\n\n截距作用于每个预测，所以 $g_b=(-1+4)/2=1.5$。所有梯度都用旧参数：$w_{new}=(1.45,-0.7)^\\top$，$b_{new}=0.85$。\n\n新预测为 $(0.9,5.9)^\\top$，新误差为 $(-1.1,1.9)^\\top$，新损失 $J_{new}=(1.21+3.61)/4=1.205<4.25$。本次下降由复算确认，不是任意学习率都安全。",
+    "checkpoints": [
+      "从标量求导说明转置位置",
+      "权重与截距梯度都除n",
+      "全部参数用同一次旧梯度同时更新",
+      "新损失为1.205"
+    ],
+    "pitfall": "维度碰巧合法不等于公式正确；先更新一部分再重算另一梯度是不同算法",
+    "verification": "中心差分分别核验w1、w2、b梯度，与解析5.5/-3/1.5比较；独立复算新损失",
+    "knowledgePoints": [
+      "链式法则",
+      "矩阵梯度",
+      "同时更新",
+      "数值梯度检查"
+    ],
+    "technique": "形状检查之后再用分量展开与中心差分检查语义"
+  },
+  {
+    "id": "mastery-machine-learning-04-03",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-04",
+    "type": "步长条件推导",
+    "level": "综合提高",
+    "prompt": "单样本模型 $\\hat y=2w_1-w_2$，目标 $y=1$，损失 $J=(2w_1-w_2-1)^2/2$。从 $w=(0,0)$ 出发按固定正学习率 $\\eta$ 做梯度下降。令 $e=2w_1-w_2-1$，推导一步后的误差与旧误差的关系，并找出保证任意非零误差严格缩小的学习率范围。分别计算 $\\eta=0.2,0.4,0.5$ 第一步的损失；误差为零是否唯一确定两个权重？",
+    "solution": "梯度为 $(2e,-e)^\\top$，故新权重为 $(w_1-2\\eta e,w_2+\\eta e)$，新误差\n$$e_{new}=2(w_1-2\\eta e)-(w_2+\\eta e)-1=(1-5\\eta)e.$$\n因此对非零误差严格缩小需 $|1-5\\eta|<1$，即 $0<\\eta<0.4$；损失乘以 $(1-5\\eta)^2$。\n\n初始 $e=-1,J=1/2$：\n- $\\eta=0.2$：新权重 $(0.4,-0.2)$，误差0，损失0\n- $\\eta=0.4$：新权重 $(0.8,-0.4)$，误差1，损失 $1/2$，继续迭代误差交替变号而不缩小\n- $\\eta=0.5$：新权重 $(1,-0.5)$，误差1.5，损失 $1.125$\n\n最优条件是直线 $2w_1-w_2=1$，例如 $(0.5,0)$、$(1,1)$ 都为零损失。因此单个样本只约束一个线性组合，不唯一确定两个参数。",
+    "checkpoints": [
+      "得到误差因子1-5η",
+      "稳定区间不包含端点0.4",
+      "三种学习率结果正确",
+      "区分预测可拟合与参数唯一"
+    ],
+    "pitfall": "负梯度是局部方向，不能由方向正确推出任何步长均下降",
+    "verification": "用Fraction核算三步结果；对多个旧权重和学习率验证误差递推恒等式",
+    "knowledgePoints": [
+      "梯度下降",
+      "学习率稳定范围",
+      "平方损失",
+      "非唯一最优"
+    ],
+    "technique": "把多参数更新投影成一个可精确分析的误差递推"
+  },
+  {
+    "id": "mastery-machine-learning-05-01",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-05",
+    "type": "训练尺度手算",
+    "level": "基础理解",
+    "prompt": "训练特征为 `[2,4,6]`，验证特征为 `[8]`，测试特征为 `[10]`。只用训练集拟合 $z=(x-\\mu)/s$，本题明确规定方差分母为训练样本数 $n$。求 $\\mu,s$ 与三组变换结果。验证或测试值超出训练变换范围时，应自动重新拟合尺度吗？",
+    "solution": "训练均值 $\\mu=4$，训练方差 $[(2-4)^2+0+(6-4)^2]/3=8/3$，尺度 $s=\\sqrt{8/3}\\approx1.63299$。\n\n训练变为 $[-\\sqrt{3/2},0,\\sqrt{3/2}]\\approx[-1.224745,0,1.224745]$；验证变为 $[\\sqrt6]\\approx[2.449490]$；测试变为 $[3\\sqrt{3/2}]\\approx[3.674235]$。\n\n新数据超过训练范围是允许的，不能因此把验证或测试数据并入 `fit`。部署应复用已有变换；范围变化可以触发调查或范围提示，不等于获准重新定义本次独立测试。分母用 $n$ 是本题的尺度定义，不是样本无偏方差的 $n-1$。",
+    "checkpoints": [
+      "方差分母为3",
+      "三组共享训练得到的4和sqrt(8/3)",
+      "超范围不自动重新fit"
+    ],
+    "pitfall": "把“标准化后必须在[-1,1]”当规则会错误修改评价流程",
+    "verification": "用NumPy ddof=0与精确方差8/3核算所有输出",
+    "knowledgePoints": [
+      "fit与transform",
+      "尺度约定",
+      "评价隔离"
+    ],
+    "technique": "先保存训练统计量，再逐组代入同一个公式"
+  },
+  {
+    "id": "mastery-machine-learning-05-02",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-05",
+    "type": "交叉验证流程纠错",
+    "level": "常规应用",
+    "prompt": "四条输入为 $X=[[0],[2],[100],[102]]$，目标为 $y=[0,2,100,102]$。研究者先对整个 $X$ 调用 `StandardScaler().fit_transform(X)`，再把变换后的数组送入两折交叉验证训练 `Ridge`。考察其中一折：训练行是前两行，验证行是后两行。\n\n指出泄漏位置，分别算错误全数据均值与正确这一折训练均值。写出把标准化纳入两折交叉验证的完整 scikit-learn 代码；本题只演示交叉验证流程，不把这四点上的分数当作最终泛化证据。",
+    "solution": "泄漏发生在划折之前对全部输入拟合标准化。全数据均值为 51，正确这一折只能用 0、2，均值为 1；全数据即使未读标签，也已经让验证输入改变训练表示。\n\n可执行修复：\n```python\nimport numpy as np\nfrom sklearn.model_selection import KFold, cross_val_score\nfrom sklearn.pipeline import make_pipeline\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.linear_model import Ridge\n\nX = np.array([[0.0], [2.0], [100.0], [102.0]])\ny = np.array([0.0, 2.0, 100.0, 102.0])\nmodel = make_pipeline(StandardScaler(), Ridge(alpha=1.0))\ncv = KFold(n_splits=2, shuffle=False)\nscores = cross_val_score(model, X, y, cv=cv,\n                         scoring=\"neg_mean_squared_error\")\nassert scores.shape == (2,)\nassert np.all(np.isfinite(scores))\n```\n每折复制并在该折训练行上拟合整条 Pipeline；题设指定的“前两行训练”那一折尺度为1，验证100、102变成99、101。另一折需要重新拟合另一组训练统计量。代码中的 KFold 先返回“后两行训练”的折，随后返回题设这一折；折的遍历次序不影响隔离原则。负MSE只是软件“越大越好”的约定，实际MSE非负。若用这些折分数选择超参数，最终表现仍须另用独立评价数据或嵌套协议。",
+    "checkpoints": [
+      "错误位置是先全数据fit而非transform本身",
+      "均值51与1正确",
+      "Pipeline接受原始X并在每折内fit",
+      "未把调参分数当最终测试成绩"
+    ],
+    "pitfall": "只把Ridge放进交叉验证无法撤销先前标准化造成的信息流",
+    "verification": "完整代码实际运行；逐折读取StandardScaler均值为1与101，匹配手算",
+    "knowledgePoints": [
+      "交叉验证",
+      "Pipeline",
+      "无标签泄漏",
+      "模型选择"
+    ],
+    "technique": "把所有学习步骤视为一条整体训练算法，再在每折重建",
+    "prerequisites": [
+      "python-11",
+      "python-20",
+      "machine-learning-06",
+      "machine-learning-09",
+      "machine-learning-29"
+    ]
+  },
+  {
+    "id": "mastery-machine-learning-05-03",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-05",
+    "type": "多重泄漏诊断",
+    "level": "综合提高",
+    "prompt": "要预测新设备的故障，现有6台设备，每台有100条按时间排列的读数。流程是：A. 随机拆分600行；B. 用全部600行的均值填补缺失；C. 用全部故障标签挑选最相关的5个特征；D. 用测试准确率选择停止轮数。另有一个在这批实验开始前独立完成的仪器标定常数。\n\n逐项判断A—D的问题，给出符合新设备任务的替代顺序，并说明是否必须丢弃那份独立标定常数。只有6台设备时，为什么不能把测试集的100条读数称为100个独立新设备？",
+    "solution": "A 混合了同一设备的相关读数，未检验新设备泛化；B 让验证和测试输入参与填补规则；C 让验证和测试标签参与特征选择；D 直接按测试成绩选模型，破坏独立最终评价。\n\n替代顺序：先确定设备是分组单位，按设备划出测试组并封存；只在训练设备内部做分组验证。每一折的填补、特征选择和模型训练都仅用该折训练设备，验证设备只用于比较候选或选停止轮数。方案固定后，可按预设规则在允许的开发设备上重新训练完整流程，再对独立测试设备评价一次。报告每个设备的表现及预先约定的汇总权重。\n\n独立于这批数据、在预测时确实可用的标定知识不因它是一个常数就必须删除；应记录来源和版本。若所谓常数其实由全体测试输出倒推，就不再独立。\n\n读数在设备内部共享特征与误差，100帧只有一个设备身份。只有6台设备意味着独立单位很少，分组后评价波动可能很大；可采用透明的分组验证和增加独立设备，不得用帧数夸大证据。",
+    "checkpoints": [
+      "四条泄漏路径各自指出信息来源",
+      "先封存设备，再在训练设备内部拟合所有步骤",
+      "区分独立标定与用测试输出倒推常数",
+      "诚实报告独立单位数量"
+    ],
+    "pitfall": "Pipeline只能防一部分步骤泄漏，不能自动修正错误的分组单位",
+    "verification": "依据每一步允许的信息集合逐项审查；与scikit-learn官方数据泄漏和分组CV原则一致",
+    "knowledgePoints": [
+      "设备分组",
+      "预处理与筛选",
+      "早停",
+      "独立知识"
+    ],
+    "technique": "画数据到决策的箭头，逐一切断测试信息回流"
+  },
+  {
+    "id": "mastery-machine-learning-07-01",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-07",
+    "type": "最小二乘手算",
+    "level": "基础理解",
+    "prompt": "四个无量纲训练点为 $(0,1),(1,2),(2,2),(3,5)$，拟合带截距的直线 $\\hat y=b+wx$。计算两列均值、斜率、截距、四个预测及残差（实测减预测），再求训练 MSE。检查残差和为零是否等于每个残差都为零。",
+    "solution": "$\\bar x=1.5$，$\\bar y=2.5$。输入离差为 $-1.5,-0.5,0.5,1.5$，目标离差为 $-1.5,-0.5,-0.5,2.5$。\n\n交叉乘积和 $2.25+0.25-0.25+3.75=6$；输入离差平方和 $2.25+0.25+0.25+2.25=5$，所以 $w=6/5=1.2$，$b=2.5-1.2(1.5)=0.7$。\n\n预测为 $0.7,1.9,3.1,4.3$，残差为 $0.3,0.1,-1.1,0.7$。残差和为0，平方和为 $0.09+0.01+1.21+0.49=1.8$，MSE为 $1.8/4=0.45$。\n\n残差和为零只说明训练集上的正负抵消。本题每个残差都不为零，MSE也大于零；这个性质不能保证测试误差小。",
+    "checkpoints": [
+      "两列中心化量正确",
+      "斜率6/5截距7/10",
+      "残差统一为实测减预测",
+      "MSE为0.45"
+    ],
+    "pitfall": "从残差平均为零推断预测准确，会忽略相反符号的抵消",
+    "verification": "Fraction精确计算并用numpy.linalg.lstsq独立核对系数和预测",
+    "knowledgePoints": [
+      "一元最小二乘",
+      "中心化",
+      "残差",
+      "训练MSE"
+    ],
+    "technique": "按均值—离差—乘积—系数—回代五步核算"
+  },
+  {
+    "id": "mastery-machine-learning-07-02",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-07",
+    "type": "条件反例与计算",
+    "level": "常规应用",
+    "prompt": "两点为 $(1,2),(2,2)$。这次强制直线过原点，模型为 $\\hat y=wx$，没有截距。求最小二乘 $w$、两个残差及残差和。以此判断“所有最小二乘拟合的残差和都为零”。若恢复自由截距，又能得到什么拟合？",
+    "solution": "目标为 $(2-w)^2+(2-2w)^2$。求导得到 $-2(2-w)-4(2-2w)=10w-12$，故 $w=6/5=1.2$；二阶导数10大于零，确为唯一最小值。\n\n预测为1.2、2.4，实测减预测的残差为0.8、−0.4，残差和0.4不为零。保持的正规方程是 $\\sum x_ir_i=1(0.8)+2(-0.4)=0$，并不要求 $\\sum r_i=0$。\n\n加入自由截距后，$w=0,b=2$ 精确拟合两点。残差和为零的常见结论依赖设计矩阵包含自由常数列等条件；去掉截距后不能继续机械套用。",
+    "checkpoints": [
+      "通过原点时用正确目标和斜率",
+      "残差和0.4与加权和0区分",
+      "恢复截距得到水平线y=2"
+    ],
+    "pitfall": "记住一个结论却忘记它依赖哪个可调参数，会把正确算法误判为错误",
+    "verification": "Fraction求导系数与NumPy无截距/有截距最小二乘结果一致",
+    "knowledgePoints": [
+      "正规方程",
+      "截距条件",
+      "残差正交",
+      "反例"
+    ],
+    "technique": "从哪个参数求导，就对应哪一种残差正交条件"
+  },
+  {
+    "id": "mastery-machine-learning-07-03",
+    "courseId": "machine-learning",
+    "lessonId": "machine-learning-07",
+    "type": "可辨识性与外推",
+    "level": "综合提高",
+    "prompt": "模型为 $\\hat y=b+w_1x_1+w_2x_2$。训练输入依次为 $(0,0),(1,2),(2,4)$，目标为1、4、7。列出所有零训练误差参数的条件，并给出两组不同解。它们在新输入 $(3,6)$ 上一定预测相同吗？在 $(3,0)$ 呢？用你给出的两组参数具体计算，并解释为什么训练预测唯一不等于每个系数都可识别。",
+    "solution": "第一点强制 $b=1$，后两点都只约束 $w_1+2w_2=3$，因此零误差解为 $b=1,w_1=3-2t,w_2=t$，其中 $t$ 为任意实数。\n\n例如解A为 $(b,w_1,w_2)=(1,3,0)$，解B为 $(1,1,1)$。所有训练点满足 $x_2=2x_1$，只能看到两系数的这个线性组合。\n\n在 $(3,6)$ 上，两组以及整个解族都预测 $1+3(w_1+2w_2)=10$。在 $(3,0)$ 上，A预测10，B预测4；一般为 $10-6t$，可以随所选解而变。\n\n因此训练拟合向量唯一不表示参数唯一，也不保证离开训练共线关系后的预测可确定。要解释两个特征的独立作用，需要能打破共线性的实验或额外、明确的建模约束；单纯让求解器返回其中一个解并不会增加信息。",
+    "checkpoints": [
+      "完整解族而不只给两组例子",
+      "共线点预测10与离开共线点的差异",
+      "区分训练拟合唯一、参数唯一和新点预测唯一"
+    ],
+    "pitfall": "“两个最小二乘解预测相同”只保证训练设计上的拟合，不自动覆盖任意新特征组合",
+    "verification": "精确检查增广矩阵秩2、零空间方向(0,-2,1)，并逐个计算新点预测",
+    "knowledgePoints": [
+      "共线性",
+      "可辨识性",
+      "零空间",
+      "外推"
+    ],
+    "technique": "找出数据只能约束的参数组合，再用离开该关系的新点构造反例"
+  }
+]

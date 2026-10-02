@@ -1,0 +1,38 @@
+/* Verifies the exercise contract and optional live DOM without adding a grade schema. */
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),ctx={window:{}};
+vm.runInNewContext(fs.readFileSync(path.join(root,'site/assets/data.js'),'utf8'),ctx);
+const w=ctx.window,exercises=w.MASTERY_EXERCISES;
+const review=JSON.parse(fs.readFileSync(path.join(root,'reviews/mastery-review-manifest.json'),'utf8'));
+for(const record of review.files){
+ const source=fs.readFileSync(path.join(root,'content/mastery-exercises-'+record.scope+'.json'));
+ assert.equal(require('node:crypto').createHash('sha256').update(source).digest('hex'),record.integrated_sha256,'Reviewed question/answer source changed: '+record.scope);
+ assert.equal(JSON.parse(source).length,record.exercises);
+}
+assert.ok(exercises.length>=78,'At least 78 reviewed exercises must ship');
+assert.equal(new Set(exercises.map(e=>e.id)).size,exercises.length);
+const levels=['基础理解','常规应用','综合提高'];
+for(const guide of w.LEARNING_GUIDES){const rows=exercises.filter(e=>e.lessonId===guide.id);assert.ok(rows.length>=3,guide.id);for(const level of levels)assert.ok(rows.some(e=>e.level===level),guide.id+' '+level);}
+assert.ok(new Set(exercises.map(e=>e.type)).size>=10,'Practice must contain varied task types');
+assert.equal(w.TEXTBOOK_VERSION.mastery_exercises,exercises.length);
+for(const e of exercises){assert.ok(!Object.hasOwn(e,'verification'));assert.ok(e.checkpoints.length>=2,e.id);assert.ok(e.solution.length>70,e.id);}
+if(process.argv.includes('--dom')){
+ const {JSDOM,VirtualConsole}=require(process.env.ZHIXU_JSDOM_MODULE||'jsdom');
+ const html=fs.readFileSync(path.join(root,'site/index.html'),'utf8');
+ const dom=new JSDOM(html,{url:'https://example.test/textbook/#/path',runScripts:'outside-only',virtualConsole:new VirtualConsole()});
+ const dw=dom.window,d=dw.document;dw.scrollTo=()=>{};dw.HTMLElement.prototype.scrollIntoView=()=>{};dw.matchMedia=()=>({matches:true});
+ const original={notes:{'calculus-03':'原始笔记'},completed:['calculus-01'],bookmarks:['calculus-03'],answers:{'calculus-03':{choice:2,correct:true,at:'2026-10-02T00:00:00Z'}}};
+ dw.localStorage.setItem('zhixu-learning-v1',JSON.stringify(original));
+ for(const m of html.matchAll(/<script defer src="([^"]+)"/g))dw.eval(fs.readFileSync(path.join(root,'site',m[1].split('?')[0]),'utf8'));
+ for(const guide of dw.LEARNING_GUIDES){const course=dw.COURSES.find(c=>c.chapters.some(l=>l.id===guide.id));dw.location.hash='#/course/'+course.id+'/'+guide.id;dw.dispatchEvent(new dw.HashChangeEvent('hashchange'));
+  const rows=dw.MASTERY_EXERCISES.filter(e=>e.lessonId===guide.id),cards=[...d.querySelectorAll('.mastery-card')];assert.equal(cards.length,rows.length,guide.id);
+  assert.match(d.querySelector('.mastery-intro').textContent,/不会自动评分/);
+  for(const card of cards){const answer=card.querySelector('details');assert.equal(answer.open,false);answer.querySelector('summary').click();assert.equal(answer.open,true);assert.ok(card.querySelector('.mastery-solution').textContent.trim().length>50);assert.ok(card.querySelectorAll('.mastery-checkpoints li').length>=2);answer.querySelector('summary').click();assert.equal(answer.open,false);}
+  assert.equal(d.querySelectorAll('.math-error').length,0,guide.id);
+  assert.equal(d.querySelectorAll('.mastery-card [data-answer],.mastery-card input').length,0,'Open ended answers must not masquerade as graded MCQ');
+  const heading=d.querySelector('.mastery-practice h2');assert.ok(d.querySelector('#mobile-toc-list [data-scroll="'+heading.id+'"]'));
+ }
+ const saved=JSON.parse(dw.localStorage.getItem('zhixu-learning-v1'));assert.equal(saved.notes['calculus-03'],original.notes['calculus-03']);assert.ok(saved.completed.includes('calculus-01'));assert.ok(saved.bookmarks.includes('calculus-03'));assert.equal(saved.answers['calculus-03'].choice,2);assert.deepEqual(Object.keys(saved).sort(),Object.keys(dw.LearningState.normalize(original,dw.ZHIXU.all)).sort());
+ dom.window.close();
+}
+console.log('Mastery exercises: '+exercises.length+' tasks across '+w.TEXTBOOK_VERSION.mastery_lessons+' lessons; 3 levels, diverse types, complete solutions and unchanged grade/progress schema passed');

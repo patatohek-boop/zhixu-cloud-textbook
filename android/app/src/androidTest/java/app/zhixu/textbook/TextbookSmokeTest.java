@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import org.json.JSONObject;
@@ -26,8 +27,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class TextbookSmokeTest extends Instrumentation {
     private static final String RECORD_KEY = "zhixu-learning-v1";
     private static final String LESSON = "calculus-03";
-    private static final int TOTAL = 10;
-    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.3.2' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
+    private static final int TOTAL = 13;
+    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.4.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
     private Activity reader;
     private WebView web;
     private int number;
@@ -56,6 +57,9 @@ public final class TextbookSmokeTest extends Instrumentation {
             runCase("conceptNavigationAndMobileLayout", this::concepts);
             runCase("researchRouteAndOfflineLabs", this::researchLabs);
             runCase("simulationAndOfflineLabs", this::simulationLabs);
+            runCase("knowledgeFrameworkAndFoundationLabs", this::learningFramework);
+            runCase("conceptStoriesOffline", this::conceptStories);
+            runCase("tieredPracticeOffline", this::masteryPractice);
             runCase("invalidRouteIsSafe", this::invalidRoute);
             runCase("backupRoundTripAndInjection", this::backups);
             runCase("notesSurviveRelaunch", this::relaunch);
@@ -158,7 +162,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     private void permissions() throws Exception {
         PackageInfo info = getTargetContext().getPackageManager().getPackageInfo(
             getTargetContext().getPackageName(), PackageManager.GET_PERMISSIONS);
-        require("1.3.2".equals(info.versionName) && info.versionCode == 6, "App version does not match the textbook revision");
+        require("1.4.0".equals(info.versionName) && info.versionCode == 7, "App version does not match the textbook revision");
         String[] requested = info.requestedPermissions == null ? new String[0] : info.requestedPermissions;
         for (String dangerous : new String[]{"android.permission.INTERNET", "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA", "android.permission.RECORD_AUDIO"})
@@ -260,6 +264,110 @@ public final class TextbookSmokeTest extends Instrumentation {
         require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0")), "PINN formulas failed offline");
         evaluate("location.hash='#/course/calculus/calculus-03'");
         waitUntil("document.querySelector('#note-text')", "Could not return from research labs");
+    }
+
+    private void learningFramework() throws Exception {
+        require(Boolean.TRUE.equals(evaluate("window.LEARNING_GUIDES.length===26 && !!window.KnowledgeMap")), "Learning framework assets missing offline");
+        evaluate("location.hash='#/map'");
+        waitUntil("document.querySelectorAll('.map-course-card').length===7", "Seven-course framework failed offline");
+        String[] courseIds = {"calculus", "linear-algebra", "thermodynamics", "heat-transfer", "fluid-mechanics", "python", "machine-learning"};
+        for (String course : courseIds) {
+            evaluate("location.hash='#/map/" + course + "'");
+            waitUntil("document.querySelectorAll('[data-node-id]').length===window.COURSES.find(function(c){return c.id==='" + course + "'}).chapters.length", "Incomplete offline map: " + course);
+            require(Boolean.TRUE.equals(evaluate("document.documentElement.scrollWidth<=innerWidth+1")), "Course map overflows mobile viewport: " + course);
+        }
+        evaluate("location.hash='#/map/calculus/calculus-03'");
+        waitUntil("document.querySelector('.dependency-current') && document.querySelector('.dependency-current').textContent.includes('导数')", "Local dependency graph missing");
+        saveReaderScreenshot("knowledge-map-screen.png");
+        evaluate("location.hash='#/path'");
+        waitUntil("document.querySelectorAll('.core-route>li').length===26", "Core path incomplete offline");
+        evaluate("location.hash='#/course/calculus/calculus-03'");
+        waitUntil("document.querySelector('#reading-depth') && document.querySelector('details.advanced-reading')", "Progressive reading controls missing");
+        require(Boolean.TRUE.equals(evaluate("(function(){var heading=document.querySelector('details.advanced-reading h2');document.querySelector('[data-scroll=\"'+heading.id+'\"]').click();return heading.closest('details').open && document.activeElement===heading})()")), "TOC did not open and focus an original proof");
+        evaluate("document.querySelector('#lesson-body figure a').click()");
+        waitUntil("window.FigureViewer.isOpen() && document.querySelector('.figure-enlarged').complete", "Offline diagram enlargement failed");
+        require(Boolean.TRUE.equals(evaluate("document.querySelector('.figure-enlarged').naturalWidth>0")), "Offline enlarged diagram failed to load");
+        require(Boolean.TRUE.equals(evaluate("window.ZHIXU.handleBack() && !window.FigureViewer.isOpen() && location.hash==='#/course/calculus/calculus-03'")), "Android back did not close the enlarged figure in place");
+        for (String lab : new String[]{"foundation-energy", "foundation-projection", "foundation-mass"}) {
+            evaluate("location.hash='#/labs/" + lab + "'");
+            waitUntil("document.querySelector('[data-lab=\"" + lab + "\"] .lab-chart svg')", "Foundation lab unavailable offline: " + lab);
+            require(Boolean.TRUE.equals(evaluate("(function(){var el=document.querySelector('[data-param]'),before=document.querySelector('.lab-result').textContent;el.value=Number(el.value)===Number(el.max)?el.min:el.max;el.dispatchEvent(new Event('input'));return document.querySelector('.lab-result').textContent!==before})()")), "Foundation controls did not update: " + lab);
+            require(Boolean.TRUE.equals(evaluate("document.documentElement.scrollWidth<=innerWidth+1")), "Foundation lab overflows mobile viewport: " + lab);
+        }
+    }
+
+    private void conceptStories() throws Exception {
+        String[] lessons = {"thermodynamics/thermodynamics-05", "heat-transfer/heat-transfer-03", "heat-transfer/heat-transfer-07", "fluid-mechanics/fluid-mechanics-07", "python/python-06", "machine-learning/machine-learning-07"};
+        for (String lesson : lessons) {
+            evaluate("location.hash='#/course/" + lesson + "'");
+            String lessonId = lesson.substring(lesson.indexOf('/') + 1);
+            waitUntil("window.ZHIXU.state.last==='" + lessonId + "' && document.querySelector('.article-head h1').textContent===window.ZHIXU.all.find(function(l){return l.id==='" + lessonId + "'}).title && document.querySelector('.concept-story svg') && document.querySelector('[data-story-action=next]')", "Concept story failed offline: " + lesson);
+            require(Boolean.TRUE.equals(evaluate("(function(){var el=document.querySelector('.concept-story'),before=el.textContent;el.querySelector('[data-story-action=next]').click();return el.textContent!==before})()")), "Story step did not change the explanation: " + lesson);
+            require(Boolean.TRUE.equals(evaluate("document.documentElement.scrollWidth<=innerWidth+1 && document.querySelectorAll('.math-error').length===0")), "Story layout or formula failed: " + lesson);
+            evaluate("document.querySelector('[data-story-action=replay]').click()");
+        }
+        evaluate("document.querySelector('.concept-story').scrollIntoView({block:'start',behavior:'instant'})");
+        saveReaderScreenshot("concept-story-screen.png");
+        evaluate("location.hash='#/course/calculus/calculus-03'");
+        waitUntil("document.querySelector('#note-text')", "Could not return from concept stories");
+    }
+
+    private void masteryPractice() throws Exception {
+        require(Boolean.TRUE.equals(evaluate("window.MASTERY_EXERCISES.length>=78 && window.TEXTBOOK_VERSION.mastery_lessons===26")), "Mastery exercises missing offline");
+        String[] lessons = {"calculus/calculus-03", "fluid-mechanics/fluid-mechanics-01", "python/python-07", "machine-learning/machine-learning-07"};
+        for (String lesson : lessons) {
+            String lessonId = lesson.substring(lesson.indexOf('/') + 1);
+            evaluate("location.hash='#/course/" + lesson + "'");
+            waitUntil("window.ZHIXU.state.last==='" + lessonId + "' && document.querySelectorAll('.mastery-card').length===3", "Mastery lesson failed offline: " + lesson);
+            require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.mastery-answer[open]').length===0 && document.querySelector('.mastery-intro').textContent.includes('不会自动评分')")), "Practice must begin without revealed answers or false grading claims");
+            evaluate("document.querySelector('.mastery-answer summary').click()");
+            require(Boolean.TRUE.equals(evaluate("document.querySelector('.mastery-answer').open && document.querySelectorAll('.mastery-checkpoints li').length>=6")), "Practice solution or self-check missing");
+            evaluate("document.querySelector('.mastery-answer summary').click()");
+            require(Boolean.TRUE.equals(evaluate("!document.querySelector('.mastery-answer').open")), "Repeated disclosure failed");
+            evaluate("document.querySelectorAll('.mastery-answer').forEach(function(e){e.open=true})");
+            require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0 && document.documentElement.scrollWidth<=innerWidth+1 && document.querySelectorAll('.mastery-card [data-answer],.mastery-card input').length===0")), "Practice formulas, mobile layout or grading contract failed");
+            if ("fluid-mechanics-01".equals(lessonId)) formulaTouchScroll();
+        }
+        evaluate("document.querySelector('.mastery-card').scrollIntoView({block:'start',behavior:'instant'})");
+        saveReaderScreenshot("mastery-practice-screen.png");
+    }
+
+    private void formulaTouchScroll() throws Exception {
+        require(Boolean.TRUE.equals(evaluate("(function(){var e=Array.from(document.querySelectorAll('.mastery-card .katex-display')).find(function(x){return x.scrollWidth>x.clientWidth+4});if(!e)return false;e.id='native-scroll-formula';e.scrollIntoView({block:'center',behavior:'instant'});return true})()")), "No overflowing formula available for native touch check");
+        waitUntil("(function(){var r=document.querySelector('#native-scroll-formula').getBoundingClientRect();return r.top>0&&r.bottom<innerHeight})()", "Touch formula is not visible");
+        for (int i=0; i<4; i++) {
+            swipeFormula(true);
+            if (Boolean.TRUE.equals(evaluate("(function(){var e=document.querySelector('#native-scroll-formula');return e.scrollWidth-e.clientWidth-e.scrollLeft<=1})()"))) break;
+        }
+        waitUntil("(function(){var e=document.querySelector('#native-scroll-formula'),r=e.getBoundingClientRect();return e.scrollLeft>0&&e.scrollWidth-e.clientWidth-e.scrollLeft<=1&&e.firstElementChild.getBoundingClientRect().right<=r.right+1})()", "Native touch cannot reveal formula's rightmost symbols");
+        saveReaderScreenshot("horizontal-formula-screen.png");
+        for (int i=0; i<4; i++) {
+            swipeFormula(false);
+            if (Boolean.TRUE.equals(evaluate("document.querySelector('#native-scroll-formula').scrollLeft<=1"))) break;
+        }
+        waitUntil("document.querySelector('#native-scroll-formula').scrollLeft<=1", "Native touch cannot return to formula's left edge");
+    }
+
+    private void swipeFormula(boolean towardsRightEdge) throws Exception {
+        JSONObject box = (JSONObject) evaluate("(function(){var e=document.querySelector('#native-scroll-formula'),r=e.getBoundingClientRect();return {left:r.left,right:r.right,y:r.top+r.height/2,viewport:innerWidth}})()");
+        int[] location = new int[2]; int[] width = new int[1];
+        runOnMainSync(() -> { web.getLocationOnScreen(location); width[0]=web.getWidth(); });
+        double scale = width[0] / box.getDouble("viewport");
+        float left = (float)(location[0]+(box.getDouble("left")+12)*scale);
+        float right = (float)(location[0]+(box.getDouble("right")-12)*scale);
+        float y = (float)(location[1]+box.getDouble("y")*scale);
+        float start = towardsRightEdge ? right : left, end = towardsRightEdge ? left : right;
+        long down = SystemClock.uptimeMillis();
+        MotionEvent event = MotionEvent.obtain(down, down, MotionEvent.ACTION_DOWN, start, y, 0);
+        sendPointerSync(event); event.recycle();
+        for (int i=1; i<=12; i++) {
+            SystemClock.sleep(16);
+            event = MotionEvent.obtain(down, SystemClock.uptimeMillis(), MotionEvent.ACTION_MOVE, start+(end-start)*i/12f, y, 0);
+            sendPointerSync(event); event.recycle();
+        }
+        event = MotionEvent.obtain(down, SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, end, y, 0);
+        sendPointerSync(event); event.recycle();
+        SystemClock.sleep(250);
     }
 
     private void invalidRoute() throws Exception {

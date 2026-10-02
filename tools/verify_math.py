@@ -49,7 +49,7 @@ for course in COURSES:
         ids.add(lesson)
         lesson_total += 1
         checked(lesson + " audit title", records[lesson]["title"] == meta["title"])
-        checked(lesson + " balanced details", text.count("<details>") == text.count("</details>"))
+        checked(lesson + " balanced details", len(re.findall(r"<details\b[^>]*>", text)) == text.count("</details>"))
         checked(lesson + " code fences", len(re.findall(r"^```", text, re.M)) % 2 == 0)
         for target_course, target in re.findall(r"#/course/([a-z-]+)/([a-z-]+-\d+)", text):
             checked(lesson + " link " + target, target in all_ids and target.startswith(target_course + "-"))

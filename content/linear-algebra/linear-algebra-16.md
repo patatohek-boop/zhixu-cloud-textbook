@@ -103,6 +103,8 @@ $$\det(H_k+\varepsilon I)=\sum_{S\subseteq\{1,\ldots,k\}}\varepsilon^{k-|S|}\det
 **例。** $H=\operatorname{diag}(1,-2,0)$，取 $S=\operatorname{diag}(3,2,1)$，则 $S^\mathsf THS=\operatorname{diag}(9,-8,0)$。特征值数值变了，惯性仍为 $(1,1,1)$。相似变换则会保持全部特征值，所以两种换坐标不可混淆。
 
 ## 二次优化与凸性的证明
+以下二次型配方证明不依赖微积分；随后的一般 Hessian 凸性结论另需[偏导与链式法则](#/course/calculus/calculus-15)，以及[梯度与 Hessian](#/course/calculus/calculus-16)。
+
 $F(x)=\tfrac12x^\mathsf THx-b^\mathsf Tx$ 在正定 $H$ 下有 $x_*=H^{-1}b$。代入 $x=x_*+h$，一次项抵消，得 $F(x)-F(x_*)=\tfrac12h^\mathsf THh$，所以唯一全局极小。若 $H$ 只有半正定，需另检查 $b$ 是否与零空间正交，否则沿零空间某方向线性项可趋负无穷。
 
 对凸开集上的 $C^2$ 函数，**若区域内每一点的 Hessian $H(x)=\nabla^2f(x)$ 都半正定**，沿任意两点的线段 $\phi(t)=f(x+t(y-x))$ 有 $\phi''=(y-x)^\mathsf TH(x+t(y-x))(y-x)\ge0$；单变量凸性定理使 $f$ 凸。这给出了 Hessian 判别的全局依据与区域条件。

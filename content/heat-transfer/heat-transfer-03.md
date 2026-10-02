@@ -33,6 +33,49 @@
   "lab": "conduction"
 }
 ---
+## 保温层两端为什么会承担大部分温差？
+
+稳态、没有内部发热时，热每秒进入一层多少，就必须从这一层流出多少，否则能量会不断积累。**串联时相同的是热流率，不是温差。** 难传热的层，需要更大的温差才能传过同样的热流。
+
+### 先定温度节点，再选热阻
+
+$L$（m）是厚度，$A$（m²）是传热面积，$k$（W/(m·K)）是材料导热系数。$R$（K/W）连接两个温度节点，满足 $\dot Q=\Delta T/R$。面积热阻 $R''=RA$（m²·K/W）不能不除面积就当 $R$ 用。
+
+空气温度、壁面温度、材料交界温度是三个不同概念。若题目给两侧**壁面温度**，边界已经放在壁面上，不再添加空气侧对流热阻；若给两侧空气温度，就要把相应对流路径算进去。
+
+### 把积分里的中间一步写出来
+
+一维稳态、常 $k$、截面积不变、无热源且侧面绝热：$\dot Q=-kA\,dT/dx$。因为 $\dot Q$ 沿 $x$ 不变，把两边移项并积分：
+
+$$dT=-\frac{\dot Q}{kA}dx,\qquad T_2-T_1=-\frac{\dot Q}{kA}L.$$
+
+移去负号，得 $\dot Q=(T_1-T_2)/(L/(kA))$，所以 $R=L/(kA)$。这不是额外的守恒定律，而是 **Fourier 本构关系加上这些模型条件** 的结果。若壁内有发热或 $k$ 明显随温度变，不能直接沿用常热阻。
+
+<figure class="teaching-figure"><a href="assets/diagrams/learn-heat-transfer-03.svg" target="_blank" rel="noopener" aria-label="打开大图：两层墙温度从60摄氏度降至55.56再到20，热阻分别为0.10和0.80开尔文每瓦，热流率相同"><img src="assets/diagrams/learn-heat-transfer-03.svg" alt="两层墙温度从60摄氏度降至55.56再到20，热阻分别为0.10和0.80开尔文每瓦，热流率相同" loading="lazy"></a><figcaption>横轴为空间位置，第二层厚度为第一层两倍；各层线性温度斜率由导热系数决定。 · 点按图形可放大</figcaption></figure>
+
+### 完整数值例：两层墙，先算热流再找界面
+
+两侧壁面为 $60\,{}^\circ\mathrm C$ 和 $20\,{}^\circ\mathrm C$，面积 $A=0.50\,\mathrm{m^2}$。第一层 $L_1=0.010\,\mathrm m$、$k_1=0.20\,\mathrm{W/(m\cdot K)}$；第二层 $L_2=0.020\,\mathrm m$、$k_2=0.050\,\mathrm{W/(m\cdot K)}$。两层理想接触，满足上述一维条件。
+
+1. $R_1=0.010/(0.20\times0.50)=0.10\,\mathrm{K/W}$
+2. $R_2=0.020/(0.050\times0.50)=0.80\,\mathrm{K/W}$
+3. 串联总阻 $R_{tot}=0.90\,\mathrm{K/W}$，$\dot Q=(60-20)/0.90=44.44\,\mathrm W$
+4. 第一层温降 $\Delta T_1=44.44\times0.10=4.44\,\mathrm K$，界面温度 $T_i=60-4.44=55.56\,{}^\circ\mathrm C$
+5. 第二层温降 $35.56\,\mathrm K$，终点 $55.56-35.56=20.00\,{}^\circ\mathrm C$，与给定边界一致
+
+第二层热阻是第一层的 8 倍，温降也是 8 倍。热流密度为 $q''=44.44/0.50=88.89\,\mathrm{W/m^2}$。同一个热流率通过同样面积时热流密度相同；若面积改变，就不能把这两个结论混为一谈。
+
+### 立即自检：把保温层面积加倍，会让热阻加倍吗？
+
+<details><summary>先看单位和公式，再看答案</summary>
+
+恰好相反。在厚度、材料、两端温度不变且仍近似一维时，面积加倍使每层 $R=L/(kA)$ 减半，总热流率加倍；热流密度保持不变。更多面积提供更多并行的微小传热通道，并不是多串上一层材料。
+
+</details>
+
+**本节过关动作：** 在图上标出每个温度，逐段检查“温降÷热阻”是否都等于同一热流率。要理解边界温度或热流为何能指定，补[导热方程与边界条件](#/course/heat-transfer/heat-transfer-02)。
+
+<details class="advanced-reading"><summary>展开完整讲解：严谨定义、推导与原有练习</summary>
 
 ## 严谨定义与记号
 
@@ -118,3 +161,5 @@ $$R_{total}=\frac1{h_1A}+\sum_i\frac{L_i}{k_iA}+\sum_j\frac{R_{c,j}''}{A}+\frac1
 ## 继续阅读
 
 本章为原创中文讲解与教学例题；课程范围与模型条件参考[MIT 2.51 Intermediate Heat and Mass Transfer — syllabus](https://ocw.mit.edu/courses/2-51-intermediate-heat-and-mass-transfer-fall-2008/pages/syllabus/)。课程资料页列出进一步阅读入口，原课程的高级内容需要另外系统学习。
+
+</details>

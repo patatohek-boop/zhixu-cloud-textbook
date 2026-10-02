@@ -42,7 +42,7 @@ $A\in\mathbb R^{n\times n}$ 实对称指 $A^\mathsf T=A$。
 
 ### 正交矩阵保持几何
 
-正交矩阵 $Q$ 满足 $Q^\mathsf TQ=I$，因此逆为转置且保持点积。
+实方阵 $Q\in\mathbb R^{n\times n}$ 满足 $Q^\mathsf TQ=I_n$ 时称为正交矩阵。此时 $Q^{-1}=Q^\mathsf T$，且保持点积。矩形矩阵也可能满足 $Q^\mathsf TQ=I$，但那只表示列向量单位正交，不能据此断言存在双侧逆。
 
 ### 二次型只取对称部分
 
@@ -56,6 +56,8 @@ Rayleigh 商为 $R_A(x)=x^\mathsf TAx/(x^\mathsf Tx)$，定义于 $x\ne0$。
 一般换基会把尺度歪斜，对称矩阵却允许只换一组垂直方向。新坐标里的每项能量独立，交叉项消失，同时长度还保持原样。
 
 ## 实对称谱定理：完整归纳证明
+本证明另用[有限维紧致极值](#/course/calculus/calculus-25)及[一元求导与极值必要条件](#/course/calculus/calculus-05)。只学谱分解应用时可先接受本定理，补足这些先修后再读证明。
+
 **定理。** 每个实对称 $A$ 存在实正交 $Q$ 和实对角 $\Lambda$ 使 $A=Q\Lambda Q^\mathsf T$。
 
 ### 第一步：在球面上找到极大方向

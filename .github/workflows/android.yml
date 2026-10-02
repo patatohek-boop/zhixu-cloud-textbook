@@ -1,6 +1,14 @@
 name: Build Android textbook
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'android/**'
+      - 'site/**'
+      - 'content/**'
+      - 'reviews/learning-*'
+      - 'tools/**'
+      - '.github/workflows/android.yml'
   push:
     branches: [main]
     paths:
@@ -36,6 +44,13 @@ jobs:
           node tools/test-learning-state.cjs
           node tools/test-research-labs.cjs
           node tools/test-cfd-labs.cjs
+          node tools/test-foundation-labs.cjs
+          node tools/test-concept-stories.cjs
+          node tools/test-knowledge-map.cjs
+          node tools/test-mastery-exercises.cjs
+          python tools/verify_final_review.py
+          python tools/test-learning-preservation.py
+          python tools/test-offline-learning.py
           python tools/verify_cfd.py
           python tools/verify_research_foundations.py
           python tools/verify_fluid.py
@@ -98,7 +113,7 @@ jobs:
           adb shell input keyevent 82
           adb install android/app/build/outputs/apk/debug/app-debug.apk
           adb install android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-          timeout 180 adb shell am instrument -w app.zhixu.textbook.test/app.zhixu.textbook.TextbookSmokeTest | tee work/android-smoke.txt
+          timeout 240 adb shell am instrument -w app.zhixu.textbook.test/app.zhixu.textbook.TextbookSmokeTest | tee work/android-smoke.txt
           grep -q ZHIXU_SMOKE_SUCCESS work/android-smoke.txt
           adb exec-out run-as app.zhixu.textbook cat files/reader-screen.png > work/android-reader.png
           test -s work/android-reader.png
@@ -108,6 +123,14 @@ jobs:
           test -s work/android-research.png
           adb exec-out run-as app.zhixu.textbook cat files/simulation-screen.png > work/android-simulation.png
           test -s work/android-simulation.png
+          adb exec-out run-as app.zhixu.textbook cat files/knowledge-map-screen.png > work/android-knowledge-map.png
+          test -s work/android-knowledge-map.png
+          adb exec-out run-as app.zhixu.textbook cat files/concept-story-screen.png > work/android-concept-story.png
+          test -s work/android-concept-story.png
+          adb exec-out run-as app.zhixu.textbook cat files/mastery-practice-screen.png > work/android-mastery-practice.png
+          test -s work/android-mastery-practice.png
+          adb exec-out run-as app.zhixu.textbook cat files/horizontal-formula-screen.png > work/android-horizontal-formula.png
+          test -s work/android-horizontal-formula.png
           adb shell am start -W -n app.zhixu.textbook/.MainActivity
           sleep 15
           adb exec-out screencap -p > work/android-home.png
@@ -121,6 +144,10 @@ jobs:
             work/android-concepts.png
             work/android-research.png
             work/android-simulation.png
+            work/android-knowledge-map.png
+            work/android-concept-story.png
+            work/android-mastery-practice.png
+            work/android-horizontal-formula.png
             work/android-home.png
             work/emulator.log
             work/android-logcat.txt

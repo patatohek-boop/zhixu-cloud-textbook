@@ -4,11 +4,13 @@ const root=path.resolve(__dirname,'..'),ctx={window:{}};
 vm.runInNewContext(fs.readFileSync(path.join(root,'site/assets/data.js'),'utf8'),ctx);
 const katex=require(path.join(root,'site/assets/vendor/katex/katex.min.js'));
 const {LABS}=require(path.join(root,'site/assets/cfd-labs.js'));
+require(path.join(root,'site/assets/foundation-labs.js'));
 let count=0,formulas=0,errors=[];
 for(const course of ctx.window.COURSES)for(const l of course.chapters){
  count++;
  if(l.lab&&!LABS[l.lab])errors.push(`${l.id}: unknown lab ${l.lab}`);
- const inputs=[l.content,l.quiz.question,...l.quiz.options,l.quiz.explanation];
+ const practice=(ctx.window.MASTERY_EXERCISES||[]).filter(e=>e.lessonId===l.id);
+ const inputs=[l.content,l.quiz.question,...l.quiz.options,l.quiz.explanation,...practice.flatMap(e=>[e.prompt,e.solution,e.technique,e.pitfall,...e.checkpoints])];
  for(let s of inputs){
   s=s.replace(/```[\s\S]*?```|`[^`\n]+`/g,'');
   for(const m of s.matchAll(/\$\$([\s\S]+?)\$\$|(?<!\\)\$([^$\n]+?)\$/g)){
@@ -16,7 +18,7 @@ for(const course of ctx.window.COURSES)for(const l of course.chapters){
    catch(e){errors.push(`${l.id}: ${m[0]} => ${e.message}`);}
   }
  }
- assert.equal((l.content.match(/<details>/g)||[]).length,(l.content.match(/<\/details>/g)||[]).length,`${l.id}: details mismatch`);
+ assert.equal((l.content.match(/<details\b[^>]*>/g)||[]).length,(l.content.match(/<\/details>/g)||[]).length,`${l.id}: details mismatch`);
 }
 for(const [id,lab]of Object.entries(LABS)){
  const values=Object.fromEntries(lab.controls.map(c=>[c[0],c[5]]));
@@ -27,6 +29,12 @@ for(const [id,lab]of Object.entries(LABS)){
  }
 }
 assert.match(LABS.derivative.draw({x:1,h:.01}).result,/2\.010/);
+// Both secant sample points must stay visibly inside the legal slider plot.
+for(const x of [-1.5,1.5])for(const h of [.01,1]){
+ const circles=[...LABS.derivative.draw({x,h}).svg.matchAll(/<circle cx="([^"]+)" cy="([^"]+)"/g)];
+ assert.equal(circles.length,2);
+ for(const [,cx,cy]of circles){assert.ok(+cx>62&&+cx<438);assert.ok(+cy>28&&+cy<212);}
+}
 assert.match(LABS.integral.draw({n:10}).result,/2\.660000/);
 assert.match(LABS.matrix.draw({a:1,b:2,c:2,d:4}).result,/奇异/);
 assert.match(LABS.carnot.draw({hot:600,cold:300}).result,/50\.0%/);

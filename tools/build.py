@@ -76,12 +76,49 @@ def build():
         audit['records']=[records[l['id']] for l in course['chapters']]
         reviews.append(audit)
     version.update(lessons=count,reviewed=sum(len(a['records']) for a in reviews),original_lessons=len(baseline['lesson_ids']),added_lessons=count-len(baseline['lesson_ids']))
+    # Curated mainline guidance is maintained separately from stable lesson records.
+    guides=[]
+    for path in sorted((ROOT/'content').glob('learning-guides-*.json')):
+        guides.extend(json.loads(path.read_text(encoding='utf-8')))
+    assert len({g['id'] for g in guides})==len(guides), 'Duplicate learning guide'
+    for g in guides:
+        assert g['id'] in ids and isinstance(g.get('mainline'),bool), 'Invalid learning guide'
+        assert all(isinstance(g.get(k),str) and g[k].strip() for k in ('why','checkpoint')), 'Missing learning outcome'
+        for kind in ('required','recommended'):
+            assert isinstance(g.get(kind),list) and set(g[kind])<=ids and g['id'] not in g[kind], 'Invalid learning relation'
+        assert not set(g['required']) & set(g['recommended']), 'A relation cannot be required and recommended'
+    edges={g['id']:g['required'] for g in guides}
+    def visit(node,trail):
+        assert node not in trail, 'Cyclic required learning relation: '+node
+        for parent in edges.get(node,[]): visit(parent,trail|{node})
+    for node in edges: visit(node,set())
+    # Open-ended mastery work is separate from stable quiz/progress records.
+    exercises=[]; exercise_ids=set()
+    for path in sorted((ROOT/'content').glob('mastery-exercises-*.json')):
+        rows=json.loads(path.read_text(encoding='utf-8'))
+        assert isinstance(rows,list), f'{path.name}: exercise file must be an array'
+        for e in rows:
+            for field in ('id','courseId','lessonId','type','level','prompt','solution','pitfall','verification','technique'):
+                assert isinstance(e.get(field),str) and e[field].strip(), f'{path.name}: missing exercise {field}'
+            assert re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*',e['id']), 'Invalid exercise ID'
+            assert e['id'] not in exercise_ids, 'Duplicate exercise ID: '+e['id']
+            exercise_ids.add(e['id'])
+            assert lesson_course.get(e['lessonId'])==e['courseId'], 'Exercise links to an unknown lesson'
+            assert e['level'] in ('基础理解','常规应用','综合提高'), 'Unknown exercise level'
+            for field in ('checkpoints','knowledgePoints'):
+                assert isinstance(e.get(field),list) and e[field] and all(isinstance(s,str) and s.strip() for s in e[field]), 'Invalid exercise '+field
+            assert isinstance(e.get('prerequisites',[]),list) and set(e.get('prerequisites',[]))<=ids, 'Unknown exercise prerequisite'
+            for field in ('prompt','solution'):
+                assert e[field].count('```')%2==0, 'Unclosed exercise code fence: '+e['id']
+            # Verification rationale is a source/review artifact, not student UI.
+            exercises.append({k:v for k,v in e.items() if k!='verification'})
+    version.update(mastery_exercises=len(exercises),mastery_lessons=len({e['lessonId'] for e in exercises}))
     target=ROOT/'site/assets/data.js'; target.parent.mkdir(parents=True,exist_ok=True)
     bundle='/* Generated from content/ and reviews/ by tools/build.py. Do not edit. */\n'
-    for name,value in [('COURSES',courses),('TEXTBOOK_VERSION',version),('CONTENT_REVIEW',reviews)]:
+    for name,value in [('COURSES',courses),('TEXTBOOK_VERSION',version),('CONTENT_REVIEW',reviews),('LEARNING_GUIDES',guides),('MASTERY_EXERCISES',exercises)]:
         bundle+='window.'+name+' = '+json.dumps(value,ensure_ascii=False,separators=(',',':'))+';\n'
     target.write_text(bundle,encoding='utf-8',newline='\n')
-    stats={'version':version['version'],'courses':len(courses),'lessons':count,'reviewed_lessons':version['reviewed'],'added_lessons':version['added_lessons'],'chinese_characters':char_count,'course_counts':{c['id']:len(c['chapters']) for c in courses}}
+    stats={'version':version['version'],'courses':len(courses),'lessons':count,'reviewed_lessons':version['reviewed'],'added_lessons':version['added_lessons'],'chinese_characters':char_count,'mastery_exercises':len(exercises),'mastery_lessons':version['mastery_lessons'],'course_counts':{c['id']:len(c['chapters']) for c in courses}}
     (ROOT/'site/assets/content-stats.json').write_text(json.dumps(stats,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     # Content-addressed resource queries prevent mixing old reader code with new lessons.
     # Normalize text line endings so Windows and Linux builds produce identical HTML.

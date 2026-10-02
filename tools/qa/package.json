@@ -1,0 +1,8 @@
+{
+  "name": "zhixu-learning-qa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Development-only browser and DOM checks; never bundled into the textbook or APK",
+  "scripts": {"test": "playwright test", "test:dom": "ZHIXU_JSDOM_MODULE=./qa/node_modules/jsdom node ../test-rendering.cjs"},
+  "devDependencies": {"@playwright/test": "1.63.0", "jsdom": "30.1.1"}
+}

@@ -35,6 +35,51 @@
   "lab": null
 }
 ---
+## 同一只热杯，三种传热为什么可以同时发生？
+
+杯底接触桌面，能量可经接触区域导热；杯外空气流动形成对流换热；杯表面还与周围物体交换热辐射。**机制是在问“怎么传”，能量守恒是在问“总账是否平衡”。** 看见空气并不能只留对流，看到接触也不能自动排除辐射。
+
+### 先把“热”拆成三个能算的量
+
+$Q$（J）是某段时间累计传递的能量；$\dot Q$（W=J/s）是每秒传热量；$q''$（W/m²）是单位面积热流率。$A$ 用 m²，温差 $\Delta T$ 用 K 或 ℃ 差值。面积上均匀且时间内不变时：
+
+$$\dot Q=q''A,\qquad Q=\dot Q\Delta t.$$
+
+若不均匀，就把小面元或小时间段的贡献相加，再用积分取代求和。$q^{\prime\prime\prime}$（W/m³）则是体积发热率，例如均匀电阻发热；它不是表面热流密度。
+
+### 每个公式负责一件事
+
+导热模型 $q_x''=-k\,dT/dx$ 使用材料导热系数 $k$（W/(m·K)）。沿 $+x$ 方向温度降低，导数为负，热流才为正。这条定律描述材料中温度梯度与导热热流的关系，不能单靠能量守恒推出。
+
+对流边界式 $\dot Q_{conv}=hA(T_s-T_\infty)$ 里的 $h$（W/(m²·K)）概括流动、形状与物性影响；它不由本式自动给出。下面例题把 $h$ 当已知模型输入，并非宣称所有空气都用同一个 $h$。
+
+辐射式 $\dot Q_{rad}=\varepsilon\sigma A(T_s^4-T_{sur}^4)$ 中，$\varepsilon$ 是表面发射率，$\sigma$ 是斯忒藩–玻尔兹曼常数。这里假定加热面远小于包围它的周围环境，周围温度均匀；表面可按漫灰表面处理，即发射率不随方向、波长改变；中间介质的辐射吸收、发射和散射可忽略。四次方温度必须用 K。下标 $s$、$\infty$、$sur$ 分别指表面、远处空气和周围辐射环境。空气温度 $T_\infty$ 与辐射环境温度 $T_{sur}$ 也不是必然相同。
+
+<figure class="teaching-figure"><a href="assets/diagrams/learn-heat-transfer-01.svg" target="_blank" rel="noopener" aria-label="打开大图：加热面输入8.13瓦，平行向空气对流散热5.00瓦、向大环境辐射散热3.13瓦"><img src="assets/diagrams/learn-heat-transfer-01.svg" alt="加热面输入8.13瓦，平行向空气对流散热5.00瓦、向大环境辐射散热3.13瓦" loading="lazy"></a><figcaption>对流与净辐射是同一表面的两条并行能量通道；图示值采用正文给定假设。 · 点按图形可放大</figcaption></figure>
+
+### 完整数值例：加热片需要多大功率？
+
+面积 $A=0.010\,\mathrm{m^2}$ 的小加热面维持 $T_s=350\,\mathrm K$，空气与大辐射环境均为 $300\,\mathrm K$。取 $h=10\,\mathrm{W/(m^2\cdot K)}$、$\varepsilon=0.80$、$\sigma=5.670\times10^{-8}\,\mathrm{W/(m^2\cdot K^4)}$。忽略背面与支架散热，满足上面的辐射几何假设。
+
+1. 向外对流：$\dot Q_{conv}=10\times0.010\times50=5.00\,\mathrm W$
+2. 先算温度四次方差：$350^4-300^4=6.90625\times10^9\,\mathrm{K^4}$
+3. 向外净辐射：$\dot Q_{rad}=0.80\times5.670\times10^{-8}\times0.010\times6.90625\times10^9=3.13\,\mathrm W$
+4. 稳态没有能量积累，所需输入 $P=5.00+3.13=8.13\,\mathrm W$
+5. 维持 60 s 所需输入能量约 $8.13\times60=488\,\mathrm J$，并非 $8.13\,\mathrm J$
+
+两条通道共享同一表面温度，分别传热后再相加，是并行关系。这里对流占约 61.5%，辐射占约 38.5%；“温度不很高”本身不足以判定辐射可忽略。
+
+### 立即自检：稳态是不是每一项热流都等于零？
+
+<details><summary>先用例题作答，再看答案</summary>
+
+不是。例题输入与输出都不为零，只是净积累为零。如果输入临时改成 $6.00\,\mathrm W$，在温度尚未改变的瞬间，储能率为 $6.00-8.13=-2.13\,\mathrm W$，物体开始冷却；随后散热率也会随温度改变，不能永远按 $8.13\,\mathrm W$ 算。
+
+</details>
+
+**本节过关动作：** 能把每条热流画成跨边界的箭头，并区分输入功率、热流率和累计能量。再读[稳态热阻](#/course/heat-transfer/heat-transfer-03)和[随时间冷却](#/course/heat-transfer/heat-transfer-07)。
+
+<details class="advanced-reading"><summary>展开完整讲解：严谨定义、推导与原有练习</summary>
 
 ## 严谨定义与记号
 
@@ -121,3 +166,5 @@ Q̇=q″A=500×0.10=50 W。若持续 20 s，累计热量才是 1000 J。
 ## 继续阅读
 
 本章为原创中文讲解与教学例题；课程范围与模型条件参考[MIT 2.51 Intermediate Heat and Mass Transfer — syllabus](https://ocw.mit.edu/courses/2-51-intermediate-heat-and-mass-transfer-fall-2008/pages/syllabus/)。课程资料页列出进一步阅读入口，原课程的高级内容需要另外系统学习。
+
+</details>

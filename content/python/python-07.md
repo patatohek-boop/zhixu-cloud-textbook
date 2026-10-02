@@ -36,6 +36,53 @@
 }
 ---
 
+## 零基础入口：让一次计算能被下一步继续使用
+
+实验开始为 20 ℃、结束为 25 ℃，温升是 $25-20=5$ ℃。若十段代码都要算温升，反复手写减法容易把先后顺序弄反。我们把这件事命名为 `temperature_rise`，约定先传开始值、再传结束值，并把算出的数交回来。
+
+本例约定输入两个给定的有限数值，单位都为摄氏度；输出是“结束减开始”的温差，允许负数表示降温。这段入门代码演示调用与返回，不承担外部文本解析、传感器故障判断或所有类型的校验。
+
+<figure class="teaching-figure"><a href="assets/diagrams/learn-python-07.svg" target="_blank" rel="noopener"><img src="assets/diagrams/learn-python-07.svg" alt="调用者提供20和25，分别绑定到本次调用的start_c和end_c；函数做25减20得到5，return把5交给调用处的rise；调用者再计算rise加2得到7。" loading="lazy"></a><figcaption>箭头是值的传递，框是本次调用的局部计算。返回值能进入下一次计算，屏幕文字本身不能代替它。</figcaption></figure>
+
+### 完整小例子：定义、调用、接回结果
+
+```python
+def temperature_rise(start_c, end_c):
+    difference_c = end_c - start_c
+    return difference_c
+
+rise = temperature_rise(20, 25)
+print(rise)
+print(rise + 2)
+```
+
+1. `def` 创建一个有名字的函数，括号里的 `start_c`、`end_c` 是形参。此时还没有做减法，缩进的函数体要等调用才运行。
+2. `temperature_rise(20, 25)` 是调用。20、25 是实参，按位置分别交给本次调用的两个形参。
+3. 函数算出 `difference_c = 5`。`return` 把这个数交回调用处，并结束本次调用。
+4. 整个调用表达式的结果是 5，于是外面的 `rise` 绑定到 5。两次输出依次为 `5`、`7`。第二次只是用返回值继续做算术，未表示新的实验测量。
+
+“局部名字”表示 `difference_c` 在这次调用内部使用；外面要使用结果，就接住返回值。不要通过猜测内部变量名去拿结果。对于本例的不可变整数，计算不会修改传入的整数对象；下文的列表例子会说明共享可变对象为什么另有副作用。
+
+### 参数顺序就是接口的一部分
+
+`temperature_rise(25, 20)` 得到 -5，含义是从 25 ℃ 降到 20 ℃；它不会自动猜出你原本想表示升温。写成 `temperature_rise(start_c=20, end_c=25)` 可把含义直接放在调用处。需要更复杂的参数限制时，再读下文的 `/` 与 `*`。
+
+常见误解：在函数里打印结果，就等于返回结果。打印是展示动作；返回是把对象交给调用者，供测试、批量处理或后续计算使用。两者可以同时存在，但用途不同。[Python 官方教程：函数定义](https://docs.python.org/3/tutorial/controlflow.html#defining-functions)说明调用、局部名字及默认返回 `None` 的规则。
+
+### 理解检查：能看到 5，为什么不能加 2
+
+把 `return difference_c` 改成 `print(difference_c)`，其余代码不变。第一次调用显示什么？`rise` 是什么？最后一行能完成吗？
+
+<details><summary>展开答案：区分副作用与返回对象</summary>
+
+调用过程中先显示 `5`，但函数走到末尾而没有 `return` 一个数，因此返回 `None`。接着 `print(rise)` 显示 `None`；最后的 `rise + 2` 不能把 `None` 与整数相加，会产生 `TypeError`。修正方法是返回数值，让调用者决定何时打印。
+
+</details>
+
+能独立做到：写一个只负责数值计算、通过参数接收输入、通过 `return` 交付结果的小函数，并说明同一组输入对应什么输出。
+
+<details class="advanced-reading"><summary>展开完整正文：严谨定义、推导与更多练习</summary>
+
 ## 函数接口的严格词汇
 **函数定义**创建函数对象并绑定名称；函数体在调用时执行。
 
@@ -162,3 +209,6 @@ assert calibrate(20.0, offset=-2.0) == 18.0
 
 2. 为什么 `items=None` 常比 `items=[]` 更合适？
 <details><summary>查看解析</summary>None 可以作为未提供参数的标记，每次调用时创建新的列表，避免不同调用意外共享可变默认对象。</details>
+
+
+</details>

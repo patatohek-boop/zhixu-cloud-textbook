@@ -1,0 +1,94 @@
+[
+  {
+    "id": "calculus-01",
+    "required": [],
+    "recommended": [],
+    "mainline": true,
+    "why": "把时间、温度等情景准确写成输入输出规则，分清运算范围与模型有效范围。",
+    "checkpoint": "能写清函数的输入、输出、单位、定义域，并独立做一次代入与反求。"
+  },
+  {
+    "id": "calculus-03",
+    "required": [
+      "calculus-01",
+      "calculus-02"
+    ],
+    "recommended": [],
+    "mainline": true,
+    "why": "从有限窗口平均变化率建立瞬时变化率，理解切线预测为什么带误差。",
+    "checkpoint": "能由差商算二次函数在一点的导数，并给出局部预测及其单位。"
+  },
+  {
+    "id": "calculus-07",
+    "required": [
+      "calculus-02",
+      "calculus-03",
+      "calculus-04"
+    ],
+    "recommended": [
+      "calculus-05",
+      "calculus-25"
+    ],
+    "mainline": true,
+    "why": "把随时间变化的功率或流量累加成总量，用积分基本定理计算。",
+    "checkpoint": "能区别速率与累积量，分清净量与绝对总量，计算并检查简单定积分。"
+  },
+  {
+    "id": "calculus-15",
+    "required": [
+      "calculus-03",
+      "calculus-04",
+      "linear-algebra-01"
+    ],
+    "recommended": [
+      "calculus-14",
+      "calculus-07"
+    ],
+    "mainline": true,
+    "why": "分开位置变化与时间变化，再组合多个输入共同造成的输出变化。",
+    "checkpoint": "能算偏导和全微分，解释各项单位，并区分沿路径总导数与偏导。"
+  },
+  {
+    "id": "linear-algebra-01",
+    "required": [],
+    "recommended": [
+      "calculus-01"
+    ],
+    "mainline": true,
+    "why": "在向量组合、逐行方程与矩阵表达之间转换，给输入和输出分量明确含义。",
+    "checkpoint": "能按分量拼出目标向量并检查权重是否满足额外的非负等情景限制。"
+  },
+  {
+    "id": "linear-algebra-02",
+    "required": [
+      "linear-algebra-01"
+    ],
+    "recommended": [],
+    "mainline": true,
+    "why": "用保留解集的行操作求解，并区分独立信息、重复约束与矛盾约束。",
+    "checkpoint": "能完整消元、回代，并先排除矛盾再判断唯一解或自由参数。"
+  },
+  {
+    "id": "linear-algebra-03",
+    "required": [
+      "linear-algebra-01",
+      "linear-algebra-02"
+    ],
+    "recommended": [],
+    "mainline": true,
+    "why": "把连续的线性处理合成一个矩阵，避免乘法次序和维数错误。",
+    "checkpoint": "能写出并计算两步线性映射，逐项核对乘积尺寸、顺序与输出。"
+  },
+  {
+    "id": "linear-algebra-10",
+    "required": [
+      "linear-algebra-03",
+      "linear-algebra-05",
+      "linear-algebra-06"
+    ],
+    "recommended": [],
+    "mainline": true,
+    "why": "精确拟合不了观测时，用明确定义的距离寻找最接近的可行预测。",
+    "checkpoint": "能求一维正交投影、计算残差平方和，并核验残差与模型方向正交。"
+  }
+]

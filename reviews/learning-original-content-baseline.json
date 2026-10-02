@@ -1,0 +1,161 @@
+{
+  "base_commit": "04b715def31b838b93201da521b633d8dcddf10f",
+  "anchors": [
+    {
+      "id": "python-01",
+      "path": "content/python/python-01.md",
+      "metadata_sha256": "4c1172967b1aa0257a5b067460dbe47257e9c7b36f70312ced1f4d8c50e41bd4",
+      "original_body_sha256": "5bc99d117f9d6f90ed6a6b290c361f2bd28ed9f51f9dfc9ac155c1518e96246c"
+    },
+    {
+      "id": "python-06",
+      "path": "content/python/python-06.md",
+      "metadata_sha256": "7d562dd7b3b9f03e004039371bbc2dd5ff0e04b74346cea739ac2c8a04e05653",
+      "original_body_sha256": "9f18e65c9d46d27cf3a79ebe59ed7aae01b12983201e3455a9651ab1cbc41cf1"
+    },
+    {
+      "id": "python-07",
+      "path": "content/python/python-07.md",
+      "metadata_sha256": "a757ce36c306aeed2ca4c3ae89b6a1028bbb921f0e28d2da18550ebee79e27bb",
+      "original_body_sha256": "3ca5de5b525569833538fea9485b96893e996e0f6861203cdec49565ff75d540"
+    },
+    {
+      "id": "python-20",
+      "path": "content/python/python-20.md",
+      "metadata_sha256": "12df086f7435cb4680f393b8a7d5d3bf13b457b3fc4c443993633e698734d7e5",
+      "original_body_sha256": "685fe4270cd84052f0c33e81f9e8dcb8d5f0f5198287669de180333045ec5ad7"
+    },
+    {
+      "id": "machine-learning-01",
+      "path": "content/machine-learning/machine-learning-01.md",
+      "metadata_sha256": "405abc9f3cb46413984017ee920b56115e6ddc48e5d9ce76bb3e5b2f15b1294c",
+      "original_body_sha256": "91df3fc6b81a7342db01a7a56c3fef0f70a59fec67e292625400a19a4e594e4d"
+    },
+    {
+      "id": "machine-learning-04",
+      "path": "content/machine-learning/machine-learning-04.md",
+      "metadata_sha256": "270d379dab141b7061e19f1bfb19a58ac53a438b29137c1630220f77df006c22",
+      "original_body_sha256": "07e326d644d00630ad3061a73d6f87e55b5fbb509c6f3d6ecfc23ebb4c16e6c5"
+    },
+    {
+      "id": "machine-learning-05",
+      "path": "content/machine-learning/machine-learning-05.md",
+      "metadata_sha256": "2f95550e778281d625927c9e5663def0882413bc3d9aa743e00e9721cf61331c",
+      "original_body_sha256": "e59a29803545ff38a522f695f7a96614c6019e955407a8bf25a3be6c3e11d2bf"
+    },
+    {
+      "id": "machine-learning-07",
+      "path": "content/machine-learning/machine-learning-07.md",
+      "metadata_sha256": "1a02f9ee38af67f1baa6d20a7e9bda220f9c1605cd81e4544aafb9af902d972e",
+      "original_body_sha256": "773a6e402f97050ca091f9a84beb92baad151010aae18c37bd2b3459c63e38b5"
+    },
+    {
+      "id": "calculus-01",
+      "path": "content/calculus/calculus-01.md",
+      "metadata_sha256": "947c504680611318079a68f6d90be2bb55f38c50356f0ae5b0e2cbbc1b98f199",
+      "original_body_sha256": "7511152f38c3b86188ae36b74031d079302d89b4a8a6bab9fb728b240e412322"
+    },
+    {
+      "id": "calculus-03",
+      "path": "content/calculus/calculus-03.md",
+      "metadata_sha256": "ce25d7c15fd7046bed24f26064f9aaf33d5363ae2abc476eebab8212ee9e8689",
+      "original_body_sha256": "9709ca6e0d9b3b70d1816d8033f0a0f671d29996597eff588245fc5ec6d2a49e"
+    },
+    {
+      "id": "calculus-07",
+      "path": "content/calculus/calculus-07.md",
+      "metadata_sha256": "e4f5952b23aec2bd4c280478485917a150ae6423835e5e3a7f22ea312a8ce208",
+      "original_body_sha256": "768681f85b9555375fba190493e933c674c280c6a87830cca8f3e9fc3149aaf2"
+    },
+    {
+      "id": "calculus-15",
+      "path": "content/calculus/calculus-15.md",
+      "metadata_sha256": "cf7efa6633b744d826c6bd62050015759a8d3d2da2fb4462e18d53dc92027004",
+      "original_body_sha256": "e225a0ffd4eebc4147ffa103dbf1de0d877134ffd039dd9429a210ed4f374ee6"
+    },
+    {
+      "id": "linear-algebra-01",
+      "path": "content/linear-algebra/linear-algebra-01.md",
+      "metadata_sha256": "49ec3042cb20681ca909cc670fe677459aa2b8a38383514b1f78e3bb2ab8a20b",
+      "original_body_sha256": "958e044d84463f52f36c8a2473b63b2b68b78d2084a0c3bd20e2ad1d98203d47"
+    },
+    {
+      "id": "linear-algebra-02",
+      "path": "content/linear-algebra/linear-algebra-02.md",
+      "metadata_sha256": "5a093bd04bc4c2aa9ba72e975c668e6c75a8ec24f7ecd4e0bba674970a0a581d",
+      "original_body_sha256": "88409af991a84bc1f89df3a52f5d4037b894b735a95177e7d1c3f5721a0f50e4"
+    },
+    {
+      "id": "linear-algebra-03",
+      "path": "content/linear-algebra/linear-algebra-03.md",
+      "metadata_sha256": "517a774f10c12d1256311069db36ef0b3bed5a6826c5a6318f18b23722de342e",
+      "original_body_sha256": "5c6a538275859f32e4d008c36853db7231916bc1dbfacbf454110612a1fbc253"
+    },
+    {
+      "id": "linear-algebra-10",
+      "path": "content/linear-algebra/linear-algebra-10.md",
+      "metadata_sha256": "7e18ad468fee6350268f6729a8207e8b4ee0539407cb6d6519377820e99e15c8",
+      "original_body_sha256": "6fdf7003b3b8e01c3f36c20a9b777183dc112bb2e803c3ace71e15648c1035ac"
+    },
+    {
+      "id": "thermodynamics-01",
+      "path": "content/thermodynamics/thermodynamics-01.md",
+      "metadata_sha256": "36554415da8aa69771ca52c98825ab0fd0027a7fe5845181ea6d2e3c77eba2c8",
+      "original_body_sha256": "00738461930e3cb04efac2e0e6b8025727690b86dfcb99c9875e035529264648"
+    },
+    {
+      "id": "thermodynamics-05",
+      "path": "content/thermodynamics/thermodynamics-05.md",
+      "metadata_sha256": "32201d5b41f506fdf9da0e9f842cccdaa4d9060109f8dab60f05cd3f66969080",
+      "original_body_sha256": "31472b85db076afa9b3ba03305f7f1b1b2e7a475dc8e6d66323eb66e55fd4005"
+    },
+    {
+      "id": "thermodynamics-07",
+      "path": "content/thermodynamics/thermodynamics-07.md",
+      "metadata_sha256": "6f0011bf859a7239982448870fd5a28de24a1d483d0ddb0be1d58b700302784e",
+      "original_body_sha256": "f3294c5c1452e9d26149b7b4da9af83233771be1914c281cae6a7b8f4872d4de"
+    },
+    {
+      "id": "heat-transfer-01",
+      "path": "content/heat-transfer/heat-transfer-01.md",
+      "metadata_sha256": "39b8b1ae9655356621ab4fc587b5cb7ab5ebbea60442c28d0f9d4192a5f447af",
+      "original_body_sha256": "428c592e9be4a3ff659c4660009d0191a6fad0ebb7e5e7fa23e892bfbe015b9a"
+    },
+    {
+      "id": "heat-transfer-03",
+      "path": "content/heat-transfer/heat-transfer-03.md",
+      "metadata_sha256": "4bf61f4bbc89955427eb9218d0557e0a2c353f1958e8f56300248b3887f44723",
+      "original_body_sha256": "ec197fcf357e73527b9c4c162b90df5775b6adc1ddf0b392bc2372006218e68e"
+    },
+    {
+      "id": "heat-transfer-07",
+      "path": "content/heat-transfer/heat-transfer-07.md",
+      "metadata_sha256": "59194eb03c0c67e910e7918a18d21b1d9244791be5b2c61c821b6fb2a4b584a5",
+      "original_body_sha256": "d87b0f487dfc67be431eaafb0d7c5657714a086f3ca345b4bc69926aa2d1789f"
+    },
+    {
+      "id": "fluid-mechanics-01",
+      "path": "content/fluid-mechanics/fluid-mechanics-01.md",
+      "metadata_sha256": "840f6db71094e1a68ed3cf67c098efd7bf5f59da6c3c64c7fe1f0d0c3e7067da",
+      "original_body_sha256": "7c2d693435b27f3abbaec3205881d23a0e4bdd21d1b89de27f93af9fa7661905"
+    },
+    {
+      "id": "fluid-mechanics-06",
+      "path": "content/fluid-mechanics/fluid-mechanics-06.md",
+      "metadata_sha256": "91a8f2e43bda6f91ad3de1bb86d22c8903431f58f3e5d3700170ec639594d7e7",
+      "original_body_sha256": "fe209b9fda523675d93382891ddcabec9d7881d165ef6f390dc724c0124ca27d"
+    },
+    {
+      "id": "fluid-mechanics-07",
+      "path": "content/fluid-mechanics/fluid-mechanics-07.md",
+      "metadata_sha256": "116e51e3ce2d782671ab09b5a2acd74a5359daa0f4cd9c68c55d957936cd2b7f",
+      "original_body_sha256": "d3eb307caa1f92dd59e99ac988a338ed0474106b2a8ad310248362134917f7e1"
+    },
+    {
+      "id": "fluid-mechanics-10",
+      "path": "content/fluid-mechanics/fluid-mechanics-10.md",
+      "metadata_sha256": "c42d47b4047abfb4283e742fd2fafbdf4a799255613a9be3e6b1cc6315c2a8dc",
+      "original_body_sha256": "b2bd06e87d024dd9a4ae507ebd242ebcfa8ea7da1fc4fc8986ddecbcf6008a8e"
+    }
+  ]
+}

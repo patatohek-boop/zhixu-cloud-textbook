@@ -20,7 +20,7 @@
   ],
   "summary": "将模糊规则写成互斥、完整、可检验的条件。",
   "quiz": {
-    "question": "区分有效数值 0 与缺失值 None 的正确检查是？",
+    "question": "要仅在 x 为缺失值 None 时进入分支，并保留有效数值 0，应使用哪种检查？",
     "options": [
       "if not x",
       "if x is None",
