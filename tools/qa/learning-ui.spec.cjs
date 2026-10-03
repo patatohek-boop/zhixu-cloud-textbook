@@ -146,8 +146,13 @@ test('report revision examples, continuation path and diagrams remain readable',
   // Also inspect the complete worked/variant answer at the narrowest width.
   await page.locator('#lesson-body details').evaluateAll(xs=>xs.forEach(d=>d.open=true));await noOverflow(page,entry.id+' revised answers');
   for(const src of entry.diagrams||[]){
-   const image=page.locator('#lesson-body figure img').filter({visible:true}).and(page.locator('img[src="'+src+'"]')).first();
-   await expect(image).toBeVisible();expect(await image.evaluate(el=>el.complete&&el.naturalWidth>0),src).toBe(true);
+   const figure=page.locator('#lesson-body figure').filter({has:page.locator('img[src="'+src+'"]')});
+   await expect(figure,src+' has one reachable figure').toHaveCount(1);
+   // Follow a reader's real scroll before checking a lazy-loaded image.
+   await figure.scrollIntoViewIfNeeded();
+   const image=figure.locator('img[src="'+src+'"]');
+   await expect.poll(()=>image.evaluate(el=>el.complete&&el.naturalWidth>0),{message:src+' loads after scrolling to its figure'}).toBe(true);
+   await image.scrollIntoViewIfNeeded();await expect(image).toBeVisible();await expect(image).toBeInViewport();
    const anchor=image.locator('..');await expect(anchor).toHaveAttribute('aria-haspopup','dialog');await image.click();
    await expect(page.locator('#figure-dialog')).toBeVisible();await noOverflow(page,src+' figure dialog');
    const svg=fs.readFileSync(path.resolve(__dirname,'../../site',src),'utf8');
