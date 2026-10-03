@@ -18,7 +18,7 @@ assert "name='app.zhixu.textbook.independent' versionCode='8' versionName='1.5.0
 assert "application-label:'知序·独立版'" in metadata
 assert 'application-debuggable' not in metadata
 assert 'uses-permission' not in permissions
-subprocess.run(['python', str(root / 'tools/bundle_android.py')], check=True)
+subprocess.run(['python', str(root / 'tools/bundle_android.py')], check=True, capture_output=True)
 bundle = root / 'android/app/build/generated/textbookAssets/www'
 expected = {str(p.relative_to(bundle)): p.read_bytes() for p in bundle.rglob('*') if p.is_file() and p.name != '.nojekyll'}
 with zipfile.ZipFile(a.apk) as z:

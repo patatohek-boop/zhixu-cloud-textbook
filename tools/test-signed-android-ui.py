@@ -80,7 +80,15 @@ def downloads():
     root = locate(tree, ['Show roots', '显示根目录', '打开抽屉', 'Navigation drawer'])
     if root is not None:
         tap_node(root)
-        tap(['Downloads', '下载'])
+        drawer = hierarchy('picker-roots')
+        roots = [n for n in drawer.iter('node')
+                 if n.attrib.get('resource-id') == 'android:id/title'
+                 and n.attrib.get('text') in ('Downloads', '下载')]
+        assert len(roots) == 1, 'Downloads root must be identified inside the open drawer'
+        tap_node(roots[0])
+        selected = hierarchy('downloads-selected')
+        assert locate(selected, ['Files in Downloads', 'Downloads', '下载']) is not None
+        assert locate(selected, ['Recent files']) is None, 'Picker is still in Recent, not Downloads'
     elif locate(tree, ['Downloads', '下载']) is None:
         raise AssertionError('Could not identify the system Downloads picker')
 
@@ -179,8 +187,8 @@ def main():
     snapshot('01-first-offline-launch')
     empty = export('zhixu-empty.json')
     assert records(empty) == {'completed': [], 'bookmarks': [], 'notes': {}, 'answers': {}}, 'Final signed app read legacy records automatically'
-    adb('push', str(OUT / 'legacy-ui-export.json'), '/sdcard/Download/zhixu-synthetic.json')
-    import_file('zhixu-synthetic.json')
+    # Choose the actual document exported by the old app, exactly as a user would.
+    import_file('legacy-ui-export.json')
     imported = export('zhixu-imported.json')
     assert_source(imported)
     snapshot('02-imported-records')
@@ -193,6 +201,7 @@ def main():
     bad = OUT / 'zhixu-invalid.json'
     bad.write_text('{invalid json')
     adb('push', str(bad), '/sdcard/Download/zhixu-invalid.json')
+    adb('shell', 'am', 'broadcast', '-a', 'android.intent.action.MEDIA_SCANNER_SCAN_FILE', '-d', 'file:///sdcard/Download/zhixu-invalid.json')
     import_file('zhixu-invalid.json')
     unchanged = export('zhixu-after-invalid.json')
     assert records(unchanged) == records(imported), 'Malformed import changed records'
@@ -202,6 +211,7 @@ def main():
     edit_file = OUT / 'zhixu-edit.json'
     edit_file.write_text(json.dumps(edited))
     adb('push', str(edit_file), '/sdcard/Download/zhixu-edit.json')
+    adb('shell', 'am', 'broadcast', '-a', 'android.intent.action.MEDIA_SCANNER_SCAN_FILE', '-d', 'file:///sdcard/Download/zhixu-edit.json')
     import_file('zhixu-edit.json')
     adb('shell', 'am', 'force-stop', PKG)
     launch()
