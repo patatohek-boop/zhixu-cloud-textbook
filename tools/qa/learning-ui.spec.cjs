@@ -162,8 +162,16 @@ test('report revision examples, continuation path and diagrams remain readable',
    let actual=await page.locator('.figure-enlarged').boundingBox();
    for(let clicks=0;Math.min(...fonts)*actual.width/box[2]<14&&clicks<6;clicks++){await page.getByRole('button',{name:'放大图片',exact:true}).click();actual=await page.locator('.figure-enlarged').boundingBox();}
    expect(Math.min(...fonts)*actual.width/box[2],src+' labels are readable using the provided zoom controls').toBeGreaterThanOrEqual(14);
+   const sourceMath=await figure.locator('figcaption .katex').count();
+   const shownCaption=page.locator('.figure-viewer-caption');await expect(shownCaption.locator('.katex')).toHaveCount(sourceMath);
+   if(sourceMath){
+    const visibleText=await shownCaption.evaluate(el=>{const copy=el.cloneNode(true);copy.querySelectorAll('.katex-mathml').forEach(n=>n.remove());return copy.textContent;});
+    expect(visibleText,src+' has no visible TeX source').not.toMatch(/\\(?:mathbf|int|,)/);
+    const semanticBoxes=await shownCaption.locator('.katex-mathml').evaluateAll(xs=>xs.map(el=>({width:el.getBoundingClientRect().width,height:el.getBoundingClientRect().height,overflow:getComputedStyle(el).overflow})));
+    for(const box of semanticBoxes){expect(box.width).toBeLessThanOrEqual(1);expect(box.height).toBeLessThanOrEqual(1);expect(box.overflow).toBe('hidden');}
+   }
    if(capture)await page.screenshot({path:info.outputPath('report-figure-'+path.basename(src,'.svg')+'.png'),fullPage:false});
-   await page.getByRole('button',{name:'关闭大图',exact:true}).click();await expect(page.locator('#figure-dialog')).not.toBeVisible();expect(new URL(page.url()).hash).toBe(hash);
+   if(sourceMath)await page.keyboard.press('Escape');else await page.getByRole('button',{name:'关闭大图',exact:true}).click();await expect(page.locator('#figure-dialog')).not.toBeVisible();await expect(anchor).toBeFocused();expect(new URL(page.url()).hash).toBe(hash);
   }
  }
 });

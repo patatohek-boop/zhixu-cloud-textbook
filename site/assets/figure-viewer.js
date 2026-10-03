@@ -18,7 +18,7 @@ function bind(container){
  container.querySelectorAll('figure a[href]').forEach(a=>{
   const img=a.querySelector('img');if(!img||!/^assets\/diagrams\/[a-z0-9-]+\.svg$/.test(img.getAttribute('src')||''))return;
   a.setAttribute('aria-haspopup','dialog');a.setAttribute('aria-label','放大看图：'+img.alt);
-  a.addEventListener('click',e=>{if(e.ctrlKey||e.metaKey||e.shiftKey||e.button>0)return;e.preventDefault();opener=a;zoom=root.innerWidth<600?2:1;const full=dialog.querySelector('.figure-enlarged');full.src=img.getAttribute('src');full.alt=img.alt;dialog.querySelector('.figure-viewer-caption').textContent=a.closest('figure').querySelector('figcaption')?.textContent||img.alt;paint();dialog.showModal();const viewport=dialog.querySelector('.figure-viewport');viewport.scrollTop=0;viewport.scrollLeft=0;dialog.querySelector('[data-figure-close]').focus();});
+  a.addEventListener('click',e=>{if(e.ctrlKey||e.metaKey||e.shiftKey||e.button>0)return;e.preventDefault();opener=a;zoom=root.innerWidth<600?2:1;const full=dialog.querySelector('.figure-enlarged');full.src=img.getAttribute('src');full.alt=img.alt;const sourceCaption=a.closest('figure').querySelector('figcaption'),caption=dialog.querySelector('.figure-viewer-caption');caption.replaceChildren();if(sourceCaption?.textContent)caption.append(...[...sourceCaption.childNodes].map(node=>node.cloneNode(true)));else caption.textContent=img.alt;paint();dialog.showModal();const viewport=dialog.querySelector('.figure-viewport');viewport.scrollTop=0;viewport.scrollLeft=0;dialog.querySelector('[data-figure-close]').focus();});
  });
 }
 root.FigureViewer={bind,isOpen:()=>!!dialog?.open,close:()=>{if(dialog?.open)dialog.close();}};

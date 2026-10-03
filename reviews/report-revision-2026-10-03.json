@@ -303,6 +303,10 @@
       "sha256": "556a7ecce83e744cda8043c36fbe67b6368d05afb0e0f1e6d763192428de206a"
     },
     {
+      "path": "site/assets/figure-viewer.js",
+      "sha256": "a688aa70067df8a471f31cee6289325469407fa4b03dd22281aaeb0fffa0e8d2"
+    },
+    {
       "path": "site/assets/knowledge-map.js",
       "sha256": "2d94b7244c2aa1a1681435371a7dac86e1bc571f7a9a65b78f1b18fb14bed654"
     }
