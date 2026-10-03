@@ -129,7 +129,7 @@ public final class MainActivity extends Activity {
         toolbar.setGravity(Gravity.CENTER_VERTICAL);
         toolbar.setPadding(dp(16), 0, dp(8), 0);
         TextView title = new TextView(this);
-        title.setText(R.string.offline_title);
+        title.setText(BuildConfig.INDEPENDENT ? R.string.independent_offline_title : R.string.offline_title);
         title.setTextSize(14);
         title.setTextColor(Color.rgb(34, 82, 68));
         toolbar.addView(title, new LinearLayout.LayoutParams(0, dp(44), 1));
@@ -163,8 +163,8 @@ public final class MainActivity extends Activity {
                 case 5: openBrowser(Uri.parse(WEBSITE)); break;
                 case 6: openBrowser(Uri.parse(RELEASES)); break;
                 case 7:
-                    new AlertDialog.Builder(this).setTitle(R.string.app_name)
-                        .setMessage(getString(R.string.about_text, BuildConfig.VERSION_NAME))
+                    new AlertDialog.Builder(this).setTitle(BuildConfig.INDEPENDENT ? R.string.independent_app_name : R.string.app_name)
+                        .setMessage((BuildConfig.INDEPENDENT ? getString(R.string.independent_notice) : "") + getString(R.string.about_text, BuildConfig.VERSION_NAME))
                         .setPositiveButton(R.string.got_it, null).show();
                     break;
                 default: return false;

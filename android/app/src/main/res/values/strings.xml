@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="independent_app_name">知序·独立版</string>
+    <string name="independent_offline_title">知序·独立版 · 离线教材</string>
+    <string name="independent_notice">独立版使用新包名，与原版并存，不会自动读取原版学习记录。请保留原版，在原版导出 JSON 后到此处导入；核对完成前不要卸载原版。\n\n</string>
     <string name="app_name">知序云教材</string>
     <string name="offline_title">知序 · 离线教材</string>
     <string name="app_menu">应用菜单</string>

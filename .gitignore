@@ -19,3 +19,6 @@ android/**/build/
 
 # Local editorial and build scratch files are not publication assets.
 work/
+
+# Private, reusable independent-edition release identity. Never publish this folder.
+.private-signing/

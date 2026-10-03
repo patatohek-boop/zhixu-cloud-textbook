@@ -14,14 +14,28 @@ import subprocess
 parser=argparse.ArgumentParser(description=__doc__)
 for name in ('apk','signer','java','keytool','backup','out'):
     parser.add_argument('--'+name,required=True)
+parser.add_argument('--create-key', action='store_true', help='Explicitly authorize creating a new release identity only when absent')
 args=parser.parse_args()
-folder=Path(args.backup).resolve()
-folder.mkdir(parents=True,exist_ok=True)
+os.umask(0o077)
+requested_folder=Path(args.backup).absolute()
+if any(p.is_symlink() for p in (requested_folder, *requested_folder.parents)):
+    raise SystemExit('Signing folder and its parents must not be symlinks.')
+folder=requested_folder.resolve()
+folder.mkdir(parents=True,exist_ok=True,mode=0o700)
+os.chmod(folder,0o700)
+root=Path(__file__).resolve().parents[1]
+if folder.is_relative_to(root):
+    ignored=subprocess.run(['git','check-ignore','--quiet',str(folder/'signing-password.txt')],cwd=root)
+    if ignored.returncode != 0:
+        raise SystemExit('Signing folder must be explicitly gitignored before creating or reading secrets.')
 keystore=folder/'zhixu-release.p12'
 password_file=folder/'signing-password.txt'
 if keystore.exists()!=password_file.exists():
     raise SystemExit('Signing backup is incomplete. Recover the matching key and password before continuing.')
-if not keystore.exists():
+created_new = not keystore.exists()
+if created_new:
+    if not args.create_key:
+        raise SystemExit('No key exists. Explicit --create-key approval is required for a new release identity.')
     password=secrets.token_urlsafe(36)
     env=dict(os.environ,ZHIXU_SIGN_PASSWORD=password)
     command=[args.keytool,'-genkeypair','-keystore',str(keystore),'-storetype','PKCS12',
@@ -38,7 +52,16 @@ if not keystore.exists():
         '如果密钥遗失，只能更换签名或应用包名；原安装不能直接覆盖升级。\n',encoding='utf-8')
 else:
     password=password_file.read_text(encoding='utf-8').strip()
+for private_file in folder.iterdir():
+    if private_file.is_file(): os.chmod(private_file,0o600)
 env=dict(os.environ,ZHIXU_SIGN_PASSWORD=password)
+public_cert=subprocess.run([args.keytool,'-exportcert','-keystore',str(keystore),'-alias','zhixu-release','-storepass:env','ZHIXU_SIGN_PASSWORD'],env=env,check=True,capture_output=True).stdout
+cert_sha=hashlib.sha256(public_cert).hexdigest()
+cert_pin=folder/'certificate-sha256.txt'
+if created_new:
+    cert_pin.write_text(cert_sha+'\n',encoding='utf-8')
+elif not cert_pin.is_file() or cert_pin.read_text(encoding='utf-8').strip()!=cert_sha:
+    raise SystemExit('Public certificate pin missing or mismatched. Do not replace the release identity.')
 output=Path(args.out).resolve()
 output.parent.mkdir(parents=True,exist_ok=True)
 subprocess.run([args.java,'-jar',args.signer,'sign','--ks',str(keystore),
@@ -51,6 +74,7 @@ certificate=folder/'签名证书校验.txt'
 certificate.write_text(verify.stdout,encoding='utf-8')
 sha=hashlib.sha256(output.read_bytes()).hexdigest()
 output.with_suffix('.apk.sha256').write_text(sha+'  '+output.name+'\n',encoding='utf-8')
+os.chmod(certificate,0o600)
 print('Signed APK:',output.name)
 print('SHA-256:',sha)
 print(verify.stdout)
