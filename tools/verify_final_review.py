@@ -42,7 +42,7 @@ assert delta_s_over_R<0
 required={
 'calculus-20':['开集 $U$','C^1(U)','求导移入积分号'],
 'linear-algebra-15':['实方阵','矩形矩阵','双侧逆'],
-'linear-algebra-17':['复方阵','本段另需'],
+'linear-algebra-17':['复方阵','使用[定积分]'],
 'fluid-mechanics-26':['协方差','正负取决'],
 'fluid-mechanics-33':['熵产生非负','不能一概要求沿程增加'],
 'fluid-mechanics-60':['共享关系','满列秩','独立未知'],

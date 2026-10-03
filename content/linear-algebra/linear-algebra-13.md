@@ -2,7 +2,7 @@
 {
   "id": "linear-algebra-13",
   "title": "特征值与特征向量",
-  "group": "05 · 特征与能量",
+  "group": "05 · 特征值、谱分解与正定性",
   "minutes": 60,
   "level": "进阶",
   "tags": [
@@ -34,7 +34,7 @@
 }
 ---
 
-## 严谨定义：特征对、特征空间与重数
+## 特征对、特征空间与重数
 
 ### 特征值和非零特征向量
 
@@ -48,11 +48,11 @@
 
 特征多项式本节约定 $p_A(t)=\det(tI-A)$。根 $\lambda$ 的代数重数是多项式因子 $(t-\lambda)$ 的次数；几何重数是 $\dim E_\lambda$。
 
-## 通俗解释：特殊方向只改变倍数
+### 特殊方向只改变倍数
 一般矩阵会把一个方向混到其他方向；特征方向经过作用仍在同一直线上，负特征值表示反向，零特征值表示被压掉。复特征向量是复坐标方向，不一定是实平面中可画的一条固定线。
 
 ## 特征方程与不同特征值无关：证明
-存在非零 $v$ 解 $(A-\lambda I)v=0$，当且仅当该方阵不可逆，由[行列式定理](#/course/linear-algebra/linear-algebra-09)等价于 $\det(\lambda I-A)=0$。它证明求根的依据，而不是把“行列式零”另立为不解释的口诀。
+存在非零 $v$ 解 $(A-\lambda I)v=0$，当且仅当该方阵不可逆，由[行列式定理](#/course/linear-algebra/linear-algebra-09)等价于 $\det(\lambda I-A)=0$。因此，特征值恰为特征多项式的根。
 
 ### 不同特征值的向量为什么无关
 
@@ -74,7 +74,7 @@ $\begin{pmatrix}\lambda I_r&B\\0&C\end{pmatrix}$。
 
 **反例。** 实矩阵 $\begin{pmatrix}0&-1\\1&0\end{pmatrix}$ 的 $p_A(t)=t^2+1$ 没有实根，不能宣称每个实矩阵都有实特征方向。相反，实对称矩阵不需要借助这个复数结果就能证明有完整实谱，见第 15 节。
 
-## 相似不变量：现在可以使用特征值语言
+## 特征值、重数与迹的相似不变性
 设 $B=S^{-1}AS$，$S$ 可逆。
 
 $Bv=\lambda v$ 当且仅当 $A(Sv)=\lambda(Sv)$，且可逆 $S$ 将非零向量保持非零，所以特征值与特征空间维数不变。左右乘可逆矩阵不改变像空间维数，所以秩不变。由[行列式乘法](#/course/linear-algebra/linear-algebra-09)，
@@ -82,7 +82,7 @@ $\det(tI-B)=\det(S^{-1}(tI-A)S)=\det(tI-A)$，故特征多项式及代数重数�
 
 若只是行等价，特征值未必相同：$\operatorname{diag}(1,2)$ 消元后为 $I$，两者特征值不同。非正交基中的坐标长度也不应直接按平方和计算：$x=Sc$ 时真实欧氏长度平方是 $c^\mathsf TS^\mathsf TSc$，只有 $S^\mathsf TS=I$ 才简化为 $c^\mathsf Tc$。
 
-## 逐步例题：对称混合的自然方向
+## 例：对称混合的自然方向
 <figure class="teaching-figure"><a href="assets/diagrams/eigen-directions.svg" target="_blank" rel="noopener" aria-label="打开大图：A=[[2,1],[1,2]] 的两个特征方向为 (1,1) 与 (1,−1)，伸缩倍数分别为 3 和 1。"><img src="assets/diagrams/eigen-directions.svg" alt="A=[[2,1],[1,2]] 的两个特征方向为 (1,1) 与 (1,−1)，伸缩倍数分别为 3 和 1。" loading="lazy"></a><figcaption>A=[[2,1],[1,2]] 的两个特征方向为 (1,1) 与 (1,−1)，伸缩倍数分别为 3 和 1。<br><small>两个特征值均为正，因此同向伸缩；一般负特征值会反向，图中不代表所有矩阵特征值都为正。箭头坐标按同一比例准确绘制。 · 点按图形可放大。</small></figcaption></figure>
 
 设 $A=\begin{pmatrix}2&1\\1&2\end{pmatrix}$。
@@ -113,7 +113,6 @@ $\det(tI-B)=\det(S^{-1}(tI-A)S)=\det(tI-A)$，故特征多项式及代数重数�
 不可以。必须排除零向量，否则特征方程对任意标量都成立，无法识别特殊方向。
 </details>
 
-<!-- math-revision-20261003:eigenproblem-practice:start -->
 ## 练习 M12：未见过的矩阵与重复根
 
 分别对实矩阵
@@ -128,4 +127,3 @@ B=\begin{pmatrix}2&1\\0&2\end{pmatrix}$$
 对 $B$，$p_B(t)=(t-2)^2$，唯一根 $2$ 的代数重数为 $2$。但 $(B-2I)(x,y)=(y,0)$，核要求 $y=0$，所以 $E_2=\operatorname{span}\{(1,0)\}$，几何重数只有 $1$。代回 $B(1,0)=2(1,0)$；任意该特征值的向量都沿此直线，不能选出两个独立特征方向。两个代数根按重数计数，不等于自动得到两个独立向量；对应的对角化问题见[第14课](#/course/linear-algebra/linear-algebra-14)。
 
 </details>
-<!-- math-revision-20261003:eigenproblem-practice:end -->

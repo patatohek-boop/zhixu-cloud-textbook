@@ -72,7 +72,7 @@
   "records": [
     {
       "id": "heat-transfer-01",
-      "title": "传热三方式与第一张能量流图",
+      "title": "传热的基本方式与能量平衡",
       "checked_concepts": [
         "热量热流率热流密度",
         "温度场",
@@ -285,7 +285,7 @@
     },
     {
       "id": "heat-transfer-07",
-      "title": "集总热容：小物体如何随时间冷却",
+      "title": "集总热容法与冷却过程",
       "checked_concepts": [
         "集总温度",
         "Biot数",
@@ -469,7 +469,7 @@
     },
     {
       "id": "heat-transfer-12",
-      "title": "Re、Pr、Nu、Gr、Ra：无量纲数的地图",
+      "title": "对流传热的无量纲分析",
       "checked_concepts": [
         "Re",
         "Pr",
@@ -983,7 +983,7 @@
     },
     {
       "id": "heat-transfer-26",
-      "title": "综合设计：散热器、保温与可信验证",
+      "title": "散热与保温设计的计算和验证",
       "checked_concepts": [
         "结温",
         "允许热阻",

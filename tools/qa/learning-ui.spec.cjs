@@ -8,11 +8,17 @@ async function open(page,hash){
   const [kind,course,id]=hash.slice(2).split('/');
   if(kind==='labs'&&course)return !!document.querySelector('[data-lab="'+course+'"] .lab-chart svg');
   if(kind==='course'&&id){const lesson=window.ZHIXU.all.find(l=>l.id===id);return window.ZHIXU.state.last===id&&document.querySelector('.article-head h1')?.textContent===lesson?.title;}
-  if(kind==='map'&&course){const c=window.COURSES.find(c=>c.id===course);return !!document.querySelector('[data-node-id="'+(id||c?.chapters[0]?.id)+'"]')&&(!id||document.querySelector('.topic-node.selected')?.dataset.nodeId===id);}
-  if(kind==='map')return document.querySelectorAll('.map-course-card').length===7;
-  if(kind==='path')return document.querySelectorAll('.core-route>li').length===window.LEARNING_GUIDES.filter(g=>!course||g.id.startsWith(course+'-')).length;
+  if((kind==='course'||kind==='path')&&course){const c=window.COURSES.find(c=>c.id===course);return document.querySelector('.course-intro h1')?.textContent===c?.title;}
+  if(kind==='map'){const c=course?window.COURSES.find(c=>c.id===course):window.COURSES[0],l=c?.chapters.find(l=>l.id===(id||c.chapters[0]?.id));return document.querySelector('#relation-select')?.value===l?.id&&document.querySelector('.dependency-current h2')?.textContent===l?.title;}
+  if(!kind||kind==='home'||kind==='path')return document.querySelectorAll('.tree-course').length===7;
+  if(kind==='about')return !!document.querySelector('.about-textbook');
   return !!document.querySelector('#main h1');
  },hash);
+}
+async function expandDetails(page,selector){
+ const details=page.locator(selector);await expect(details).toHaveCount(1);
+ if(await details.getAttribute('open')===null)await details.locator(':scope > summary').click();
+ await expect(details).toHaveAttribute('open','');
 }
 async function noOverflow(page,label){await page.evaluate(()=>document.fonts.ready);const result=await page.evaluate(()=>({width:innerWidth,html:document.documentElement.scrollWidth,body:document.body.scrollWidth}));expect(result.html,label).toBeLessThanOrEqual(result.width+1);expect(result.body,label).toBeLessThanOrEqual(result.width+1);}
 async function wheelToEdge(page,region,direction,label){
@@ -40,37 +46,62 @@ async function horizontalScroll(page,regions,label,required,capturePath){
   }
   if(capturePath)await region.screenshot({style:cleanCaptureChrome,path:capturePath});
   await wheelToEdge(page,region,-1,label+' backward');await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' returns to the left edge'}).toBeLessThanOrEqual(1);
+  if(await region.evaluate(el=>el.classList.contains('katex-display'))){
+   await expect(region).toHaveAttribute('tabindex','0');await region.focus();await expect(region).toBeFocused();
+   await region.press('ArrowRight');await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' keyboard reveals symbols to the right'}).toBeGreaterThan(0);
+   // Native key input must also restore the left edge; never set scrollLeft in a test.
+   for(let press=0;press<4;press++)await region.press('ArrowLeft');
+   await expect.poll(()=>region.evaluate(el=>el.scrollLeft),{message:label+' keyboard returns to the left edge'}).toBeLessThanOrEqual(1);
+  }
   console.log(label+': real horizontal wheel reaches both ends passed');return;
  }
  expect(required,label+' should include an overflowing mobile region').toBe(false);
 }
-test('all routes, layered maps, lesson links and readable widths',async({page},info)=>{
- const capture=['width-390','width-1440'].includes(info.project.name);const errors=[];page.on('pageerror',e=>errors.push(e.message));await open(page,'#/map');
- const data=await page.evaluate(()=>({courses:COURSES.map(c=>({id:c.id,lessons:c.chapters.map(l=>l.id)})),guides:LEARNING_GUIDES.map(g=>g.id)}));
- await expect(page.locator('.map-course-card')).toHaveCount(7);await noOverflow(page,'global map');
- if(capture)await page.screenshot({path:info.outputPath('map-overview.png'),fullPage:true});
- for(const c of data.courses){await open(page,'#/map/'+c.id);await expect(page.locator('[data-node-id]')).toHaveCount(c.lessons.length);await noOverflow(page,c.id+' map');
-  await page.locator('#map-filter').selectOption('mainline');const visible=await page.locator('[data-node-id]:visible').count();expect(visible).toBeGreaterThan(0);await page.locator('#map-filter').selectOption('all');
-  for(const id of c.lessons.filter(id=>info.project.name==='width-320'||data.guides.includes(id))){await open(page,'#/course/'+c.id+'/'+id);await noOverflow(page,id);await expect(page.locator('.math-error')).toHaveCount(0);if(info.project.name==='width-320'){await page.locator('#lesson-body details').evaluateAll(xs=>xs.forEach(d=>d.open=true));await noOverflow(page,id+' all proofs and answers expanded');}}
+test('knowledge tree, local relationships, continuous lessons and readable widths',async({page},info)=>{
+ const capture=['width-390','width-1440'].includes(info.project.name);const errors=[];page.on('pageerror',e=>errors.push(e.message));await open(page,'#/');
+ const data=await page.evaluate(()=>({courses:COURSES.map(c=>({id:c.id,title:c.title,lessons:c.chapters.map(l=>({id:l.id,title:l.title}))})),guides:LEARNING_GUIDES.map(g=>g.id),practiceCount:MASTERY_EXERCISES.length,practiceLessons:[...new Set(MASTERY_EXERCISES.map(e=>e.lessonId))]}));
+ expect(data.guides).toHaveLength(30);expect(data.practiceCount).toBe(78);expect(data.practiceLessons).toHaveLength(26);expect(data.courses.flatMap(c=>c.lessons)).toHaveLength(253);
+ await expect(page.locator('.topbar nav [data-nav]')).toHaveCount(3);await expect(page.locator('.topbar nav')).toHaveText('知识树知识联系关于');
+ await expect(page.locator('.tree-course')).toHaveCount(7);await noOverflow(page,'knowledge tree');
+ for(const c of data.courses){
+  const tree=page.locator('.tree-course').filter({has:page.locator('header h2 a[href="#/course/'+c.id+'"]')});await expect(tree).toHaveCount(1);
+  expect(await tree.locator('.tree-chapter li a').evaluateAll(xs=>xs.map(x=>x.getAttribute('href')))).toEqual(c.lessons.map(l=>'#/course/'+c.id+'/'+l.id));
  }
- await open(page,'#/map/calculus/calculus-03');await expect(page.locator('.dependency-current')).toContainText('导数');await noOverflow(page,'local dependency diagram');if(capture)await page.screenshot({path:info.outputPath('map-local-dependencies.png'),fullPage:true});if(capture)await page.locator('.map-selected').screenshot({style:cleanCaptureChrome,path:info.outputPath('map-selected-concept.png')});
- await open(page,'#/path');await expect(page.locator('.core-route>li')).toHaveCount(30);await noOverflow(page,'mainline path');
- await open(page,'#/course/calculus/calculus-03');if(capture)await page.screenshot({path:info.outputPath('reader-starter.png'),fullPage:false});
- await page.locator('#reading-depth').click();await expect(page.locator('details.advanced-reading')).toHaveAttribute('open','');await noOverflow(page,'expanded original proof');
- await page.evaluate(()=>{window.print=()=>{window.__printOpened=[...document.querySelectorAll('.prose details')].every(d=>d.open);};});await page.locator('#print').click();expect(await page.evaluate(()=>window.__printOpened)).toBe(true);
- const originalParagraph=page.locator('details.advanced-reading p').first();const oldFont=await originalParagraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize));await page.locator('#font-up').click();await page.locator('#font-up').click();expect(await originalParagraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(oldFont);await noOverflow(page,'larger reader font');
+ const firstChapter=page.locator('.tree-chapter').first();await firstChapter.locator('summary').click();await expect(firstChapter.locator('li a').first()).toBeVisible();await firstChapter.locator('summary').press('Enter');await expect(firstChapter).not.toHaveAttribute('open','');
+ if(capture)await page.screenshot({path:info.outputPath('knowledge-tree.png'),fullPage:true});
+ for(const c of data.courses){
+  await open(page,'#/course/'+c.id);await expect(page.locator('.course-contents .tree-chapter li a')).toHaveCount(c.lessons.length);await noOverflow(page,c.id+' chapter index');
+  await open(page,'#/map/'+c.id);await expect(page.locator('#relation-select option')).toHaveCount(c.lessons.length);await noOverflow(page,c.id+' relationships');
+  const selected=c.lessons[Math.floor(c.lessons.length/2)];await page.locator('#relation-select').selectOption(selected.id);await expect(page.locator('.dependency-current h2')).toHaveText(selected.title);await expect(page).toHaveURL(new RegExp('#/map/'+c.id+'/'+selected.id+'$'));
+  const relationLinks=await page.evaluate(id=>{const m=KnowledgeMap.model(COURSES,LEARNING_GUIDES),n=m.byId.get(id),before=[...n.required,...n.recommended.filter(x=>!n.required.some(r=>r.id===x.id))],after=m.nodes.filter(x=>x.required.some(r=>r.id===n.id)||x.recommended.some(r=>r.id===n.id));return [...before,...after].map(x=>'#/map/'+x.course.id+'/'+x.id);},selected.id);
+  expect(await page.locator('.relationship-diagram .relation-node').evaluateAll(xs=>xs.map(x=>x.getAttribute('href')))).toEqual(relationLinks);
+  for(const {id} of c.lessons.filter(l=>info.project.name==='width-320'||data.guides.includes(l.id))){
+   await open(page,'#/course/'+c.id+'/'+id);await noOverflow(page,id);await expect(page.locator('.math-error')).toHaveCount(0);await expect(page.locator('#lesson-body details.advanced-reading')).toHaveCount(0);await expect(page.locator('#reading-depth')).toHaveCount(0);
+   const firstHeading=page.locator('#lesson-body > h2').first();await expect(firstHeading).toBeVisible();expect(await firstHeading.evaluate(el=>!!el.closest('details')),id+' main content is not collapsed').toBe(false);
+   if(info.project.name==='width-320'){await page.locator('#lesson-body details').evaluateAll(xs=>xs.forEach(d=>d.open=true));await noOverflow(page,id+' all answers expanded');}
+  }
+ }
+ await open(page,'#/map/calculus/calculus-03');await expect(page.locator('.dependency-current')).toContainText('导数');await noOverflow(page,'local dependency diagram');if(capture)await page.screenshot({path:info.outputPath('map-local-dependencies.png'),fullPage:true});if(capture)await page.locator('.relationship-diagram').screenshot({style:cleanCaptureChrome,path:info.outputPath('map-selected-concept.png')});
+ // Old bookmarks remain reachable through route aliases, without reviving the retired page shell.
+ await open(page,'#/path');await expect(page.locator('.tree-course')).toHaveCount(7);await noOverflow(page,'legacy path route');
+ await open(page,'#/about');await expect(page.locator('#main h1')).toHaveText('关于知序');for(const route of ['research','simulation','labs','notebook','review'])await expect(page.locator('.about-textbook a[href="#/'+route+'"]').first()).toBeVisible();await noOverflow(page,'about');
+ await open(page,'#/course/calculus/calculus-03');if(capture)await page.screenshot({path:info.outputPath('reader-continuous.png'),fullPage:false});
+ const proof=page.locator('#lesson-body h2').filter({hasText:'可导等价于唯一的一阶近似'});await expect(proof).toHaveCount(1);await proof.scrollIntoViewIfNeeded();await expect(proof).toBeVisible();expect(await proof.evaluate(el=>!!el.closest('details'))).toBe(false);await noOverflow(page,'visible main proof');
+ await expandDetails(page,'.reading-tools');await page.evaluate(()=>{window.print=()=>{window.__printOpened=[...document.querySelectorAll('.prose details')].every(d=>d.open);};});await page.locator('#print').click();expect(await page.evaluate(()=>window.__printOpened)).toBe(true);
+ const paragraph=page.locator('#lesson-body > p').first();const oldFont=await paragraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize));await page.locator('#font-up').click();await page.locator('#font-up').click();expect(await paragraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(oldFont);await noOverflow(page,'larger reader font');
  await page.locator('#theme').click();await expect(page.locator('body')).toHaveClass(/dark/);await noOverflow(page,'dark reader');if(capture)await page.screenshot({path:info.outputPath('reader-dark.png'),fullPage:false});
  expect(errors).toEqual([]);
 });
+
 test('controls, retained learning state, repeated navigation and preloaded offline runtime',async({page,context},info)=>{
  const capture=['width-390','width-1440'].includes(info.project.name);const external=[];await context.route('**/*',route=>{const u=route.request().url();if(!u.startsWith('http://127.0.0.1:8767/')&&!u.startsWith('data:')){external.push(u);return route.abort();}return route.continue();});
- await open(page,'#/course/calculus/calculus-03');await page.locator('#note-text').fill('测试笔记：先写差商，再求极限');await page.locator('#bookmark').click();await page.locator('[data-answer="2"]').click();await page.locator('#complete').click();
- await open(page,'#/map/calculus/calculus-03');await expect(page.locator('.map-done').first()).toBeVisible();await page.goBack();await expect(page.locator('#note-text')).toHaveValue('测试笔记：先写差商，再求极限');
- await page.reload();await expect(page.locator('#note-text')).toHaveValue('测试笔记：先写差商，再求极限');await expect(page.locator('#bookmark')).toHaveAttribute('aria-pressed','true');await expect(page.locator('#feedback')).toContainText('回答正确');
+ await open(page,'#/course/calculus/calculus-03');await expandDetails(page,'#my-notes');await page.locator('#note-text').fill('测试笔记：先写差商，再求极限');await expandDetails(page,'.reading-tools');await page.locator('#bookmark').click();await page.locator('[data-answer="2"]').click();await page.locator('#complete').click();
+ await open(page,'#/course/calculus');await expect(page.locator('.course-contents a[href="#/course/calculus/calculus-03"] .tick')).toBeVisible();await page.goBack();await expandDetails(page,'#my-notes');await expect(page.locator('#note-text')).toHaveValue('测试笔记：先写差商，再求极限');
+ await page.reload();await expandDetails(page,'#my-notes');await expect(page.locator('#note-text')).toHaveValue('测试笔记：先写差商，再求极限');await expandDetails(page,'.reading-tools');await expect(page.locator('#bookmark')).toHaveAttribute('aria-pressed','true');await expect(page.locator('#feedback')).toContainText('回答正确');
  const targets=await page.locator('.article-tools button').evaluateAll(xs=>xs.map(x=>({id:x.id,h:x.getBoundingClientRect().height,w:x.getBoundingClientRect().width})));for(const t of targets){expect(t.h,t.id).toBeGreaterThanOrEqual(44);expect(t.w,t.id).toBeGreaterThanOrEqual(44);}
  for(const id of ['foundation-energy','foundation-projection','foundation-mass']){await open(page,'#/labs/'+id);await expect(page.locator('.lab-chart svg').first()).toBeVisible();const before=await page.locator('.lab-result').innerText();const input=page.locator('[data-param]').first();const direction=await input.evaluate(el=>Number(el.value)>=Number(el.max)?'ArrowLeft':'ArrowRight');await input.press(direction);await expect(page.locator('.lab-result')).not.toHaveText(before);await page.locator('.lab-next').click();await expect(page.locator('.lab-step-count')).toContainText('2 /');await page.locator('.lab-preset').click();await page.locator('.lab-reset').click();await expect(page.locator('.lab-result')).toHaveText(before);await noOverflow(page,id);if(capture)await page.locator('.lab-card').screenshot({style:cleanCaptureChrome,path:info.outputPath(id+'.png')});await page.locator('#theme').click();await noOverflow(page,id+' dark');if(capture)await page.locator('.lab-card').screenshot({style:cleanCaptureChrome,path:info.outputPath(id+'-dark.png')});await page.locator('#theme').click();}
- // This checks already-loaded JS/content only. Initial offline loads and every packaged image are checked by the Android bundle/emulator tests.
- await context.setOffline(true);await page.locator('.topbar a[data-nav="map"]').click();await expect(page.locator('.knowledge-page')).toBeVisible();await page.locator('.map-course-card[href="#/map/thermodynamics"]').click();await page.locator('[data-node-id="thermodynamics-05"] .map-read').click();await expect(page.locator('#lesson-body')).toContainText('能量');await expect(page.locator('.lab-chart svg').first()).toBeVisible();expect(external).toEqual([]);
+ // Already-loaded JS/content only. First offline loads and every packaged image belong to Android bundle/emulator checks.
+ await context.setOffline(true);await page.locator('.topbar a[data-nav="home"]').click();await expect(page.locator('.textbook-index')).toBeVisible();await page.locator('.tree-course header h2 a[href="#/course/thermodynamics"]').click();await page.locator('.course-contents a[href="#/course/thermodynamics/thermodynamics-05"]').click();await expect(page.locator('#lesson-body')).toContainText('能量');await expect(page.locator('.lab-chart svg').first()).toBeVisible();expect(external).toEqual([]);
 });
 
 test('concept stories are controllable, readable and disposed on navigation',async({page},info)=>{
@@ -92,7 +123,7 @@ test('concept stories are controllable, readable and disposed on navigation',asy
 
 test('every new diagram can be enlarged to readable labels without leaving the lesson',async({page},info)=>{
  const fs=require('node:fs'),path=require('node:path'),capture=['width-320','width-390','width-1440'].includes(info.project.name);
- await open(page,'#/path');const guides=await page.evaluate(()=>LEARNING_GUIDES.filter(g=>MASTERY_EXERCISES.some(e=>e.lessonId===g.id)).map(g=>({id:g.id,course:ZHIXU.all.find(l=>l.id===g.id).course.id})));
+ await open(page,'#/');const guides=await page.evaluate(()=>LEARNING_GUIDES.filter(g=>MASTERY_EXERCISES.some(e=>e.lessonId===g.id)).map(g=>({id:g.id,course:ZHIXU.all.find(l=>l.id===g.id).course.id})));
  for(const guide of guides){
   const hash='#/course/'+guide.course+'/'+guide.id;await open(page,hash);const image=page.locator('#lesson-body figure img[src*="learn-"]').first();await expect(image).toBeVisible();const src=await image.getAttribute('src');
   const svg=fs.readFileSync(path.resolve(__dirname,'../../site',src),'utf8'),box=svg.match(/viewBox="([^"]+)"/)[1].trim().split(/\s+/).map(Number),fonts=[...svg.matchAll(/font-size\s*(?:=|:)\s*["']?(\d+(?:\.\d+)?)/g)].map(m=>Number(m[1]));expect(fonts.length,src).toBeGreaterThan(0);
@@ -105,7 +136,7 @@ test('every new diagram can be enlarged to readable labels without leaving the l
 });
 
 test('tiered practice reveals verified solutions without automatic grading',async({page},info)=>{
- const capture=['width-320','width-390','width-1440'].includes(info.project.name);await open(page,'#/path');
+ const capture=['width-320','width-390','width-1440'].includes(info.project.name);await open(page,'#/');
  const guides=await page.evaluate(()=>LEARNING_GUIDES.filter(g=>MASTERY_EXERCISES.some(e=>e.lessonId===g.id)).map(g=>({id:g.id,course:ZHIXU.all.find(l=>l.id===g.id).course.id})));
  for(const guide of guides){
   await open(page,'#/course/'+guide.course+'/'+guide.id);const practice=page.locator('.mastery-practice');await expect(practice).toBeVisible();await expect(practice.locator('.mastery-card')).toHaveCount(3);await expect(practice.locator('.mastery-intro')).toContainText('不会自动评分');
@@ -124,23 +155,53 @@ test('tiered practice reveals verified solutions without automatic grading',asyn
   }
  }
  await open(page,'#/course/calculus/calculus-03');const summary=page.locator('.mastery-answer summary').first();await summary.focus();await summary.press('Enter');await expect(page.locator('.mastery-answer').first()).toHaveAttribute('open','');await summary.press('Enter');await expect(page.locator('.mastery-answer').first()).not.toHaveAttribute('open','');
- await page.locator('.mastery-answer').first().evaluate(d=>d.open=true);const solutionParagraph=page.locator('.mastery-solution p').first();const initialSize=await solutionParagraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize));await page.locator('#font-up').click();await page.locator('#font-up').click();expect(await solutionParagraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(initialSize);await noOverflow(page,'enlarged practice solution font');
+ await page.locator('.mastery-answer').first().evaluate(d=>d.open=true);const solutionParagraph=page.locator('.mastery-solution p').first();const initialSize=await solutionParagraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize));await expandDetails(page,'.reading-tools');await page.locator('#font-up').click();await page.locator('#font-up').click();expect(await solutionParagraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(initialSize);await noOverflow(page,'enlarged practice solution font');
  await page.locator('#theme').click();await page.locator('.mastery-answer').evaluateAll(xs=>xs.forEach(d=>d.open=true));await noOverflow(page,'dark practice');if(capture)await page.locator('.mastery-card').first().screenshot({style:cleanCaptureChrome,path:info.outputPath('mastery-dark.png')});
 });
 
-test('report revision examples, continuation path and diagrams remain readable',async({page},info)=>{
+test('retained worked examples, continuation lessons and diagrams remain readable',async({page},info)=>{
  const fs=require('node:fs'),path=require('node:path');
  const revision=JSON.parse(fs.readFileSync(path.resolve(__dirname,'../../reviews/report-revision-2026-10-03.json'),'utf8'));
+ // Each mapping points to the same reviewed example after its editorial title changed.
+ // The historical 1.5.0 review remains unchanged; all its visual checks still run.
+ const headingNames={
+  'calculus-04':'具体例子：一元复合不是两个独立函数',
+  'linear-algebra-05':'两个向量张成的平面',
+  'linear-algebra-06':'三个向量的线性关系',
+  'calculus-05':'渐近线与有理函数的图像',
+  'calculus-19':'例：抛物面与平面围成的立体',
+  'fluid-mechanics-08':'例题：90°弯管的受力分量',
+  'machine-learning-03':'例题：五个独立试件的均值检验',
+  'machine-learning-06':'例题：阈值选择与独立评价',
+  'machine-learning-36':'按预测对象划分实验数据',
+  'python-25':'练习三：增加阈值计数'
+ };
+ const continuationGroups=[
+  ['calculus-05','calculus-08','calculus-19','linear-algebra-13','linear-algebra-18'],
+  ['thermodynamics-04','thermodynamics-15','thermodynamics-19'],
+  ['heat-transfer-06','heat-transfer-08','heat-transfer-16','heat-transfer-22','heat-transfer-30'],
+  ['fluid-mechanics-08','fluid-mechanics-13','fluid-mechanics-16','fluid-mechanics-26'],
+  ['machine-learning-02','machine-learning-03','machine-learning-05','machine-learning-06','machine-learning-24'],
+  ['python-11','python-15','python-20','python-25']
+ ];
  const capture=['width-390','width-1440'].includes(info.project.name);
- await open(page,'#/path');await expect(page.locator('.core-continuation')).toContainText('本科核心续学');
- await expect(page.locator('.core-continuation .relation')).toHaveCount(6);await noOverflow(page,'undergraduate continuation');
- if(capture){await page.locator('.core-continuation h2').scrollIntoViewIfNeeded();await page.screenshot({path:info.outputPath('report-core-continuation.png'),fullPage:false});}
- const continuationCourses=await page.evaluate(()=>COURSES.map(c=>c.id));for(const course of continuationCourses){await open(page,'#/path/'+course);expect(await page.locator('.core-continuation .relation').count(),course+' has follow-on core work').toBeGreaterThan(0);await noOverflow(page,course+' continuation');}
+ await open(page,'#/');const continued=await page.evaluate(ids=>ids.map(id=>{const l=ZHIXU.all.find(l=>l.id===id);return {id,course:l.course.id,title:l.title};}),continuationGroups.flat());
+ expect(continuationGroups).toHaveLength(6);expect(continued).toHaveLength(26);
+ for(const lesson of continued){const link=page.locator('.textbook-tree .tree-chapter a[href="#/course/'+lesson.course+'/'+lesson.id+'"]');await expect(link).toHaveCount(1);await expect(link).toContainText(lesson.title);}
+ await noOverflow(page,'continuation lessons in knowledge tree');
+ const continuationCourses=await page.evaluate(()=>COURSES.map(c=>c.id));
+ for(const course of continuationCourses){
+  await open(page,'#/path/'+course);const targets=continued.filter(l=>l.course===course);expect(targets.length,course+' retains follow-on core work').toBeGreaterThan(0);
+  for(const target of targets){const link=page.locator('.course-contents a[href="#/course/'+course+'/'+target.id+'"]');await expect(link).toBeVisible();}
+  await noOverflow(page,course+' continuation in chapter index');
+  if(capture&&course==='heat-transfer')await page.screenshot({path:info.outputPath('report-core-continuation.png'),fullPage:false});
+ }
  for(const entry of revision.visual_checks){
   const hash='#/course/'+entry.course+'/'+entry.id;await open(page,hash);
-  await page.locator('#lesson-body details.advanced-reading').evaluateAll(xs=>xs.forEach(d=>d.open=true));
-  const heading=page.locator('#lesson-body h2,#lesson-body h3').filter({hasText:entry.heading}).first();
-  await expect(heading,entry.id+' reviewed section').toHaveCount(1);await heading.scrollIntoViewIfNeeded();
+  await expect(page.locator('#lesson-body details.advanced-reading')).toHaveCount(0);
+  const expectedHeading=headingNames[entry.id]||entry.heading;
+  const heading=page.locator('#lesson-body h2,#lesson-body h3').filter({hasText:expectedHeading});
+  await expect(heading,entry.id+' reviewed section').toHaveCount(1);expect(await heading.evaluate(el=>!!el.closest('details')),entry.id+' reviewed material is in continuous text').toBe(false);await heading.scrollIntoViewIfNeeded();
   await expect(page.locator('.math-error')).toHaveCount(0);await noOverflow(page,entry.id+' reviewed section');
   if(capture)await page.screenshot({path:info.outputPath('report-'+entry.id+'.png'),fullPage:false});
   // Also inspect the complete worked/variant answer at the narrowest width.

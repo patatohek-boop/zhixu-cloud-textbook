@@ -2,7 +2,7 @@
 {
   "id": "thermodynamics-27",
   "title": "真实气体性质：可测导数与节流温变",
-  "group": "07 · 性质关系与推进补充",
+  "group": "07 · 真实气体、推进与统计熵",
   "minutes": 38,
   "level": "进阶",
   "tags": [
@@ -35,8 +35,7 @@
   "lab": null
 }
 ---
-
-## 严谨定义与记号
+## 真实气体的性质导数
 
 ### 真实气体状态与热性质
 
@@ -48,9 +47,13 @@ Joule–Thomson系数 $\mu_{JT}=(\partial T/\partial p)_h$，单位K/Pa，描述
 
 反转曲线是 $\mu_{JT}=0$ 的状态集合；它不是“某种气体永远冷却或永远升温”的分界温度常数，通常也随压力改变。
 
-## 通俗解释
+### 体膨胀系数
 
-理想气体把相互作用忽略后，能量只随温度走；真实气体分子拉开或靠近，还会改变相互作用能。阀门保持焓，不保证保持温度。
+$\alpha_v=(1/v)(\partial v/\partial T)_p$ 描述定压下比体积随温度的相对变化，单位K⁻¹。下标 $v$ 用于区别传热学中的热扩散率。
+
+## 等焓过程中的温度变化
+
+理想气体的内能只依赖温度；真实气体的分子相互作用还会使内能随比体积变化。节流过程在相应条件下保持焓，因此真实气体可能降温，也可能升温，方向由该状态的Joule–Thomson系数决定。
 
 ## 推导一：状态方程怎样约束内能
 
@@ -74,7 +77,7 @@ $$\mu_{JT}=\frac{T(\partial v/\partial T)_p-v}{c_p}=\frac{v(T\alpha_v-1)}{c_p}.$
 
 理想气体 $\alpha_v=1/T$故系数0。真实气体降压时 $dp<0$，若 $\mu_{JT}>0$ 则降温；若负则升温。大压降应沿等焓路径积分或查出口焓，不能把入口系数视为全程常数。
 
-## 一步步算一个例子
+## 例题1
 
 某状态 $T=300$ K、$v=0.020$ m³/kg、$\alpha_v=0.0040$ K⁻¹、$c_p=1000$ J/(kg·K)。
 
@@ -83,7 +86,7 @@ $$\mu_{JT}=\frac{T(\partial v/\partial T)_p-v}{c_p}=\frac{v(T\alpha_v-1)}{c_p}.$
 3. 小降压 $\Delta p=-100$ kPa时，线性估计 $\Delta T\approx-0.40$ K。
 4. 这是局部斜率近似；若压力下降很多，应重新评价物性并积分。
 
-## 动手练习
+## 练习
 
 **练习1**　理想气体等焓节流为何不变温？
 
@@ -103,4 +106,4 @@ $T\alpha_v-1=-0.40$，$\mu_{JT}=-8.0\times10^{-6}$ K/Pa，乘负压差得到约+
 
 ## 范围与继续阅读
 
-本章补足性质导数与节流机制，不包括临界区高精度状态方程拟合。课程范围参照[MIT热力学讲义](https://web.mit.edu/16.unified/www/FALL/thermodynamics/notes/notes.html)及[MIT 2.43课程说明](https://ocw.mit.edu/courses/2-43-advanced-thermodynamics-spring-2024/pages/syllabus/)，推导和数值题为原创。
+本节讨论性质导数与节流机制，不包括临界区高精度状态方程拟合。课程范围参照[MIT热力学讲义](https://web.mit.edu/16.unified/www/FALL/thermodynamics/notes/notes.html)及[MIT 2.43课程说明](https://ocw.mit.edu/courses/2-43-advanced-thermodynamics-spring-2024/pages/syllabus/)，推导和数值题为原创。

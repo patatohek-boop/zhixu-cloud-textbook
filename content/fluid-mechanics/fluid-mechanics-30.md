@@ -31,11 +31,10 @@
     "explanation": "环量守恒证明使用物质曲线速度与流体速度相同这一条件。"
   },
   "lab": null,
-  "revision": "2026-09-28 · 概念分段与教学审读"
+  "revision": "2026-10-04 · 知识页结构与行文整理"
 }
 ---
-
-## 严谨定义与定理条件
+## Kelvin 环量定理及其条件
 
 ### 随体曲线与环量
 
@@ -49,17 +48,19 @@
 
 **Kelvin 环量定理。** 若流体无黏，场与物质曲线足够光滑，流体正压，体力保守，且曲线不穿过激波或奇点，则 $d\Gamma/dt=0$。这里的曲线必须随同一群质点运动，固定空间圆圈不满足同一命题。
 
-## 通俗解释：给流体圈一条会变形的橡皮圈
+## 随体闭曲线上的环量
 
 橡皮圈可以拉长、扭曲，局部速度可以改变，但在上述理想条件下沿圈累积的切向速度保持同一个值。黏性、非正压的密度压力错位、激波或非保守作用都可能改变环量。
 
-## 完整证明：对移动曲线求导
+## 证明：对移动曲线求导
 
 用周期参数 $s$ 表示曲线 $\mathbf X(s,t)$，满足 $\mathbf X_t=\mathbf u(\mathbf X,t)$。于是
 $$\Gamma=\int\mathbf u(\mathbf X,t)\cdot\mathbf X_s\,ds.$$
 对时间求导并用链式法则，得到 $d\Gamma/dt=\int[D\mathbf u/Dt\cdot\mathbf X_s+\mathbf u\cdot\partial_s\mathbf u]ds$。第二项为闭曲线上 $\int\partial_s(|\mathbf u|^2/2)ds=0$；故 $d\Gamma/dt=\oint(D\mathbf u/Dt)\cdot d\mathbf l$。
 
-Euler 方程给 $D\mathbf u/Dt=-\nabla p/\rho-\nabla\Phi$。定义 $H(p)=\int^p dq/\rho(q)$，便有 $\nabla H=\nabla p/\rho$。因此 $d\Gamma/dt=-\oint\nabla(H+\Phi)\cdot d\mathbf l=0$，因为闭合曲线上的单值势函数增量为零，证毕。若不正压，$\nabla p/\rho$ 未必是梯度，证明在这一步失效。
+Euler 方程给 $D\mathbf u/Dt=-\nabla p/\rho-\nabla\Phi$。定义 $H(p)=\int^p dq/\rho(q)$，便有 $\nabla H=\nabla p/\rho$。因此 $d\Gamma/dt=-\oint\nabla(H+\Phi)\cdot d\mathbf l=0$，因为闭合曲线上的单值势函数增量为零，证毕。
+
+若不正压，$\nabla p/\rho$ 未必是梯度，证明在这一步失效。
 
 ## 推导：局部涡量会如何变化
 

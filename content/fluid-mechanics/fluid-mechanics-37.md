@@ -31,11 +31,10 @@
     "explanation": "同号镜像源的法向速度在壁面相消；点涡则需反号镜像，二者不能混用。"
   },
   "lab": null,
-  "revision": "2026-09-28 · 概念分段与教学审读"
+  "revision": "2026-10-04 · 知识页结构与行文整理"
 }
 ---
-
-## 严谨定义：先选定义域与边界条件
+## 势流的定义域与边界条件
 
 ### 势流模型与固壁条件
 
@@ -53,7 +52,7 @@
 
 环绕一周的体积流率按单位轴向长度计，单位为 m²/s；三维点源的流率单位才是 m³/s。不能把两种源强混为一个量。
 
-## 通俗解释：用几块能算清楚的积木拼出边界
+## 势流叠加与边界条件
 
 势流的优势是已知解可以相加。关键不是“叠加之后图好看”，而是叠加后的法向速度恰好满足物体表面条件。压力含速度平方，不能把各个积木的压力也线性相加；想象出来的源或涡通常放在物体内部或流体域外。
 
@@ -63,7 +62,9 @@
 
 同理，环量定义给点涡 $u_\vartheta=\Gamma/(2\pi r)$，因此 $\phi=\Gamma\vartheta/(2\pi)$。绕原点角度增加 $2\pi$ 时势增加 $\Gamma$，说明它一般多值；速度却在去掉原点的区域单值。三维径向点源用球面积 $4\pi r^2$ 代替圆周长度，得 $u_r=Q/(4\pi r^2)$、$\phi=-Q/(4\pi r)$。
 
-现在把强度 $+q$ 的源放在 $x=-\epsilon/2$，强度 $-q$ 的汇放在 $x=+\epsilon/2$。两势相加，令 $\epsilon\to0$、$q\epsilon=m$ 保持不变。对位移作一阶展开，$\ln|\mathbf x+\epsilon\mathbf e_x/2|-\ln|\mathbf x-\epsilon\mathbf e_x/2|\approx\epsilon\partial_x\ln r=\epsilon\cos\vartheta/r$，于是**二维偶极子**的势为 $m\cos\vartheta/(2\pi r)$，$m$ 的单位是 m³/s。其净源强为零，但速度场并不为零。
+现在把强度 $+q$ 的源放在 $x=-\epsilon/2$，强度 $-q$ 的汇放在 $x=+\epsilon/2$。两势相加，令 $\epsilon\to0$、$q\epsilon=m$ 保持不变。对位移作一阶展开，$\ln|\mathbf x+\epsilon\mathbf e_x/2|-\ln|\mathbf x-\epsilon\mathbf e_x/2|\approx\epsilon\partial_x\ln r=\epsilon\cos\vartheta/r$，于是**二维偶极子**的势为 $m\cos\vartheta/(2\pi r)$，$m$ 的单位是 m³/s。
+
+其净源强为零，但速度场并不为零。
 
 ## 分步构造：圆柱外的速度与压力
 
@@ -84,9 +85,11 @@ $$\phi=\frac{q}{4\pi}\ln\frac{x^2+(y-b)^2}{r_0^2}+\frac{q}{4\pi}\ln\frac{x^2+(y+
 这里 $r_0>0$ 是参考长度，使对数自变量无量纲；改变它只改变势常数。
 对 $y$ 求导，在 $y=0$ 两项分别正比 $-b/(x^2+b^2)$ 和 $b/(x^2+b^2)$，相消，所以壁面无穿透；它没有保证无滑移。若原奇点是点涡，壁下需放**反向**涡才能消去法向速度。源与涡的镜像符号不同，应求导检查，而非靠记忆图像。
 
-## 非定常并不等于有阻力：附加质量的完整球例
+## 球体平移的附加质量
 
-半径 $a$ 的球以速度 $U(t)\mathbf e_z$ 在无限大、远处静止的理想流体中平移。以瞬时球心为球坐标原点，候选势为 $\phi=-Ua^3\cos\vartheta/(2r^2)$。它在 $r>a$ 调和，远处衰减，且 $\phi_r(a)=U\cos\vartheta$ 满足运动壁面的法向速度。球外速度为 $u_r=Ua^3\cos\vartheta/r^3$、$u_\vartheta=Ua^3\sin\vartheta/(2r^3)$。
+半径 $a$ 的球以速度 $U(t)\mathbf e_z$ 在无限大、远处静止的理想流体中平移。以瞬时球心为球坐标原点，候选势为 $\phi=-Ua^3\cos\vartheta/(2r^2)$。它在 $r>a$ 调和，远处衰减，且 $\phi_r(a)=U\cos\vartheta$ 满足运动壁面的法向速度。
+
+球外速度为 $u_r=Ua^3\cos\vartheta/r^3$、$u_\vartheta=Ua^3\sin\vartheta/(2r^3)$。
 
 直接积分流体动能，避免把移动坐标中的时间导数误当固定空间导数：
 $$K_f=\frac{\rho}{2}\int_a^\infty\int_0^{2\pi}\int_0^\pi
@@ -97,7 +100,7 @@ $$m_a=\frac{2}{3}\pi\rho a^3=\frac12\rho\left(\frac43\pi a^3\right).$$
 
 ## 例题与练习
 
-半径0.1 m的球在密度1000 kg/m³的理想水体中平移，附加质量 $m_a=2\pi/3\approx2.094$ kg。球自身质量0.5 kg，若期望加速度0.4 m/s²，则此模型所需净外力为 $(0.5+2.094)\times0.4=1.038$ N；这里只算加速方向上的净力，重力与浮力若有关要另入账。
+半径0.1 m的球在密度1000 kg/m³的理想水体中平移，附加质量 $m_a=2\pi/3\approx2.094$ kg。球自身质量0.5 kg，若期望加速度0.4 m/s²，则此模型所需净外力为 $(0.5+2.094)\times0.4=1.038$ N；这里只算加速方向上的净力，重力与浮力若有关要另行计入。
 
 1. 无环量圆柱面在迎流停滞点和顶部的 $C_p$ 分别是多少？
 <details><summary>查看解析</summary>
@@ -111,6 +114,8 @@ $$m_a=\frac{2}{3}\pi\rho a^3=\frac12\rho\left(\frac43\pi a^3\right).$$
 否。匀速时 $\dot U=0$，启动时 $\dot U\ne0$，必须建立周围流体的动能。实际黏性流还会产生阻力，不能把附加质量替代所有水动力。
 </details>
 
-## 讲义对照与后续阅读
+## 参考资料
 
-主题对照 [MIT 2.20 Lecture 10：基本势流](https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture10/)、[Lecture 11：镜像与受力](https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture11/)、[Lecture 13：附加质量](https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture13/)。一般六自由度附加质量矩阵与船舶波浪辐射属于后续海洋工程专题，本章完整推导的是无界球体平移模型。
+主题对照 [MIT 2.20 Lecture 10：基本势流](https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture10/)、[Lecture 11：镜像与受力](https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture11/)、[Lecture 13：附加质量](https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture13/)。
+
+一般六自由度附加质量矩阵与船舶波浪辐射属于后续海洋工程专题，本章完整推导的是无界球体平移模型。

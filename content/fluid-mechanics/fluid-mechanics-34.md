@@ -31,11 +31,10 @@
     "explanation": "ω=√(gk)，对k求导得cg=cp/2。"
   },
   "lab": null,
-  "revision": "2026-09-28 · 概念分段与教学审读"
+  "revision": "2026-10-04 · 知识页结构与行文整理"
 }
 ---
-
-## 严谨定义：波形速度与波包速度
+## 线性表面波与传播速度
 
 ### 几何、波长与小振幅条件
 
@@ -53,7 +52,7 @@
 
 以下假定无黏、不可压、无旋、小振幅，气体压力恒定，表面张力 $\sigma$ 均匀。
 
-## 通俗解释：同一片水面，不同波长跑得不一样
+## 波峰与波包的运动
 
 长重力波主要受重力和水深控制；很短的波更受表面张力影响。多个接近波长叠加会出现慢慢移动的包络，它不一定和其中的波峰同速。
 
@@ -69,7 +68,9 @@ $$\omega^2=(gk+\sigma k^3/\rho)\tanh(kh).$$
 
 ## 极限与群速度的证明
 
-忽略张力，浅水 $kh\ll1$ 时 $\tanh(kh)\approx kh$，得 $\omega\approx k\sqrt{gh}$，故 $c_p=c_g\approx\sqrt{gh}$，与浅水方程一致。深水 $kh\gg1$ 时 $\omega\approx\sqrt{gk}$，故 $c_p=\sqrt{g/k}$、$c_g=c_p/2$。若深水短波由张力主导，$\omega\approx\sqrt{\sigma/\rho}\,k^{3/2}$，所以 $c_g=3c_p/2$。
+忽略张力，浅水 $kh\ll1$ 时 $\tanh(kh)\approx kh$，得 $\omega\approx k\sqrt{gh}$，故 $c_p=c_g\approx\sqrt{gh}$，与浅水方程一致。深水 $kh\gg1$ 时 $\omega\approx\sqrt{gk}$，故 $c_p=\sqrt{g/k}$、$c_g=c_p/2$。
+
+若深水短波由张力主导，$\omega\approx\sqrt{\sigma/\rho}\,k^{3/2}$，所以 $c_g=3c_p/2$。
 
 为何包络速度是导数？叠加 $\cos(k_1x-\omega_1t)$ 与 $\cos(k_2x-\omega_2t)$，用和差化积得到快速载波乘以慢因子 $2\cos[(\Delta kx-\Delta\omega t)/2]$；慢因子固定相位速度为 $\Delta\omega/\Delta k$，窄带极限为 $d\omega/dk$。
 

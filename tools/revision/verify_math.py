@@ -140,14 +140,31 @@ exact=float(sol.subs(t,s.Rational(1,10)));check('M14 numerical value',abs(exact-
 check('supremum counterexample witness',all(1-e<1<=1 for e in [1e-9,.1,1,100]))
 check('supremum candidate excluded',not all(i<=1 for i in [0,1,2]))
 # Source preservation, quiz metadata equality, 14 unique added identifiers.
+# 1.5.0 retains its immutable pre-revision hashes. 1.6.0 uses the reviewed
+# metadata/source mapping after authorized heading and reader restructuring.
+version=json.loads((ROOT/'version.json').read_text(encoding='utf-8'))['version']
+check('known preservation contract',version in ('1.5.0','1.6.0'))
+reviewed={}
+if version=='1.6.0':
+ review=json.loads((ROOT/'reviews/reader-revision-1.6.0.json').read_text(encoding='utf-8'))
+ check('1.6 reviewed source snapshot',review['version']=='1.6.0' and review['status']=='reviewed')
+ reviewed={row['id']:row for row in review['lesson_mapping']}
+ check('1.6 complete reviewed mapping',len(reviewed)==len(review['lesson_mapping'])==253)
 manifest=[{'id':id,'path':f'content/{id.rsplit("-",1)[0]}/{id}.md'} for id in BASE_HASHES]
 newids=[]
 for item in manifest:
- rel=item['path'];new=(ROOT/rel).read_text();newids+=re.findall(r'##+ (?:桥梁自检|练习) (M\d+)',new)
- check('metadata unchanged '+item['id'],hashlib.sha256(json.dumps(json.loads(new[8:].split('\n---\n',1)[0]),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()==BASE_HASHES[item['id']]['metadata_sha256'])
- clean=re.sub(r'<!-- math-revision-20261003:[^\n]+:start -->\n.*?<!-- math-revision-20261003:[^\n]+:end -->\n','',new,flags=re.S)
- if item['id']=='calculus-25': clean=clean.replace(r'等价地，$u$ 是 $S$ 的上界，并且对每个 $\varepsilon>0$，都能找到 $s\in S$ 使 $u-\varepsilon<s\le u$。',r'等价地，每个 $\varepsilon>0$ 都能找到 $s\in S$ 使 $u-\varepsilon<s\le u$。')
- check('old text preserved '+item['id'],hashlib.sha256('\n'.join(l for l in clean.splitlines() if l.strip()).encode()).hexdigest()==BASE_HASHES[item['id']]['source_nonempty_sha256'])
+ rel=item['path'];new=(ROOT/rel).read_text(encoding='utf-8');newids+=re.findall(r'##+ (?:桥梁自检|练习) (M\d+)',new)
+ metadata_hash=hashlib.sha256(json.dumps(json.loads(new[8:].split('\n---\n',1)[0]),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+ if version=='1.6.0':
+  row=reviewed[item['id']]
+  check('reviewed lesson path '+item['id'],row['path']==rel)
+  check('reviewed metadata unchanged '+item['id'],metadata_hash==row['after_metadata_sha256'])
+  check('reviewed source unchanged '+item['id'],hashlib.sha256(new.encode()).hexdigest()==row['after_sha256'])
+ else:
+  check('metadata unchanged '+item['id'],metadata_hash==BASE_HASHES[item['id']]['metadata_sha256'])
+  clean=re.sub(r'<!-- math-revision-20261003:[^\n]+:start -->\n.*?<!-- math-revision-20261003:[^\n]+:end -->\n','',new,flags=re.S)
+  if item['id']=='calculus-25': clean=clean.replace(r'等价地，$u$ 是 $S$ 的上界，并且对每个 $\varepsilon>0$，都能找到 $s\in S$ 使 $u-\varepsilon<s\le u$。',r'等价地，每个 $\varepsilon>0$ 都能找到 $s\in S$ 使 $u-\varepsilon<s\le u$。')
+  check('old text preserved '+item['id'],hashlib.sha256('\n'.join(l for l in clean.splitlines() if l.strip()).encode()).hexdigest()==BASE_HASHES[item['id']]['source_nonempty_sha256'])
  check('details balanced '+item['id'],len(re.findall(r'<details(?:\s[^>]*)?>',new))==new.count('</details>'))
 check('exact 14 exercise identifiers',sorted(newids)==[f'M{i:02}' for i in range(1,15)])
 # SVG coordinate audit from independent transform specifications.
@@ -173,6 +190,6 @@ for name,sx,sy,ox,oy,expected in geometry:
  if name=='math-paraboloid-bounds.svg':
   for point in tree.findall('.//s:polyline',ns)[0].attrib['points'].split():
    px,py=map(float,point.split(','));rr=(px-ox)/sx;zz=(py-oy)/sy;check('SVG paraboloid sampled curve',abs(zz-rr*rr)<2e-5)
-summary={'assertions':len(checks),'passed':sum(c['passed'] for c in checks),'failed':sum(not c['passed'] for c in checks),'checks':checks,'limits':['Exact symbolic/numerical checks supplement manual proof and pedagogical review; they do not machine-prove all theorems.','Source preservation uses stored nonempty-line SHA256 and metadata SHA256 for 18 original lessons; blank-line formatting is not compared.']}
+summary={'assertions':len(checks),'passed':sum(c['passed'] for c in checks),'failed':sum(not c['passed'] for c in checks),'checks':checks,'limits':['Exact symbolic/numerical checks supplement manual proof and pedagogical review; they do not machine-prove all theorems.','1.5.0 uses immutable nonempty-line/metadata hashes; 1.6.0 uses exact reviewed source and canonical metadata hashes for the same 18 lessons. Hashes identify the reviewed text and do not prove mathematical correctness.']}
 if a.output:a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps({k:summary[k] for k in ['assertions','passed','failed']}))

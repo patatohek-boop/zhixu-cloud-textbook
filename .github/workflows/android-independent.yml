@@ -1,6 +1,12 @@
 name: Verify independent Android edition
 on:
   workflow_dispatch:
+    inputs:
+      require_production:
+        description: 'Release acceptance: require the final 1.6.0 signed APK and both migration scenarios'
+        type: boolean
+        default: false
+        required: false
   pull_request:
     paths:
       - 'downloads/**'
@@ -27,7 +33,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 55
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
@@ -39,6 +45,15 @@ jobs:
       - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
         with:
           python-version: '3.12'
+      - name: Require production inputs for release acceptance
+        if: inputs.require_production == true
+        run: |
+          test -s downloads/Zhixu-1.6.0.apk
+          test -s downloads/Zhixu-1.6.0.apk.sha256
+          test -s downloads/certificate-sha256.txt
+          test -s downloads/Zhixu-Independent-1.5.0.apk
+          test -s downloads/Zhixu-Independent-1.5.0.apk.sha256
+          test -s downloads/1.5.0-certificate-sha256.txt
       - name: Validate textbook
         run: |
           python tools/build.py
@@ -71,7 +86,7 @@ jobs:
           dirname "$SDK_MANAGER" >> "$GITHUB_PATH"
           echo "$SDK_ROOT/platform-tools" >> "$GITHUB_PATH"
           "$SDK_MANAGER" 'platforms;android-37.0' 'build-tools;36.0.0'
-      - name: Build preserved legacy test app
+      - name: Build current-source fixture with the original package identity
         working-directory: android
         run: |
           bash gradlew --no-daemon :app:assembleDebug :app:assembleDebugAndroidTest
@@ -131,8 +146,8 @@ jobs:
             timeout 10 adb exec-out screencap -p > work/android-final-screen.png || true
             timeout 10 adb shell dumpsys window > work/android-window.txt || true
             for name in concept-toc-screen concept-position-failure-screen; do
-              if timeout 5 adb shell test -f "/data/data/app.zhixu.textbook.independent/files/$name.png"; then
-                timeout 5 adb exec-out cat "/data/data/app.zhixu.textbook.independent/files/$name.png" > "work/android-$name.png" || true
+              if timeout 5 adb shell test -f "/data/data/app.zhixu.textbook.reader/files/$name.png"; then
+                timeout 5 adb exec-out cat "/data/data/app.zhixu.textbook.reader/files/$name.png" > "work/android-$name.png" || true
               fi
             done
             tail -60 work/emulator.log || true
@@ -158,29 +173,29 @@ jobs:
             echo "Fresh emulator has an unresolved system ANR; do not run app tests"
             exit 1
           fi
-          timeout 240 adb shell am instrument -w -e expectRelease true app.zhixu.textbook.independent.test/app.zhixu.textbook.TextbookSmokeTest | tee work/android-smoke.txt
+          timeout 240 adb shell am instrument -w -e expectRelease true app.zhixu.textbook.reader.test/app.zhixu.textbook.TextbookSmokeTest | tee work/android-smoke.txt
           grep -q ZHIXU_SMOKE_SUCCESS work/android-smoke.txt
-          adb exec-out cat /data/data/app.zhixu.textbook.independent/files/reader-screen.png > work/android-reader.png
+          adb exec-out cat /data/data/app.zhixu.textbook.reader/files/reader-screen.png > work/android-reader.png
           test -s work/android-reader.png
-          adb exec-out cat /data/data/app.zhixu.textbook.independent/files/concept-screen.png > work/android-concepts.png
+          adb exec-out cat /data/data/app.zhixu.textbook.reader/files/concept-screen.png > work/android-concepts.png
           test -s work/android-concepts.png
-          adb exec-out cat /data/data/app.zhixu.textbook.independent/files/research-screen.png > work/android-research.png
+          adb exec-out cat /data/data/app.zhixu.textbook.reader/files/research-screen.png > work/android-research.png
           test -s work/android-research.png
-          adb exec-out cat /data/data/app.zhixu.textbook.independent/files/simulation-screen.png > work/android-simulation.png
+          adb exec-out cat /data/data/app.zhixu.textbook.reader/files/simulation-screen.png > work/android-simulation.png
           test -s work/android-simulation.png
-          adb exec-out cat /data/data/app.zhixu.textbook.independent/files/knowledge-map-screen.png > work/android-knowledge-map.png
+          adb exec-out cat /data/data/app.zhixu.textbook.reader/files/knowledge-map-screen.png > work/android-knowledge-map.png
           test -s work/android-knowledge-map.png
-          adb exec-out cat /data/data/app.zhixu.textbook.independent/files/concept-story-screen.png > work/android-concept-story.png
+          adb exec-out cat /data/data/app.zhixu.textbook.reader/files/concept-story-screen.png > work/android-concept-story.png
           test -s work/android-concept-story.png
-          adb exec-out cat /data/data/app.zhixu.textbook.independent/files/mastery-practice-screen.png > work/android-mastery-practice.png
+          adb exec-out cat /data/data/app.zhixu.textbook.reader/files/mastery-practice-screen.png > work/android-mastery-practice.png
           test -s work/android-mastery-practice.png
-          adb exec-out cat /data/data/app.zhixu.textbook.independent/files/horizontal-formula-screen.png > work/android-horizontal-formula.png
+          adb exec-out cat /data/data/app.zhixu.textbook.reader/files/horizontal-formula-screen.png > work/android-horizontal-formula.png
           test -s work/android-horizontal-formula.png
-          adb exec-out cat /data/data/app.zhixu.textbook.independent/files/core-continuation-screen.png > work/android-core-continuation.png
-          test -s work/android-core-continuation.png
-          adb exec-out cat /data/data/app.zhixu.textbook.independent/files/report-revision-screen.png > work/android-report-revision.png
+          adb exec-out cat /data/data/app.zhixu.textbook.reader/files/knowledge-tree-screen.png > work/android-knowledge-tree.png
+          test -s work/android-knowledge-tree.png
+          adb exec-out cat /data/data/app.zhixu.textbook.reader/files/report-revision-screen.png > work/android-report-revision.png
           test -s work/android-report-revision.png
-          adb shell am start -W -n app.zhixu.textbook.independent/app.zhixu.textbook.MainActivity
+          adb shell am start -W -n app.zhixu.textbook.reader/app.zhixu.textbook.MainActivity
           sleep 15
           adb exec-out screencap -p > work/android-home.png
           probe() {
@@ -188,18 +203,18 @@ jobs:
             tail -10 work/android-migration.txt | grep -q "ZHIXU_MIGRATION_SUCCESS $2 $1"
           }
           # Discard only synthetic smoke state before first-launch migration checks.
-          adb shell pm clear app.zhixu.textbook.independent
+          adb shell pm clear app.zhixu.textbook.reader
           probe app.zhixu.textbook seed
           # Prove legacy persistence before the independent app is launched or imported.
           probe app.zhixu.textbook source
-          probe app.zhixu.textbook.independent empty
+          probe app.zhixu.textbook.reader empty
           adb exec-out cat /data/data/app.zhixu.textbook/files/migration-export.json > work/synthetic-legacy-backup.json
-          adb push work/synthetic-legacy-backup.json /data/data/app.zhixu.textbook.independent/files/migration-input.json
-          adb shell chmod 644 /data/data/app.zhixu.textbook.independent/files/migration-input.json
-          probe app.zhixu.textbook.independent import
+          adb push work/synthetic-legacy-backup.json /data/data/app.zhixu.textbook.reader/files/migration-input.json
+          adb shell chmod 644 /data/data/app.zhixu.textbook.reader/files/migration-input.json
+          probe app.zhixu.textbook.reader import
           probe app.zhixu.textbook source
-          probe app.zhixu.textbook.independent destination
-          adb shell dumpsys package app.zhixu.textbook.independent > work/independent-package-runtime.txt
+          probe app.zhixu.textbook.reader destination
+          adb shell dumpsys package app.zhixu.textbook.reader > work/independent-package-runtime.txt
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
@@ -219,7 +234,7 @@ jobs:
             work/android-concept-story.png
             work/android-mastery-practice.png
             work/android-horizontal-formula.png
-            work/android-core-continuation.png
+            work/android-knowledge-tree.png
             work/android-report-revision.png
             work/android-home.png
             work/emulator.log
@@ -229,16 +244,37 @@ jobs:
             work/emulator-preflight-window.txt
           retention-days: 14
       - name: Verify exact production-signed APK through public UI
-        if: always() && !cancelled() && hashFiles('downloads/Zhixu-Independent-1.5.0.apk') != ''
-        timeout-minutes: 15
+        if: always() && !cancelled() && hashFiles('downloads/Zhixu-1.6.0.apk') != ''
+        timeout-minutes: 25
         run: |
-          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs downloads/Zhixu-Independent-1.5.0.apk | tee work/production-signature.txt
+          set -euo pipefail
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs downloads/Zhixu-1.6.0.apk | tee work/production-signature.txt
           grep -q "Signer #1 certificate SHA-256 digest: $(cat downloads/certificate-sha256.txt)" work/production-signature.txt
-          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging downloads/Zhixu-Independent-1.5.0.apk > work/production-metadata.txt
-          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump permissions downloads/Zhixu-Independent-1.5.0.apk > work/production-permissions.txt
-          python tools/verify-independent-apk.py --apk downloads/Zhixu-Independent-1.5.0.apk --metadata work/production-metadata.txt --permissions work/production-permissions.txt > work/production-payload.json
-          python tools/test-signed-android-ui.py downloads/Zhixu-Independent-1.5.0.apk | tee work/production-ui-result.txt
-          grep -q ZHIXU_SIGNED_RELEASE_UI_SUCCESS work/production-ui-result.txt
+          test "$(cat downloads/certificate-sha256.txt)" != "$(cat downloads/1.5.0-certificate-sha256.txt)"
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging downloads/Zhixu-1.6.0.apk > work/production-metadata.txt
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump permissions downloads/Zhixu-1.6.0.apk > work/production-permissions.txt
+          python tools/verify-independent-apk.py --apk downloads/Zhixu-1.6.0.apk --metadata work/production-metadata.txt --permissions work/production-permissions.txt > work/production-payload.json
+          python tools/test-signed-android-ui.py downloads/Zhixu-1.6.0.apk --source-package app.zhixu.textbook --out-dir work/signed-release-ui/original-package | tee work/production-ui-original.txt
+          grep -q ZHIXU_SIGNED_RELEASE_UI_SUCCESS work/production-ui-original.txt
+          python tools/test-signed-android-ui.py downloads/Zhixu-1.6.0.apk --source-package app.zhixu.textbook.independent --source-apk downloads/Zhixu-Independent-1.5.0.apk --aapt "$ANDROID_HOME/build-tools/36.0.0/aapt" --apksigner "$ANDROID_HOME/build-tools/36.0.0/apksigner" --out-dir work/signed-release-ui/independent-1.5.0 | tee work/production-ui-independent-1.5.0.txt
+          grep -q ZHIXU_SIGNED_RELEASE_UI_SUCCESS work/production-ui-independent-1.5.0.txt
+      - name: Confirm both production migration results for release acceptance
+        if: always() && !cancelled() && (inputs.require_production == true || hashFiles('downloads/Zhixu-1.6.0.apk') != '')
+        run: |
+          python - <<'PY'
+          import hashlib, json, pathlib
+          apk_hash = hashlib.sha256(pathlib.Path('downloads/Zhixu-1.6.0.apk').read_bytes()).hexdigest()
+          scenarios = [('original-package', 'app.zhixu.textbook', False), ('independent-1.5.0', 'app.zhixu.textbook.independent', True)]
+          for scenario, package, historical in scenarios:
+              result = json.loads(pathlib.Path('work/signed-release-ui', scenario, 'verification.json').read_text())
+              assert result['sha256'] == apk_hash
+              assert result['package'] == 'app.zhixu.textbook.reader'
+              assert result['source']['package'] == package
+              assert result['legacy_1_5_independent_coexistence_tested'] is historical
+              for flag in ('install', 'offline_first_launch', 'initial_records_empty', 'native_json_export_import', 'cancel_and_invalid_import_atomic', 'relaunch_and_same_apk_reinstall_preserve_records', 'legacy_records_unchanged', 'legacy_native_import_normal_exit_reopen'):
+                  assert result[flag] is True, (scenario, flag)
+          print('ZHIXU_PRODUCTION_RELEASE_ACCEPTANCE_SUCCESS')
+          PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
@@ -249,5 +285,6 @@ jobs:
             work/production-metadata.txt
             work/production-permissions.txt
             work/production-payload.json
-            work/production-ui-result.txt
+            work/production-ui-original.txt
+            work/production-ui-independent-1.5.0.txt
           retention-days: 14

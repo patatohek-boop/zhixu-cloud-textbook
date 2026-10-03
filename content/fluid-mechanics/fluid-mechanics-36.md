@@ -32,15 +32,16 @@
     "explanation": "牛顿黏性应力由对称变形率决定，不能把单个速度梯度直接当一般剪切率。"
   },
   "lab": null,
-  "revision": "2026-09-28 · 概念分段与教学审读"
+  "revision": "2026-10-04 · 知识页结构与行文整理"
 }
 ---
-
-## 严谨定义：应力需要说明两个方向
+## 应力张量与指标记号
 
 ### 牵引、法向与切向分量
 
-在流体内想象切出一个小面。外侧流体作用于所选一侧的单位面积力称为**牵引向量** $\mathbf t(\mathbf n)$，其中单位法线 $\mathbf n$ 指向所选体积外侧，单位为 Pa。$\mathbf t\cdot\mathbf n$ 是法向应力，$\mathbf t-(\mathbf t\cdot\mathbf n)\mathbf n$ 是切向牵引。压力取压缩为正，所以静止简单流体有 $\mathbf t=-p\mathbf n$。
+在流体内想象切出一个小面。外侧流体作用于所选一侧的单位面积力称为**牵引向量** $\mathbf t(\mathbf n)$，其中单位法线 $\mathbf n$ 指向所选体积外侧，单位为 Pa。$\mathbf t\cdot\mathbf n$ 是法向应力，$\mathbf t-(\mathbf t\cdot\mathbf n)\mathbf n$ 是切向牵引。
+
+压力取压缩为正，所以静止简单流体有 $\mathbf t=-p\mathbf n$。
 
 ### 应力分量的两个指标
 
@@ -62,32 +63,34 @@ $\delta_{ij}$ 为 Kronecker 符号，同指标时为1，否则为0；矩阵形�
 
 **迹** $\operatorname{tr}\mathbf A$ 是方阵对角线元素之和。
 
-## 通俗解释：先说明在哪个面上，再说明往哪边推
+## 面朝向与牵引方向
 
 同一点的不同朝向截面会受到不同方向的力。只说“这里应力是10 Pa”往往信息不够，就像只说一个盒子受力而没有说推哪一面。压力是很特殊的情形：无论切面朝哪里，力都垂直向内；流动中的黏性作用还会沿面拖动，也可能改变法向受力。
 
 ## 证明一：为什么任意面的牵引等于应力矩阵乘法线
 
-### 第一步：列清局部假设并证明反向牵引
+### 列清局部假设并证明反向牵引
 
 采用经典连续介质假设：面力由该处状态和面法线决定，考察点邻域内的应力、体积力与加速度连续且有界，内部没有额外的表面质量，且不跨越应力跳跃界面。
 
 先用极薄的小柱跨过同一点的两侧面。两大面面积为 $A$，侧面面积和体积随厚度趋零；动量平衡除以 $A$ 后取极限，得到 $\mathbf t(-\mathbf n)=-\mathbf t(\mathbf n)$。
 
-### 第二步：对小四面体写动量平衡
+### 对小四面体写动量平衡
 
 再取三面与坐标面平行、第四面法线为 $\mathbf n$ 的小四面体。先令三个 $n_j>0$。斜面面积为 $A$，三个坐标面的投影面积分别为 $A n_j$，其外法线为 $-\mathbf e_j$。
 
 特征边长为 $\epsilon$ 时，面力是 $O(\epsilon^2)$，体积力和惯性是 $O(\epsilon^3)$。动量方程除以 $A$ 并令 $\epsilon\to0$，得到
 $$\mathbf t(\mathbf n)-\sum_{j=1}^3 n_j\mathbf t(\mathbf e_j)=0.$$
 
-### 第三步：从分量式回到矩阵式
+### 从分量式回到矩阵式
 
 取第 $i$ 分量即 $t_i=\sigma_{ij}n_j$。其他法线象限可用对应正负坐标面并结合反向牵引关系处理；零分量由连续极限得到。因此 $\mathbf t=\boldsymbol\sigma\mathbf n$。这是一条由局部动量平衡推出的结论，尚未使用牛顿黏性本构。
 
 ## 证明二：应力对称来自角动量守恒
 
-考虑以中心为原点、各边长为 $\epsilon$ 的小立方体，忽略独立体偶矩与偶应力。两 $y$ 面上的 $x$ 向剪切形成绕 $z$ 轴的力矩 $-\sigma_{12}\epsilon^3$，两 $x$ 面上的 $y$ 向剪切给 $+\sigma_{21}\epsilon^3$。光滑场的应力变化给更高阶项；有界体积力和惯性关于中心的总力矩也高于这一阶。角动量平衡因此给 $(\sigma_{21}-\sigma_{12})\epsilon^3=o(\epsilon^3)$，除以体积取极限，得 $\sigma_{12}=\sigma_{21}$。另两对坐标同理。
+考虑以中心为原点、各边长为 $\epsilon$ 的小立方体，忽略独立体偶矩与偶应力。两 $y$ 面上的 $x$ 向剪切形成绕 $z$ 轴的力矩 $-\sigma_{12}\epsilon^3$，两 $x$ 面上的 $y$ 向剪切给 $+\sigma_{21}\epsilon^3$。光滑场的应力变化给更高阶项；有界体积力和惯性关于中心的总力矩也高于这一阶。
+
+角动量平衡因此给 $(\sigma_{21}-\sigma_{12})\epsilon^3=o(\epsilon^3)$，除以体积取极限，得 $\sigma_{12}=\sigma_{21}$。另两对坐标同理。
 
 所以普通非极性连续介质中 $\boldsymbol\sigma$ 对称。若研究带独立微旋转、体偶矩或偶应力的介质，必须扩展角动量方程，不能不加说明照搬这个结论。应力对称也不意味着三个主应力相同。
 
@@ -98,7 +101,9 @@ $$\mathbf D=\frac{\mathbf A+\mathbf A^T}{2},\qquad \mathbf W=\frac{\mathbf A-\ma
 
 ### 检验：哪一部分改变质点间距离
 
-因为反对称矩阵满足 $\mathbf r^T\mathbf W\mathbf r=0$，有 $d|\mathbf r|^2/dt=2\mathbf r^T\mathbf D\mathbf r$。因此 $\mathbf D$ 决定局部长度和夹角的变化率，称**变形率张量**；$\mathbf W$ 只对应瞬时刚体旋转。逐分量比较可得 $\mathbf W\mathbf r=(\boldsymbol\omega/2)\times\mathbf r$，局部刚体角速度等于涡量的一半。
+因为反对称矩阵满足 $\mathbf r^T\mathbf W\mathbf r=0$，有 $d|\mathbf r|^2/dt=2\mathbf r^T\mathbf D\mathbf r$。因此 $\mathbf D$ 决定局部长度和夹角的变化率，称**变形率张量**；$\mathbf W$ 只对应瞬时刚体旋转。
+
+逐分量比较可得 $\mathbf W\mathbf r=(\boldsymbol\omega/2)\times\mathbf r$，局部刚体角速度等于涡量的一半。
 
 ### 反例比较：剪切与纯转动
 
@@ -118,7 +123,9 @@ $$\Phi=\boldsymbol\tau:\mathbf D=2\mu\sum_{i,j}(D'_{ij})^2+\zeta\theta^2.$$
 
 ## 例题：从速度场算真正的面力
 
-流场 $u=3y,v=w=0$，$y$ 单位m，系数3单位s⁻¹；$\mu=0.2$ Pa·s，$p=100$ Pa。先求 $D_{12}=D_{21}=1.5$ s⁻¹，故 $\tau_{12}=\tau_{21}=0.6$ Pa。对 $\mathbf n=(0,1,0)$ 的面，有 $\mathbf t=(0.6,-100,0)$ Pa：压力向内，黏性力沿 $x$ 方向。若面积0.01 m²且各量均匀，合力为 $(0.006,-1,0)$ N。
+流场 $u=3y,v=w=0$，$y$ 单位m，系数3单位s⁻¹；$\mu=0.2$ Pa·s，$p=100$ Pa。先求 $D_{12}=D_{21}=1.5$ s⁻¹，故 $\tau_{12}=\tau_{21}=0.6$ Pa。对 $\mathbf n=(0,1,0)$ 的面，有 $\mathbf t=(0.6,-100,0)$ Pa：压力向内，黏性力沿 $x$ 方向。
+
+若面积0.01 m²且各量均匀，合力为 $(0.006,-1,0)$ N。
 
 1. 把法线反向，同一切面另一侧的牵引是什么？
 <details><summary>查看解析</summary>
@@ -132,6 +139,6 @@ $\mathbf t(-\mathbf n)=-\boldsymbol\sigma\mathbf n=(-0.6,100,0)$ Pa。不要只�
 不能。一般式为 $\tau_{xy}=\mu(\partial_yu+\partial_xv)$；两项 $-\Omega$ 和 $+\Omega$ 相消。只有 $v_x=0$ 等额外条件满足时，才退化为平行剪切的简式。
 </details>
 
-## 讲义对照与后续阅读
+## 参考资料
 
 本章用于补足“受力描述→材料关系→场方程”的先修链。可对照 [MIT 2.20 Lecture 3：应力与守恒](https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture3/) 和 [Lecture 4：牛顿流体与边界](https://ocw.mit.edu/courses/2-20-marine-hydrodynamics-13-021-spring-2005/resources/lecture4/) 的主题；此处符号、算例与叙述独立编写。

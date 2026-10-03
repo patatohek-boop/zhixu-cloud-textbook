@@ -33,11 +33,10 @@
     "explanation": "Ri=Gr/Re²，表示浮力相对惯性的重要程度。"
   },
   "lab": null,
-  "revision": "2026-09-30 · 流动换热仿真专项"
+  "revision": "2026-10-04 · 知识页结构与行文整理"
 }
 ---
-
-## 严谨定义：无量纲数是项的相对大小
+## 流动换热的无量纲参数
 
 ### 尺度与参数
 
@@ -53,7 +52,7 @@ $$Gr=\frac{g\beta\Delta T L^3}{\nu^2},\quad Ra=GrPr,\quad Ri=\frac{Gr}{Re^2}=\fr
 
 $Ri$ 是浮力与惯性的尺度比，$Ra$ 用于自然对流。Mach 数 $Ma=U/a$ 比较速度与声速；Brinkman 数 $Br=\mu U^2/(\lambda\Delta T)$ 比较黏性耗散与导热。正负温差、重力与温度梯度方向还会影响浮力稳定性，不能只看绝对值。
 
-## 通俗解释：同样的网格，不一定能同时看清速度和温度
+## 速度与温度的空间尺度
 
 高 $Pr$ 流体的热扩散慢，温度边界层可能比速度边界层薄；低 $Pr$ 液态金属的热扩散快。由此，满足速度场分辨率的网格不一定满足壁面热流精度。湍流热输运也不只是把黏度改成某个更大的值。
 
@@ -65,9 +64,11 @@ $$\partial_{t^*}\theta+\mathbf u^*\cdot\nabla^*\theta=\frac1{RePr}\nabla^{*2}\th
 
 动量方程除以 $\rho U^2/L$ 后，黏性项系数为 $1/Re$，Boussinesq 浮力项大小系数为 $Ri$。因此尺度分析给出“可能重要的项”，但不会自动给出真实分离位置、转捩点或湍流强度。
 
-### 完整算例：缓慢空气冷却
+### 例题：缓慢空气冷却
 
-取 $L=0.1\ \mathrm m$、$U=0.2\ \mathrm{m/s}$、$\nu=1.5\times10^{-5}\ \mathrm{m^2/s}$、$Pr=0.7$、$\beta=1/300\ \mathrm{K^{-1}}$、$\Delta T=20\ \mathrm K$。得到 $Re\approx1333$、$Pe\approx933$、$Ri\approx1.64$。尽管入口是风扇驱动，浮力不宜直接忽略。改为 $U=2\ \mathrm{m/s}$ 时 $Ri\approx0.0164$，浮力相对惯性弱得多。
+取 $L=0.1\ \mathrm m$、$U=0.2\ \mathrm{m/s}$、$\nu=1.5\times10^{-5}\ \mathrm{m^2/s}$、$Pr=0.7$、$\beta=1/300\ \mathrm{K^{-1}}$、$\Delta T=20\ \mathrm K$。得到 $Re\approx1333$、$Pe\approx933$、$Ri\approx1.64$。
+
+尽管入口是风扇驱动，浮力不宜直接忽略。改为 $U=2\ \mathrm{m/s}$ 时 $Ri\approx0.0164$，浮力相对惯性弱得多。
 
 ## 从尺度到建模决策
 
