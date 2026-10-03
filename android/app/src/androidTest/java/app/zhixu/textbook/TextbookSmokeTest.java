@@ -35,15 +35,20 @@ public final class TextbookSmokeTest extends Instrumentation {
     private int failures;
     private String originalRecord;
     private boolean capturedRecord;
+    private String migrationAction;
+    private boolean expectRelease;
     private final StringBuilder report = new StringBuilder();
 
     @Override public void onCreate(Bundle arguments) {
         super.onCreate(arguments);
+        migrationAction = arguments == null ? null : arguments.getString("migrationAction");
+        expectRelease = arguments != null && "true".equals(arguments.getString("expectRelease"));
         start();
     }
 
     @Override public void onStart() {
         super.onStart();
+        if (migrationAction != null) { migration(); return; }
         try {
             launchReader();
             waitUntil(READY, "Revised textbook did not become ready");
@@ -88,6 +93,78 @@ public final class TextbookSmokeTest extends Instrumentation {
         }
     }
 
+
+    /** Synthetic-only migration probe for the isolated CI emulator; never use on personal data. */
+    private void migration() {
+        Bundle result = new Bundle();
+        try {
+            launchReader();
+            waitUntil(READY, "Migration reader not ready offline");
+            waitForReaderFocus();
+            String pkg = getTargetContext().getPackageName();
+            boolean independent = pkg.equals("app.zhixu.textbook.independent");
+            File exported = new File(getTargetContext().getFilesDir(), "migration-export.json");
+            if ("seed".equals(migrationAction)) {
+                require(!independent, "Seed must run in legacy sandbox");
+                require(Boolean.TRUE.equals(evaluate("Object.keys(window.ZHIXU.state.notes).length===0 && window.ZHIXU.state.completed.length===0")), "Seed requires clean synthetic emulator data");
+                JSONObject synthetic = new JSONObject();
+                synthetic.put("format", "zhixu-learning").put("version", 1);
+                synthetic.put("completed", new org.json.JSONArray().put(LESSON));
+                synthetic.put("bookmarks", new org.json.JSONArray().put("calculus-04"));
+                synthetic.put("notes", new JSONObject().put(LESSON, "MIGRATION_SOURCE_NOTE 合成记录 <script>不会执行</script>"));
+                synthetic.put("answers", new JSONObject().put(LESSON, new JSONObject().put("choice", 0).put("at", "2026-10-03T00:00:00Z")));
+                JSONObject imported = (JSONObject) evaluate("window.ZHIXU.importBackup(" + JSONObject.quote(synthetic.toString()) + ")");
+                require(imported.getBoolean("ok"), "Synthetic seed import failed");
+                writeSynthetic(exported, (String) evaluate("window.ZHIXU.exportBackup()"));
+            } else if ("empty".equals(migrationAction)) {
+                require(independent, "Empty check requires independent sandbox");
+                require(Boolean.TRUE.equals(evaluate("Object.keys(window.ZHIXU.state.notes).length===0 && window.ZHIXU.state.completed.length===0 && window.ZHIXU.state.bookmarks.length===0 && Object.keys(window.ZHIXU.state.answers).length===0")), "Independent app read legacy records before explicit import");
+            } else if ("import".equals(migrationAction)) {
+                require(independent, "Import requires independent sandbox");
+                String backup = new String(java.nio.file.Files.readAllBytes(new File(getTargetContext().getFilesDir(), "migration-input.json").toPath()), java.nio.charset.StandardCharsets.UTF_8);
+                JSONObject imported = (JSONObject) evaluate("window.ZHIXU.importBackup(" + JSONObject.quote(backup) + ")");
+                require(imported.getBoolean("ok"), "Cross-package JSON import failed");
+                assertMigrated(false);
+                evaluate("window.ZHIXU.state.notes['" + LESSON + "'] += '\\nINDEPENDENT_ONLY';window.ZHIXU.flush()");
+                writeSynthetic(exported, (String) evaluate("window.ZHIXU.exportBackup()"));
+            } else if ("source".equals(migrationAction)) {
+                require(!independent, "Source check requires legacy sandbox");
+                assertMigrated(false);
+                require(Boolean.TRUE.equals(evaluate("!window.ZHIXU.state.notes['" + LESSON + "'].includes('INDEPENDENT_ONLY')")), "Independent edit changed legacy record");
+            } else if ("destination".equals(migrationAction)) {
+                require(independent, "Destination check requires independent sandbox");
+                assertMigrated(true);
+            } else throw new AssertionError("Unknown migration action");
+            // Instrumentation.finish terminates its target process immediately. Let WebView's
+            // asynchronous localStorage backend commit synthetic writes before that forced exit.
+            if ("seed".equals(migrationAction) || "import".equals(migrationAction)) SystemClock.sleep(6000);
+            String evidence = (String) evaluate("window.ZHIXU.exportBackup()");
+            writeSynthetic(new File(getTargetContext().getFilesDir(), "migration-" + migrationAction + ".json"), evidence);
+            result.putString("stream", "\nZHIXU_MIGRATION_SUCCESS " + migrationAction + " " + pkg + "\n");
+            if (reader != null) runOnMainSync(() -> reader.finish());
+            waitForIdleSync();
+            SystemClock.sleep(1000);
+            finish(Activity.RESULT_OK, result);
+        } catch (Throwable failure) {
+            String evidence = "unavailable";
+            try { evidence = String.valueOf(evaluate("window.ZHIXU.exportBackup()")); } catch (Throwable ignored) {}
+            result.putString("stream", "\nZHIXU_MIGRATION_FAILED " + migrationAction + ": " + failure + "\nSynthetic state: " + evidence + "\n");
+            if (reader != null) runOnMainSync(() -> reader.finish());
+            finish(Activity.RESULT_CANCELED, result);
+        }
+    }
+
+    private void writeSynthetic(File file, String text) throws Exception {
+        try (FileOutputStream out = new FileOutputStream(file)) {
+            out.write(text.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        }
+    }
+
+    private void assertMigrated(boolean modified) throws Exception {
+        require(Boolean.TRUE.equals(evaluate("window.ZHIXU.state.completed.includes('" + LESSON + "') && window.ZHIXU.state.bookmarks.includes('calculus-04') && window.ZHIXU.state.notes['" + LESSON + "'].includes('MIGRATION_SOURCE_NOTE') && window.ZHIXU.state.answers['" + LESSON + "'].choice===0")), "Progress, bookmark, note, or quiz answer missing after migration/relaunch");
+        if (modified) require(Boolean.TRUE.equals(evaluate("window.ZHIXU.state.notes['" + LESSON + "'].includes('INDEPENDENT_ONLY')")), "Independent edit did not persist across relaunch");
+    }
+
     private interface Check { void run() throws Exception; }
 
     private void runCase(String name, Check check) {
@@ -100,6 +177,7 @@ public final class TextbookSmokeTest extends Instrumentation {
         status.putString("id", "ZhixuOfflineSmoke");
         sendStatus(1, status);
         try {
+            waitForReaderFocus();
             check.run();
             status.putString("stream", ".");
             sendStatus(0, status);
@@ -111,6 +189,17 @@ public final class TextbookSmokeTest extends Instrumentation {
             sendStatus(-2, status);
             report.append("FAIL ").append(name).append(": ").append(failure).append('\n');
         }
+    }
+
+    private void waitForReaderFocus() {
+        long until = SystemClock.uptimeMillis() + 10_000;
+        boolean[] focused = new boolean[1];
+        while (SystemClock.uptimeMillis() < until) {
+            runOnMainSync(() -> focused[0] = reader != null && reader.hasWindowFocus());
+            if (focused[0]) return;
+            SystemClock.sleep(100);
+        }
+        throw new AssertionError("Emulator window precondition: target reader is not foreground; check system ANR/overlay diagnostics");
     }
 
     private void launchReader() {
@@ -165,6 +254,9 @@ public final class TextbookSmokeTest extends Instrumentation {
             getTargetContext().getPackageName(), PackageManager.GET_PERMISSIONS);
         require("1.5.0".equals(info.versionName) && info.versionCode == 8, "App version does not match the textbook revision");
         String[] requested = info.requestedPermissions == null ? new String[0] : info.requestedPermissions;
+        require(requested.length == 0, "Application must request zero permissions");
+        if (expectRelease) require((info.applicationInfo.flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) == 0, "Expected non-debug release app");
+        require((BuildConfig.INDEPENDENT ? "app.zhixu.textbook.independent" : "app.zhixu.textbook").equals(info.packageName), "Unexpected distribution identity");
         for (String dangerous : new String[]{"android.permission.INTERNET", "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA", "android.permission.RECORD_AUDIO"})
             require(!Arrays.asList(requested).contains(dangerous), "Unexpected permission " + dangerous);
@@ -371,6 +463,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     }
 
     private void swipeFormula(boolean towardsRightEdge) throws Exception {
+        waitForReaderFocus();
         JSONObject box = (JSONObject) evaluate("(function(){var e=document.querySelector('#native-scroll-formula'),r=e.getBoundingClientRect();return {left:r.left,right:r.right,y:r.top+r.height/2,viewport:innerWidth}})()");
         int[] location = new int[2]; int[] width = new int[1];
         runOnMainSync(() -> { web.getLocationOnScreen(location); width[0]=web.getWidth(); });
@@ -430,6 +523,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     }
 
     private void tapVisible(String selector, boolean captureOutline) throws Exception {
+        waitForReaderFocus();
         String selected = "document.querySelector(" + JSONObject.quote(selector) + ")";
         evaluate(selected + ".scrollIntoView({block:'center',behavior:'instant'})");
         waitForConceptLayout();

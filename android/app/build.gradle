@@ -2,12 +2,16 @@ plugins {
     id 'com.android.application'
 }
 
+def independentEdition = providers.gradleProperty('independent').orElse('false').get().toBoolean()
+
 android {
     namespace 'app.zhixu.textbook'
     compileSdk { version = release(37) }
 
     defaultConfig {
-        applicationId 'app.zhixu.textbook'
+        applicationId independentEdition ? 'app.zhixu.textbook.independent' : 'app.zhixu.textbook'
+        manifestPlaceholders = [appLabel: independentEdition ? '@string/independent_app_name' : '@string/app_name']
+        buildConfigField 'boolean', 'INDEPENDENT', independentEdition.toString()
         minSdk 26
         targetSdk 35
         versionCode 8
