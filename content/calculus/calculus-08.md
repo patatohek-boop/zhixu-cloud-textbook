@@ -155,3 +155,41 @@ $$I_m=\frac{x}{2a^2(m-1)(x^2+a^2)^{m-1}}+\frac{2m-3}{2a^2(m-1)}I_{m-1}\quad(m\ge
 
 在 $x>0$ 上，取 $u=\ln x$、$dv=dx$，得到 $x\ln x-\int1\,dx=x\ln x-x+C$。
 </details>
+
+<!-- math-revision-20261003:integration-representative-practice:start -->
+## 代表性计算：把设式、区间和验算做完整
+
+### 练习 M06：重复一次因子与不可约二次因子
+
+在任一不跨过 $x=1$ 的开区间上，计算
+$$\int\frac{4x^2-2x+2}{(x-1)^2(x^2+1)}\,dx.$$
+要求写齐部分分式项，列出并求解系数方程，再对原函数求导验算。
+
+<details><summary>查看完整解析与检查</summary>
+
+分子次数较低，不需长除法。设
+$$\frac{A}{x-1}+\frac{B}{(x-1)^2}+\frac{Cx+D}{x^2+1}.$$
+乘回分母并比较 $x^3,x^2,x,1$ 的系数，得到
+$$A+C=0,\quad -A+B-2C+D=4,\quad A+C-2D=-2,\quad -A+B+D=2.$$
+由前后两条含一次项的关系先得 $C=-A,D=1$；再由剩下两式得 $A+B=3,B-A=1$，所以 $A=1,B=2,C=-1,D=1$。积分为
+$$F(x)=\ln|x-1|-\frac{2}{x-1}-\frac12\ln(x^2+1)+\arctan x+C_0.$$
+逐项求导给 $1/(x-1)+2/(x-1)^2+(-x+1)/(x^2+1)$，通分后的分子恰为 $4x^2-2x+2$。其中 $x^2+1>0$ 无须加绝对值；$\ln|x-1|$ 与积分常数须在不跨奇点的区间上解释，不能借原函数公式把穿越 $1$ 的反常积分当成普通端点差。
+
+</details>
+
+### 练习 M07：完成一次根式代换
+
+计算 $I=\int_0^1\sqrt{4-x^2}\,dx$。要求说明三角替换的角度区间、同时替换 $dx$ 和上下限，并给出可求导检查的原函数。
+
+<details><summary>查看完整解析与检查</summary>
+
+令 $x=2\sin\theta$；在本题 $0\le\theta\le\pi/6$ 上它单调且 $\cos\theta>0$，故 $\sqrt{4-x^2}=2\cos\theta$，$dx=2\cos\theta\,d\theta$。因此
+$$I=4\int_0^{\pi/6}\cos^2\theta\,d\theta=[2\theta+\sin2\theta]_0^{\pi/6}=\frac\pi3+\frac{\sqrt3}{2}.$$
+在 $-2<x<2$ 上回代可得
+$$F(x)=\frac{x}{2}\sqrt{4-x^2}+2\arcsin(x/2),$$
+其中反正弦取 $[-\pi/2,\pi/2]$ 主支。求导时三项合并为
+$$F'(x)=\frac12\sqrt{4-x^2}-\frac{x^2}{2\sqrt{4-x^2}}+\frac{2}{\sqrt{4-x^2}}=\sqrt{4-x^2}.$$
+端点差与前式一致，且 $\sqrt3\le I\le2$，所得约 $1.91322$ 在该区间。不要漏掉 $dx$ 的第二个 $2\cos\theta$。
+
+</details>
+<!-- math-revision-20261003:integration-representative-practice:end -->

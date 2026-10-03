@@ -27,8 +27,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class TextbookSmokeTest extends Instrumentation {
     private static final String RECORD_KEY = "zhixu-learning-v1";
     private static final String LESSON = "calculus-03";
-    private static final int TOTAL = 13;
-    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.4.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
+    private static final int TOTAL = 14;
+    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.5.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
     private Activity reader;
     private WebView web;
     private int number;
@@ -60,6 +60,7 @@ public final class TextbookSmokeTest extends Instrumentation {
             runCase("knowledgeFrameworkAndFoundationLabs", this::learningFramework);
             runCase("conceptStoriesOffline", this::conceptStories);
             runCase("tieredPracticeOffline", this::masteryPractice);
+            runCase("reportRevisionOffline", this::reportRevision);
             runCase("invalidRouteIsSafe", this::invalidRoute);
             runCase("backupRoundTripAndInjection", this::backups);
             runCase("notesSurviveRelaunch", this::relaunch);
@@ -162,7 +163,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     private void permissions() throws Exception {
         PackageInfo info = getTargetContext().getPackageManager().getPackageInfo(
             getTargetContext().getPackageName(), PackageManager.GET_PERMISSIONS);
-        require("1.4.0".equals(info.versionName) && info.versionCode == 7, "App version does not match the textbook revision");
+        require("1.5.0".equals(info.versionName) && info.versionCode == 8, "App version does not match the textbook revision");
         String[] requested = info.requestedPermissions == null ? new String[0] : info.requestedPermissions;
         for (String dangerous : new String[]{"android.permission.INTERNET", "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA", "android.permission.RECORD_AUDIO"})
@@ -267,7 +268,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     }
 
     private void learningFramework() throws Exception {
-        require(Boolean.TRUE.equals(evaluate("window.LEARNING_GUIDES.length===26 && !!window.KnowledgeMap")), "Learning framework assets missing offline");
+        require(Boolean.TRUE.equals(evaluate("window.LEARNING_GUIDES.length===30 && !!window.KnowledgeMap")), "Learning framework assets missing offline");
         evaluate("location.hash='#/map'");
         waitUntil("document.querySelectorAll('.map-course-card').length===7", "Seven-course framework failed offline");
         String[] courseIds = {"calculus", "linear-algebra", "thermodynamics", "heat-transfer", "fluid-mechanics", "python", "machine-learning"};
@@ -280,7 +281,7 @@ public final class TextbookSmokeTest extends Instrumentation {
         waitUntil("document.querySelector('.dependency-current') && document.querySelector('.dependency-current').textContent.includes('导数')", "Local dependency graph missing");
         saveReaderScreenshot("knowledge-map-screen.png");
         evaluate("location.hash='#/path'");
-        waitUntil("document.querySelectorAll('.core-route>li').length===26", "Core path incomplete offline");
+        waitUntil("document.querySelectorAll('.core-route>li').length===30", "Core path incomplete offline");
         evaluate("location.hash='#/course/calculus/calculus-03'");
         waitUntil("document.querySelector('#reading-depth') && document.querySelector('details.advanced-reading')", "Progressive reading controls missing");
         require(Boolean.TRUE.equals(evaluate("(function(){var heading=document.querySelector('details.advanced-reading h2');document.querySelector('[data-scroll=\"'+heading.id+'\"]').click();return heading.closest('details').open && document.activeElement===heading})()")), "TOC did not open and focus an original proof");
@@ -330,6 +331,27 @@ public final class TextbookSmokeTest extends Instrumentation {
         }
         evaluate("document.querySelector('.mastery-card').scrollIntoView({block:'start',behavior:'instant'})");
         saveReaderScreenshot("mastery-practice-screen.png");
+    }
+
+    private void reportRevision() throws Exception {
+        evaluate("location.hash='#/path'");
+        waitUntil("document.querySelector('.core-continuation') && document.querySelectorAll('.core-route>li').length===30", "Revised continuation path missing offline");
+        require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.core-continuation .relation').length===6 && document.documentElement.scrollWidth<=innerWidth+1")), "Continuation capabilities missing or overflowing");
+        evaluate("document.querySelector('.core-continuation h2').scrollIntoView({block:'start',behavior:'instant'})");
+        saveReaderScreenshot("core-continuation-screen.png");
+        String[] lessons = {"calculus/calculus-02", "calculus/calculus-04", "linear-algebra/linear-algebra-05", "linear-algebra/linear-algebra-06", "thermodynamics/thermodynamics-04", "heat-transfer/heat-transfer-30", "machine-learning/machine-learning-03", "machine-learning/machine-learning-06", "fluid-mechanics/fluid-mechanics-39"};
+        for (String lesson : lessons) {
+            String id = lesson.substring(lesson.indexOf('/') + 1);
+            evaluate("location.hash='#/course/" + lesson + "'");
+            waitUntil("window.ZHIXU.state.last==='"+id+"' && document.querySelector('#lesson-body')", "Revised lesson missing offline: "+lesson);
+            evaluate("document.querySelectorAll('#lesson-body details').forEach(function(d){d.open=true})");
+            require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0 && document.documentElement.scrollWidth<=innerWidth+1")), "Revised lesson fails formula/layout check: "+lesson);
+            require(Boolean.TRUE.equals(evaluate("Array.from(document.querySelectorAll('#lesson-body figure img')).every(function(img){img.loading='eager';return img.getAttribute('src').indexOf('assets/')===0})")), "Revised lesson uses a remote figure: "+lesson);
+            if ("fluid-mechanics-39".equals(id)) {
+                evaluate("Array.from(document.querySelectorAll('#lesson-body h3')).find(function(h){return h.textContent.includes('绝热液体')}).scrollIntoView({block:'start',behavior:'instant'})");
+                saveReaderScreenshot("report-revision-screen.png");
+            }
+        }
     }
 
     private void formulaTouchScroll() throws Exception {

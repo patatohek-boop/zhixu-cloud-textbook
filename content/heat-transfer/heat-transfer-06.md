@@ -16,7 +16,9 @@
     "从边界和单位检查模型并解原算例"
   ],
   "prerequisites": [
-    "内热源与变导热系数"
+    "内热源与变导热系数",
+    "calculus-24",
+    "calculus-29"
   ],
   "summary": "散热器加许多细片，是为增大与空气接触的面积；但肋片越远离根部越冷，新增面积未必都像根部一样有效。",
   "quiz": {
@@ -55,6 +57,14 @@
 ## 推导一：肋片方程及效率
 
 取微段 $dx$，轴向导入减导出 $kA_c\theta''dx$ 等于侧面对流 $hP\theta dx$，因此 $\theta''-m_f^2\theta=0$。根部 $\theta(0)=\theta_b$，绝热端 $\theta'(L)=0$。通解用双曲函数并代入两条件，得
+
+### 数学桥：指数通解怎样变成双曲余弦
+
+只需先会[常系数二阶ODE](#/course/calculus/calculus-24)及[指数与双曲函数](#/course/calculus/calculus-29)，不必学完整偏微分方程课。令 $m=m_f>0$，特征方程 $r^2-m^2=0$ 给出 $\theta=Ae^{mx}+Be^{-mx}$。定义 $\cosh z=(e^z+e^{-z})/2$、$\sinh z=(e^z-e^{-z})/2$，所以通解也可写成
+
+$$\theta=C\cosh[m(L-x)]+D\sinh[m(L-x)].$$
+
+这是同一组指数解的线性组合，平移到端部只是为了方便代边界。求导得 $\theta'=-mC\sinh[m(L-x)]-mD\cosh[m(L-x)]$；在 $x=L$ 代绝热条件，因 $\sinh0=0,\cosh0=1$，得 $D=0$。再代 $\theta(0)=\theta_b$，得 $C=\theta_b/\cosh(mL)$，于是恢复下式。检查端温为 $\theta_b/\cosh(mL)$ 而非0；$mL\to0$ 时温度趋于均匀。若 $h=0$ 使 $m=0$，直接解 $\theta''=0$ 得同一极限。
 
 $$\theta(x)=\theta_b\frac{\cosh[m_f(L-x)]}{\cosh(m_fL)}.$$
 

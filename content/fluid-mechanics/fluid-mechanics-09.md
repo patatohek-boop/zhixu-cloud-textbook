@@ -31,7 +31,7 @@
     "explanation": "绕轴的单位质量角动量为 rVθ，Vθ 是绝对速度的周向分量。"
   },
   "lab": null,
-  "revision": "2026-09-28 · 概念分段与教学审读"
+  "revision": "2026-10-03 · 科学条件与本科练习补强"
 }
 ---
 
@@ -59,14 +59,24 @@
 
 把 $b=\mathbf r\times\mathbf V$ 代入输运定理：
 $$\sum\mathbf M=\frac{d}{dt}\int_{CV}\rho(\mathbf r\times\mathbf V)dV+\int_{CS}\rho(\mathbf r\times\mathbf V)(\mathbf V\cdot\mathbf n)dA.$$
-对稳态或周期平均稳态叶轮取轴向分量，在一进一出、截面以代表性 $rV_\theta$ 描述时，$M_z=\dot m(r_2V_{\theta2}-r_1V_{\theta1})$。若分布明显不均匀，应保留积分，不能拿任意测点作截面代表。
+对稳态或周期平均稳态流动取轴向分量，一般先写
+
+$$M_z+M_{\mathrm{other},z}=\dot m(r_2V_{\theta2}-r_1V_{\theta1}),$$
+
+其中 $M_z$ 是转子对流体的轴矩，$M_{\mathrm{other},z}$ 是控制体内其余外部轴矩之和。这里是一进一出、截面用质量流加权的代表性 $rV_\theta$ 描述的形式；分布明显不均匀时应保留通量积分，不能拿任意测点作截面代表。
+
+**本节的叶轮控制体只围住旋转叶排。** 两个截面紧邻叶排前后；采用使端口压力无轴向力矩的截面，其他压力及体力的轴矩也可忽略；静止导叶排排除在外，机壳等非转子轴矩可忽略。由此才有 $M_{\mathrm{other},z}\approx0$，并化为 $M_z=\dot m(r_2V_{\theta2}-r_1V_{\theta1})$。若把转子和静止导叶一起圈入，不能把总外轴矩直接当作转子轴矩。
 
 微小转角 $d\vartheta$ 中，转子做功为 $dW=M_zd\vartheta$，故 $P=M_z\Omega$。除以 $\dot m$ 并使用 $U_i=\Omega r_i$，得到
 $$w=U_2V_{\theta2}-U_1V_{\theta1}.$$
 这就是欧拉透平方程的守恒推导。泵对流体输入功常为正；涡轮按同一约定为负，涡轮对外输出功则取其相反数。该式决定能量交换的骨架，不独自确定叶片滑移、损失或效率。
 
+### 换大控制体时，功率不能跟着套同一角速度
+
+例如同时围住转子与静止去旋流导叶，转子给流体 $+10\ \mathrm{N\cdot m}$，导叶给流体 $-4\ \mathrm{N\cdot m}$，则净角动量通量增加为 $6\ \mathrm{N\cdot m}$。若转子 $\Omega=100\ \mathrm{rad/s}$，输入功率为 $10\times100=1000\ \mathrm W$；静止导叶角速度为零，虽施加力矩却不输出轴功。把净轴矩 6 乘转子角速度得到 600 W 会漏算边界做功。
+
 ## 例题：叶轮的力矩和功率
-某叶轮角速度为 $100\,\mathrm{rad/s}$，流量 $\dot m=2\,\mathrm{kg/s}$。入口 $r_1=0.10\,\mathrm m$、$V_{\theta1}=0$；出口 $r_2=0.20\,\mathrm m$、$V_{\theta2}=15\,\mathrm{m/s}$。
+沿用只围住转子、其余轴矩可忽略的控制体。某叶轮角速度为 $100\,\mathrm{rad/s}$，流量 $\dot m=2\,\mathrm{kg/s}$。入口 $r_1=0.10\,\mathrm m$、$V_{\theta1}=0$；出口 $r_2=0.20\,\mathrm m$、$V_{\theta2}=15\,\mathrm{m/s}$。
 
 角动量方程给出 $M_z=2(0.20\times15)=6\,\mathrm{N\cdot m}$。流体所得功率 $P=\Omega M=600\,\mathrm W$。单位质量功为 300 J/kg；对水若全部作为理想机械能增加，等价扬程 $H=w/g\approx30.6\,\mathrm m$。实际可用水头还要扣除内部损失。
 
@@ -86,3 +96,5 @@ $$w=U_2V_{\theta2}-U_1V_{\theta1}.$$
 
 两端 $rV_\theta$ 均为零，净轴力矩为零。径向压力和径向力仍可存在。
 </details>
+
+叶排控制体与功率关系对照：[MIT Unified Engineering：Euler Turbine Equation](https://web.mit.edu/16.unified/www/FALL/thermodynamics/notes/node91.html)。

@@ -59,6 +59,11 @@ $0=F_{x_i}=f_{x_i}-f_{x_n}g_{x_i}/g_{x_n}$。
 令 $\lambda=f_{x_n}/g_{x_n}$，便有全部 $f_{x_i}=\lambda g_{x_i}$，第 $n$ 项也按定义成立，证毕。多个独立约束时，对隐函数定理给出的自由坐标重复此论证，等价于目标梯度属于约束梯度张成空间；需要先保证满秩，不能只多写几个乘子。
 
 ## 多个等式约束：把满秩条件真正用进证明
+
+<!-- math-revision-20261003:local-rank-prerequisite:start -->
+**本段回读先修。** 下面的秩、独立列、核与切空间需先会[秩与四个基本空间](#/course/linear-algebra/linear-algebra-07)，矩阵逆需会[矩阵运算](#/course/linear-algebra/linear-algebra-03)。第一次学单约束乘子，可先做本页“固定和时距离原点最近”例题，再回来读多约束和受限 Hessian。
+<!-- math-revision-20261003:local-rank-prerequisite:end -->
+
 设 $g=(g_1,\ldots,g_m):U\subset\mathbb R^n\to\mathbb R^m$ 为 $C^1$，$m<n$，在候选点 $a$ 有 $g(a)=c$、$Dg(a)$ 的秩为 $m$。这等价于 $m$ 个约束梯度无关，也等价于能够选出 $m$ 列组成可逆矩阵。重排坐标写 $x=(z,y)$，令 $B=D_yg(a)$ 可逆；向量隐函数定理把约束写为 $y=\psi(z)$，且 $D\psi=-B^{-1}D_zg$。
 
 受限函数 $F(z)=f(z,\psi(z))$ 在内部极值时 $D_zF=0$，所以

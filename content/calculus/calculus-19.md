@@ -92,6 +92,38 @@ $x=\rho\sin\phi\cos\theta,y=\rho\sin\phi\sin\theta,z=\rho\cos\phi$。
 ## 易错点与应用
 三重积分不总表示体积，密度积分给质量，位置加权积分可给质心，到转轴距离平方乘质量密度的积分给转动惯量。写惯量时应使用到指定轴的距离，不是到原点的距离。选择坐标后先列范围，再写微元，最后代入被积函数，这个固定顺序能减少遗漏。积分完成后检查量纲以及半径增大时的尺度律：均匀体积应随长度三次方增长，惯量还多出距离平方。
 
+<!-- math-revision-20261003:mixed-solid-bounds:start -->
+## 完整案例：抛物面与平面之间的立体
+
+接续[截痕与投影](#/course/calculus/calculus-14)，求 $D=\{x^2+y^2\le z\le4\}$ 的体积。先把表面、投影和积分次序分开。
+
+1. **交线给投影。** 两边界相交于 $x^2+y^2=4,z=4$；向 $xy$ 平面投影为半径 $2$ 的圆盘
+2. **选择坐标。** 柱坐标 $x=r\cos\theta,y=r\sin\theta$ 把下面写成 $z=r^2$，上面仍是 $z=4$
+3. **固定外层再读内层。** 当 $0\le\theta\le2\pi,0\le r\le2$，竖线上的 $z$ 从 $r^2$ 到 $4$。体积元为 $r\,dz\,dr\,d\theta$，不能把 Jacobian 的 $r$ 漏掉。轴线和角度接缝处的重复是零体积边界，不影响积分
+
+<figure class="teaching-figure"><a href="assets/diagrams/math-paraboloid-bounds.svg" target="_blank" rel="noopener" aria-label="打开大图：柱坐标的 r–z 截面：0≤r≤2，r²≤z≤4；在 r=1 处竖直线段从 z=1 到 z=4。灰色区域是截面，绕 z 轴转一周才得到立体。"><img src="assets/diagrams/math-paraboloid-bounds.svg" alt="柱坐标的 r–z 截面：0≤r≤2，r²≤z≤4；在 r=1 处竖直线段从 z=1 到 z=4。灰色区域是截面，绕 z 轴转一周才得到立体。" loading="lazy"></a><figcaption>柱坐标的 r–z 截面：0≤r≤2，r²≤z≤4；在 r=1 处竖直线段从 z=1 到 z=4。灰色区域是截面，绕 z 轴转一周才得到立体。 · 点按图形可放大。</figcaption></figure>
+
+$$V=\int_0^{2\pi}\int_0^2\int_{r^2}^4r\,dz\,dr\,d\theta
+=2\pi\int_0^2(4-r^2)r\,dr=8\pi.$$
+
+**独立换序检查。** 固定高度 $0\le z\le4$ 时，横截面圆盘半径为 $\sqrt z$、面积为 $\pi z$，所以 $V=\int_0^4\pi z\,dz=8\pi$。不是先背上下限，而是每次都回答“固定外层变量后，内层从哪儿走到哪儿”。
+
+### 练习 M10：改变高度并加入密度
+
+全部坐标取无量纲值。对 $D_3=\{x^2+y^2\le z\le3\}$，先计算体积，再对密度函数 $\rho(x,y,z)=z$ 计算质量 $M=\iiint_{D_3}\rho\,dV$。用竖直线与水平圆盘两种切法分别列式并复算质量。
+
+<details><summary>查看完整解析与检查</summary>
+
+交线给 $r=\sqrt3$，故 $0\le\theta\le2\pi,0\le r\le\sqrt3,r^2\le z\le3$。体积为
+$$V=2\pi\int_0^{\sqrt3}(3-r^2)r\,dr=\frac{9\pi}{2}.$$
+质量须再乘 $z$，不是把密度当成恒定顶面值：
+$$M=2\pi\int_0^{\sqrt3}\int_{r^2}^3zr\,dz\,dr
+=\pi\int_0^{\sqrt3}(9-r^4)r\,dr=9\pi.$$
+独立按高度切片：$z\in[0,3]$，每片面积 $\pi z$，密度在该片恒为 $z$，故 $M=\int_0^3z(\pi z)\,dz=9\pi$。平均密度 $M/V=2$ 位于最小 $0$ 与最大 $3$ 之间，提供额外量级检查。
+
+</details>
+<!-- math-revision-20261003:mixed-solid-bounds:end -->
+
 ## 练习
 1. 用极坐标计算单位圆盘面积。
 <details><summary>查看解析</summary>

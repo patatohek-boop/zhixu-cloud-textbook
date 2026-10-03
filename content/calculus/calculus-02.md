@@ -34,6 +34,50 @@
 }
 ---
 
+<!-- math-revision-20261003:calculus-02-starter:start -->
+## 先算一个靠近过程，再读量词
+
+第一遍先会三件事：区分附近趋势与点值；为任意允许误差选出输入范围；解释为什么有限个数值不能证明极限。[函数与定义域](#/course/calculus/calculus-01)中的代入、因式分解和绝对值足够起步；存在性证明可稍后回读。
+
+### 具体例子：补上一个点会改变极限吗
+
+令 $g(x)=(x^2-1)/(x-1)$，定义域先排除 $x=1$。当 $x=0.9,0.99,1.01,1.1$，函数值依次为 $1.9,1.99,2.01,2.1$。这提示附近趋势是 $2$。真正的依据是：只在 $x\ne1$ 时约去因子，得到 $g(x)=x+1$，于是 $|g(x)-2|=|x-1|$。
+
+在图上画直线 $y=x+1$，在 $(1,2)$ 留空心圆；若另规定 $g(1)=7$，就在 $(1,7)$ 加实心点。附近直线没动，所以极限仍为 $2$；实心点不在空洞处，所以不连续。下图把这两个位置分开画出；深入层原图的误差带可在学习极限定义时回读。
+
+<figure class="teaching-figure"><a href="assets/diagrams/math-limit-hole.svg"><img src="assets/diagrams/math-limit-hole.svg" alt="除x等于1外沿直线y=x+1；空心圆(1,2)表示附近趋向的位置，实心点(1,7)表示另指定的函数值。" loading="lazy"></a><figcaption>蓝线在(1,2)留孔，另把g(1)指定为7。极限为2，点值为7，故在x=1不连续。点按可放大。</figcaption></figure>
+
+### 操作步骤：从平方函数找一个有效的 δ
+
+证明 $\lim_{x\to1}x^2=1$。给定任意 $\varepsilon>0$，希望 $|x^2-1|=|x-1||x+1|<\varepsilon$。
+
+1. 先限制 $|x-1|<1$，则 $0<x<2$，所以 $|x+1|<3$
+2. 再要求 $|x-1|<\varepsilon/3$
+3. 合并取 $\delta=\min(1,\varepsilon/3)$；对所有 $0<|x-1|<\delta$，都有 $|x^2-1|<3\delta\le\varepsilon$
+
+例如 $\varepsilon=0.03$ 可取 $\delta=0.01$。这个范围不是最大范围，但足以保证承诺。$\delta$ 可依赖 $\varepsilon$，不能依赖尚未挑选的 $x$。刚才数值表只给直觉，这三个步骤才控制了所有合法输入。
+
+### 桥梁自检 M01：分母也会变化怎么办
+
+不借商法则，直接按定义证明 $\lim_{x\to2}1/x=1/2$：给任意 $\varepsilon>0$ 选择 $\delta$，写出分母的局部下界，并解释为何 $x=0$ 不会混进来。
+
+<details><summary>查看完整解析与检查</summary>
+
+先取 $|x-2|<1$，得 $1<x<3$，所以 $|x|>1$，且避开 $0$。此时
+$$\left|\frac1x-\frac12\right|=\frac{|x-2|}{2|x|}<\frac{|x-2|}{2}.$$
+因此可取 $\delta=\min(1,2\varepsilon)$。当 $0<|x-2|<\delta$ 时，误差严格小于 $\delta/2\le\varepsilon$。任意更小正 $\delta$ 也有效。数值检查：$\varepsilon=0.05$ 时取 $\delta=0.1$；端点 $x=1.9,2.1$ 的误差分别为 $1/38,1/42$，均小于 $0.05$，但这两个点的检查本身不能替代全区间估计。
+
+</details>
+
+### 原证明回读入口
+
+能不看答案完成自检后，展开下方“严谨定义”核对量词顺序，再读“极限定理与证明”。“连续函数的存在性定理”另用[完备性第25课](#/course/calculus/calculus-25)；第一遍可以先掌握定理条件和孔洞例子，不必先证明全部紧致结论。
+<!-- math-revision-20261003:calculus-02-starter:end -->
+
+<!-- math-revision-20261003:calculus-02-return-open:start -->
+<details class="advanced-reading"><summary>回读原有完整定义、证明、例题与练习</summary>
+<!-- math-revision-20261003:calculus-02-return-open:end -->
+
 ## 严谨定义：函数极限与连续
 
 ### 聚点：允许怎样接近
@@ -96,3 +140,7 @@ $\lim_{x\to\infty}f(x)=L$ 把输入条件改为 $x>M$；$\lim_{x\to a}f(x)=+\inf
 
 多项式连续，两端值为 $-1$ 与 $1$，故有根。若 $x_2>x_1$，则 $x_2^3+x_2>x_1^3+x_1$，函数严格递增，故根至多一个。
 </details>
+
+<!-- math-revision-20261003:calculus-02-return-close:start -->
+</details>
+<!-- math-revision-20261003:calculus-02-return-close:end -->

@@ -116,3 +116,34 @@ $$Ax=\sum_{i=1}^r\sigma_i u_i(v_i^\mathsf Tx).$$
 
 秩为三。其余方向对应零伸缩或额外的零空间结构。
 </details>
+
+<!-- math-revision-20261003:non-axis-svd-practice:start -->
+## 练习 M13：把混合方向的 SVD 完整算出来
+
+对
+$$A=\begin{pmatrix}3&1\\1&3\\0&0\end{pmatrix}$$
+求一个完整实 SVD $A=U\Sigma V^\mathsf T$：写 $A^\mathsf TA$、奇异值、两侧单位正交基和矩阵尺寸，最后乘回检查。再将矩阵改为
+$$B=\begin{pmatrix}1&1\\1&1\\0&0\end{pmatrix},$$
+沿同一方法说明零奇异方向应怎样处理，给出完整分解。
+
+<details><summary>查看完整解析与检查</summary>
+
+$A^\mathsf TA=\begin{pmatrix}10&6\\6&10\end{pmatrix}$。它的特征多项式为 $(t-16)(t-4)$，对应单位向量可取
+$$v_1=\frac1{\sqrt2}(1,1),\quad v_2=\frac1{\sqrt2}(1,-1),\qquad\sigma_1=4,\ \sigma_2=2.$$
+计算 $u_i=Av_i/\sigma_i$，得到 $u_1=(1,1,0)/\sqrt2$、$u_2=(1,-1,0)/\sqrt2$；再补 $u_3=(0,0,1)$。于是
+$$U=\begin{pmatrix}1/\sqrt2&1/\sqrt2&0\\1/\sqrt2&-1/\sqrt2&0\\0&0&1\end{pmatrix},\quad
+\Sigma_A=\begin{pmatrix}4&0\\0&2\\0&0\end{pmatrix},\quad
+V=\frac1{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix}.$$
+尺寸分别是 $3\times3,3\times2,2\times2$，相乘得到 $3\times2$。各列直接点乘可查 $U^\mathsf TU=I_3,V^\mathsf TV=I_2$。外积重构给
+$$4u_1v_1^\mathsf T+2u_2v_2^\mathsf T
+=\begin{pmatrix}2&2\\2&2\\0&0\end{pmatrix}+\begin{pmatrix}1&-1\\-1&1\\0&0\end{pmatrix}=A.$$
+这次列向量本来并不正交；输入和输出的主要方向都与标准坐标轴倾斜。
+
+对 $B$，$B^\mathsf TB=\begin{pmatrix}2&2\\2&2\end{pmatrix}$，同一 $v_1,v_2$ 分别对应特征值 $4,0$，奇异值为 $2,0$。有 $Bv_1=2u_1$、$Bv_2=0$。不能用 $Bv_2/0$ 定义 $u_2$；而是把已得到的 $u_1$ 补成输出空间正交基，上面同一 $u_2,u_3$ 恰可使用。因此保留上述 $U,V$，令
+$$\Sigma_B=\begin{pmatrix}2&0\\0&0\\0&0\end{pmatrix},\qquad B=2u_1v_1^\mathsf T.$$
+秩为 $1$，输入零空间由 $v_2$ 张成；输出左零空间由 $u_2,u_3$ 张成。检查 $B^\mathsf Tu_2=B^\mathsf Tu_3=0$，便能区分“一个被压掉的输入方向”与“两个无法生成的输出方向”。
+
+</details>
+
+延伸阅读：[MIT 18.06SC 的 SVD 课程与独立习题](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/positive-definite-matrices-and-applications/singular-value-decomposition/)。本题的两种矩阵与检查步骤可直接手算。
+<!-- math-revision-20261003:non-axis-svd-practice:end -->

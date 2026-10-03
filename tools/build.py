@@ -92,6 +92,7 @@ def build():
         assert node not in trail, 'Cyclic required learning relation: '+node
         for parent in edges.get(node,[]): visit(parent,trail|{node})
     for node in edges: visit(node,set())
+    version.update(learning_guides=len(guides),mainline_lessons=sum(g['mainline'] for g in guides))
     # Open-ended mastery work is separate from stable quiz/progress records.
     exercises=[]; exercise_ids=set()
     for path in sorted((ROOT/'content').glob('mastery-exercises-*.json')):
@@ -118,7 +119,7 @@ def build():
     for name,value in [('COURSES',courses),('TEXTBOOK_VERSION',version),('CONTENT_REVIEW',reviews),('LEARNING_GUIDES',guides),('MASTERY_EXERCISES',exercises)]:
         bundle+='window.'+name+' = '+json.dumps(value,ensure_ascii=False,separators=(',',':'))+';\n'
     target.write_text(bundle,encoding='utf-8',newline='\n')
-    stats={'version':version['version'],'courses':len(courses),'lessons':count,'reviewed_lessons':version['reviewed'],'added_lessons':version['added_lessons'],'chinese_characters':char_count,'mastery_exercises':len(exercises),'mastery_lessons':version['mastery_lessons'],'course_counts':{c['id']:len(c['chapters']) for c in courses}}
+    stats={'version':version['version'],'courses':len(courses),'lessons':count,'reviewed_lessons':version['reviewed'],'added_lessons':version['added_lessons'],'chinese_characters':char_count,'mastery_exercises':len(exercises),'mastery_lessons':version['mastery_lessons'],'learning_guides':version['learning_guides'],'mainline_lessons':version['mainline_lessons'],'course_counts':{c['id']:len(c['chapters']) for c in courses}}
     (ROOT/'site/assets/content-stats.json').write_text(json.dumps(stats,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     # Content-addressed resource queries prevent mixing old reader code with new lessons.
     # Normalize text line endings so Windows and Linux builds produce identical HTML.

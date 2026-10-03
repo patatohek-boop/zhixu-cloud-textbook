@@ -34,6 +34,46 @@
 }
 ---
 
+<!-- math-revision-20261003:calculus-04-starter:start -->
+## 先画依赖链：谁随着谁变化
+
+起步只需[导数与局部线性](#/course/calculus/calculus-03)。先算复合函数与单位；下方微小量证明用于解释公式为何成立，隐函数存在性可到[第27课](#/course/calculus/calculus-27)再回读。
+
+### 具体例子：一元复合不是两个独立函数
+
+令 $y=(1+2x)^3$。按依赖次序写成
+$$x\ \xrightarrow{u=1+2x}\ u\ \xrightarrow{y=u^3}\ y.$$
+
+第一步分别求每层：$du/dx=2$，$dy/du=3u^2$。第二步沿箭头相乘并代回：$dy/dx=3(1+2x)^2\cdot2=6(1+2x)^2$。第三步在 $x=1$ 检查，导数为 $54$；直接展开为 $1+6x+12x^2+8x^3$ 后求导，同样得到 $54$。
+
+### 同一条链放上单位
+
+圆盘半径 $r(t)=(2+0.1t)\,\mathrm{cm}$（$t$ 的数值以秒计），面积 $A=\pi r^2$。依赖链为 $t\to r\to A$。在 $t=0$，
+$$\frac{dA}{dt}=\underbrace{2\pi r}_{\mathrm{cm^2/cm}}\underbrace{\frac{dr}{dt}}_{\mathrm{cm/s}}=0.4\pi\,\mathrm{cm^2/s}.$$
+
+单位必须沿链消去中间的长度。用小步 $h$ 秒直接复算：$[A(h)-A(0)]/h=0.4\pi+0.01\pi h$，它趋于 $0.4\pi$。若漏乘 $dr/dt$，连单位也会从面积变化率变成长度。
+
+### 桥梁自检 M02：三层链与单位
+
+水箱边长 $s(t)=(1+0.2t)\,\mathrm m$，其中 $t$ 的数值以秒计；体积 $V=s^3$，传感器输出 $q=5V$，比例常数的单位为 $\mathrm{V/m^3}$（此处直立体 $\mathrm V$ 表示伏特）。求 $t=5\,\mathrm s$ 时 $dq/dt$，写清每层因子，并用直接展开检查。
+
+<details><summary>查看完整解析与检查</summary>
+
+依赖链 $t\to s\to V\to q$ 给
+$$\frac{dq}{dt}=\frac{dq}{dV}\frac{dV}{ds}\frac{ds}{dt}=5\cdot3s^2\cdot0.2.$$
+$t=5$ 时 $s=2\,\mathrm m$，所以 $dq/dt=12\,\mathrm{V/s}$。单位为 $(\mathrm{V/m^3})(\mathrm{m^3/m})(\mathrm{m/s})=\mathrm{V/s}$。直接写数值函数 $q(t)=5(1+0.2t)^3=5+3t+0.6t^2+0.04t^3$，求导在 $5$ 处得到 $3+6+3=12$。先把 $t=5$ 代成常数再求导会丢失时间依赖。
+
+</details>
+
+### 原证明回读入口
+
+展开下面“乘积、商和链式法则”可核对：每层在哪里可导；商分母为何不能为零；内层增量为零时证明为什么仍成立。学隐式求导时先完成原来的圆切线例，再读隐函数定理的存在条件。
+<!-- math-revision-20261003:calculus-04-starter:end -->
+
+<!-- math-revision-20261003:calculus-04-return-open:start -->
+<details class="advanced-reading"><summary>回读原有完整定义、证明、例题与练习</summary>
+<!-- math-revision-20261003:calculus-04-return-open:end -->
+
 ## 严谨定义与法则的适用点
 
 ### 乘积、商与复合的条件
@@ -93,3 +133,7 @@ $$\frac{dV}{dt}=4\pi r^2\frac{dr}{dt}.$$
 
 $A=s^2$，故 $dA/dt=2s\,ds/dt=30$ 平方厘米每秒。应先求导后代入。
 </details>
+
+<!-- math-revision-20261003:calculus-04-return-close:start -->
+</details>
+<!-- math-revision-20261003:calculus-04-return-close:end -->

@@ -69,6 +69,11 @@ $0=D_xF\,h+F_y\Delta y+o(\sqrt{\|h\|^2+|\Delta y|^2})$。
 
 ## 向量版本和逆函数定理的构造证明
 
+<!-- math-revision-20261003:local-vector-ift-prerequisite:start -->
+**本段回读先修。** $B^{-1}$ 与矩阵链式计算需先会[矩阵乘法、逆与可逆系统](#/course/linear-algebra/linear-algebra-03)；把本定理用于多个约束时，再补[秩和零空间](#/course/linear-algebra/linear-algebra-07)。本段会自行定义所用矩阵范数与收缩；这些矩阵先修不要求在前面的标量隐函数证明之前全部完成。
+<!-- math-revision-20261003:local-vector-ift-prerequisite:end -->
+
+
 ### 向量版的可逆矩阵条件
 
 现在 $y\in\mathbb R^m,F\in\mathbb R^m$；仍要求 $F$ 在 $(a,b)$ 的某个开邻域内为 $C^1$、$F(a,b)=0$，并要求 $B=D_yF(a,b)$ 可逆。

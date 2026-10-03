@@ -182,7 +182,7 @@
     "lessonId": "python-07",
     "type": "函数设计与边界测试",
     "level": "综合提高",
-    "prompt": "实现 `mean_at_least(values, *, threshold=20)`。输入为有限整数列表及整数阈值；返回所有不低于阈值的读数平均值，无达标值则返回 `None`，不得修改输入或在函数里打印。给出 `[18,20,22]`、阈值改为 22、空列表的结果；说明 `mean_at_least([20], 19)` 是否符合签名。测试调用后原列表不变。",
+    "prompt": "实现 `mean_at_least(values, *, threshold=20)`。输入为有限整数列表及整数阈值；返回所有不低于阈值的读数平均值（本题平均值须在 float 可表示范围内，返回浮点近似值，不承诺任意精度的精确均值），无达标值则返回 `None`，不得修改输入或在函数里打印。给出 `[18,20,22]`、阈值改为 22、空列表的结果；说明 `mean_at_least([20], 19)` 是否符合签名。测试调用后原列表不变。",
     "solution": "计算与展示分开，分子分母使用同一筛选条件：\n```python\ndef mean_at_least(values, *, threshold=20):\n    total = 0\n    count = 0\n    for value in values:\n        if value >= threshold:\n            total += value\n            count += 1\n    if count == 0:\n        return None\n    return total / count\n\nreadings = [18, 20, 22]\nassert mean_at_least(readings) == 21.0\nassert mean_at_least(readings, threshold=22) == 22.0\nassert mean_at_least([]) is None\nassert mean_at_least([18, 19]) is None\nassert mean_at_least([0], threshold=0) == 0.0\nassert readings == [18, 20, 22]\n```\n`*` 后的阈值只能按关键字提供，故 `mean_at_least([20], 19)` 在绑定参数阶段产生 `TypeError`；应写 `threshold=19`。`None` 表示没有可计算的平均，不能返回 0 冒充读数零的平均。此实现只承诺题设整数输入，并未宣称全面验证外部文本或异常数值。",
     "checkpoints": [
       "实现关键字参数接口",

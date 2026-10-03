@@ -1,0 +1,468 @@
+{
+  "version": "1.5.0",
+  "base_commit": "2ba30c914deaebb8e9d261de1eb929f0162ba738",
+  "scope": "基础衔接、科学条件澄清与代表性完整算例；保持253课号和原学习记录格式",
+  "counts": {
+    "modified_lessons": 57,
+    "mainline_guides": 30,
+    "mastery_exercises": 78,
+    "mastery_lessons": 26,
+    "new_body_exercises": 31,
+    "new_body_exercises_by_domain": {
+      "math": 14,
+      "thermal": 8,
+      "fluid": 4,
+      "computing": 5
+    },
+    "new_diagrams": 8,
+    "revised_diagrams": 1
+  },
+  "files": [
+    {
+      "path": "content/calculus/calculus-02.md",
+      "sha256": "569cb825fc2b81dfbeaf76a7541db68efe0d50844e6f91cdfcad6bf027a950b6"
+    },
+    {
+      "path": "content/calculus/calculus-04.md",
+      "sha256": "73c741367ab8b67a4611a72292931615268fb1aa88edf29a69fbb88f73a735ec"
+    },
+    {
+      "path": "content/calculus/calculus-05.md",
+      "sha256": "f77df45b43cb0ab2abb0d302155b0a7dd29e582808aa7dda06793a2b6de90642"
+    },
+    {
+      "path": "content/calculus/calculus-08.md",
+      "sha256": "2048c5edf77493f203aa6eefc5b7711cdbaaf5c1c258614fe25a0f06028f6156"
+    },
+    {
+      "path": "content/calculus/calculus-12.md",
+      "sha256": "312039353705ae2cd514ddced3cb4f5df729b202098cf54256106b3704f8235d"
+    },
+    {
+      "path": "content/calculus/calculus-14.md",
+      "sha256": "53434f04fb18bce8320e1e6516205c308f75b68ca93a385d38136b7985a80b48"
+    },
+    {
+      "path": "content/calculus/calculus-15.md",
+      "sha256": "45e0c98de935b7f4dcec4b7498dd63b3525a265409a3256457cdca706fe24ef7"
+    },
+    {
+      "path": "content/calculus/calculus-17.md",
+      "sha256": "6c5680c38604cc35e9290738d7503042d87416c25c680e2465983beaa3e99b21"
+    },
+    {
+      "path": "content/calculus/calculus-19.md",
+      "sha256": "6af3a250a58c068a4cb9c335af08c6ed31e067b33b63a34a604f7c3c08a57fd1"
+    },
+    {
+      "path": "content/calculus/calculus-22.md",
+      "sha256": "cf57966be6ce117b7836d1568948e2cc843c7104ec54201357338e06240ae2c8"
+    },
+    {
+      "path": "content/calculus/calculus-24.md",
+      "sha256": "d470c6b3d3caf41dee647c766e5525aed3a68ab1b0a44165b591c33fd66ddcbc"
+    },
+    {
+      "path": "content/calculus/calculus-25.md",
+      "sha256": "35410d4320a6f36cf18c35ae731bc0fbc1058249f2e88a1ffbf9e1bf0f341198"
+    },
+    {
+      "path": "content/calculus/calculus-27.md",
+      "sha256": "64d36c4d70c7e79acae78312d6910c3448f8004ebed2fac2d07ad87d8e452454"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-03.md",
+      "sha256": "212f83e643c4c898beecfac74668681a323f69bb99a44063e5fed0640fc53efa"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-04.md",
+      "sha256": "56bbd0b0f6121a664736461219236ae1663d60b52b1787f82fe75c52e00dec6c"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-05.md",
+      "sha256": "ebc16d2d1127ab984128aff66b3384d55a7e587dbade67f4334248461bf3aa50"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-08.md",
+      "sha256": "8169a324728a5986debbcc30509bd582b3cbc3cfa67a1f410721e36bf4f3e588"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-09.md",
+      "sha256": "963cbd9ef665fba8a80ea8d13e36d0d69bee8f7943335c959536d9df0742f60d"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-13.md",
+      "sha256": "67dbf245bb349baaced71cc9f3a65eb9772c5b2b815f3bf9ef713ae452a7f86c"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-16.md",
+      "sha256": "31abe6738b252a83413227258cb54e7b9224b7c7b6ff0a8821cba04bbca70dac"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-26.md",
+      "sha256": "525667a876f8b3ac60cc7543e8bd4c0c5b274fbf658a856d6e716c6b93e85331"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-39.md",
+      "sha256": "4cf7c1ba02596a3dfdd1985c853b9b1c587b67b34a300e515f82adea30f118a3"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-50.md",
+      "sha256": "0138fb3aa7f806dedbe6fee5d690d78f98e06812611efed0bad57a5cf04a3610"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-55.md",
+      "sha256": "08a28c287ac3088d7f397aa2724cf868fddf8b8ba05ed30ea1a06c8d523808fb"
+    },
+    {
+      "path": "content/heat-transfer/heat-transfer-06.md",
+      "sha256": "ab2c0a4ef5433fd782a3e694cb6e4d2d09b47e4d8ea8c9eeef2f7c2ca7e92c5c"
+    },
+    {
+      "path": "content/heat-transfer/heat-transfer-08.md",
+      "sha256": "aeeffabbb41d747a36d82a49f7ec73a0bb92529b3a5c805db0c3fbdf6a5cffe3"
+    },
+    {
+      "path": "content/heat-transfer/heat-transfer-10.md",
+      "sha256": "aa130f186a1f7c92755bd692a24f7cbf79d99c5df25394a2912da6ad346369e8"
+    },
+    {
+      "path": "content/heat-transfer/heat-transfer-12.md",
+      "sha256": "d060e70b35b1f87a13598a9cf685dbb73ebc884561fa4005954bfaac5baaac9c"
+    },
+    {
+      "path": "content/heat-transfer/heat-transfer-16.md",
+      "sha256": "9ec35ae83b9883cba1edfc6bc9b7ea46be1528ac342ba3deb107de327f868c7a"
+    },
+    {
+      "path": "content/heat-transfer/heat-transfer-22.md",
+      "sha256": "c10930f0a8109b1f461cfe7140d70e697833595133662a70403da3b57bacfb95"
+    },
+    {
+      "path": "content/heat-transfer/heat-transfer-27.md",
+      "sha256": "294b0fccf60c60a8da07f8bde0e3b963244ce143f9000d1cd807f0ebbc02a8e4"
+    },
+    {
+      "path": "content/heat-transfer/heat-transfer-30.md",
+      "sha256": "c6ec30e2e5c64497aea807d59c62460b49ef2f5293e4c2a630f3d19bf84319f8"
+    },
+    {
+      "path": "content/learning-guides-math.json",
+      "sha256": "729ac8374236313ff54c099ae8eb327346e644b4a31264fd5c304283475efd34"
+    },
+    {
+      "path": "content/linear-algebra/linear-algebra-05.md",
+      "sha256": "7d3b2a359d2438b79bd92634c0bcb06e084b030997b1294ce1e22841733b0c56"
+    },
+    {
+      "path": "content/linear-algebra/linear-algebra-06.md",
+      "sha256": "a801c095587b11b4b249e745578aa78ce3b2da10c6408738b44340e0c8ec88a6"
+    },
+    {
+      "path": "content/linear-algebra/linear-algebra-09.md",
+      "sha256": "af6b767d008cb9bbe1d7a2bec86e40811fdad2292042828d44299a1f57159dc2"
+    },
+    {
+      "path": "content/linear-algebra/linear-algebra-13.md",
+      "sha256": "eed3c237ccce2834a64d1e2a1e72e78855479c551fa6b5cfb3733011afdbf2c2"
+    },
+    {
+      "path": "content/linear-algebra/linear-algebra-18.md",
+      "sha256": "4f56ff2066cbb76ff794a2464088b30468e8833ffe387f460f94297000319061"
+    },
+    {
+      "path": "content/machine-learning/machine-learning-03.md",
+      "sha256": "abd97e106001187019a52a4b8f99251e789c2e77a2ddae563ebf3cd9720b26f2"
+    },
+    {
+      "path": "content/machine-learning/machine-learning-05.md",
+      "sha256": "7a87c7f26ff371d798f41eaeb0f2dd9c054b270b414a3426dc6841192324b9e8"
+    },
+    {
+      "path": "content/machine-learning/machine-learning-06.md",
+      "sha256": "e8682612d76e58a31b534474646d1d5963e25779b0063fec27761d31c7664c4f"
+    },
+    {
+      "path": "content/machine-learning/machine-learning-12.md",
+      "sha256": "f84cea1039c008a28f5d37a357ab148ee492dd2acb1cab80782797046644f1b1"
+    },
+    {
+      "path": "content/machine-learning/machine-learning-16.md",
+      "sha256": "ad7da55eb43499084e3ac45a3103c91f7d05514ce34b609a6792b9f2814cda7c"
+    },
+    {
+      "path": "content/machine-learning/machine-learning-36.md",
+      "sha256": "78948197a166f309151fe0d41d3476e24c04c2c18781a961cf4140055e43a9d0"
+    },
+    {
+      "path": "content/machine-learning/machine-learning-47.md",
+      "sha256": "9e93bb74eae1a3c9fe40b9c44fe9ce20d16dc5cffe548ac8df4e346d3c5a9e8e"
+    },
+    {
+      "path": "content/mastery-exercises-computing.json",
+      "sha256": "6b7758a5afecece3441ffa04ce2b3a6d8a0d41db545f5004545e55f4b61f3c7f"
+    },
+    {
+      "path": "content/python/python-02.md",
+      "sha256": "09bbfc2f87fe06ee2d41977bc1d3a5fbd6ad69a18f2f89fc45763b0a11ace69f"
+    },
+    {
+      "path": "content/python/python-05.md",
+      "sha256": "f19395808fc131f0cbbeaa8e016e091d590b8dbced4a5de141e37947f735a193"
+    },
+    {
+      "path": "content/python/python-08.md",
+      "sha256": "4d359522064c0218610dcc01542513ca883734f837ae4cc71717cc5a67fbaaef"
+    },
+    {
+      "path": "content/python/python-11.md",
+      "sha256": "e5787fe0cda4a5aa4cf0227734ee6b8f7cb3462a2a4105cbc670fba6d8a328d3"
+    },
+    {
+      "path": "content/python/python-25.md",
+      "sha256": "45b5cd3ca570746d9bbb7174d679c5189ca592d3a484d399936626fc16dcb0ba"
+    },
+    {
+      "path": "content/thermal-property-cases.json",
+      "sha256": "9b63d1b13719f4666a3679a77efa495cc62261387e2f757ed4f941741a2a0ec0"
+    },
+    {
+      "path": "content/thermodynamics/thermodynamics-04.md",
+      "sha256": "5a18c0679b92db968efe1bcb7c041f09d743bc9d121efb5922123c79f9cbc45a"
+    },
+    {
+      "path": "content/thermodynamics/thermodynamics-06.md",
+      "sha256": "2f6040075956e1ad8107a9ef840fee0b8302cc272e8ad6e8e563d016096115d9"
+    },
+    {
+      "path": "content/thermodynamics/thermodynamics-14.md",
+      "sha256": "f9ea5205964c70a5c1a12e83e6c61f3a9768e53d4385bdfa62584618c76cf559"
+    },
+    {
+      "path": "content/thermodynamics/thermodynamics-15.md",
+      "sha256": "c51ea331c95a58a47486d1c93ad6e3cdb5031a129f97cf17713702671c5513cb"
+    },
+    {
+      "path": "content/thermodynamics/thermodynamics-19.md",
+      "sha256": "cec75168976ca58022a2d7525105be8689e6e100e1ee8fab561e2ba66ac71799"
+    },
+    {
+      "path": "content/thermodynamics/thermodynamics-21.md",
+      "sha256": "3b5efa6287832c982559811acbfc8662811239bd4c706e5148635cda8bb6a44d"
+    },
+    {
+      "path": "content/thermodynamics/thermodynamics-24.md",
+      "sha256": "33c52e279e2726ecfa8330c580e279b98202f4940ffd70c5ca6288acff0cfb57"
+    },
+    {
+      "path": "content/thermodynamics/thermodynamics-25.md",
+      "sha256": "3d45a67f1e9b548393e557d290ed4c8827f9c8c5624674b5da181d0a872231d5"
+    },
+    {
+      "path": "site/assets/app.js",
+      "sha256": "5d44175214113f9ff30e8d3afb6410ddd412e5517c32c1a9531f807b9920f0c3"
+    },
+    {
+      "path": "site/assets/cfd-labs.js",
+      "sha256": "313c156db9ae44431e7a3e967956fe6ff54ad7b458335d7604211c5d7ac1118d"
+    },
+    {
+      "path": "site/assets/diagrams/bend-momentum-forces.svg",
+      "sha256": "9ac2c59a857aee34e7f9a375f4cdb3843c1f6de08a05109d4141c5c021ad2eec"
+    },
+    {
+      "path": "site/assets/diagrams/math-bridge-basis.svg",
+      "sha256": "e5ac7824f261b54142d57c2af7e619c8635e1565c327650b40c61b7676130e4d"
+    },
+    {
+      "path": "site/assets/diagrams/math-limit-hole.svg",
+      "sha256": "52ae3ae3b7d9c321fdd837e85f76f64cc7544f2d4c9db4175760ac2f710ec5d1"
+    },
+    {
+      "path": "site/assets/diagrams/math-paraboloid-bounds.svg",
+      "sha256": "7409bd0025ecf85320677fd012758f5c2e6639d3433ad6f55692a540ed05e169"
+    },
+    {
+      "path": "site/assets/diagrams/math-rational-asymptotes.svg",
+      "sha256": "e6c18829772bc056432f3cbb5d064a0ec80d91b994f3aa8ffda0969230c6ff7a"
+    },
+    {
+      "path": "site/assets/diagrams/thermal-compressor-cycle.svg",
+      "sha256": "5e92b619c7148dd47cfca4ebf79102ab0a6a3fcbb94484ab581dbd1e801697b5"
+    },
+    {
+      "path": "site/assets/diagrams/thermal-psychrometric-map.svg",
+      "sha256": "565ae960e1024670e6b2483ad4468e225a9a906e0685dbaa6d741d7d1eae5284"
+    },
+    {
+      "path": "site/assets/diagrams/thermal-rankine-state-map.svg",
+      "sha256": "6c198cde97b15e702bc2dc9cab35466f31af406ead65db7b36f7c7449d03c71c"
+    },
+    {
+      "path": "site/assets/diagrams/thermal-refrigeration-state-map.svg",
+      "sha256": "556a7ecce83e744cda8043c36fbe67b6368d05afb0e0f1e6d763192428de206a"
+    },
+    {
+      "path": "site/assets/knowledge-map.js",
+      "sha256": "2d94b7244c2aa1a1681435371a7dac86e1bc571f7a9a65b78f1b18fb14bed654"
+    }
+  ],
+  "visual_checks": [
+    {
+      "id": "calculus-02",
+      "course": "calculus",
+      "heading": "具体例子：补上一个点会改变极限吗",
+      "diagrams": [
+        "assets/diagrams/math-limit-hole.svg"
+      ]
+    },
+    {
+      "id": "calculus-04",
+      "course": "calculus",
+      "heading": "先画依赖链",
+      "diagrams": []
+    },
+    {
+      "id": "linear-algebra-05",
+      "course": "linear-algebra",
+      "heading": "从两个方向出发",
+      "diagrams": []
+    },
+    {
+      "id": "linear-algebra-06",
+      "course": "linear-algebra",
+      "heading": "用消元看见",
+      "diagrams": [
+        "assets/diagrams/math-bridge-basis.svg"
+      ]
+    },
+    {
+      "id": "calculus-05",
+      "course": "calculus",
+      "heading": "完整案例：极限、导数与渐近线一起画图",
+      "diagrams": [
+        "assets/diagrams/math-rational-asymptotes.svg"
+      ]
+    },
+    {
+      "id": "calculus-19",
+      "course": "calculus",
+      "heading": "完整案例：抛物面与平面之间的立体",
+      "diagrams": [
+        "assets/diagrams/math-paraboloid-bounds.svg"
+      ]
+    },
+    {
+      "id": "thermodynamics-04",
+      "course": "thermodynamics",
+      "heading": "实操：真正查一次NIST水表",
+      "diagrams": []
+    },
+    {
+      "id": "thermodynamics-06",
+      "course": "thermodynamics",
+      "heading": "能源动力续学：闭口压缩功与压气机功不是同一个账",
+      "diagrams": [
+        "assets/diagrams/thermal-compressor-cycle.svg"
+      ]
+    },
+    {
+      "id": "thermodynamics-15",
+      "course": "thermodynamics",
+      "heading": "完整实操：从温压输入构造水蒸汽循环",
+      "diagrams": [
+        "assets/diagrams/thermal-rankine-state-map.svg"
+      ]
+    },
+    {
+      "id": "thermodynamics-19",
+      "course": "thermodynamics",
+      "heading": "短实操：R134a的过热、过冷与等熵查表",
+      "diagrams": [
+        "assets/diagrams/thermal-refrigeration-state-map.svg"
+      ]
+    },
+    {
+      "id": "thermodynamics-21",
+      "course": "thermodynamics",
+      "heading": "短实操：在同一张焓湿图走完加热与冷却除湿",
+      "diagrams": [
+        "assets/diagrams/thermal-psychrometric-map.svg"
+      ]
+    },
+    {
+      "id": "heat-transfer-06",
+      "course": "heat-transfer",
+      "heading": "数学桥：指数通解怎样变成双曲余弦",
+      "diagrams": []
+    },
+    {
+      "id": "heat-transfer-08",
+      "course": "heat-transfer",
+      "heading": "正交、完备和收敛各负责什么",
+      "diagrams": []
+    },
+    {
+      "id": "heat-transfer-16",
+      "course": "heat-transfer",
+      "heading": "完整题：换热系数依赖未知壁温时怎样迭代",
+      "diagrams": []
+    },
+    {
+      "id": "heat-transfer-22",
+      "course": "heat-transfer",
+      "heading": "完整题：三表面灰腔必须联立",
+      "diagrams": []
+    },
+    {
+      "id": "heat-transfer-30",
+      "course": "heat-transfer",
+      "heading": "完整题：顺排管束从选式到热负荷",
+      "diagrams": []
+    },
+    {
+      "id": "fluid-mechanics-08",
+      "course": "fluid-mechanics",
+      "heading": "再算一次：90°弯管的两个方向",
+      "diagrams": [
+        "assets/diagrams/bend-momentum-forces.svg"
+      ]
+    },
+    {
+      "id": "fluid-mechanics-39",
+      "course": "fluid-mechanics",
+      "heading": "反例：绝热液体也可能因压降而升温",
+      "diagrams": []
+    },
+    {
+      "id": "machine-learning-03",
+      "course": "machine-learning",
+      "heading": "操作闭环：从五个原始读数到一份检验结论",
+      "diagrams": []
+    },
+    {
+      "id": "machine-learning-06",
+      "course": "machine-learning",
+      "heading": "操作闭环：先扫阈值，再封存选择，最后独立评价",
+      "diagrams": []
+    },
+    {
+      "id": "machine-learning-36",
+      "course": "machine-learning",
+      "heading": "为未来用途留下真正没见过的数据",
+      "diagrams": []
+    },
+    {
+      "id": "machine-learning-47",
+      "course": "machine-learning",
+      "heading": "两种共享表示的代理",
+      "diagrams": []
+    },
+    {
+      "id": "python-25",
+      "course": "python",
+      "heading": "练习三：只改一项规格，先写出会失败的测试",
+      "diagrams": []
+    }
+  ]
+}

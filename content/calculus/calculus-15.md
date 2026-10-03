@@ -111,6 +111,11 @@ $$\partial_i f(a)=\lim_{t\to0}\frac{f(a+te_i)-f(a)}t,$$
 
 ### 全导数控制所有方向的共同误差
 
+<!-- math-revision-20261003:local-jacobian-prerequisite:start -->
+**本段回读先修。** 向量值 Jacobian 与矩阵链式法则还需先会[矩阵乘法与线性映射的复合](#/course/linear-algebra/linear-algebra-03)。只学习前面的标量偏导、全微分和移动探头算例，可先跳过本段矩阵形式；这里的 $AB$ 必须按输入、输出维数检查。
+<!-- math-revision-20261003:local-jacobian-prerequisite:end -->
+
+
 对向量值函数 $f:U\to\mathbb R^m$，极限定义把输出绝对值换成欧氏范数；偏导逐分量定义。全可微指存在**线性映射** $A:\mathbb R^n\to\mathbb R^m$ 使
 $$f(a+h)=f(a)+Ah+r(h),\qquad \frac{\|r(h)\|}{\|h\|}\to0.$$
 

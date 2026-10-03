@@ -17,7 +17,12 @@
     "用二分区间求第一特征根，并以初值检验一项截断"
   ],
   "prerequisites": [
-    "集总热容：小物体如何随时间冷却"
+    "集总热容：小物体如何随时间冷却",
+    "calculus-07",
+    "calculus-08",
+    "calculus-24",
+    "linear-algebra-10",
+    "linear-algebra-17"
   ],
   "summary": "厚面包放进烤箱，表面已经热了，中心还可能很冷。",
   "quiz": {
@@ -53,6 +58,10 @@
 
 初始温度形状像由多个“音符”叠加成的声音，细小起伏衰减快，最慢的宽缓模式最后占主导。早期只留一个音符通常还拼不出正确形状。
 
+## 先修只接到本节需要的工具
+
+回看[ODE的指数与正弦解](#/course/calculus/calculus-24)、[定积分](#/course/calculus/calculus-07)与[积分计算](#/course/calculus/calculus-08)、[内积与投影](#/course/linear-algebra/linear-algebra-10)及[函数模态和完备性边界](#/course/linear-algebra/linear-algebra-17)。这里把向量点积换成 $\langle f,g\rangle=\int_0^1fg\,dX$；系数“内积除模平方”与有限维投影同形，但无限展开仍要另用定理。
+
 ## 逐步证明：平板级数从何而来
 
 ### 第一步：分离空间形状与时间衰减
@@ -72,6 +81,12 @@ $$\lambda\sin\lambda=Bi\cos\lambda\quad\Rightarrow\quad\lambda\tan\lambda=Bi.$$
 中心处两导数为零；表面处每个模态都有 $F_n'=-BiF_n$，两个乘积也恰好抵消。所以端点项为零，留下 $(\lambda_n^2-\lambda_m^2)\int_0^1F_mF_n dX=0$。故不同模态正交，可以将初值1投影：
 
 $$A_n=\frac{\int_0^1\cos(\lambda_nX)dX}{\int_0^1\cos^2(\lambda_nX)dX}=\frac{4\sin\lambda_n}{2\lambda_n+\sin2\lambda_n}.$$
+
+### 正交、完备和收敛各负责什么
+
+上面证明的是**正交性**，它使不同模态的投影互不干扰；不能单凭正交断定所有允许的初值都能展开。接下来借用正则Sturm–Liouville展开定理：本节有限区间、常系数、自伴齐次分离边界条件下，特征函数在 $L^2(0,1)$ 中**完备**，故平方可积初值的模态投影按均方意义收敛到初值。
+
+对 $t>0$，指数衰减使本题级数及所需导数在离开初时刻的区间上收敛，构成满足热方程与边界的光滑解。$t=0$ 与突然改变的对流边界交会处可能不兼容：均匀初温的零梯度与新Robin条件未必同时成立，不能声称所有导数在此处连续。圆柱/球体采用相应径向算子的正则中心条件与带权空间 $L^2((0,1),X^m dX)$ 的谱展开结论，不能把它们说成已由正交性全部证明。这里推导边界方程与投影系数，完备及收敛定理作先修借用；可参阅[MIT热方程讲义](https://ocw.mit.edu/courses/18-303-linear-partial-differential-equations-fall-2006/d11b374a85c3fde55ec971fe587f8a50_heateqni.pdf)。
 
 ### 第四步：把所有模态叠加
 

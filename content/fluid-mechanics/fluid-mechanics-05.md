@@ -31,7 +31,7 @@
     "explanation": "皂泡有两个界面，Δp=4σ/R；液滴有一个界面，Δp=2σ/R。"
   },
   "lab": null,
-  "revision": "2026-09-28 · 概念分段与教学审读"
+  "revision": "2026-10-03 · 科学条件与本科练习补强"
 }
 ---
 
@@ -65,7 +65,7 @@ $$\Delta p=\sigma(1/R_1+1/R_2).$$
 
 ## 推导二：旋转液面为什么是抛物面
 
-刚体旋转时流体质点的径向加速度为 $-\Omega^2r$。径向动量平衡 $-\partial p/\partial r=-\rho\Omega^2r$，竖直仍有 $\partial p/\partial z=-\rho g$。沿自由表面 $p=p_{\mathrm{atm}}$，所以 $dp=\rho\Omega^2r\,dr-\rho g\,dz=0$，积分得 $z-z_0=\Omega^2r^2/(2g)$。$z_0$ 要再由总液体体积确定；不能同时随意固定轴心水位与液体体积。
+刚体旋转时流体质点的径向加速度为 $-\Omega^2r$。径向动量平衡 $-\partial p/\partial r=-\rho\Omega^2r$，竖直仍有 $\partial p/\partial z=-\rho g$。在忽略表面张力压差与壁面弯月面、气相压力近似均匀的模型中，沿自由表面 $p=p_{\mathrm{atm}}$，所以 $dp=\rho\Omega^2r\,dr-\rho g\,dz=0$，积分得 $z-z_0=\Omega^2r^2/(2g)$。$z_0$ 要再由总液体体积确定；不能同时随意固定轴心水位与液体体积。
 
 ## 例题：细管中的水
 取水的 $\sigma=0.072\,\mathrm{N/m}$、$\rho=1000\,\mathrm{kg/m^3}$，完全润湿玻璃，$\theta\approx0$，管半径 $r=0.5\,\mathrm{mm}$。代入得 $h=0.144/(1000\times9.81\times0.0005)=0.0294\,\mathrm m$，即约 2.94 cm。

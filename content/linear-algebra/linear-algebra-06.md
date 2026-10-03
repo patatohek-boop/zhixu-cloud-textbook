@@ -34,6 +34,46 @@
 }
 ---
 
+<!-- math-revision-20261003:linear-algebra-06-starter:start -->
+## 用消元看见：冗余方向与唯一坐标
+
+先会[消元](#/course/linear-algebra/linear-algebra-02)和[张成与子空间](#/course/linear-algebra/linear-algebra-05)。这一遍先做“列方程→消元→代回”，再回读为什么任何基都有相同长度。
+
+### 具体例子：三个箭头只有两个独立方向
+
+令 $v_1=(1,1)$、$v_2=(1,-1)$、$v_3=(2,0)$。检查零组合的系数：
+$$\begin{pmatrix}1&1&2\\1&-1&0\end{pmatrix}
+\longrightarrow\begin{pmatrix}1&1&2\\0&-2&-2\end{pmatrix}
+\longrightarrow\begin{pmatrix}1&0&1\\0&1&1\end{pmatrix}.$$
+
+于是 $c_1=-c_3,c_2=-c_3$。取 $c_3=1$ 得非零系数组合 $-v_1-v_2+v_3=0$，所以三向量相关；它们两两不平行仍不足以保证整组无关。
+
+### 删去冗余后，坐标如何唯一
+
+只保留 $v_1,v_2$，零组合给 $a+b=0,a-b=0$，只能 $a=b=0$。任意 $(x,y)$ 又都能写成
+$$\frac{x+y}{2}v_1+\frac{x-y}{2}v_2,$$
+所以这两个方向既无关又张成平面，构成基。目标 $(4,2)$ 的基坐标为 $(3,1)$。下面图中箭头端点按同一比例绘制；基坐标 $3,1$ 是权重，不是标准横纵坐标。
+<figure class="teaching-figure"><a href="assets/diagrams/math-bridge-basis.svg" target="_blank" rel="noopener" aria-label="打开大图：斜基 v₁=(1,1)、v₂=(1,−1)：3v₁+v₂=(4,2)，三条箭头的坐标使用同一比例。"><img src="assets/diagrams/math-bridge-basis.svg" alt="斜基 v₁=(1,1)、v₂=(1,−1)：3v₁+v₂=(4,2)，三条箭头的坐标使用同一比例。" loading="lazy"></a><figcaption>斜基 v₁=(1,1)、v₂=(1,−1)：3v₁+v₂=(4,2)，三条箭头的坐标使用同一比例。 · 点按图形可放大。</figcaption></figure>
+
+### 桥梁自检 M04：改变目标，并保留冗余列
+
+求 $w=(5,1)$ 在有序基 $(v_1,v_2)$ 中的坐标；再找出它在 $(v_1,v_2,v_3)$ 中的全部系数组合，解释为何后一组坐标不唯一。
+
+<details><summary>查看完整解析与检查</summary>
+
+$a+b=5,a-b=1$，所以基坐标为 $(3,2)$，代回 $3(1,1)+2(1,-1)=(5,1)$。含第三列时有 $c_1+c_3=3,c_2+c_3=2$，令 $c_3=t\in\mathbb R$，所有系数为 $(3-t,2-t,t)$。代回可见输出恒为 $(5,1)$。例如 $(3,2,0)$ 与 $(2,1,1)$ 已不同；冗余列带来自由参数，而不是目标向量有两个不同位置。
+
+</details>
+
+### 原证明回读入口
+
+展开下面的“基坐标为何存在且唯一”，把两次表示相减，便接上刚才的零组合检验。“交换引理与维数良定义”回答为什么不同基的长度总相同，宜在能独立消元后回读；不应先靠“二维中两个方向”来代替无关和张成检查。
+<!-- math-revision-20261003:linear-algebra-06-starter:end -->
+
+<!-- math-revision-20261003:linear-algebra-06-return-open:start -->
+<details class="advanced-reading"><summary>回读原有完整定义、证明、例题与练习</summary>
+<!-- math-revision-20261003:linear-algebra-06-return-open:end -->
+
 ## 严谨定义：无关、基、坐标和有限维
 
 ### 线性无关与相关
@@ -105,3 +145,7 @@ $$\dim(U+W)=\dim U+\dim W-\dim(U\cap W).$$
 
 可取 $\{1,t,t^2\}$。任意成员由三个系数唯一表示，所以维数为三，包括零多项式在内。
 </details>
+
+<!-- math-revision-20261003:linear-algebra-06-return-close:start -->
+</details>
+<!-- math-revision-20261003:linear-algebra-06-return-close:end -->

@@ -54,7 +54,7 @@ test('all routes, layered maps, lesson links and readable widths',async({page},i
   for(const id of c.lessons.filter(id=>info.project.name==='width-320'||data.guides.includes(id))){await open(page,'#/course/'+c.id+'/'+id);await noOverflow(page,id);await expect(page.locator('.math-error')).toHaveCount(0);if(info.project.name==='width-320'){await page.locator('#lesson-body details').evaluateAll(xs=>xs.forEach(d=>d.open=true));await noOverflow(page,id+' all proofs and answers expanded');}}
  }
  await open(page,'#/map/calculus/calculus-03');await expect(page.locator('.dependency-current')).toContainText('导数');await noOverflow(page,'local dependency diagram');if(capture)await page.screenshot({path:info.outputPath('map-local-dependencies.png'),fullPage:true});if(capture)await page.locator('.map-selected').screenshot({style:cleanCaptureChrome,path:info.outputPath('map-selected-concept.png')});
- await open(page,'#/path');await expect(page.locator('.core-route>li')).toHaveCount(26);await noOverflow(page,'mainline path');
+ await open(page,'#/path');await expect(page.locator('.core-route>li')).toHaveCount(30);await noOverflow(page,'mainline path');
  await open(page,'#/course/calculus/calculus-03');if(capture)await page.screenshot({path:info.outputPath('reader-starter.png'),fullPage:false});
  await page.locator('#reading-depth').click();await expect(page.locator('details.advanced-reading')).toHaveAttribute('open','');await noOverflow(page,'expanded original proof');
  await page.evaluate(()=>{window.print=()=>{window.__printOpened=[...document.querySelectorAll('.prose details')].every(d=>d.open);};});await page.locator('#print').click();expect(await page.evaluate(()=>window.__printOpened)).toBe(true);
@@ -92,7 +92,7 @@ test('concept stories are controllable, readable and disposed on navigation',asy
 
 test('every new diagram can be enlarged to readable labels without leaving the lesson',async({page},info)=>{
  const fs=require('node:fs'),path=require('node:path'),capture=['width-320','width-390','width-1440'].includes(info.project.name);
- await open(page,'#/path');const guides=await page.evaluate(()=>LEARNING_GUIDES.map(g=>({id:g.id,course:ZHIXU.all.find(l=>l.id===g.id).course.id})));
+ await open(page,'#/path');const guides=await page.evaluate(()=>LEARNING_GUIDES.filter(g=>MASTERY_EXERCISES.some(e=>e.lessonId===g.id)).map(g=>({id:g.id,course:ZHIXU.all.find(l=>l.id===g.id).course.id})));
  for(const guide of guides){
   const hash='#/course/'+guide.course+'/'+guide.id;await open(page,hash);const image=page.locator('#lesson-body figure img[src*="learn-"]').first();await expect(image).toBeVisible();const src=await image.getAttribute('src');
   const svg=fs.readFileSync(path.resolve(__dirname,'../../site',src),'utf8'),box=svg.match(/viewBox="([^"]+)"/)[1].trim().split(/\s+/).map(Number),fonts=[...svg.matchAll(/font-size\s*(?:=|:)\s*["']?(\d+(?:\.\d+)?)/g)].map(m=>Number(m[1]));expect(fonts.length,src).toBeGreaterThan(0);
@@ -106,7 +106,7 @@ test('every new diagram can be enlarged to readable labels without leaving the l
 
 test('tiered practice reveals verified solutions without automatic grading',async({page},info)=>{
  const capture=['width-320','width-390','width-1440'].includes(info.project.name);await open(page,'#/path');
- const guides=await page.evaluate(()=>LEARNING_GUIDES.map(g=>({id:g.id,course:ZHIXU.all.find(l=>l.id===g.id).course.id})));
+ const guides=await page.evaluate(()=>LEARNING_GUIDES.filter(g=>MASTERY_EXERCISES.some(e=>e.lessonId===g.id)).map(g=>({id:g.id,course:ZHIXU.all.find(l=>l.id===g.id).course.id})));
  for(const guide of guides){
   await open(page,'#/course/'+guide.course+'/'+guide.id);const practice=page.locator('.mastery-practice');await expect(practice).toBeVisible();await expect(practice.locator('.mastery-card')).toHaveCount(3);await expect(practice.locator('.mastery-intro')).toContainText('不会自动评分');
   const first=practice.locator('.mastery-answer').first();await expect(first).not.toHaveAttribute('open','');await first.locator('summary').click();await expect(first).toHaveAttribute('open','');await expect(first.locator('.mastery-solution')).toBeVisible();await first.locator('summary').click();await expect(first).not.toHaveAttribute('open','');
@@ -126,4 +126,39 @@ test('tiered practice reveals verified solutions without automatic grading',asyn
  await open(page,'#/course/calculus/calculus-03');const summary=page.locator('.mastery-answer summary').first();await summary.focus();await summary.press('Enter');await expect(page.locator('.mastery-answer').first()).toHaveAttribute('open','');await summary.press('Enter');await expect(page.locator('.mastery-answer').first()).not.toHaveAttribute('open','');
  await page.locator('.mastery-answer').first().evaluate(d=>d.open=true);const solutionParagraph=page.locator('.mastery-solution p').first();const initialSize=await solutionParagraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize));await page.locator('#font-up').click();await page.locator('#font-up').click();expect(await solutionParagraph.evaluate(el=>parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThan(initialSize);await noOverflow(page,'enlarged practice solution font');
  await page.locator('#theme').click();await page.locator('.mastery-answer').evaluateAll(xs=>xs.forEach(d=>d.open=true));await noOverflow(page,'dark practice');if(capture)await page.locator('.mastery-card').first().screenshot({style:cleanCaptureChrome,path:info.outputPath('mastery-dark.png')});
+});
+
+test('report revision examples, continuation path and diagrams remain readable',async({page},info)=>{
+ const fs=require('node:fs'),path=require('node:path');
+ const revision=JSON.parse(fs.readFileSync(path.resolve(__dirname,'../../reviews/report-revision-2026-10-03.json'),'utf8'));
+ const capture=['width-390','width-1440'].includes(info.project.name);
+ await open(page,'#/path');await expect(page.locator('.core-continuation')).toContainText('本科核心续学');
+ await expect(page.locator('.core-continuation .relation')).toHaveCount(6);await noOverflow(page,'undergraduate continuation');
+ if(capture){await page.locator('.core-continuation h2').scrollIntoViewIfNeeded();await page.screenshot({path:info.outputPath('report-core-continuation.png'),fullPage:false});}
+ const continuationCourses=await page.evaluate(()=>COURSES.map(c=>c.id));for(const course of continuationCourses){await open(page,'#/path/'+course);expect(await page.locator('.core-continuation .relation').count(),course+' has follow-on core work').toBeGreaterThan(0);await noOverflow(page,course+' continuation');}
+ for(const entry of revision.visual_checks){
+  const hash='#/course/'+entry.course+'/'+entry.id;await open(page,hash);
+  await page.locator('#lesson-body details.advanced-reading').evaluateAll(xs=>xs.forEach(d=>d.open=true));
+  const heading=page.locator('#lesson-body h2,#lesson-body h3').filter({hasText:entry.heading}).first();
+  await expect(heading,entry.id+' reviewed section').toHaveCount(1);await heading.scrollIntoViewIfNeeded();
+  await expect(page.locator('.math-error')).toHaveCount(0);await noOverflow(page,entry.id+' reviewed section');
+  if(capture)await page.screenshot({path:info.outputPath('report-'+entry.id+'.png'),fullPage:false});
+  // Also inspect the complete worked/variant answer at the narrowest width.
+  await page.locator('#lesson-body details').evaluateAll(xs=>xs.forEach(d=>d.open=true));await noOverflow(page,entry.id+' revised answers');
+  for(const src of entry.diagrams||[]){
+   const image=page.locator('#lesson-body figure img').filter({visible:true}).and(page.locator('img[src="'+src+'"]')).first();
+   await expect(image).toBeVisible();expect(await image.evaluate(el=>el.complete&&el.naturalWidth>0),src).toBe(true);
+   const anchor=image.locator('..');await expect(anchor).toHaveAttribute('aria-haspopup','dialog');await image.click();
+   await expect(page.locator('#figure-dialog')).toBeVisible();await noOverflow(page,src+' figure dialog');
+   const svg=fs.readFileSync(path.resolve(__dirname,'../../site',src),'utf8');
+   const box=svg.match(/viewBox="([^"]+)"/)[1].trim().split(/\s+/).map(Number);
+   const fonts=[...svg.matchAll(/font-size\s*(?:=|:)\s*["']?(\d+(?:\.\d+)?)/g)].map(m=>Number(m[1]));
+   expect(fonts.length,src+' declares readable label sizes').toBeGreaterThan(0);
+   let actual=await page.locator('.figure-enlarged').boundingBox();
+   for(let clicks=0;Math.min(...fonts)*actual.width/box[2]<14&&clicks<6;clicks++){await page.getByRole('button',{name:'放大图片',exact:true}).click();actual=await page.locator('.figure-enlarged').boundingBox();}
+   expect(Math.min(...fonts)*actual.width/box[2],src+' labels are readable using the provided zoom controls').toBeGreaterThanOrEqual(14);
+   if(capture)await page.screenshot({path:info.outputPath('report-figure-'+path.basename(src,'.svg')+'.png'),fullPage:false});
+   await page.getByRole('button',{name:'关闭大图',exact:true}).click();await expect(page.locator('#figure-dialog')).not.toBeVisible();expect(new URL(page.url()).hash).toBe(hash);
+  }
+ }
 });

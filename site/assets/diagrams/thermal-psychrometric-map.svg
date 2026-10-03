@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="760" viewBox="0 0 720 760" role="img" aria-label="湿空气：加热、露点与除湿"><title>湿空气：加热、露点与除湿</title><desc>总压101.325 kPa；理想混合物近似；干空气质量基准</desc><defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="context-stroke"/></marker></defs><style>text{font-family:"Noto Sans CJK SC","Microsoft YaHei",sans-serif;fill:#172d40;font-size:18px}.small{font-size:16px}.title{font-size:26px;font-weight:700}.tick{font-size:16px}</style><rect width="720" height="100%" fill="#fff"/><text x="28" y="38" class="title">湿空气：加热、露点与除湿</text><text x="28" y="65" class="small">总压101.325 kPa；理想混合物近似；干空气质量基准</text>
+<polyline points="82.000,126.000 82.000,612.000" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="82.00" y="637.00" class="tick" text-anchor="middle">0</text>
+<polyline points="196.400,126.000 196.400,612.000" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="196.40" y="637.00" class="tick" text-anchor="middle">5</text>
+<polyline points="310.800,126.000 310.800,612.000" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="310.80" y="637.00" class="tick" text-anchor="middle">10</text>
+<polyline points="425.200,126.000 425.200,612.000" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="425.20" y="637.00" class="tick" text-anchor="middle">15</text>
+<polyline points="539.600,126.000 539.600,612.000" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="539.60" y="637.00" class="tick" text-anchor="middle">20</text>
+<polyline points="654.000,126.000 654.000,612.000" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="654.00" y="637.00" class="tick" text-anchor="middle">25</text>
+<polyline points="82.000,612.000 654.000,612.000" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="70.00" y="618.00" class="tick" text-anchor="end">0</text>
+<polyline points="82.000,527.478 654.000,527.478" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="70.00" y="533.48" class="tick" text-anchor="end">20</text>
+<polyline points="82.000,442.957 654.000,442.957" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="70.00" y="448.96" class="tick" text-anchor="end">40</text>
+<polyline points="82.000,358.435 654.000,358.435" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="70.00" y="364.43" class="tick" text-anchor="end">60</text>
+<polyline points="82.000,273.913 654.000,273.913" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="70.00" y="279.91" class="tick" text-anchor="end">80</text>
+<polyline points="82.000,189.391 654.000,189.391" fill="none" stroke="#e4e9ed" stroke-width="1"/>
+<text x="70.00" y="195.39" class="tick" text-anchor="end">100</text>
+<polyline points="82.000,121.000 82.000,612.000 660.000,612.000" fill="none" stroke="#627080" stroke-width="2"/>
+<text x="368.00" y="670.00" class="" text-anchor="middle">含湿量 ω / [g/kg干空气]</text>
+<text x="82.00" y="103.00" class="" text-anchor="start">比焓 h / [kJ/kg干空气]</text>
+<polyline points="82.000,612.000 168.367,572.103" fill="none" stroke="#adb8c2" stroke-width="1.4"/>
+<text x="90.86" y="603.83" class="small" text-anchor="start" style="fill:#627080">0℃</text>
+<polyline points="82.000,569.486 256.620,488.220" fill="none" stroke="#adb8c2" stroke-width="1.4"/>
+<text x="90.86" y="561.29" class="small" text-anchor="start" style="fill:#627080">10℃</text>
+<polyline points="82.000,526.971 418.328,369.293" fill="none" stroke="#adb8c2" stroke-width="1.4"/>
+<text x="90.86" y="518.75" class="small" text-anchor="start" style="fill:#627080">20℃</text>
+<polyline points="82.000,484.457 654.000,214.325" fill="none" stroke="#adb8c2" stroke-width="1.4"/>
+<text x="90.86" y="476.22" class="small" text-anchor="start" style="fill:#627080">30℃</text>
+<polyline points="82.000,441.942 654.000,169.846" fill="none" stroke="#adb8c2" stroke-width="1.4"/>
+<text x="90.86" y="433.68" class="small" text-anchor="start" style="fill:#627080">40℃</text>
+<polyline points="82.000,399.428 654.000,125.366" fill="none" stroke="#adb8c2" stroke-width="1.4"/>
+<text x="90.86" y="391.14" class="small" text-anchor="start" style="fill:#627080">50℃</text>
+<polyline points="168.367,572.103 169.788,570.489 171.231,568.866 172.694,567.233 174.179,565.589 175.685,563.936 177.214,562.272 178.764,560.597 180.338,558.912 181.934,557.216 183.553,555.509 185.195,553.791 186.861,552.062 188.551,550.322 190.266,548.570 192.005,546.806 193.769,545.030 195.558,543.243 197.372,541.443 199.213,539.632 201.080,537.807 202.973,535.970 204.893,534.121 206.840,532.258 208.815,530.383 210.818,528.494 212.848,526.592 214.908,524.676 216.996,522.747 219.114,520.804 221.261,518.846 223.438,516.875 225.646,514.888 227.884,512.888 230.153,510.872 232.454,508.842 234.787,506.796 237.152,504.735 239.550,502.658 241.981,500.566 244.445,498.458 246.943,496.333 249.476,494.193 252.043,492.035 254.645,489.861 257.283,487.670 259.957,485.462 262.667,483.237 265.415,480.993 268.199,478.732 271.021,476.454 273.882,474.156 276.781,471.841 279.720,469.506 282.697,467.153 285.716,464.781 288.774,462.389 291.874,459.978 295.015,457.546 298.198,455.095 301.424,452.623 304.693,450.131 308.006,447.618 311.362,445.084 314.763,442.528 318.210,439.951 321.702,437.352 325.240,434.731 328.825,432.087 332.457,429.421 336.137,426.732 339.866,424.020 343.644,421.284 347.471,418.524 351.349,415.741 355.277,412.933 359.257,410.100 363.288,407.242 367.373,404.360 371.510,401.451 375.701,398.517 379.947,395.557 384.248,392.570 388.605,389.556 393.018,386.516 397.488,383.448 402.016,380.352 406.602,377.228 411.248,374.075 415.953,370.894 420.719,367.684 425.546,364.445 430.435,361.175 435.386,357.876 440.401,354.546 445.480,351.185 450.624,347.793 455.834,344.369 461.110,340.913 466.453,337.425 471.864,333.905 477.343,330.351 482.893,326.763 488.512,323.142 494.203,319.487 499.966,315.796 505.802,312.071 511.711,308.310 517.695,304.513 523.755,300.680 529.890,296.809 536.103,292.902 542.394,288.957 548.764,284.974 555.214,280.952 561.745,276.891 568.357,272.790 575.052,268.650 581.831,264.469 588.695,260.247 595.644,255.984 602.680,251.679 609.804,247.332 617.016,242.941 624.318,238.507 631.711,234.030 639.196,229.507 646.774,224.940" fill="none" stroke="#17618c" stroke-width="3"/>
+<text x="420.00" y="240.00" class="small" text-anchor="start" style="fill:#17618c">饱和线 φ=100%</text>
+<polyline points="386.635,340.590 386.635,297.029" fill="none" stroke="#ba3f35" stroke-width="3" marker-end="url(#arrow)"/>
+<polyline points="386.635,297.029 386.635,390.946" fill="none" stroke="#1e7760" stroke-width="3" stroke-dasharray="7 4" marker-end="url(#arrow)"/>
+<polyline points="386.504,391.008 384.660,392.284 382.826,393.556 381.002,394.823 379.187,396.085 377.383,397.343 375.589,398.596 373.804,399.844 372.029,401.087 370.264,402.326 368.508,403.560 366.762,404.790 365.026,406.015 363.299,407.235 361.582,408.451 359.874,409.662 358.175,410.869 356.486,412.071 354.806,413.269 353.135,414.462 351.474,415.651 349.821,416.836 348.178,418.016 346.544,419.192 344.918,420.364 343.302,421.531 341.695,422.694 340.097,423.853 338.507,425.007 336.926,426.157 335.354,427.304 333.791,428.445 332.236,429.583 330.690,430.717 329.152,431.846 327.624,432.972 326.103,434.093 324.591,435.211 323.087,436.324 321.592,437.433 320.105,438.539 318.627,439.640 317.156,440.738 315.694,441.831 314.240,442.921 312.794,444.007 311.356,445.088 309.926,446.166 308.504,447.241 307.091,448.311 305.685,449.378 304.286,450.440 302.896,451.500 301.514,452.555 300.139,453.607 298.772,454.655 297.413,455.699 296.061,456.740 294.717,457.777 293.381,458.810 292.052,459.840 290.730,460.866 289.416,461.889 288.109,462.908 286.810,463.923 285.518,464.935 284.234,465.944 282.956,466.949 281.686,467.951 280.423,468.949 279.168,469.944 277.919,470.935 276.677,471.923 275.443,472.908 274.215,473.890 272.995,474.868 271.781,475.842 270.575,476.814 269.375,477.782 268.182,478.747 266.996,479.708 265.816,480.667 264.643,481.622 263.477,482.574 262.318,483.523 261.165,484.468 260.019,485.411 258.880,486.350 257.747,487.286 256.620,488.220" fill="none" stroke="#1e7760" stroke-width="3" marker-end="url(#arrow)"/>
+<circle cx="386.635" cy="340.590" r="5.4" fill="#ba3f35" stroke="white" stroke-width="1.5"/>
+<text x="399.64" y="348.59" class="" text-anchor="start">A</text>
+<circle cx="386.635" cy="297.029" r="5.4" fill="#ba3f35" stroke="white" stroke-width="1.5"/>
+<text x="399.64" y="293.03" class="" text-anchor="start">B</text>
+<circle cx="386.635" cy="390.946" r="5.4" fill="#1e7760" stroke="white" stroke-width="1.5"/>
+<text x="399.64" y="405.95" class="" text-anchor="start">D</text>
+<circle cx="256.621" cy="488.219" r="5.4" fill="#1e7760" stroke="white" stroke-width="1.5"/>
+<text x="229.62" y="508.22" class="" text-anchor="start">C</text>
+<text x="345.00" y="710.00" class="small" text-anchor="middle">A→B：加热  B→D：冷却  D→C：凝结除湿</text>
+<text x="345.00" y="738.00" class="small" text-anchor="middle">灰色斜线：等干球温度；露点约18.44 ℃</text>
+</svg>

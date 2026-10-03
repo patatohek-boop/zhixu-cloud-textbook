@@ -109,6 +109,92 @@ $$T=\frac Z{\sqrt{U/(n-1)}}=\frac{\bar X-\mu}{S/\sqrt n}\sim t_{n-1}.$$
 
 一个有效 p 值还应在每个满足零假设的分布下满足 $P(p\le t)\le t$（0≤t≤1）；连续精确检验常取等号，离散检验可能保守。复合零假设包含多个参数值时，不能任挑其中一个最有利参数来宣称误报率受控。双侧检验必须事先规定两侧的极端性，例如正态均值检验按 $|T|$ 比较。
 
+## 操作闭环：从五个原始读数到一份检验结论
+
+第一遍可以先完成这一段的计算和条件检查，再回读前面的分布证明、后面的多重检验与Bootstrap。手算只需平方、开方和查t分布；代码复核再用[Python 环境](#/course/python/python-11)及 NumPy、SciPy，不把安装库当作理解统计的先决条件。
+
+### 先约定独立单位、问题和检验方向
+
+下面是原创教学数据：五个独立试件在同一规定工况、同一规定时刻各测一次温度，单位℃，读数为 `[21,22,23,24,25]`。假设它们是目标总体的独立同分布正态观测，总体标准差未知且大于零，标定偏差可忽略。五个数本身不能证明这些前提；它们也不能换成同一试件的五个相邻时刻后仍按五个独立试件分析。
+
+采样前预设：检验总体平均温度是否不同于20 ℃，即 $H_0:\mu=20\,{}^\circ\mathrm C$，$H_1:\mu\ne20\,{}^\circ\mathrm C$，双侧显著性水平 $\alpha=0.05$。只做这一次预设比较，不看完数据再改成单侧或筛掉读数。
+
+### 第一步：原始样本变成统计量
+
+1. 样本量n=5，总和115 ℃，均值 $\bar x=23\,{}^\circ\mathrm C$。
+2. 离均差为 $[-2,-1,0,1,2]\,\mathrm K$，平方和为 $10\,\mathrm K^2$。所以 $s^2=10/(5-1)=2.5\,\mathrm K^2$，$s=\sqrt{2.5}=1.581139\,\mathrm K$。
+3. 均值的估计标准误 $\widehat{SE}=s/\sqrt5=\sqrt{0.5}=0.707107\,\mathrm K$。s描述单次读数的离散，SE描述样本均值的抽样波动，不能混用。
+4. 观测到的统计量
+$$T_{\rm obs}=\frac{\bar x-20\,{}^\circ\mathrm C}{s/\sqrt n}=\frac{3}{\sqrt{0.5}}=4.242641,\qquad \nu=n-1=4.$$
+温差的℃数值与K数值相同，所以比值T无量纲；不能把摄氏温度读数本身写成23 K。
+
+### 第二步：统计量变成尾概率
+
+在 $H_0$ 及以上正态、独立前提下，统计量服从自由度4的t分布。记其累积分布为 $F_4(a)=P(T\le a)$，右尾函数为 $S_4(a)=1-F_4(a)$。预设双侧检验比较绝对值，因此
+$$p=P(|T|\ge|T_{\rm obs}|\mid H_0)=2S_4(4.242641)\approx0.01323560.$$
+
+查常见t表可先得到范围：自由度4的双侧5%临界值约2.77645，双侧1%临界值约4.60409；观测值在两者之间，故 $0.01<p<0.05$。表给概率范围，库函数给更细的数值。p是这条“零假设下的尾面积”，不是 $P(H_0\mid\text{数据})$。
+
+<details><summary>手算复核尾面积：自由度4的一个方便公式</summary>
+
+自由度4的密度为 $f_4(t)=\frac38(1+t^2/4)^{-5/2}$。对a≥0，令 $z=a/\sqrt{a^2+4}$，积分得到
+$$S_4(a)=\frac12-\frac34z+\frac14z^3.$$
+可用代换 $t=2\tan\theta$，此时密度乘dt为 $\frac34\cos^3\theta\,d\theta$，再令z=sinθ。代入 $a=\sqrt{18}$，有 $z=3/\sqrt{11}$，所以双侧p为 $1-\frac32z+\frac12z^3\approx0.01323560$，与查表范围一致。这个特式只用于本例的自由度4；实际代码优先用右尾函数 `sf`，避免很小的尾概率由 `1-cdf` 相减损失精度。
+
+</details>
+
+### 第三步：同时报告区间、效应和结论
+
+$t_{0.975,4}=2.776445$，所以总体均值的95%置信区间为
+$$23\pm2.776445\sqrt{0.5}=[21.036757,24.963243]\,{}^\circ\mathrm C.$$
+相对20 ℃的平均温差估计为 $\widehat\Delta=3\,\mathrm K$，相应95%区间为 $[1.036757,4.963243]\,\mathrm K$。这是有单位的效应大小；是否达到工程上值得关心的温差，还需采样前规定实际标准。
+
+可以这样写结论：“在五个独立同分布正态试件读数、测量偏差可忽略的前提下，双侧单样本t检验得到 $t(4)=4.2426$、p=0.01324，在5%水平拒绝均值为20 ℃的零假设。样本平均比20 ℃高3 K，差值95%区间为[1.04,4.96] K。”它不证明每个试件都偏高，也不证明某一材料或干预造成了差异。置信水平描述重复抽样程序的覆盖率，不是本次固定参数的后验概率。
+
+### 第四步：用官方库复核同一条计算链
+
+下段是独立完整程序，不读取文件，不需要联网。环境准备见[Python11](#/course/python/python-11)，需 NumPy 与 SciPy；这里用基本 `t.sf`、`t.ppf` 和 `ttest_1samp` 接口。
+
+```python
+import numpy as np
+from scipy import stats
+
+x = np.array([21., 22., 23., 24., 25.])  # degC; one reading per specimen
+mu0 = 20.0
+n = x.size
+mean_c = float(np.mean(x))
+s_k = float(np.std(x, ddof=1))
+se_k = s_k / np.sqrt(n)
+t_observed = (mean_c - mu0) / se_k
+df = n - 1
+p = 2.0 * stats.t.sf(abs(t_observed), df)
+critical = stats.t.ppf(0.975, df)
+ci_c = np.array([mean_c - critical * se_k, mean_c + critical * se_k])
+result = stats.ttest_1samp(x, popmean=mu0, alternative="two-sided")
+np.testing.assert_allclose([t_observed, p], [result.statistic, result.pvalue])
+# An independent algebraic tail check for df=4 only.
+z = abs(t_observed) / np.sqrt(t_observed ** 2 + 4.0)
+np.testing.assert_allclose(p, 1.0 - 1.5 * z + 0.5 * z ** 3, atol=1e-14)
+print("n, df:", n, df)
+print("mean C, s K, SE K: %.6f %.6f %.6f" % (mean_c, s_k, se_k))
+print("t, p: %.6f %.8f" % (t_observed, p))
+print("95%% mean CI C: %.6f %.6f" % tuple(ci_c))
+print("difference K: %.6f; 95%% CI K: %.6f %.6f" %
+      (mean_c - mu0, ci_c[0] - mu0, ci_c[1] - mu0))
+```
+
+预期输出：
+
+```text
+n, df: 5 4
+mean C, s K, SE K: 23.000000 1.581139 0.707107
+t, p: 4.242641 0.01323560
+95% mean CI C: 21.036757 24.963243
+difference K: 3.000000; 95% CI K: 1.036757 4.963243
+```
+
+先检查 `ddof=1`、尾数2和自由度4，再比较小数。若s=0，分母为零，这个t程序不能照用；若有缺失值或相关重复测量，须先按研究设计处理，不能为了得到p值默默删行或更换独立单位。公式与假设可核对[NIST 均值置信区间](https://www.itl.nist.gov/div898/handbook/eda/section3/eda352.htm)、[SciPy 单样本t检验](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_1samp.html)及[t分布尾函数和分位数](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html)。
+
 ## 先区分错误发现比例，再使用排序检验
 设 R 是拒绝的零假设总数，V 是其中实际上为真的个数。**家族错误率** FWER=$P(V\ge1)$；**错误发现率** FDR=$E[V/\max(R,1)]$。后者是随机比例的期望，并不等于 $EV/ER$，也不保证每次报告中的错误比例都不超过目标 q。
 
@@ -155,3 +241,65 @@ Bootstrap 通过从样本中有放回抽样近似统计量分布，适合很多�
 
 2. p=0.03 是否表示零假设只有 3% 概率为真？
 <details><summary>查看解析</summary>不是。p 值以零假设成立为条件，描述数据极端程度；它不是假设的后验概率。</details>
+
+### 练习三：换一批原始数据，独立完成双侧检验
+
+五个新的独立试件各测一次，温度为 `[18,20,21,22,24]` ℃。仍采用独立同分布正态、总体方差未知且非零的假设，采样前预设 $H_0:\mu=20\,{}^\circ\mathrm C$、双侧 $\alpha=0.05$。不借用前例的s，重新求均值、s、SE、T、自由度、p、均值及温差的95%区间，并写一句结论。查表时可使用 $t_{0.975,4}=2.776445$；p可用上面的自由度4尾概率式或官方库求出。
+
+<details><summary>查看完整解析、易错点与自查</summary>
+
+均值为21 ℃；离均差[-3,−1,0,1,3] K，平方和20 K²。因此 $s^2=20/4=5\,\mathrm K^2$，$s=\sqrt5=2.236068\,\mathrm K$，SE=1 K，$T=(21-20)/1=1$，df=4。
+
+尾概率 $p=2S_4(1)=0.37390097$。手算时z=1/√5，代入 $p=1-3z/2+z^3/2$ 得同值。均值95%区间为 $21\pm2.776445=[18.223555,23.776445]$ ℃；温差估计1 K，区间为[−1.776445,3.776445] K。
+
+p>0.05，因此本次没有足够证据拒绝均值20 ℃。不能写“证明二者完全相同”：区间仍容许若干K的正负差值。样本很小，前提的可信度来自采样设计与领域知识，不能由这五点自动保证。
+
+```python
+import numpy as np
+from scipy import stats
+x = np.array([18., 20., 21., 22., 24.])
+s = x.std(ddof=1)
+se = s / np.sqrt(x.size)
+t_obs = (x.mean() - 20.0) / se
+p = 2 * stats.t.sf(abs(t_obs), x.size - 1)
+ci = x.mean() + np.array([-1., 1.]) * stats.t.ppf(.975, 4) * se
+np.testing.assert_allclose([x.mean(), s, se, t_obs], [21., np.sqrt(5.), 1., 1.])
+np.testing.assert_allclose(p, stats.ttest_1samp(x, 20.).pvalue)
+print("p = %.8f; CI C = [%.6f, %.6f]" % (p, ci[0], ci[1]))
+```
+
+输出为 `p = 0.37390097; CI C = [18.223555, 23.776445]`。
+
+易错点：平方离差除5会算成总体描述方差，不能接着按本题样本t公式使用；不要用前例的标准差。自查：五个离均差之和应为0；区间应以21为中心并包含20；温差区间只是均值区间两端各减20，单位改记K。
+
+</details>
+
+### 练习四：统计差异是否已经超过实际门槛
+
+回到 `[21,22,23,24,25]` ℃。假设在采样前就另行规定问题为“总体平均温度与20 ℃基准的差是否超过2 K”，严格写成检验 $H_0:\mu\le22\,{}^\circ\mathrm C$ 对 $H_1:\mu>22\,{}^\circ\mathrm C$，单侧 $\alpha=0.05$。沿用独立同分布正态前提，计算边界µ=22处的T和右尾p，求均值的单侧95%置信下限并判断能否支持该门槛。临界值 $t_{0.95,4}=2.131847$。若这五点其实来自同一试件相邻时刻，原检验的哪条前提失去依据？
+
+<details><summary>查看完整解析、易错点与自查</summary>
+
+均值仍23 ℃，SE仍√0.5 K，但零假设边界变了：$T=(23-22)/\sqrt{0.5}=\sqrt2=1.414214$。右尾p为 $S_4(\sqrt2)=0.11509982$，不能再次乘2。复合零假设µ≤22下，在给定正态模型中拒绝概率在边界µ=22最大，因此按该边界计算控制单侧错误率。
+
+单侧95%下限为 $23-2.131847\sqrt{0.5}=21.492557$ ℃，温差下限为1.492557 K。下限没有超过22 ℃，p也大于0.05，所以这批小样本不足以支持“总体平均温差超过2 K”。这与前例拒绝µ=20不矛盾：问题与门槛不同。这里的单侧95%下限也不同于双侧95%区间的下端，不能混抄临界值。
+
+```python
+import numpy as np
+from scipy import stats
+x = np.array([21., 22., 23., 24., 25.])
+se = x.std(ddof=1) / np.sqrt(x.size)
+t_obs = (x.mean() - 22.0) / se
+p = stats.t.sf(t_obs, 4)
+lower = x.mean() - stats.t.ppf(.95, 4) * se
+check = stats.ttest_1samp(x, 22.0, alternative="greater")
+np.testing.assert_allclose([t_obs, p], [check.statistic, check.pvalue])
+assert p > .05 and lower < 22.0
+print("t = %.6f; right-tail p = %.8f; lower C = %.6f" % (t_obs, p, lower))
+```
+
+输出为 `t = 1.414214; right-tail p = 0.11509982; lower C = 21.492557`。
+
+若读数来自同一试件相邻时刻，独立性和“一个样本代表一个新试件”的解释失去依据；不能继续声称n=5个独立试件。应重新设计独立试件采样，或采用明确处理相关性的模型。易错点：不能看到双侧结果以后临时改单侧，再把它宣称为预设检验。自查：先写H₀/H₁和单位，检查尾的方向，再写p与实际温差，最后说明结论范围。
+
+</details>

@@ -49,6 +49,9 @@ jobs:
           node tools/test-knowledge-map.cjs
           node tools/test-mastery-exercises.cjs
           python tools/verify_final_review.py
+          python tools/verify_report_revision.py
+          python tools/verify_thermal_cases.py
+          python tools/revision/verify_fluid.py
           python tools/test-learning-preservation.py
           python tools/test-offline-learning.py
           python tools/verify_cfd.py
@@ -131,6 +134,10 @@ jobs:
           test -s work/android-mastery-practice.png
           adb exec-out run-as app.zhixu.textbook cat files/horizontal-formula-screen.png > work/android-horizontal-formula.png
           test -s work/android-horizontal-formula.png
+          adb exec-out run-as app.zhixu.textbook cat files/core-continuation-screen.png > work/android-core-continuation.png
+          test -s work/android-core-continuation.png
+          adb exec-out run-as app.zhixu.textbook cat files/report-revision-screen.png > work/android-report-revision.png
+          test -s work/android-report-revision.png
           adb shell am start -W -n app.zhixu.textbook/.MainActivity
           sleep 15
           adb exec-out screencap -p > work/android-home.png
@@ -148,6 +155,8 @@ jobs:
             work/android-concept-story.png
             work/android-mastery-practice.png
             work/android-horizontal-formula.png
+            work/android-core-continuation.png
+            work/android-report-revision.png
             work/android-home.png
             work/emulator.log
             work/android-logcat.txt
