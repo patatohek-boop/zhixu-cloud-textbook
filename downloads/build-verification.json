@@ -17,5 +17,43 @@
     "v2",
     "v3"
   ],
-  "status": "Candidate: final production-signed APK UI installation verification pending"
+  "status": "Production-signed APK passed Android 15 installation and native UI acceptance",
+  "acceptance_source_commit": "97d737ba61d925d71858ea640b16f5366ecc79e8",
+  "acceptance_run": 37123439458,
+  "acceptance_url": "https://github.com/patatohek-boop/zhixu-cloud-textbook/actions/runs/37123439458",
+  "formal_ui_artifact_id": 11274009011,
+  "formal_ui_artifact_sha256": "7c50192f2ab1f6d754d75b2950c563659954279dec41599571f9bef208d17d13",
+  "temporary_signed_release_tests": 14,
+  "temporary_migration_checks": [
+    "seed",
+    "legacy source before independent operations",
+    "independent first launch empty",
+    "JSON import",
+    "legacy source after independent edit",
+    "independent destination relaunch"
+  ],
+  "formal_ui": {
+    "sha256": "b4f92a1342ac5029e2a8a6c599e676ed414246c76d48c80b5dd50a37705734a0",
+    "package": "app.zhixu.textbook.independent",
+    "versionName": "1.5.0",
+    "versionCode": 8,
+    "install": true,
+    "offline_first_launch": true,
+    "distinct_uids": {
+      "app.zhixu.textbook.independent": "10213",
+      "app.zhixu.textbook": "10209"
+    },
+    "initial_records_empty": true,
+    "native_json_export_import": true,
+    "cancel_and_invalid_import_atomic": true,
+    "relaunch_and_same_apk_reinstall_preserve_records": true,
+    "legacy_records_unchanged": true,
+    "legacy_native_import_normal_exit_reopen": true,
+    "boundary": "Exact production-signed APK driven through public UI; no production-key instrumentation APK."
+  },
+  "limits": [
+    "Android 15 isolated emulator, not all phone brands",
+    "Normal UI exit/relaunch and same-APK replacement are tested; arbitrary immediate process death/power loss is not a storage guarantee",
+    "External private-key backup has not been performed"
+  ]
 }

@@ -1,8 +1,8 @@
 # 安卓 App
 
-## 1.5.0 独立版候选
+## 1.5.0 独立版
 
-本轮新增 **知序·独立版**（`app.zhixu.textbook.independent`，1.5.0 / versionCode 8）。它使用新的长期发布证书，与旧包 `app.zhixu.textbook` 并存；不能覆盖升级旧包，也不会自动读取或改写旧包记录。默认构建仍是原包，只有显式 `-Pindependent=true` 才构建独立版。签名 APK 完成最终安装验收后，由维护者发布到仓库根目录 `downloads/`（不进入离线课文资源）；候选构建和通过情况见对应 PR 的检查。
+本轮新增 **知序·独立版**（`app.zhixu.textbook.independent`，1.5.0 / versionCode 8）。它使用新的长期发布证书，与旧包 `app.zhixu.textbook` 并存；不能覆盖升级旧包，也不会自动读取或改写旧包记录。默认构建仍是原包，只有显式 `-Pindependent=true` 才构建独立版。签名 APK 已通过正式安装与迁移验收，下载入口位于仓库根目录 [`downloads/`](downloads/README.md)（不进入离线课文资源）；[完整验收](https://github.com/patatohek-boop/zhixu-cloud-textbook/actions/runs/37123439458)与公开校验文件可逐项复核。
 
 迁移：保留旧App → 在旧App“应用菜单”导出学习备份 JSON → 安装独立版 → 在独立版“应用菜单”导入备份 → 核对笔记、收藏、完成状态及答题记录。不同笔记合并保留，导入失败不会覆盖原记录；迁移不复制个性化主题、字号或最后阅读位置。核对前不要卸载旧版或清除数据，导出的 JSON 也请保留。两个包之后各自保存记录，需要再次同步时手动导出/导入。
 

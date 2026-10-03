@@ -2,7 +2,7 @@
 
 面向初学者、可以持续修订的中文云教材。包含微积分、线性代数、工程热力学、传热学、流体力学、Python 学习和机器学习。
 
-当前源码构建目标为 2026 年 10 月 3 日 1.5.0 修订版，共253节、30节起步入口、原26节的78道分层开放练习、24个交互实验及6段可控图解动画。本轮修正四项条件/措辞，补强数学桥梁、真实物性与完整基础算例，增加本科核心续学能力清单。原课号、进度和笔记格式保留；253道自测答案索引不变，其中新试件评价题的条件与解析同步澄清。网站与正式APK状态请以部署和 Releases 为准。统计见 `site/assets/content-stats.json`。
+当前源码构建目标为 2026 年 10 月 3 日 1.5.0 修订版，共253节、30节起步入口、原26节的78道分层开放练习、24个交互实验及6段可控图解动画。本轮修正四项条件/措辞，补强数学桥梁、真实物性与完整基础算例，增加本科核心续学能力清单。原课号、进度和笔记格式保留；253道自测答案索引不变，其中新试件评价题的条件与解析同步澄清。网站与正式APK状态请以部署和[安卓下载说明](downloads/README.md)为准。统计见 `site/assets/content-stats.json`。
 
 **覆盖定位：本科核心知识体系与部分高级主题导读。尚未经过外部专业教师逐章审校，不宣称穷尽七个学科所有知识。** 关键工程、科研或考试结论请结合引用资料核验。每科标注结构参考和延伸阅读；本站并非 MIT、Stanford 或北航的官方教材或翻译。
 
@@ -26,7 +26,7 @@ python -m http.server 8765 --directory site
 
 在线阅读：[知序云教材](https://patatohek-boop.github.io/zhixu-cloud-textbook/)。逐节变更、课程讲义对照和未展开范围可在[修订与覆盖](https://patatohek-boop.github.io/zhixu-cloud-textbook/#/review)查看。
 
-安卓离线 App：[已发布的正式 APK](https://github.com/patatohek-boop/zhixu-cloud-textbook/releases)。源码版本与已发布版本可能不同，请以发布页的版本号和检查结果为准。安装、备份迁移和持续构建说明见 [ANDROID.md](ANDROID.md)。
+安卓离线 App：[知序·独立版 1.5.0 正式下载与校验](downloads/README.md)。新包名与旧版并存，请保留旧版并用 JSON 导出/导入学习记录；不会自动迁移。原包历史版本仍在 [Releases](https://github.com/patatohek-boop/zhixu-cloud-textbook/releases)。安装、备份迁移和持续构建说明见 [ANDROID.md](ANDROID.md)。
 
 - 课程书架、分组目录、前后课导航、先修关系与学习路线。
 - [AI × 传热与实验研究路线](https://patatohek-boop.github.io/zhixu-cloud-textbook/#/research)：测量与标定、可辨识性、贝叶斯反演、GP 与多保真、实验设计、PINN、POD、神经算子、热像与可复现项目。
