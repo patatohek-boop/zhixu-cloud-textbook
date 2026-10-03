@@ -132,6 +132,7 @@ def launch():
 
 
 def main():
+    global PKG
     apk = pathlib.Path(sys.argv[1])
     expected = pathlib.Path(str(apk) + '.sha256').read_text().split()[0]
     assert hashlib.sha256(apk.read_bytes()).hexdigest() == expected
@@ -139,6 +140,28 @@ def main():
     assert adb('shell', 'getprop', 'ro.kernel.qemu').strip() == '1'
     adb('shell', 'svc', 'wifi', 'disable')
     adb('shell', 'svc', 'data', 'disable')
+    # Establish the legacy record through the same native import UI a user uses.
+    # Its new marker was never present in the earlier instrumentation fixture.
+    PKG = 'app.zhixu.textbook'
+    synthetic = {'format': 'zhixu-learning', 'version': 1,
+                 'completed': ['calculus-03'], 'bookmarks': ['calculus-04'],
+                 'notes': {'calculus-03': 'MIGRATION_SOURCE_NOTE FORMAL_NATIVE_LEGACY_IMPORT 合成记录'},
+                 'answers': {'calculus-03': {'choice': 0, 'at': '2026-10-03T00:00:00Z'}}}
+    source = OUT / 'legacy-native-input.json'
+    source.write_text(json.dumps(synthetic, ensure_ascii=False))
+    adb('shell', 'mkdir', '-p', '/sdcard/Download')
+    adb('push', str(source), '/sdcard/Download/legacy-native-input.json')
+    launch()
+    import_file('legacy-native-input.json')
+    # Normal user Back, not Instrumentation.finish's forced target-process exit.
+    adb('shell', 'input', 'keyevent', 'KEYCODE_BACK')
+    time.sleep(1)
+    launch()
+    legacy_before = export('legacy-ui-export.json')
+    assert_source(legacy_before)
+    assert 'FORMAL_NATIVE_LEGACY_IMPORT' in legacy_before['notes']['calculus-03'], 'Legacy native import was lost after normal Back/reopen'
+    snapshot('00-legacy-native-import-reopen')
+    PKG = 'app.zhixu.textbook.independent'
     # Remove only the throw-away independent CI edition, never the legacy app.
     adb('uninstall', PKG + '.test')
     adb('uninstall', PKG)
@@ -156,7 +179,7 @@ def main():
     snapshot('01-first-offline-launch')
     empty = export('zhixu-empty.json')
     assert records(empty) == {'completed': [], 'bookmarks': [], 'notes': {}, 'answers': {}}, 'Final signed app read legacy records automatically'
-    adb('push', 'work/synthetic-legacy-backup.json', '/sdcard/Download/zhixu-synthetic.json')
+    adb('push', str(OUT / 'legacy-ui-export.json'), '/sdcard/Download/zhixu-synthetic.json')
     import_file('zhixu-synthetic.json')
     imported = export('zhixu-imported.json')
     assert_source(imported)
@@ -190,16 +213,19 @@ def main():
     launch()
     updated = export('zhixu-after-reinstall.json')
     assert records(updated) == records(restored)
-    legacy = adb('shell', 'am', 'instrument', '-w', '-e', 'migrationAction', 'source', 'app.zhixu.textbook.test/app.zhixu.textbook.TextbookSmokeTest')
-    (OUT / 'legacy-unchanged.txt').write_text(legacy)
-    assert 'ZHIXU_MIGRATION_SUCCESS source app.zhixu.textbook' in legacy
+    PKG = 'app.zhixu.textbook'
+    launch()
+    legacy_after = export('legacy-after-independent.json')
+    assert records(legacy_after) == records(legacy_before), 'Independent changes modified legacy records'
+    snapshot('04-legacy-unchanged')
+    PKG = 'app.zhixu.textbook.independent'
     launch()
     snapshot('03-relaunch-and-reinstall')
     result = {'sha256': expected, 'package': PKG, 'versionName': '1.5.0', 'versionCode': 8,
               'install': True, 'offline_first_launch': True, 'distinct_uids': found,
               'initial_records_empty': True, 'native_json_export_import': True,
               'cancel_and_invalid_import_atomic': True, 'relaunch_and_same_apk_reinstall_preserve_records': True,
-              'legacy_records_unchanged': True,
+              'legacy_records_unchanged': True, 'legacy_native_import_normal_exit_reopen': True,
               'boundary': 'Exact production-signed APK driven through public UI; no production-key instrumentation APK.'}
     (OUT / 'verification.json').write_text(json.dumps(result, ensure_ascii=False, indent=2))
     print(json.dumps(result, ensure_ascii=False))

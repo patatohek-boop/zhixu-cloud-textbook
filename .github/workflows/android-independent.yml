@@ -229,7 +229,7 @@ jobs:
             work/emulator-preflight-window.txt
           retention-days: 14
       - name: Verify exact production-signed APK through public UI
-        if: hashFiles('downloads/Zhixu-Independent-1.5.0.apk') != ''
+        if: always() && !cancelled() && hashFiles('downloads/Zhixu-Independent-1.5.0.apk') != ''
         timeout-minutes: 15
         run: |
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs downloads/Zhixu-Independent-1.5.0.apk | tee work/production-signature.txt
