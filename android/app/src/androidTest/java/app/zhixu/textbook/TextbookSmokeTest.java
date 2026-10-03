@@ -100,6 +100,7 @@ public final class TextbookSmokeTest extends Instrumentation {
         try {
             launchReader();
             waitUntil(READY, "Migration reader not ready offline");
+            waitForReaderFocus();
             String pkg = getTargetContext().getPackageName();
             boolean independent = pkg.equals("app.zhixu.textbook.independent");
             File exported = new File(getTargetContext().getFilesDir(), "migration-export.json");
@@ -167,6 +168,7 @@ public final class TextbookSmokeTest extends Instrumentation {
         status.putString("id", "ZhixuOfflineSmoke");
         sendStatus(1, status);
         try {
+            waitForReaderFocus();
             check.run();
             status.putString("stream", ".");
             sendStatus(0, status);
@@ -178,6 +180,17 @@ public final class TextbookSmokeTest extends Instrumentation {
             sendStatus(-2, status);
             report.append("FAIL ").append(name).append(": ").append(failure).append('\n');
         }
+    }
+
+    private void waitForReaderFocus() {
+        long until = SystemClock.uptimeMillis() + 10_000;
+        boolean[] focused = new boolean[1];
+        while (SystemClock.uptimeMillis() < until) {
+            runOnMainSync(() -> focused[0] = reader != null && reader.hasWindowFocus());
+            if (focused[0]) return;
+            SystemClock.sleep(100);
+        }
+        throw new AssertionError("Emulator window precondition: target reader is not foreground; check system ANR/overlay diagnostics");
     }
 
     private void launchReader() {
@@ -441,6 +454,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     }
 
     private void swipeFormula(boolean towardsRightEdge) throws Exception {
+        waitForReaderFocus();
         JSONObject box = (JSONObject) evaluate("(function(){var e=document.querySelector('#native-scroll-formula'),r=e.getBoundingClientRect();return {left:r.left,right:r.right,y:r.top+r.height/2,viewport:innerWidth}})()");
         int[] location = new int[2]; int[] width = new int[1];
         runOnMainSync(() -> { web.getLocationOnScreen(location); width[0]=web.getWidth(); });
@@ -500,6 +514,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     }
 
     private void tapVisible(String selector, boolean captureOutline) throws Exception {
+        waitForReaderFocus();
         String selected = "document.querySelector(" + JSONObject.quote(selector) + ")";
         evaluate(selected + ".scrollIntoView({block:'center',behavior:'instant'})");
         waitForConceptLayout();

@@ -153,6 +153,11 @@ jobs:
           # The fresh Google APIs image can display a Pixel Launcher ANR after boot.
           # Stop only that emulator launcher before testing; keep application failures visible.
           adb shell am force-stop com.google.android.apps.nexuslauncher
+          adb shell dumpsys window > work/emulator-preflight-window.txt
+          if grep -q "Application Not Responding:" work/emulator-preflight-window.txt; then
+            echo "Fresh emulator has an unresolved system ANR; do not run app tests"
+            exit 1
+          fi
           timeout 240 adb shell am instrument -w -e expectRelease true app.zhixu.textbook.independent.test/app.zhixu.textbook.TextbookSmokeTest | tee work/android-smoke.txt
           grep -q ZHIXU_SMOKE_SUCCESS work/android-smoke.txt
           adb exec-out cat /data/data/app.zhixu.textbook.independent/files/reader-screen.png > work/android-reader.png
@@ -219,6 +224,7 @@ jobs:
             work/android-logcat.txt
             work/android-final-screen.png
             work/android-window.txt
+            work/emulator-preflight-window.txt
           retention-days: 14
       - name: Verify exact production-signed APK through public UI
         if: hashFiles('downloads/Zhixu-Independent-1.5.0.apk') != ''
