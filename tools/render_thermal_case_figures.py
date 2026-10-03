@@ -110,5 +110,5 @@ cur=[(v3+(v4-v3)*i/100,4*(v3/(v3+(v4-v3)*i/100))**n) for i in range(101)];path(s
 for key,z,off in [('1',(v1,1),(10,-9)),('2',(v2,4),(10,-12)),('3',(v3,4),(-26,-12)),('4',(v4,1),(-22,29))]:
  xx,yy=xy(*z);circle(s,xx,yy);text(s,xx+off[0],yy+off[1],key)
 text(s,428,330,'1→2 压缩',color=RED);text(s,170,154,'2→3 排气',color=RED);text(s,111,326,'3→4 再膨胀',cls='small',color=BLUE);text(s,310,490,'4→1 吸气',color=BLUE)
-text(s,360,631,'V4/Vs=0.14524；新吸气体积比=1.05−0.14524','small','middle');text(s,360,662,'流入流出的质量不同，不能当作同一团气体的闭口循环','small','middle');save(s,'thermal-compressor-cycle')
+text(s,360,631,'V4/Vs=0.14524；新吸气体积比=1.05−0.14524','small','middle');text(s,360,662,'吸排气时工质穿越边界，不能当作同一团气体的闭口循环','small','middle');save(s,'thermal-compressor-cycle')
 print('generated four original SVGs')

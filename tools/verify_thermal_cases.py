@@ -95,5 +95,8 @@ for f in files:
 for name in ('thermal-compressor-cycle.svg','thermal-psychrometric-map.svg','thermal-rankine-state-map.svg','thermal-refrigeration-state-map.svg'):
  p=ROOT/'site/assets/diagrams'/name
  tree=ET.parse(p);check(tree.getroot().get('viewBox').startswith('0 0 720 '),'SVG responsive viewport '+p.name);check('font-size:16px' in p.read_text(),'SVG min font '+p.name)
+caption='吸排气时工质穿越边界，不能当作同一团气体的闭口循环'
+check(caption in (ROOT/'site/assets/diagrams/thermal-compressor-cycle.svg').read_text(),'compressor caption distinguishes material identity from equal cycle mass throughput')
+check(caption in (ROOT/'tools/render_thermal_case_figures.py').read_text(),'compressor generator preserves the reviewed open-system caption')
 result={'status':'passed','check_count':len(checks),'new_numbered_exercises':new_exercises if args.baseline else None,'checks':checks}
 print(json.dumps(result,ensure_ascii=False,indent=2))
