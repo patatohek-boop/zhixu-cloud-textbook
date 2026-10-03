@@ -190,6 +190,8 @@ jobs:
           # Discard only synthetic smoke state before first-launch migration checks.
           adb shell pm clear app.zhixu.textbook.independent
           probe app.zhixu.textbook seed
+          # Prove legacy persistence before the independent app is launched or imported.
+          probe app.zhixu.textbook source
           probe app.zhixu.textbook.independent empty
           adb exec-out cat /data/data/app.zhixu.textbook/files/migration-export.json > work/synthetic-legacy-backup.json
           adb push work/synthetic-legacy-backup.json /data/data/app.zhixu.textbook.independent/files/migration-input.json

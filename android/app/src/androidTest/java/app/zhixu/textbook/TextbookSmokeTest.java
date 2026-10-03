@@ -135,11 +135,20 @@ public final class TextbookSmokeTest extends Instrumentation {
                 require(independent, "Destination check requires independent sandbox");
                 assertMigrated(true);
             } else throw new AssertionError("Unknown migration action");
+            // Instrumentation.finish terminates its target process immediately. Let WebView's
+            // asynchronous localStorage backend commit synthetic writes before that forced exit.
+            if ("seed".equals(migrationAction) || "import".equals(migrationAction)) SystemClock.sleep(6000);
+            String evidence = (String) evaluate("window.ZHIXU.exportBackup()");
+            writeSynthetic(new File(getTargetContext().getFilesDir(), "migration-" + migrationAction + ".json"), evidence);
             result.putString("stream", "\nZHIXU_MIGRATION_SUCCESS " + migrationAction + " " + pkg + "\n");
             if (reader != null) runOnMainSync(() -> reader.finish());
+            waitForIdleSync();
+            SystemClock.sleep(1000);
             finish(Activity.RESULT_OK, result);
         } catch (Throwable failure) {
-            result.putString("stream", "\nZHIXU_MIGRATION_FAILED " + migrationAction + ": " + failure + "\n");
+            String evidence = "unavailable";
+            try { evidence = String.valueOf(evaluate("window.ZHIXU.exportBackup()")); } catch (Throwable ignored) {}
+            result.putString("stream", "\nZHIXU_MIGRATION_FAILED " + migrationAction + ": " + failure + "\nSynthetic state: " + evidence + "\n");
             if (reader != null) runOnMainSync(() -> reader.finish());
             finish(Activity.RESULT_CANCELED, result);
         }
