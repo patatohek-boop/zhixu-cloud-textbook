@@ -24,12 +24,17 @@ folder=requested_folder.resolve()
 folder.mkdir(parents=True,exist_ok=True,mode=0o700)
 os.chmod(folder,0o700)
 root=Path(__file__).resolve().parents[1]
+if args.create_key and folder != root/'.private-signing/independent':
+    raise SystemExit('New key creation is restricted to this project independent-edition private directory.')
 if folder.is_relative_to(root):
     ignored=subprocess.run(['git','check-ignore','--quiet',str(folder/'signing-password.txt')],cwd=root)
     if ignored.returncode != 0:
         raise SystemExit('Signing folder must be explicitly gitignored before creating or reading secrets.')
 keystore=folder/'zhixu-release.p12'
 password_file=folder/'signing-password.txt'
+cert_pin=folder/'certificate-sha256.txt'
+if any(p.is_symlink() for p in folder.iterdir()):
+    raise SystemExit('Signing files must not be symlinks.')
 if keystore.exists()!=password_file.exists():
     raise SystemExit('Signing backup is incomplete. Recover the matching key and password before continuing.')
 created_new = not keystore.exists()
@@ -40,7 +45,7 @@ if created_new:
     env=dict(os.environ,ZHIXU_SIGN_PASSWORD=password)
     command=[args.keytool,'-genkeypair','-keystore',str(keystore),'-storetype','PKCS12',
         '-alias','zhixu-release','-keyalg','RSA','-keysize','3072','-sigalg','SHA256withRSA',
-        '-validity','10000','-dname','CN=Zhixu Textbook',
+        '-validity','10000','-dname','CN=Zhixu Independent Edition',
         '-storepass:env','ZHIXU_SIGN_PASSWORD','-keypass:env','ZHIXU_SIGN_PASSWORD']
     subprocess.run(command,env=env,check=True,capture_output=True)
     password_file.write_text(password+'\n',encoding='utf-8')
@@ -53,11 +58,11 @@ if created_new:
 else:
     password=password_file.read_text(encoding='utf-8').strip()
 for private_file in folder.iterdir():
+    if private_file.is_symlink(): raise SystemExit('Signing folder must not contain symlinks.')
     if private_file.is_file(): os.chmod(private_file,0o600)
 env=dict(os.environ,ZHIXU_SIGN_PASSWORD=password)
 public_cert=subprocess.run([args.keytool,'-exportcert','-keystore',str(keystore),'-alias','zhixu-release','-storepass:env','ZHIXU_SIGN_PASSWORD'],env=env,check=True,capture_output=True).stdout
 cert_sha=hashlib.sha256(public_cert).hexdigest()
-cert_pin=folder/'certificate-sha256.txt'
 if created_new:
     cert_pin.write_text(cert_sha+'\n',encoding='utf-8')
 elif not cert_pin.is_file() or cert_pin.read_text(encoding='utf-8').strip()!=cert_sha:
@@ -70,6 +75,8 @@ subprocess.run([args.java,'-jar',args.signer,'sign','--ks',str(keystore),
     '--out',str(output),args.apk],env=env,check=True,capture_output=True)
 verify=subprocess.run([args.java,'-jar',args.signer,'verify','--verbose','--print-certs',str(output)],
     check=True,capture_output=True,text=True)
+if ('Signer #1 certificate SHA-256 digest: '+cert_sha) not in verify.stdout:
+    raise SystemExit('APK certificate does not match the pinned release identity.')
 certificate=folder/'签名证书校验.txt'
 certificate.write_text(verify.stdout,encoding='utf-8')
 sha=hashlib.sha256(output.read_bytes()).hexdigest()

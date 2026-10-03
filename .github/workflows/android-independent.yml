@@ -89,6 +89,7 @@ jobs:
           cp android/app/build/outputs/apk/debug/app-debug.apk work/android-artifact/
           cp android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk work/android-artifact/
           git rev-parse HEAD > work/android-artifact/source-commit.txt
+          echo "${{ github.event.pull_request.head.sha || github.sha }}" > work/android-artifact/candidate-commit.txt
           "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging android/app/build/outputs/apk/release/app-release-unsigned.apk > work/android-artifact/apk-metadata.txt
           "$ANDROID_HOME/build-tools/36.0.0/aapt" dump permissions android/app/build/outputs/apk/release/app-release-unsigned.apk > work/android-artifact/apk-permissions.txt
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -176,6 +177,8 @@ jobs:
             timeout 90 adb shell am instrument -w -e migrationAction "$2" "$1.test/app.zhixu.textbook.TextbookSmokeTest" | tee -a work/android-migration.txt
             tail -10 work/android-migration.txt | grep -q "ZHIXU_MIGRATION_SUCCESS $2 $1"
           }
+          # Discard only synthetic smoke state before first-launch migration checks.
+          adb shell pm clear app.zhixu.textbook.independent
           probe app.zhixu.textbook seed
           probe app.zhixu.textbook.independent empty
           adb exec-out cat /data/data/app.zhixu.textbook/files/migration-export.json > work/synthetic-legacy-backup.json
@@ -215,6 +218,10 @@ jobs:
         timeout-minutes: 15
         run: |
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs downloads/Zhixu-Independent-1.5.0.apk | tee work/production-signature.txt
+          grep -q "Signer #1 certificate SHA-256 digest: $(cat downloads/certificate-sha256.txt)" work/production-signature.txt
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging downloads/Zhixu-Independent-1.5.0.apk > work/production-metadata.txt
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump permissions downloads/Zhixu-Independent-1.5.0.apk > work/production-permissions.txt
+          python tools/verify-independent-apk.py --apk downloads/Zhixu-Independent-1.5.0.apk --metadata work/production-metadata.txt --permissions work/production-permissions.txt > work/production-payload.json
           python tools/test-signed-android-ui.py downloads/Zhixu-Independent-1.5.0.apk | tee work/production-ui-result.txt
           grep -q ZHIXU_SIGNED_RELEASE_UI_SUCCESS work/production-ui-result.txt
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -224,5 +231,8 @@ jobs:
           path: |
             work/signed-release-ui/
             work/production-signature.txt
+            work/production-metadata.txt
+            work/production-permissions.txt
+            work/production-payload.json
             work/production-ui-result.txt
           retention-days: 14

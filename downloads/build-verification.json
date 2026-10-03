@@ -1,0 +1,21 @@
+{
+  "candidate_source_commit": "b8f09769afd8de5ed1837c866df762e90e66a126",
+  "ci_checkout_merge_commit": "d01f95c2ee07417f8de7547f732436fd34f878fb",
+  "unsigned_workflow_run": 37120613712,
+  "unsigned_artifact_id": 11272479880,
+  "unsigned_sha256": "6e4fbebfa15eb7a3eb5ace42e8417bfbfe8213dceb4d1a0bd62a6268950b5be2",
+  "signed_sha256": "b4f92a1342ac5029e2a8a6c599e676ed414246c76d48c80b5dd50a37705734a0",
+  "certificate_sha256": "eac09dcca7192a3a7c99bc67de80d9616c9afa9b986fb107d5ef233e7368f376",
+  "package": "app.zhixu.textbook.independent",
+  "label": "知序·独立版",
+  "version_name": "1.5.0",
+  "version_code": 8,
+  "debuggable": false,
+  "permissions": 0,
+  "runtime_assets": 153,
+  "signature_schemes": [
+    "v2",
+    "v3"
+  ],
+  "status": "Candidate: final production-signed APK UI installation verification pending"
+}
