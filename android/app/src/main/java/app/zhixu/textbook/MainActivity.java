@@ -161,7 +161,7 @@ public final class MainActivity extends Activity {
                 case 3: chooseDocument(IMPORT); break;
                 case 4: printLesson(); break;
                 case 5: openBrowser(Uri.parse(WEBSITE)); break;
-                case 6: openBrowser(Uri.parse(RELEASES)); break;
+                case 6: openBrowser(Uri.parse(BuildConfig.INDEPENDENT ? "https://github.com/patatohek-boop/zhixu-cloud-textbook/blob/main/downloads/README.md" : RELEASES)); break;
                 case 7:
                     new AlertDialog.Builder(this).setTitle(BuildConfig.INDEPENDENT ? R.string.independent_app_name : R.string.app_name)
                         .setMessage((BuildConfig.INDEPENDENT ? getString(R.string.independent_notice) : "") + getString(R.string.about_text, BuildConfig.VERSION_NAME))
