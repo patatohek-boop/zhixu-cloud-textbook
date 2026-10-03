@@ -128,6 +128,8 @@ jobs:
         run: |
           collect_diagnostics() {
             timeout 15 adb logcat -d > work/android-logcat.txt 2>&1 || true
+            timeout 10 adb exec-out screencap -p > work/android-final-screen.png || true
+            timeout 10 adb shell dumpsys window > work/android-window.txt || true
             for name in concept-toc-screen concept-position-failure-screen; do
               if timeout 5 adb shell test -f "/data/data/app.zhixu.textbook.independent/files/$name.png"; then
                 timeout 5 adb exec-out cat "/data/data/app.zhixu.textbook.independent/files/$name.png" > "work/android-$name.png" || true
@@ -148,6 +150,9 @@ jobs:
           adb install work/legacy/app-debug-androidTest.apk
           adb install work/independent-ci-release.apk
           adb install android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+          # The fresh Google APIs image can display a Pixel Launcher ANR after boot.
+          # Stop only that emulator launcher before testing; keep application failures visible.
+          adb shell am force-stop com.google.android.apps.nexuslauncher
           timeout 240 adb shell am instrument -w -e expectRelease true app.zhixu.textbook.independent.test/app.zhixu.textbook.TextbookSmokeTest | tee work/android-smoke.txt
           grep -q ZHIXU_SMOKE_SUCCESS work/android-smoke.txt
           adb exec-out cat /data/data/app.zhixu.textbook.independent/files/reader-screen.png > work/android-reader.png
@@ -212,6 +217,8 @@ jobs:
             work/android-home.png
             work/emulator.log
             work/android-logcat.txt
+            work/android-final-screen.png
+            work/android-window.txt
           retention-days: 14
       - name: Verify exact production-signed APK through public UI
         if: hashFiles('downloads/Zhixu-Independent-1.5.0.apk') != ''
