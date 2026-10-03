@@ -10,7 +10,10 @@
   ],
   "prerequisites": [
     "fluid-mechanics-29",
-    "fluid-mechanics-25"
+    "fluid-mechanics-25",
+    "machine-learning-02",
+    "machine-learning-03",
+    "calculus-15"
   ],
   "tags": [
     "流动测量、相似实验与不确定度",
@@ -31,9 +34,21 @@
     "explanation": "精密度与准确度不同，校准偏差不会仅靠重复测量自动消失。"
   },
   "lab": null,
-  "revision": "2026-09-28 · 概念分段与教学审读"
+  "revision": "2026-10-03 · 科学条件与本科练习补强"
 }
 ---
+
+## 先借偏导、期望和协方差这几个工具
+
+不确定度传播只调用下列片段，不要求先学完机器学习或多元微积分：
+
+- [微积分15](#/course/calculus/calculus-15)的“两个输入同时变：先预测，再算真实误差”与“全导数控制所有方向的共同误差”：用 $\delta Y\approx\sum_i f_i\delta X_i$ 表示局部一阶变化
+- [机器学习02](#/course/machine-learning/machine-learning-02)的“期望与离散程度”和“方差、标准差与协方差”：会把 $E[(X_i-EX_i)(X_j-EX_j)]$ 认作协方差，并区分不相关与独立
+- [机器学习03](#/course/machine-learning/machine-learning-03)的“偏差与标准误”和“均值标准误为何有根号 n”：仅在把重复读数转换成均值标准不确定度时借用；不必先读检验、回归或概率分布的完整证明
+
+本页的 $\delta X_i=X_i-EX_i$ 是围绕输入估计中心的随机偏离，$u_i^2$ 是相应方差；$f_i$ 是在该中心计算的局部灵敏度系数。
+
+**过关动作：** 能展开 $(f_1\delta X_1+f_2\delta X_2)^2$，指出交叉项取期望后为什么出现协方差，再继续下面的两输入压差算例。已知校准偏差应先修正，并把剩余校准不确定度纳入输入，不能当作“多测几次会消失”。
 
 ## 严谨定义：测量值与不确定度各代表什么
 

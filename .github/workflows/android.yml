@@ -49,6 +49,9 @@ jobs:
           node tools/test-knowledge-map.cjs
           node tools/test-mastery-exercises.cjs
           python tools/verify_final_review.py
+          python tools/verify_report_revision.py
+          python tools/verify_thermal_cases.py
+          python tools/revision/verify_fluid.py
           python tools/test-learning-preservation.py
           python tools/test-offline-learning.py
           python tools/verify_cfd.py
@@ -106,7 +109,16 @@ jobs:
       - name: Verify offline app on Android 15
         timeout-minutes: 10
         run: |
-          trap 'timeout 15 adb logcat -d > work/android-logcat.txt 2>&1 || true; tail -60 work/emulator.log || true' EXIT
+          collect_diagnostics() {
+            timeout 15 adb logcat -d > work/android-logcat.txt 2>&1 || true
+            for name in concept-toc-screen concept-position-failure-screen; do
+              if timeout 5 adb shell run-as app.zhixu.textbook test -f "files/$name.png"; then
+                timeout 5 adb exec-out run-as app.zhixu.textbook cat "files/$name.png" > "work/android-$name.png" || true
+              fi
+            done
+            tail -60 work/emulator.log || true
+          }
+          trap collect_diagnostics EXIT
           "$ANDROID_HOME/emulator/emulator" -avd zhixu-test -no-window -no-audio -no-boot-anim -no-snapshot -gpu software -camera-back none -camera-front none > work/emulator.log 2>&1 &
           timeout 90 adb wait-for-device
           timeout 240 bash -c 'until [ "$(adb shell getprop sys.boot_completed | tr -d "\r")" = "1" ]; do sleep 3; done'
@@ -131,6 +143,10 @@ jobs:
           test -s work/android-mastery-practice.png
           adb exec-out run-as app.zhixu.textbook cat files/horizontal-formula-screen.png > work/android-horizontal-formula.png
           test -s work/android-horizontal-formula.png
+          adb exec-out run-as app.zhixu.textbook cat files/core-continuation-screen.png > work/android-core-continuation.png
+          test -s work/android-core-continuation.png
+          adb exec-out run-as app.zhixu.textbook cat files/report-revision-screen.png > work/android-report-revision.png
+          test -s work/android-report-revision.png
           adb shell am start -W -n app.zhixu.textbook/.MainActivity
           sleep 15
           adb exec-out screencap -p > work/android-home.png
@@ -142,12 +158,16 @@ jobs:
             work/android-smoke.txt
             work/android-reader.png
             work/android-concepts.png
+            work/android-concept-toc-screen.png
+            work/android-concept-position-failure-screen.png
             work/android-research.png
             work/android-simulation.png
             work/android-knowledge-map.png
             work/android-concept-story.png
             work/android-mastery-practice.png
             work/android-horizontal-formula.png
+            work/android-core-continuation.png
+            work/android-report-revision.png
             work/android-home.png
             work/emulator.log
             work/android-logcat.txt

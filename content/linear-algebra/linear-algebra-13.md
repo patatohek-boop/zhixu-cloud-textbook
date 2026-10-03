@@ -112,3 +112,20 @@ $\det(tI-B)=\det(S^{-1}(tI-A)S)=\det(tI-A)$，故特征多项式及代数重数�
 
 不可以。必须排除零向量，否则特征方程对任意标量都成立，无法识别特殊方向。
 </details>
+
+<!-- math-revision-20261003:eigenproblem-practice:start -->
+## 练习 M12：未见过的矩阵与重复根
+
+分别对实矩阵
+$$A=\begin{pmatrix}4&2\\1&3\end{pmatrix},\qquad
+B=\begin{pmatrix}2&1\\0&2\end{pmatrix}$$
+求特征多项式、每个特征空间的一组基、代数与几何重数，并判断能否选出两个独立的特征方向。每个方向都必须代回原矩阵检查。
+
+<details><summary>查看完整解析与检查</summary>
+
+对 $A$，$p_A(t)=(t-4)(t-3)-2=t^2-7t+10=(t-5)(t-2)$。$\lambda=5$ 时解 $-x+2y=0$，故 $E_5=\operatorname{span}\{(2,1)\}$；$\lambda=2$ 时解 $x+y=0$，故 $E_2=\operatorname{span}\{(1,-1)\}$。两根各代数重数 $1$、几何重数 $1$，方向独立，因为以这两列组成的矩阵行列式为 $-3\ne0$。代回 $A(2,1)=(10,5)=5(2,1)$、$A(1,-1)=(2,-2)=2(1,-1)$；迹 $7=5+2$ 与行列式 $10=5\cdot2$ 是额外检查。
+
+对 $B$，$p_B(t)=(t-2)^2$，唯一根 $2$ 的代数重数为 $2$。但 $(B-2I)(x,y)=(y,0)$，核要求 $y=0$，所以 $E_2=\operatorname{span}\{(1,0)\}$，几何重数只有 $1$。代回 $B(1,0)=2(1,0)$；任意该特征值的向量都沿此直线，不能选出两个独立特征方向。两个代数根按重数计数，不等于自动得到两个独立向量；对应的对角化问题见[第14课](#/course/linear-algebra/linear-algebra-14)。
+
+</details>
+<!-- math-revision-20261003:eigenproblem-practice:end -->

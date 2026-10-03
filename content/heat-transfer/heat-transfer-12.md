@@ -48,6 +48,10 @@ Nusselt数 $Nu=hL/k_f$ 用流体 $k_f$，Biot数 $Bi=hL_c/k_s$ 用固体 $k_s$�
 
 浮升热膨胀系数 $\beta=-(1/\rho)(\partial\rho/\partial T)_p$（K⁻¹）；$Gr=g\beta|\Delta T|L^3/\nu^2$，$Ra=GrPr$，$Ri=Gr/Re^2$。所有这些比值无量纲，特征长度和物性取值必须与所用关联式的定义一致。
 
+### 本节正值Gr/Ra的前提
+
+本节“热而轻”及 $g\beta|\Delta T|$ 作为非负强弱量级，默认所用温区 $\beta>0$ 且可近似常数。若 $\beta<0$，必须保留浮力项 $g\beta(T-T_0)$ 的符号，按实际密度随高度的分布判断稳定性；若只比较驱动大小，可另定义含 $|\beta\Delta T|$ 的模量，但不能因此自动使用本节正Ra经验式。常压水约0—4 ℃受热反而变密，跨密度极大值时常 $\beta$ 模型也可能失效。低速、近不可压缩且无其他密度因素时，重液在下、轻液在上才是通常的稳定排序；具体临界条件还依几何与边界。参见[OpenStax水的反常热膨胀](https://openstax.org/books/university-physics-volume-2/pages/1-3-thermal-expansion)。
+
 ## 通俗解释
 
 无量纲数比较“谁比谁强”，不是给公式起的任意缩写。同样的速度，放进细管与宽管中，黏性相对惯性的作用可完全不同。

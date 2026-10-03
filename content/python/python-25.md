@@ -139,3 +139,96 @@ DictReader 把每行转成按表头命名的字典。程序先检查表头契约
 
 2. 为什么错误行不能填成零再参与平均？
 <details><summary>查看解析</summary>零是有效温度，替换会制造并不存在的观测并拉低均值。应保留错误信息，按事先定义的规则处理。</details>
+
+### 练习三：只改一项规格，先写出会失败的测试
+
+把本章分析器另存为一个练习版本，保留原版作为对照。新需求是：在原有每个传感器的 `count`、`mean_c` 旁增加 `high_count`，统计**有效温度中不低于阈值**的条数。函数签名改为 `analyze_with_threshold(text, *, threshold_c=22.0)`；阈值单位℃，题设输入为有限float，非有限阈值须报 `ValueError`。高于阈值仍是有效读数，必须继续参与原来的总数和均值。其他CSV、物理行号、无效记录与排序规则不变。
+
+先用下面输入写测试，再修改实现。不要先运行程序，把期望值从原始记录手算出来：
+
+```text
+sensor,temp_c
+A,20
+A,22
+B,0
+B,invalid
+A,24
+C,NaN
+```
+
+1. 默认阈值22 ℃下，A、B的count、mean_c、high_count及错误行号各是多少？C是否应该出现在有效汇总中？
+2. 阈值改成0 ℃时，如何证明有效零没有被当缺失？只有表头没有数据、表头顺序错误和阈值NaN各该怎样处理？
+3. 说明原版为什么未满足新增测试；若把“不低于”误写成 `>`，哪一个边界测试能抓住它？
+
+<details><summary>查看完整解析、可运行改造与失败解释</summary>
+
+A的有效值是20、22、24 ℃，count=3、mean_c=22 ℃、high_count=2；B只有有效0 ℃，count=1、mean_c=0 ℃、high_count=0。第5、7物理行无效，C没有有效读数，不能凭NaN建立一个平均为零的组。阈值改为0 ℃时，A的high_count=3，B的high_count=1。空数据应返回两个空列表，错误表头应使整个任务失败，非有限阈值也应在处理记录前使任务失败。
+
+最小改动是保存原来的有效分组，在汇总每组时对同一批有效值数达标数量；不要为计算high_count另建一套放宽校验的读取流程。下段代码可单独保存运行，只依赖标准库：
+
+```python
+import csv
+import io
+import math
+import statistics
+
+def analyze_with_threshold(text, *, threshold_c=22.0):
+    # Contract: threshold_c is a float in degC; nonfinite thresholds are rejected.
+    if not math.isfinite(threshold_c):
+        raise ValueError("阈值必须有限")
+    groups, errors = {}, []
+    reader = csv.DictReader(io.StringIO(text))
+    if reader.fieldnames != ["sensor", "temp_c"]:
+        raise ValueError("表头必须为 sensor,temp_c")
+    for row in reader:
+        line_no = reader.line_num
+        try:
+            if None in row or any(value is None for value in row.values()):
+                raise ValueError("列数与表头不一致")
+            sensor = row["sensor"].strip()
+            value = float(row["temp_c"])
+            if not sensor or not math.isfinite(value):
+                raise ValueError("名称为空或读数非有限")
+            if value < -273.15:
+                raise ValueError("低于绝对零度")
+            groups.setdefault(sensor, []).append(value)
+        except (ValueError, TypeError, AttributeError) as exc:
+            errors.append({"line": line_no, "reason": str(exc)})
+    summary = []
+    for sensor, values in sorted(groups.items()):
+        summary.append({"sensor": sensor, "count": len(values),
+                        "mean_c": statistics.mean(values),
+                        "high_count": sum(value >= threshold_c for value in values)})
+    return {"summary": summary, "errors": errors}
+
+text = "sensor,temp_c\nA,20\nA,22\nB,0\nB,invalid\nA,24\nC,NaN\n"
+report = analyze_with_threshold(text)
+assert report["summary"] == [
+    {"sensor": "A", "count": 3, "mean_c": 22.0, "high_count": 2},
+    {"sensor": "B", "count": 1, "mean_c": 0.0, "high_count": 0},
+]
+assert [error["line"] for error in report["errors"]] == [5, 7]
+assert all(error["reason"] for error in report["errors"])
+zero_threshold = analyze_with_threshold(text, threshold_c=0.0)
+assert [row["high_count"] for row in zero_threshold["summary"]] == [3, 1]
+assert analyze_with_threshold("sensor,temp_c\n") == {"summary": [], "errors": []}
+for bad_text, threshold in [("temp_c,sensor\n20,A\n", 22.0),
+                            ("sensor,temp_c\nA,20\n", float("nan"))]:
+    try:
+        analyze_with_threshold(bad_text, threshold_c=threshold)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("expected ValueError")
+print(report["summary"])
+print("invalid end lines:", [error["line"] for error in report["errors"]])
+print("all checks passed")
+```
+
+预期第一行是两个字典组成的列表，与断言中的A/B结果一致；第二行为 `invalid end lines: [5, 7]`，最后为 `all checks passed`。错误信息的具体英文措辞可能随Python版本变化，因此关键断言核对行号与原因非空，不依赖转换异常的某一条英文原文。`sum(条件 for ...)` 是[推导式/生成器](#/course/python/python-10)的用法，True计1、False计0；这里数的是事件次数，不是把温度数值相加。
+
+原版没有 `high_count` 字段，按新增规格访问它会得到 `KeyError`。这说明旧程序不满足**新需求**，不表示旧规格下的均值计算错误。改成严格 `>` 的版本会漏掉A的22 ℃，得到high_count=1；默认测试要求2，能直接抓住端点错误。若只测试20和24，就发现不了这一错误。
+
+易错点：不能把达标值从均值组中移除；不能把invalid或NaN填零；不能用温度的真假判断筛掉0 ℃。自查：每组high_count应在0与count之间（含端点）；改变阈值只应改变high_count，不能改变有效count、mean_c或错误列表。题设未承诺验证任意阈值类型、CSV语法损坏或资源耗尽，真实接口需要另定这些策略。数据解析和物理行号语义可核对[Python csv.DictReader](https://docs.python.org/3/library/csv.html#csv.DictReader)与[reader.line_num](https://docs.python.org/3/library/csv.html#csv.csvreader.line_num)。
+
+</details>

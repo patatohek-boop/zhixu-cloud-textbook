@@ -16,7 +16,10 @@
     "检查模型条件并复核保留算例"
   ],
   "prerequisites": [
-    "相平衡、Clapeyron 关系与稳定性边界"
+    "相平衡、Clapeyron 关系与稳定性边界",
+    "machine-learning-02",
+    "machine-learning-03",
+    "calculus-15"
   ],
   "summary": "实验读数并不自动等于物理真值。",
   "quiz": {
@@ -68,6 +71,12 @@
 $$\int_0^tP(\tau)d\tau-Q_{loss}=mc\Delta T+C_{cup}\Delta T.$$
 
 常功率时才可换成 $Pt$，解出 $c=(Pt-Q_{loss})/(m\Delta T)-C_{cup}/m$。若局部测点不能代表整个样品温度，增加公式项并不能补救采样代表性，应先改善混合和测点布置。
+
+## 统计先修桥：只借用三件工具
+
+可先读[随机变量、期望与协方差](#/course/machine-learning/machine-learning-02)、[样本标准差与标准误](#/course/machine-learning/machine-learning-03)以及[全微分](#/course/calculus/calculus-15)，不要求先学完机器学习。期望是概率加权平均，方差是 $E[(X-EX)^2]$，协方差是 $E[(X-EX)(Y-EY)]$；相关项可能为负，不是所有平方和都能直接相加。
+
+最小例：三次独立同条件温度读数20、21、22 ℃，均值21 ℃，样本方差 $s^2=[(-1)^2+0^2+1^2]/(3-1)=1$ K²；均值的估计标准误是 $s/\sqrt3\approx0.577$ K，不是单次读数的标准差1 K。独立、同分布和仪器偏差已校正是这个解释的条件；它不自动给95%区间。若同一温度计两次读数都带未知共同零偏 $b$，$(T_2+b)-(T_1+b)=T_2-T_1$，共同项恰好抵消，下面的负协方差项就是这种抵消的一阶表达。
 
 ## 证明二：误差平方和为什么有条件
 

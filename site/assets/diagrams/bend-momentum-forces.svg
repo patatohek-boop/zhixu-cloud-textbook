@@ -1,20 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="820" height="440" viewBox="0 0 820 440" role="img" aria-labelledby="title desc">
-<title id="title">90 度弯管内流体的动量与受力</title><desc id="desc">俯视水平弯管，入口向右，出口向上。入口表压力向右，出口表压力向下，管壁作用力向左上。</desc>
+<title id="title">90 度弯管内流体的表压动量账本</title><desc id="desc">俯视水平弯管，入口向右，出口向上。采用统一扣除大气背景的表压，管壁有效作用力 Rg 向左上；Rg 不是实际湿壁牵引合力。</desc>
 <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#236d89"/></marker><marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#bf602d"/></marker></defs>
 <rect width="820" height="440" rx="12" fill="#f7fbfc"/>
 <g font-family="sans-serif" font-size="19" fill="#173c4a">
-<text x="28" y="35" font-weight="bold" font-size="23">研究对象：管内的水（俯视图）</text>
+<text x="28" y="35" font-weight="bold" font-size="23">研究对象：管内的水（表压账本，俯视图）</text>
 <path d="M97 250H246Q302 250 302 194V120" stroke="#accfdb" stroke-width="80" fill="none"/>
 <path d="M97 250H246Q302 250 302 194V120" stroke="#e3f3f8" stroke-width="74" fill="none"/>
 <path d="M97 209V291M262 120H342" stroke="#7e9caa" stroke-width="2" stroke-dasharray="5 5"/>
 <g stroke="#236d89" stroke-width="3" marker-end="url(#a)"><path d="M36 270H158"/><path d="M284 185V77"/></g>
 <text x="36" y="309">入口 V₁ →</text><text x="205" y="65">出口 V₂ ↑</text>
 <g stroke="#bf602d" stroke-width="3" marker-end="url(#b)"><path d="M40 226H155"/><path d="M324 66V186"/></g>
-<text x="29" y="203" fill="#a04b21">p₁A = 300 N</text><text x="346" y="117" fill="#a04b21">p₂A = 200 N</text>
+<text x="29" y="203" fill="#a04b21">p₁,gA = 300 N</text><text x="346" y="117" fill="#a04b21">p₂,gA = 200 N</text>
 <path d="M237 242L148 159" stroke="#bf602d" stroke-width="3" marker-end="url(#b)"/>
-<text x="112" y="137" fill="#a04b21">管壁力 R</text>
+<text x="112" y="137" fill="#a04b21">有效管壁力 Rg</text>
 <g stroke="#236d89" stroke-width="2" marker-end="url(#a)"><path d="M65 387H143"/><path d="M65 387V327"/></g>
 <text x="150" y="391">+x</text><text x="35" y="326">+y</text>
-<g transform="translate(447 196)"><text font-weight="bold">每秒流出 − 每秒流入</text><text y="35">动量净通量 = (−40, +40) N</text><text y="88">Rₓ + 300 = −40</text><text y="122">Rᵧ − 200 = +40</text><text y="170" fill="#a04b21">R = (−340, +240) N</text></g>
-<text x="236" y="411" font-size="17">换成“管道”受力图时，水对管道的力才取 −R。</text>
+<g transform="translate(447 196)"><text font-weight="bold">每秒流出 − 每秒流入</text><text y="35">动量净通量 = (−40, +40) N</text><text y="88">Rg,x + 300 = −40</text><text y="122">Rg,y − 200 = +40</text><text y="170" fill="#a04b21">Rg = (−340, +240) N</text></g>
+<text x="215" y="411" font-size="16">−Rg 是计入对应外侧大气作用后的管道有效净载荷。</text>
 </g></svg>

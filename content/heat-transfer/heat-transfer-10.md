@@ -16,7 +16,9 @@
     "区分解析推导、模型假设和经验数据范围"
   ],
   "prerequisites": [
-    "半无限体、热穿透与叠加原理"
+    "半无限体、热穿透与叠加原理",
+    "calculus-12",
+    "linear-algebra-17"
   ],
   "summary": "几何有孔洞、边界不均匀或材料分层时，解析解可能很难得到。",
   "quiz": {
@@ -59,6 +61,8 @@ Taylor展开给 $T_{xx}(x_i,t_n)=[T_{i-1}^n-2T_i^n+T_{i+1}^n]/\Delta x^2+O(\Delt
 $$T_i^{n+1}=rT_{i-1}^n+(1-2r)T_i^n+rT_{i+1}^n.$$
 
 ### 由误差模态得到放大因子
+
+先回看[Taylor展开](#/course/calculus/calculus-12)与[复数、Fourier模态](#/course/linear-algebra/linear-algebra-17)。虚数单位 $\mathrm i^2=-1$ 与网格编号 $i$ 不是同一个量；Euler公式 $e^{\mathrm i\theta i}=\cos(\theta i)+\mathrm i\sin(\theta i)$ 只把两种**实数误差波**合写。本题更新系数为实数且线性，所以实部和虚部分别按同一规则更新，温度不变成复数。邻点的因子为 $e^{\pm\mathrm i\theta}$，相加是 $2\cos\theta$；由 $2\cos\theta-2=-4\sin^2(\theta/2)$ 就得到下面的放大因子。第一遍也可先用后面的非负权重判断，不必先掌握DFT算法。
 
 在无限或周期均匀网格上取误差模态 $e_i^n=G^ne^{\mathrm i\theta i}$，代入消去公因子得到 $G=1-4r\sin^2(\theta/2)$。
 

@@ -89,6 +89,15 @@ print(transform(test))
 
 能独立做到：画出每个 `fit` 可以读哪些行、哪些字段，以及评价结果可以影响哪些决定。下面的条件期望证明说明独立测试为什么有用，也列出其适用边界。
 
+### 同一道 Pipeline 练习，分两次完成
+
+本页分层练习中的“交叉验证流程纠错”保留为一题，第一次阅读先完成手算部分，后续再回来运行原题代码：
+
+- **现在可做：** 对 `[0,2,100,102]` 定位“全数据先 fit”的泄漏，算全数据均值51和题设训练折 `[0,2]` 的均值1。该折使用分母2的尺度为1，验证100、102应变为99、101。画出训练行进入 `fit`、验证行只进入 `transform` 的箭头；不必已经会 Ridge。
+- **以后可运行：** 学过[本节后续的交叉验证](#/course/machine-learning/machine-learning-06)、[岭回归](#/course/machine-learning/machine-learning-09)、[Python 环境](#/course/python/python-11)与[NumPy](#/course/python/python-20)后，再运行原题完整 Pipeline 代码；需要更完整项目背景时回读[建模项目](#/course/machine-learning/machine-learning-29)。逐折核对训练均值1和101，而不是只检查分数有没有输出。
+
+这里 `Pipeline` 是把预处理与模型连成一条训练流程。每一折都重新拟合整条流程，才能让这一折的验证行保持在学习步骤之外。现在能指出信息越界就完成了第一层；以后能验证逐折拟合并解释负MSE，才完成运行层。
+
 <details class="advanced-reading"><summary>展开完整正文：严谨定义、推导与更多练习</summary>
 
 ## 严格区分参数学习、方案选择和评价

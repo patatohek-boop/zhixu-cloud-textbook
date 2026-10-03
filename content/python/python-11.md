@@ -35,6 +35,12 @@
 }
 ---
 
+## 到这里需要会什么
+
+最低准备是[函数定义与调用](#/course/python/python-07)、基本列表/字符串，以及本页马上介绍的 `import`。先会把一个函数放进 `.py` 文件、导入后调用，再执行环境检查；不要求先学完异常、类、装饰器或第10—19节全部内容。
+
+阅读顺序：先看 `conversions.py` 的直接运行与导入区别，再按本页步骤创建环境、确认解释器和包版本。命名空间包、循环导入与 `pyproject.toml` 属于第二层，遇到项目需要时回读。自查时必须说清“哪个 Python 正在运行、第三方包装在哪里”，不能只凭编辑器没有红线判断环境已经就绪。
+
 ## 先定义组织层级
 **模块**是具有独立名字空间的代码组织单位，常由一个 `.py` 文件实现，也可能来自内建或扩展模块。
 
@@ -93,7 +99,7 @@ if __name__ == "__main__":
 
 ## 为后面的科学计算课准备同一个环境
 
-NumPy、pandas、Matplotlib 与 scikit-learn 是第三方包，和 `math`、`csv` 等标准库不同。请先把终端切换到存放课程脚本的项目文件夹，创建环境。创建本身不需要下载第三方包；下面的安装步骤需要网络或事先准备好的包。
+NumPy、SciPy、pandas、Matplotlib 与 scikit-learn 是第三方包，和 `math`、`csv` 等标准库不同。请先把终端切换到存放课程脚本的项目文件夹，创建环境。创建本身不需要下载第三方包；下面的安装步骤需要网络或事先准备好的包。
 
 ### 第一步：创建项目环境
 
@@ -104,13 +110,13 @@ NumPy、pandas、Matplotlib 与 scikit-learn 是第三方包，和 `math`、`csv
 Windows PowerShell：
 
 ```text
-.\.venv\Scripts\python.exe -m pip install numpy pandas matplotlib scikit-learn
+.\.venv\Scripts\python.exe -m pip install numpy scipy pandas matplotlib scikit-learn
 ```
 
 macOS/Linux：
 
 ```text
-./.venv/bin/python -m pip install numpy pandas matplotlib scikit-learn
+./.venv/bin/python -m pip install numpy scipy pandas matplotlib scikit-learn
 ```
 
 这种写法直接指定环境里的解释器，无需先激活，也不会因另一个同名 `pip` 把库装进其他环境。发行包名 `scikit-learn` 对应代码中的导入名 `sklearn`，二者拼写不同。
@@ -122,12 +128,14 @@ macOS/Linux：
 ```python
 import sys
 import numpy as np
+import scipy
 import pandas as pd
 import matplotlib
 import sklearn
 
 print("解释器:", sys.executable)
 print("NumPy:", np.__version__)
+print("SciPy:", scipy.__version__)
 print("pandas:", pd.__version__)
 print("Matplotlib:", matplotlib.__version__)
 print("scikit-learn:", sklearn.__version__)

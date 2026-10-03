@@ -72,9 +72,18 @@ $$C\frac{dT}{dt}=-hA(T-T_a),\quad
 $$r(x)=u'(x)+\widehat\gamma u(x)
 =\widehat\gamma+\sum_{j=1}^d w_j[jx^{j-1}+\widehat\gamma x^j].$$
 
-损失是数据均方误差、λ倍配点残差均方和η∥w∥²之和。数据项再乘每个run的已知初温差与固定60 K参考温差之比，使其恰好等于温度MSE除以60²，与基线的温度误差权重一致。η为预设的微小岭项。所有项都已无量纲化。γ̂仅来自训练run，这样“物理参数”不会暗中包含测试信息。
+损失是数据误差项、λ倍配点残差均方和η∥w∥²之和。先把每个无量纲数据残差乘以该run的已知初温差与固定60 K参考温差之比，再平方平均；等价地，每个平方误差的权重是该比值的平方。
 
-令Φij=xiʲ，Rij=jziʲ⁻¹+γ̂ziʲ，z为固定配点。把Φ、√λR及√ηI按行拼接，并给各均方项除以相应样本数的平方根，就转化成线性最小二乘。代码用lstsq求解，避免显式形成逆矩阵。此例解的是凸二次问题，因此能清楚分辨表示误差和物理假设误差；不涉及深网络的非凸优化困难。
+具体地，令 $e_i=u(x_i)-y_i$，其中 $y_i$ 是无量纲观测，$s_i=\Delta T_i/(60\,\mathrm K)$，$\Delta T_i=T_{0,i}-T_{a,i}>0$。则
+$$L_d=\frac1N\sum_{i=1}^N(s_ie_i)^2
+=\frac1N\sum_{i=1}^Ns_i^2e_i^2
+=\frac{\mathrm{MSE}_{T}}{(60\,\mathrm K)^2}.$$
+温度残差是 $\Delta T_i e_i$，因此该数据项与基线的温度误差权重一致。比如两项 $e=[1,1]$、$s=[0.5,2]$，正确均方为 $(0.25+4)/2=2.125$；若只给平方误差乘一次s，会错成1.25。η为预设的微小岭项。所有损失项均无量纲，γ̂仅来自训练run，这样“物理参数”不会暗中包含测试信息。
+
+令 $\Phi_{ij}=x_i^j$，$R_{ij}=jz_i^{j-1}+\widehat\gamma z_i^j$，z为固定配点，N为训练观测数、M为配点数，$D_s=\operatorname{diag}(s_1,\ldots,s_N)$。矩阵与右端必须一起作相同的行缩放：
+$$A_{\rm stack}=\begin{bmatrix}D_s\Phi/\sqrt N\\ \sqrt{\lambda/M}R\\ \sqrt\eta I\end{bmatrix},\qquad
+b_{\rm stack}=\begin{bmatrix}D_s(y-\mathbf1)/\sqrt N\\ -\widehat\gamma\sqrt{\lambda/M}\mathbf1\\ \mathbf0\end{bmatrix}.$$
+因此 $\|A_{\rm stack}w-b_{\rm stack}\|^2=L_d+(\lambda/M)\sum_{i=1}^M r(z_i)^2+\eta\|w\|^2$。数据块对应代码的 `sample_scale`，物理块的负号来自残差中的常数 $\widehat\gamma$。代码用 `lstsq` 求解，避免显式形成逆矩阵；其最小化的欧氏残差平方和见[NumPy 官方定义](https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html)。此例是凸二次问题，不涉及深网络的非凸优化困难。
 
 ### 先按run拆分，再做任何模型选择
 

@@ -3,8 +3,9 @@ const root=path.resolve(__dirname,'..'),ctx={window:{}};vm.createContext(ctx);
 for(const name of ['data.js','knowledge-map.js'])vm.runInContext(fs.readFileSync(path.join(root,'site/assets',name),'utf8'),ctx);
 const {COURSES:courses,LEARNING_GUIDES:guides,KnowledgeMap:map}=ctx.window,m=map.model(courses,guides);
 assert.equal(m.nodes.length,253);assert.equal(new Set(m.nodes.map(n=>n.id)).size,253);
-assert.equal(guides.length,26,'The first enrichment pass covers exactly the enumerated 26 anchors');
-assert.equal(m.nodes.filter(n=>n.tier==='mainline').length,26);
+assert.equal(guides.length,30,'The reviewed 26 anchors plus four explicit mathematics bridges must ship');
+for(const id of ['calculus-02','calculus-04','linear-algebra-05','linear-algebra-06'])assert.ok(m.guideById.has(id),id);
+assert.equal(m.nodes.filter(n=>n.tier==='mainline').length,30);
 let required=0,recommended=0;
 for(const n of m.nodes){
  assert.ok(['mainline','foundation','advanced'].includes(n.tier));
@@ -20,7 +21,8 @@ for(const c of courses){
  for(const l of c.chapters){const local=map.render(courses,guides,[],c.id,l.id);links(local);assert.ok(local.includes('先学什么，学会后再去哪'));assert.ok(local.includes('必须先会')||!m.byId.get(l.id).required.length);}
  assert.equal(map.render(courses,guides,[],c.id,'__missing'),null);
 }
-links(map.render(courses,guides,[]));links(map.path(courses,guides,[]));
+links(map.render(courses,guides,[]));const corePath=map.path(courses,guides,[]);links(corePath);assert.ok(corePath.includes('本科核心续学'));assert.ok(corePath.indexOf('本科核心续学')<corePath.indexOf('达到对应能力后，再选专项'));assert.equal((corePath.match(/<b>自己检查：<\/b>/g)||[]).length,6);
+for(const c of courses){const filtered=map.path(courses,guides,[],c.id);links(filtered);assert.ok((filtered.match(/<b>自己检查：<\/b>/g)||[]).length>0,c.id+' needs a nonempty undergraduate continuation');}
 assert.equal(map.render(courses,guides,[],'__missing'),null);
 const title=courses[0].chapters[0].title;courses[0].chapters[0].title='<img src=x onerror=alert(1)>';
 const escaped=map.render(courses,guides,[],courses[0].id,courses[0].chapters[0].id);

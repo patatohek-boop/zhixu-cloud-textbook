@@ -26,6 +26,9 @@ jobs:
           node tools/test-knowledge-map.cjs
           node tools/test-mastery-exercises.cjs
           python tools/verify_final_review.py
+          python tools/verify_report_revision.py
+          python tools/verify_thermal_cases.py
+          python tools/revision/verify_fluid.py
           python tools/test-learning-preservation.py
           node tools/test-foundation-labs.cjs
           node tools/test-concept-stories.cjs
@@ -38,6 +41,8 @@ jobs:
           python tools/verify_computing.py
           python tools/verify_research_physics.py
           python tools/verify_audit_errata.py
+          python tools/revision/verify_math.py
+          python tools/revision/verify_computing.py
           python tools/mastery/verify_math.py
           python tools/mastery/verify_thermal.py
           python tools/mastery/verify_fluid.py
@@ -59,9 +64,14 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: always()
         with:
-          name: learning-ui-screenshots-and-report
-          path: |
-            work/learning-ui-results/
-            work/learning-ui-report/
+          name: learning-ui-screenshots
+          path: work/learning-ui-results/
+          if-no-files-found: warn
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: learning-ui-report
+          path: work/learning-ui-report/
           if-no-files-found: warn
           retention-days: 14

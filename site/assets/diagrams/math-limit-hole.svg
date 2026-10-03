@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="510" viewBox="0 0 720 510" role="img" aria-labelledby="title desc">
+<title id="title">附近趋势与点值是两回事</title>
+<desc id="desc">横轴x、纵轴g。除x等于1外，图像是直线y等于x加1；在坐标1、2处为空心圆，另在坐标1、7处是实心点。趋近1时的极限是2，指定点值是7，所以不连续。</desc>
+<rect width="720" height="510" fill="#f8fbfd"/>
+<g font-family="sans-serif" font-size="22" fill="#233448">
+<text x="30" y="39" font-size="28">附近趋势与点值是两回事</text>
+<text x="30" y="70">g(x) = x+1（x ≠ 1），另规定 g(1) = 7</text>
+<g stroke="#dce5ee" stroke-width="1">
+<path d="M120 105H620 M120 330H620 M120 375H620"/>
+<path d="M320 90V420 M520 90V420"/>
+</g>
+<path d="M120 420H649 M120 420V88" fill="none" stroke="#334155" stroke-width="2"/>
+<text x="658" y="427">x</text><text x="72" y="99">g</text>
+<text x="106" y="445" text-anchor="end">0</text><text x="320" y="449" text-anchor="middle">1</text><text x="520" y="449" text-anchor="middle">2</text>
+<text x="105" y="383" text-anchor="end">1</text><text x="105" y="338" text-anchor="end">2</text><text x="105" y="113" text-anchor="end">7</text>
+<line x1="120" y1="375" x2="620" y2="262.5" stroke="#236d89" stroke-width="4" data-rule="y=x+1" data-x-scale="200" data-x-offset="120" data-y-scale="-45" data-y-offset="420"/>
+<circle cx="320" cy="330" r="8" fill="#f8fbfd" stroke="#236d89" stroke-width="4" data-x="1" data-y="2" data-kind="excluded"/>
+<circle cx="320" cy="105" r="8" fill="#b65732" data-x="1" data-y="7" data-kind="included"/>
+<text x="347" y="112" fill="#944426">实心点：g(1) = 7</text>
+<text x="347" y="369" fill="#236d89">空心圆：(1, 2)</text>
+<text x="466" y="245" fill="#236d89">附近沿 y = x+1</text>
+<text x="30" y="490">当 x → 1，g(x) → 2；指定点值不改变附近趋势</text>
+</g>
+</svg>

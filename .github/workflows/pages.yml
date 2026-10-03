@@ -34,6 +34,9 @@ jobs:
       - run: node tools/test-knowledge-map.cjs
       - run: node tools/test-mastery-exercises.cjs
       - run: python tools/verify_final_review.py
+      - run: python tools/verify_report_revision.py
+      - run: python tools/verify_thermal_cases.py
+      - run: python tools/revision/verify_fluid.py
       - run: python tools/test-learning-preservation.py
       - run: python tools/verify_cfd.py
       - run: python tools/verify_research_foundations.py

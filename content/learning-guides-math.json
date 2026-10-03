@@ -90,5 +90,52 @@
     "mainline": true,
     "why": "精确拟合不了观测时，用明确定义的距离寻找最接近的可行预测。",
     "checkpoint": "能求一维正交投影、计算残差平方和，并核验残差与模型方向正交。"
+  },
+  {
+    "id": "calculus-02",
+    "required": [
+      "calculus-01"
+    ],
+    "recommended": [
+      "calculus-25"
+    ],
+    "mainline": true,
+    "why": "先区分点值与附近趋势，再用局部估计兑现任意精度的极限承诺。",
+    "checkpoint": "能为平方或倒数函数选出有效δ，给出全邻域估计，并解释孔洞与连续的差别。"
+  },
+  {
+    "id": "calculus-04",
+    "required": [
+      "calculus-03"
+    ],
+    "recommended": [
+      "calculus-27"
+    ],
+    "mainline": true,
+    "why": "沿明确的输入输出依赖链合成变化率，核对每层导数与单位。",
+    "checkpoint": "能独立画依赖链、算复合导数与相关变化率，并用直接展开或单位复核。"
+  },
+  {
+    "id": "linear-algebra-05",
+    "required": [
+      "linear-algebra-01"
+    ],
+    "recommended": [
+      "linear-algebra-02"
+    ],
+    "mainline": true,
+    "why": "先从可到达的线性组合认识张成，再检查零向量、加法与数乘封闭。",
+    "checkpoint": "能判断目标是否属于两个方向的张成，区分过原点子空间、平移平面与非负组合。"
+  },
+  {
+    "id": "linear-algebra-06",
+    "required": [
+      "linear-algebra-02",
+      "linear-algebra-05"
+    ],
+    "recommended": [],
+    "mainline": true,
+    "why": "用消元发现冗余，建立无关、张成与唯一基坐标之间的联系。",
+    "checkpoint": "能消元找出非零零组合，删去冗余列，并计算和代回验证唯一基坐标。"
   }
 ]

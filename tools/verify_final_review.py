@@ -3,12 +3,21 @@ import hashlib,json,math,pathlib
 r=pathlib.Path(__file__).resolve().parents[1]
 baseline=json.loads((r/'reviews/release-record-baseline.json').read_text())
 def digest(x):return hashlib.sha256(json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+amendment_path=r/'reviews/report-revision-preservation.json'
+amendments=json.loads(amendment_path.read_text()).get('quizzes',[]) if amendment_path.exists() else []
+assert {a['id'] for a in amendments}<={'machine-learning-36'} and len(amendments)<=1, 'Only the reviewed new-specimen wording correction is allowed'
+approved_quizzes={a['id']:a for a in amendments}
 current={}
 for p in (r/'content').glob('*/*.md'):
  meta=json.loads(p.read_text()[8:].split('\n---\n',1)[0]);current[meta['id']]=(p,meta)
 assert set(current)=={e['id'] for e in baseline['lessons']} and len(current)==253
 for e in baseline['lessons']:
  p,m=current[e['id']];q=m['quiz'];payload=dict(q);payload.pop('question')
+ if e['id'] in approved_quizzes:
+  a=approved_quizzes[e['id']];assert a['before_quiz_sha256']==e['quiz_sha256'] and a['before_payload_sha256']==e['answer_options_explanation_sha256']
+  assert digest(q)==a['after_quiz_sha256'] and digest(payload)==a['after_payload_sha256'], 'Unreviewed specimen-condition quiz change'
+  assert q['answer']==a['unchanged_answer_index'] and a['reason'].strip() and a['review'].strip()
+  continue
  assert digest(payload)==e['answer_options_explanation_sha256'],e['id']+': existing answers/options/explanation changed'
  if e['id']=='python-05':assert q['question']=='要仅在 x 为缺失值 None 时进入分支，并保留有效数值 0，应使用哪种检查？'
  else:assert digest(q)==e['quiz_sha256'],e['id']+': unexpected existing quiz change'
@@ -43,4 +52,4 @@ required={
 for lid,phrases in required.items():
  source=current[lid][0].read_text()
  for phrase in phrases:assert phrase in source,(lid,phrase)
-print('Final review regressions: 253 stable IDs and original quiz answers/options/explanations; documented stem correction, cycle data, mean counterexample, covariance/entropy conditions and proof continuity passed')
+print('Final review regressions: 253 stable IDs, original quiz keys and exact approved condition clarifications; documented stem correction, cycle data, mean counterexample, covariance/entropy conditions and proof continuity passed')

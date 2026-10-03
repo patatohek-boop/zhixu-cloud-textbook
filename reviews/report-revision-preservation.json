@@ -1,0 +1,58 @@
+{
+  "version": "1.5.0",
+  "base_commit": "2ba30c914deaebb8e9d261de1eb929f0162ba738",
+  "anchors": [
+    {
+      "id": "calculus-15",
+      "reason": "在全微分段补准确先修提示；原定义、证明、例题和练习未删改",
+      "review": "数学新增内容独立回读、原文保留与符号数值复算通过",
+      "original_body_sha256": {
+        "before": "e225a0ffd4eebc4147ffa103dbf1de0d877134ffd039dd9429a210ed4f374ee6",
+        "after": "e99f385c9aaa03d3657e6c1b1c786c338da80e4ca4e6c31a73c5afa5b2908479"
+      }
+    }
+  ],
+  "new_bridges": [
+    {
+      "id": "calculus-02",
+      "path": "content/calculus/calculus-02.md",
+      "original_body_sha256": "093a5143a8e4acb41e0374b49f981af3042f278ed7da746c73eec240342597ec"
+    },
+    {
+      "id": "calculus-04",
+      "path": "content/calculus/calculus-04.md",
+      "original_body_sha256": "89ed946f88f4860b098bffb918e3ae24f7e4d3a8869c65aabce8d998eb915850"
+    },
+    {
+      "id": "linear-algebra-05",
+      "path": "content/linear-algebra/linear-algebra-05.md",
+      "original_body_sha256": "ca0d1f46de313c1d696547408708c76a5d42e3c50c63e9b230f3bb7ca8595f65"
+    },
+    {
+      "id": "linear-algebra-06",
+      "path": "content/linear-algebra/linear-algebra-06.md",
+      "original_body_sha256": "0ba8c9090bf0a19b1a978569c075a881f7952f52bc004991b6c37e1ab864bdb2"
+    }
+  ],
+  "quizzes": [
+    {
+      "id": "machine-learning-36",
+      "before_quiz_sha256": "5577feda4bfdd06b6abc317aaebb1c8b174f465650cd294aae52be5743eb4b7b",
+      "before_payload_sha256": "e596f3d7caf6b29e714712d755074c140a7a5802b4cc8ca223090fa52e86ed3d",
+      "after_quiz_sha256": "de8f7070a58e1e7613c8c2df82eb4d68c2c0f634c9893a90e0684c2252780ca7",
+      "after_payload_sha256": "0d3384b6b8ee78d5d44e1b91000c0d8dd96ef03a3cd86a5ef1b5e73b0852d1b4",
+      "unchanged_answer_index": 2,
+      "reason": "新试件目标的风险选项与解析同步改为按试件隔离，题干与其余选项不变",
+      "review": "全部四个选项独立回读，唯一正确项仍为索引2"
+    }
+  ],
+  "mastery": [
+    {
+      "scope": "computing",
+      "before_sha256": "60347e060ce439fb1b324f3c89a74eb56d90a3f36d5de55027eeb81d839df833",
+      "after_sha256": "6b7758a5afecece3441ffa04ce2b3a6d8a0d41db545f5004545e55f4b61f3c7f",
+      "reason": "仅平均值题prompt补float可表示范围和近似返回条件；解答与其他23题不变",
+      "review": "逐对象逐字段核对，仅mastery-python-07-03.prompt发生批准范围内修改"
+    }
+  ]
+}

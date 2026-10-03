@@ -4,15 +4,23 @@ const root=path.resolve(__dirname,'..'),ctx={window:{}};
 vm.runInNewContext(fs.readFileSync(path.join(root,'site/assets/data.js'),'utf8'),ctx);
 const w=ctx.window,exercises=w.MASTERY_EXERCISES;
 const review=JSON.parse(fs.readFileSync(path.join(root,'reviews/mastery-review-manifest.json'),'utf8'));
+const amendmentPath=path.join(root,'reviews/report-revision-preservation.json');
+const masteryAmendments=fs.existsSync(amendmentPath)?JSON.parse(fs.readFileSync(amendmentPath,'utf8')).mastery:[];
+assert.ok(masteryAmendments.length<=1 && masteryAmendments.every(a=>a.scope==='computing'),'Only the reviewed floating-point prompt clarification is allowed');
 for(const record of review.files){
  const source=fs.readFileSync(path.join(root,'content/mastery-exercises-'+record.scope+'.json'));
- assert.equal(require('node:crypto').createHash('sha256').update(source).digest('hex'),record.integrated_sha256,'Reviewed question/answer source changed: '+record.scope);
+ const amendment=masteryAmendments.find(a=>a.scope===record.scope);
+ if(amendment){assert.equal(amendment.before_sha256,record.integrated_sha256);assert.ok(amendment.reason&&amendment.review);}
+ assert.equal(require('node:crypto').createHash('sha256').update(source).digest('hex'),amendment?.after_sha256||record.integrated_sha256,'Reviewed question/answer source changed: '+record.scope);
  assert.equal(JSON.parse(source).length,record.exercises);
 }
-assert.ok(exercises.length>=78,'At least 78 reviewed exercises must ship');
+assert.equal(exercises.length,78,'All 78 reviewed exercises ship without replacing their identities');
+const originalAnchors=JSON.parse(fs.readFileSync(path.join(root,'reviews/learning-original-content-baseline.json'),'utf8')).anchors.map(a=>a.id);
+assert.equal(originalAnchors.length,26);
+assert.deepEqual([...new Set(exercises.map(e=>e.lessonId))].sort(),originalAnchors.slice().sort());
 assert.equal(new Set(exercises.map(e=>e.id)).size,exercises.length);
 const levels=['基础理解','常规应用','综合提高'];
-for(const guide of w.LEARNING_GUIDES){const rows=exercises.filter(e=>e.lessonId===guide.id);assert.ok(rows.length>=3,guide.id);for(const level of levels)assert.ok(rows.some(e=>e.level===level),guide.id+' '+level);}
+for(const guide of w.LEARNING_GUIDES.filter(g=>originalAnchors.includes(g.id))){const rows=exercises.filter(e=>e.lessonId===guide.id);assert.ok(rows.length>=3,guide.id);for(const level of levels)assert.ok(rows.some(e=>e.level===level),guide.id+' '+level);}
 assert.ok(new Set(exercises.map(e=>e.type)).size>=10,'Practice must contain varied task types');
 assert.equal(w.TEXTBOOK_VERSION.mastery_exercises,exercises.length);
 for(const e of exercises){assert.ok(!Object.hasOwn(e,'verification'));assert.ok(e.checkpoints.length>=2,e.id);assert.ok(e.solution.length>70,e.id);}
@@ -24,7 +32,7 @@ if(process.argv.includes('--dom')){
  const original={notes:{'calculus-03':'原始笔记'},completed:['calculus-01'],bookmarks:['calculus-03'],answers:{'calculus-03':{choice:2,correct:true,at:'2026-10-02T00:00:00Z'}}};
  dw.localStorage.setItem('zhixu-learning-v1',JSON.stringify(original));
  for(const m of html.matchAll(/<script defer src="([^"]+)"/g))dw.eval(fs.readFileSync(path.join(root,'site',m[1].split('?')[0]),'utf8'));
- for(const guide of dw.LEARNING_GUIDES){const course=dw.COURSES.find(c=>c.chapters.some(l=>l.id===guide.id));dw.location.hash='#/course/'+course.id+'/'+guide.id;dw.dispatchEvent(new dw.HashChangeEvent('hashchange'));
+ for(const guide of dw.LEARNING_GUIDES.filter(g=>originalAnchors.includes(g.id))){const course=dw.COURSES.find(c=>c.chapters.some(l=>l.id===guide.id));dw.location.hash='#/course/'+course.id+'/'+guide.id;dw.dispatchEvent(new dw.HashChangeEvent('hashchange'));
   const rows=dw.MASTERY_EXERCISES.filter(e=>e.lessonId===guide.id),cards=[...d.querySelectorAll('.mastery-card')];assert.equal(cards.length,rows.length,guide.id);
   assert.match(d.querySelector('.mastery-intro').textContent,/不会自动评分/);
   for(const card of cards){const answer=card.querySelector('details');assert.equal(answer.open,false);answer.querySelector('summary').click();assert.equal(answer.open,true);assert.ok(card.querySelector('.mastery-solution').textContent.trim().length>50);assert.ok(card.querySelectorAll('.mastery-checkpoints li').length>=2);answer.querySelector('summary').click();assert.equal(answer.open,false);}

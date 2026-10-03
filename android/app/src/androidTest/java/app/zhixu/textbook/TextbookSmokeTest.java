@@ -27,8 +27,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class TextbookSmokeTest extends Instrumentation {
     private static final String RECORD_KEY = "zhixu-learning-v1";
     private static final String LESSON = "calculus-03";
-    private static final int TOTAL = 13;
-    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.4.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
+    private static final int TOTAL = 14;
+    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.5.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
     private Activity reader;
     private WebView web;
     private int number;
@@ -60,6 +60,7 @@ public final class TextbookSmokeTest extends Instrumentation {
             runCase("knowledgeFrameworkAndFoundationLabs", this::learningFramework);
             runCase("conceptStoriesOffline", this::conceptStories);
             runCase("tieredPracticeOffline", this::masteryPractice);
+            runCase("reportRevisionOffline", this::reportRevision);
             runCase("invalidRouteIsSafe", this::invalidRoute);
             runCase("backupRoundTripAndInjection", this::backups);
             runCase("notesSurviveRelaunch", this::relaunch);
@@ -162,7 +163,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     private void permissions() throws Exception {
         PackageInfo info = getTargetContext().getPackageManager().getPackageInfo(
             getTargetContext().getPackageName(), PackageManager.GET_PERMISSIONS);
-        require("1.4.0".equals(info.versionName) && info.versionCode == 7, "App version does not match the textbook revision");
+        require("1.5.0".equals(info.versionName) && info.versionCode == 8, "App version does not match the textbook revision");
         String[] requested = info.requestedPermissions == null ? new String[0] : info.requestedPermissions;
         for (String dangerous : new String[]{"android.permission.INTERNET", "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA", "android.permission.RECORD_AUDIO"})
@@ -267,7 +268,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     }
 
     private void learningFramework() throws Exception {
-        require(Boolean.TRUE.equals(evaluate("window.LEARNING_GUIDES.length===26 && !!window.KnowledgeMap")), "Learning framework assets missing offline");
+        require(Boolean.TRUE.equals(evaluate("window.LEARNING_GUIDES.length===30 && !!window.KnowledgeMap")), "Learning framework assets missing offline");
         evaluate("location.hash='#/map'");
         waitUntil("document.querySelectorAll('.map-course-card').length===7", "Seven-course framework failed offline");
         String[] courseIds = {"calculus", "linear-algebra", "thermodynamics", "heat-transfer", "fluid-mechanics", "python", "machine-learning"};
@@ -280,7 +281,7 @@ public final class TextbookSmokeTest extends Instrumentation {
         waitUntil("document.querySelector('.dependency-current') && document.querySelector('.dependency-current').textContent.includes('导数')", "Local dependency graph missing");
         saveReaderScreenshot("knowledge-map-screen.png");
         evaluate("location.hash='#/path'");
-        waitUntil("document.querySelectorAll('.core-route>li').length===26", "Core path incomplete offline");
+        waitUntil("document.querySelectorAll('.core-route>li').length===30", "Core path incomplete offline");
         evaluate("location.hash='#/course/calculus/calculus-03'");
         waitUntil("document.querySelector('#reading-depth') && document.querySelector('details.advanced-reading')", "Progressive reading controls missing");
         require(Boolean.TRUE.equals(evaluate("(function(){var heading=document.querySelector('details.advanced-reading h2');document.querySelector('[data-scroll=\"'+heading.id+'\"]').click();return heading.closest('details').open && document.activeElement===heading})()")), "TOC did not open and focus an original proof");
@@ -330,6 +331,27 @@ public final class TextbookSmokeTest extends Instrumentation {
         }
         evaluate("document.querySelector('.mastery-card').scrollIntoView({block:'start',behavior:'instant'})");
         saveReaderScreenshot("mastery-practice-screen.png");
+    }
+
+    private void reportRevision() throws Exception {
+        evaluate("location.hash='#/path'");
+        waitUntil("document.querySelector('.core-continuation') && document.querySelectorAll('.core-route>li').length===30", "Revised continuation path missing offline");
+        require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.core-continuation .relation').length===6 && document.documentElement.scrollWidth<=innerWidth+1")), "Continuation capabilities missing or overflowing");
+        evaluate("document.querySelector('.core-continuation h2').scrollIntoView({block:'start',behavior:'instant'})");
+        saveReaderScreenshot("core-continuation-screen.png");
+        String[] lessons = {"calculus/calculus-02", "calculus/calculus-04", "linear-algebra/linear-algebra-05", "linear-algebra/linear-algebra-06", "thermodynamics/thermodynamics-04", "heat-transfer/heat-transfer-30", "machine-learning/machine-learning-03", "machine-learning/machine-learning-06", "fluid-mechanics/fluid-mechanics-39"};
+        for (String lesson : lessons) {
+            String id = lesson.substring(lesson.indexOf('/') + 1);
+            evaluate("location.hash='#/course/" + lesson + "'");
+            waitUntil("window.ZHIXU.state.last==='"+id+"' && document.querySelector('#lesson-body')", "Revised lesson missing offline: "+lesson);
+            evaluate("document.querySelectorAll('#lesson-body details').forEach(function(d){d.open=true})");
+            require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0 && document.documentElement.scrollWidth<=innerWidth+1")), "Revised lesson fails formula/layout check: "+lesson);
+            require(Boolean.TRUE.equals(evaluate("Array.from(document.querySelectorAll('#lesson-body figure img')).every(function(img){return img.getAttribute('src').indexOf('assets/')===0})")), "Revised lesson uses a remote figure: "+lesson);
+            if ("fluid-mechanics-39".equals(id)) {
+                evaluate("Array.from(document.querySelectorAll('#lesson-body h3')).find(function(h){return h.textContent.includes('绝热液体')}).scrollIntoView({block:'start',behavior:'instant'})");
+                saveReaderScreenshot("report-revision-screen.png");
+            }
+        }
     }
 
     private void formulaTouchScroll() throws Exception {
@@ -382,8 +404,12 @@ public final class TextbookSmokeTest extends Instrumentation {
         evaluate("location.hash='#/course/fluid-mechanics/fluid-mechanics-04'");
         waitUntil("document.querySelector('#lesson-body h3') && document.querySelector('#lesson-body').textContent.includes('四分之一圆柱闸门')", "Segmented fluid lesson did not render");
         require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('#mobile-toc-list .toc-concept').length===document.querySelectorAll('#lesson-body h3').length")), "Concepts are missing from mobile navigation");
-        evaluate("document.querySelector('.mobile-toc').open=true");
-        evaluate("document.querySelector('#mobile-toc-list .toc-concept').click()");
+        waitForConceptLayout();
+        tapVisible(".reader-preflight > summary", false);
+        waitUntil("document.querySelector('.reader-preflight').open", "Outer reading controls did not open after native tap");
+        tapVisible(".mobile-toc > summary", false);
+        waitUntil("document.querySelector('.mobile-toc').open", "Concept outline did not open after native tap");
+        tapVisible("#mobile-toc-list .toc-concept", true);
         waitForConceptPosition();
         require(Boolean.TRUE.equals(evaluate("location.hash==='#/course/fluid-mechanics/fluid-mechanics-04'")), "Concept navigation left the chapter");
         require(Boolean.TRUE.equals(evaluate("document.documentElement.scrollWidth<=window.innerWidth+1")), "Lesson overflows the mobile viewport horizontally");
@@ -393,26 +419,63 @@ public final class TextbookSmokeTest extends Instrumentation {
         waitUntil("document.querySelector('#note-text') && document.querySelector('#lesson-body').textContent.includes('导数')", "Could not return from concept test");
     }
 
+    private void waitForConceptLayout() throws Exception {
+        evaluate("window.__conceptLayoutReady=false;document.fonts.ready.then(function(){requestAnimationFrame(function(){requestAnimationFrame(function(){window.__conceptLayoutReady=true})})})");
+        waitUntil("window.__conceptLayoutReady", "Concept fonts and layout did not become ready");
+        CountDownLatch ready = new CountDownLatch(1);
+        runOnMainSync(() -> web.postVisualStateCallback(SystemClock.uptimeMillis(), new WebView.VisualStateCallback() {
+            @Override public void onComplete(long requestId) { ready.countDown(); }
+        }));
+        require(ready.await(15, TimeUnit.SECONDS), "Concept visual frame did not become ready");
+    }
+
+    private void tapVisible(String selector, boolean captureOutline) throws Exception {
+        String selected = "document.querySelector(" + JSONObject.quote(selector) + ")";
+        evaluate(selected + ".scrollIntoView({block:'center',behavior:'instant'})");
+        waitForConceptLayout();
+        waitUntil("(function(){var e=" + selected + ",r=e.getBoundingClientRect(),bar=document.querySelector('.topbar').getBoundingClientRect();var hit=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);return r.width>0&&r.height>0&&r.top>=bar.bottom&&r.bottom<=innerHeight&&(hit===e||e.contains(hit))})()", "Concept control is not visibly tappable: " + selector);
+        if (captureOutline) saveReaderScreenshot("concept-toc-screen.png");
+        JSONObject box = (JSONObject) evaluate("(function(){var r=" + selected + ".getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,viewport:innerWidth}})()");
+        int[] location = new int[2]; int[] width = new int[1];
+        runOnMainSync(() -> { web.getLocationOnScreen(location); width[0]=web.getWidth(); });
+        double scale = width[0] / box.getDouble("viewport");
+        float x = (float)(location[0] + box.getDouble("x") * scale);
+        float y = (float)(location[1] + box.getDouble("y") * scale);
+        long down = SystemClock.uptimeMillis();
+        MotionEvent event = MotionEvent.obtain(down, down, MotionEvent.ACTION_DOWN, x, y, 0);
+        sendPointerSync(event); event.recycle();
+        SystemClock.sleep(80);
+        event = MotionEvent.obtain(down, SystemClock.uptimeMillis(), MotionEvent.ACTION_UP, x, y, 0);
+        sendPointerSync(event); event.recycle();
+    }
+
     private void waitForConceptPosition() throws Exception {
         long until = SystemClock.uptimeMillis() + 30_000;
         double previousTop = Double.NaN;
         double previousScroll = Double.NaN;
         int stableIntervals = 0;
+        int observations = 0;
+        JSONObject lastPosition = null;
         while (SystemClock.uptimeMillis() < until) {
             JSONObject position = (JSONObject) evaluate("(function(){"
                 + "var heading=document.querySelector('#lesson-body h3'),toolbar=document.querySelector('.topbar');"
                 + "var rect=heading.getBoundingClientRect(),toolbarBottom=toolbar.getBoundingClientRect().bottom;"
                 + "var padding=parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)||0;"
                 + "var margin=parseFloat(getComputedStyle(heading).scrollMarginTop)||0;"
-                + "return {top:rect.top,scroll:window.scrollY,visible:rect.height>0&&rect.top>=toolbarBottom"
+                + "return {top:rect.top,bottom:rect.bottom,scroll:window.scrollY,toolbarBottom:toolbarBottom,padding:padding,margin:margin,innerHeight:innerHeight,fonts:document.fonts.status,preflightOpen:document.querySelector('.reader-preflight').open,tocOpen:document.querySelector('.mobile-toc').open,focused:document.activeElement===heading,visible:rect.height>0&&rect.top>=toolbarBottom"
                 + "&&rect.bottom<=window.innerHeight&&Math.abs(rect.top-(padding+margin))<=1};})()");
+            lastPosition = position;
+            if (observations++ % 20 == 0) report.append("CONCEPT_POSITION ").append(position.toString()).append('\n');
             double top = position.getDouble("top");
             double scroll = position.getDouble("scroll");
             // Coordinates and rounding tolerance are CSS pixels, independent of screen density.
             // Require two stable polling intervals at the expected alignment before the screenshot.
             if (position.getBoolean("visible") && Math.abs(top - previousTop) <= 0.5
                     && Math.abs(scroll - previousScroll) <= 0.5) {
-                if (++stableIntervals >= 2) return;
+                if (++stableIntervals >= 2) {
+                    report.append("CONCEPT_POSITION_SETTLED ").append(position.toString()).append('\n');
+                    return;
+                }
             } else {
                 stableIntervals = 0;
             }
@@ -420,7 +483,9 @@ public final class TextbookSmokeTest extends Instrumentation {
             previousScroll = scroll;
             SystemClock.sleep(150);
         }
-        throw new AssertionError("Concept heading did not settle visibly below the toolbar");
+        try { saveReaderScreenshot("concept-position-failure-screen.png"); }
+        catch (Throwable captureFailure) { report.append("CONCEPT_CAPTURE ").append(captureFailure.toString()).append('\n'); }
+        throw new AssertionError("Concept heading did not settle visibly below the toolbar: " + lastPosition);
     }
 
     private void revision() throws Exception {

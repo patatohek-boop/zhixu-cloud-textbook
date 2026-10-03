@@ -88,6 +88,18 @@ $$Q=\sum_{i,k}r_{ik}\left[\log\pi_k-\frac12\log|\Sigma_k|
 
 
 
+### 小桥：把矩阵沿一个方向移动一点
+
+先借用[行列式](#/course/linear-algebra/linear-algebra-09)和[迹的性质](#/course/linear-algebra/linear-algebra-13)，不需要先学整门矩阵微积分。下面B是实对称正定矩阵，H是同阶实对称扰动；t足够小时B+tH仍正定，因此行列式为正，$\log\det$ 有定义。
+
+1. 先分解 $\det(B+tH)=\det(B)\det(I+tB^{-1}H)$。
+2. 由行列式的多重线性，对任意固定方阵C，$\det(I+tC)=1+t\operatorname{tr}(C)+O(t^2)$：只取一列的一阶改变量时留下该列的对角元，取两列或更多改变量才进入二阶以上。
+3. 再用 $\log(1+a)=a+O(a^2)$，得到
+$$\left.\frac{d}{dt}\log\det(B+tH)\right|_{t=0}=\operatorname{tr}(B^{-1}H).$$
+这就是 $d\log\det B[H]$；H是方向，并不是逐元素给B的每项都加同一个数。线性性同时给 $d\operatorname{tr}(BA)[H]=\operatorname{tr}(HA)$。
+
+例如 $B=\operatorname{diag}(2,3)$、$H=\operatorname{diag}(1,-1)$，有 $\det(B+tH)=6+t-t^2$，所以对数行列式的导数为 $1/6$；迹公式也给 $1/2-1/3=1/6$。这是无量纲教学矩阵，不能把它的数值当成真实协方差的物理单位。将该方向导数用于下段Q，所有对称H下导数为零，才得到 $N_kB^{-1}=A_k$。更一般的行列式梯度见[CS229 线性代数复习第4.5节](https://cs229.stanford.edu/summer2019/cs229-linalg.pdf)。
+
 ### 协方差更新与退化
 
 令 $A_k=\sum_i r_{ik}(x_i-\mu_k)(x_i-\mu_k)^\top$，用精度矩阵 B=Σ⁻¹，协方差部分为 $(N_k/2)\log|B|-\operatorname{tr}(BA_k)/2$。微分使用 $d\log|B|=\operatorname{tr}(B^{-1}dB)$，驻点为 $N_kB^{-1}=A_k$，故 Σ_k=A_k/N_k；若 A_k 奇异，正定条件失效，需约束或正则化，并说明优化目标相应改变。
