@@ -1,4 +1,4 @@
-name: Transfer verified public Android build
+name: Inspect verified public web screenshots
 on:
   push:
     branches: ['release-transfer/zhixu-1.6.0']
@@ -12,9 +12,9 @@ jobs:
     timeout-minutes: 5
     strategy:
       matrix:
-        chunk: [0, 1, 2, 3, 4, 5, 6, 7]
+        chunk: [0]
     steps:
-      - name: Emit one verified public APK segment for local signing
+      - name: Emit selected public browser screenshots
         env:
           GH_TOKEN: ${{ github.token }}
           PART: ${{ matrix.chunk }}
@@ -24,7 +24,7 @@ jobs:
           class NoRedirect(urllib.request.HTTPRedirectHandler):
               def redirect_request(self, req, fp, code, msg, headers, newurl):
                   return None
-          api='https://api.github.com/repos/patatohek-boop/zhixu-cloud-textbook/actions/artifacts/11284328311/zip'
+          api='https://api.github.com/repos/patatohek-boop/zhixu-cloud-textbook/actions/artifacts/11288962719/zip'
           req=urllib.request.Request(api,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
           try:
               urllib.request.build_opener(NoRedirect()).open(req,timeout=30)
@@ -34,18 +34,17 @@ jobs:
               location=error.headers['Location']
           assert location.startswith('https://')
           raw=urllib.request.urlopen(location,timeout=60).read()
-          assert hashlib.sha256(raw).hexdigest()=='aaf76fcd0bec65527e765cf830c77b4ab0291115f5d2372c421e99acce44d81f'
+          assert hashlib.sha256(raw).hexdigest()=='799ccb0ed8fef44fd62b8b37c12b482a0eed40a3d6ee6f00ff62cce89d1ded91'
           archive=zipfile.ZipFile(io.BytesIO(raw))
-          candidate=archive.read('candidate-commit.txt').decode().strip()
-          assert candidate=='c085ea46ee39d7a85c5dd977ba1fd0ad15bb54b6'
-          apk=archive.read('app-release-unsigned.apk')
-          part=int(os.environ['PART'])
-          width=(len(apk)+7)//8
-          payload=apk[part*width:(part+1)*width]
-          meta={'part':part,'parts':8,'bytes':len(apk),'sha256':hashlib.sha256(apk).hexdigest(),'part_sha256':hashlib.sha256(payload).hexdigest(),'candidate':candidate,'checkout':archive.read('source-commit.txt').decode().strip(),'signer_sha256':hashlib.sha256(archive.read('apksigner.jar')).hexdigest(),'metadata':archive.read('apk-metadata.txt').decode(),'permissions':archive.read('apk-permissions.txt').decode()}
-          print('ZHIXU_TRANSFER_META '+json.dumps(meta,ensure_ascii=True))
-          encoded=base64.b64encode(payload).decode()
-          for offset in range(0,len(encoded),8192):
-              print('ZHIXU_TRANSFER_DATA '+encoded[offset:offset+8192])
-          print('ZHIXU_TRANSFER_END '+str(part))
+          names=archive.namelist()
+          print('ZHIXU_SCREENSHOT_NAMES '+json.dumps(names))
+          selected=[n for n in names if n.endswith('reader-continuous.png') and ('width-390' in n or 'width-1440' in n)]
+          assert len(selected)==2, selected
+          for index,name in enumerate(selected):
+              payload=archive.read(name)
+              print('ZHIXU_IMAGE_META '+json.dumps({'part':index,'name':name,'sha256':hashlib.sha256(payload).hexdigest(),'bytes':len(payload)}))
+              encoded=base64.b64encode(payload).decode()
+              for offset in range(0,len(encoded),8192):
+                  print('ZHIXU_IMAGE_DATA '+str(index)+' '+encoded[offset:offset+8192])
+              print('ZHIXU_IMAGE_END '+str(index))
           PY

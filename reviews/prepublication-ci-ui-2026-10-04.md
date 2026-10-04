@@ -25,3 +25,14 @@ PR 12 的 head `c085ea46ee39d7a85c5dd977ba1fd0ad15bb54b6`：
 - 测试文件 SHA-256：修订前 `ee7b1d6a3c7fec78c6ba10582a3bf7366d64d527496c81e9470722054365729a`；修订后 `bdf9afa5200e7f885354a8e25c6ea003a947780faef6257c98c171ff55ab342d`。
 
 本次仅修改测试与本记录，等待主任务提交后重跑 CI；没有将旧的失败结果记作通过。
+
+## 修正后的 CI 结果（追加，不替换此前失败记录）
+
+已只读核对 [Learning interface checks run 37165370207](https://github.com/patatohek-boop/zhixu-cloud-textbook/actions/runs/37165370207)，对应 head `7dc001ed2d9e6eec5dacfa32da593173bcf50cec`，job `111327064387`，结论为 `success`。日志明确记录 **36 passed (6.5m)**；原先失败的插图放大测试在 320、360、390、768、1165、1440 像素六种宽度均通过。4 个 DOM 命令、内容保全及独立数值复算步骤也成功，数学修订检查记录 2,336 项通过、0 项失败。
+
+本次成功产物均关联上述 head，不能与旧失败产物混用：
+
+- [截图产物 `learning-ui-screenshots`](https://github.com/patatohek-boop/zhixu-cloud-textbook/actions/runs/37165370207/artifacts/11288962719)：ID `11288962719`，24,981,419 字节，SHA-256 `799ccb0ed8fef44fd62b8b37c12b482a0eed40a3d6ee6f00ff62cce89d1ded91`。
+- [完整报告 `learning-ui-report`](https://github.com/patatohek-boop/zhixu-cloud-textbook/actions/runs/37165370207/artifacts/11288768801)：ID `11288768801`，1,508,954 字节，SHA-256 `f476c80c612835faf77cda242baf3c2324ac239617cb09d15250d38576dd63a8`。
+
+该结果确认图片测试修正后的网页验收通过；不代替正式签名 APK 的安装、并存或迁移验收。本次追加依据已读取的完成日志与产物元数据，未再次触发或查询 CI，未修改测试、教学内容或应用文件。
