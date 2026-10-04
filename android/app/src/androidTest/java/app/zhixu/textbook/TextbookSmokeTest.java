@@ -28,7 +28,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     private static final String RECORD_KEY = "zhixu-learning-v1";
     private static final String LESSON = "calculus-03";
     private static final int TOTAL = 14;
-    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.5.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length>182";
+    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.6.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length===253";
     private Activity reader;
     private WebView web;
     private int number;
@@ -102,7 +102,7 @@ public final class TextbookSmokeTest extends Instrumentation {
             waitUntil(READY, "Migration reader not ready offline");
             waitForReaderFocus();
             String pkg = getTargetContext().getPackageName();
-            boolean independent = pkg.equals("app.zhixu.textbook.independent");
+            boolean independent = pkg.equals("app.zhixu.textbook.reader");
             File exported = new File(getTargetContext().getFilesDir(), "migration-export.json");
             if ("seed".equals(migrationAction)) {
                 require(!independent, "Seed must run in legacy sandbox");
@@ -252,11 +252,11 @@ public final class TextbookSmokeTest extends Instrumentation {
     private void permissions() throws Exception {
         PackageInfo info = getTargetContext().getPackageManager().getPackageInfo(
             getTargetContext().getPackageName(), PackageManager.GET_PERMISSIONS);
-        require("1.5.0".equals(info.versionName) && info.versionCode == 8, "App version does not match the textbook revision");
+        require("1.6.0".equals(info.versionName) && info.versionCode == 9, "App version does not match the textbook revision");
         String[] requested = info.requestedPermissions == null ? new String[0] : info.requestedPermissions;
         require(requested.length == 0, "Application must request zero permissions");
         if (expectRelease) require((info.applicationInfo.flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) == 0, "Expected non-debug release app");
-        require((BuildConfig.INDEPENDENT ? "app.zhixu.textbook.independent" : "app.zhixu.textbook").equals(info.packageName), "Unexpected distribution identity");
+        require((BuildConfig.INDEPENDENT ? "app.zhixu.textbook.reader" : "app.zhixu.textbook").equals(info.packageName), "Unexpected distribution identity");
         for (String dangerous : new String[]{"android.permission.INTERNET", "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA", "android.permission.RECORD_AUDIO"})
             require(!Arrays.asList(requested).contains(dangerous), "Unexpected permission " + dangerous);
@@ -350,33 +350,41 @@ public final class TextbookSmokeTest extends Instrumentation {
             if ("heat-modes".equals(lab)) saveReaderScreenshot("research-screen.png");
         }
         evaluate("location.hash='#/course/machine-learning/machine-learning-42'");
-        // Lesson 42 contains exactly nine displayed formulas; require all of them in the correct lesson.
+        // Check the selected lesson against its current content metadata, including every displayed formula.
         waitUntil("window.ZHIXU.state.last==='machine-learning-42' && document.querySelector('#lesson-body h3')"
-            + " && document.querySelector('#main h1').textContent==='PINN：把热方程写进学习目标'"
-            + " && document.querySelectorAll('#lesson-body .katex').length===9", "PINN lesson did not render offline");
+            + " && document.querySelector('#main h1').textContent===window.ZHIXU.all.find(function(l){return l.id==='machine-learning-42'}).title"
+            + " && document.querySelectorAll('#lesson-body .katex-display').length===(window.ZHIXU.all.find(function(l){return l.id==='machine-learning-42'}).content.match(/\\$\\$[\\s\\S]+?\\$\\$/g)||[]).length && document.querySelectorAll('#lesson-body .katex-display').length>4", "PINN lesson did not render offline");
         require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.math-error').length===0")), "PINN formulas failed offline");
         evaluate("location.hash='#/course/calculus/calculus-03'");
         waitUntil("document.querySelector('#note-text')", "Could not return from research labs");
     }
 
     private void learningFramework() throws Exception {
-        require(Boolean.TRUE.equals(evaluate("window.LEARNING_GUIDES.length===30 && !!window.KnowledgeMap")), "Learning framework assets missing offline");
+        require(Boolean.TRUE.equals(evaluate("window.LEARNING_GUIDES.length===30 && !!window.KnowledgeMap && !!window.TextbookNav")), "Learning framework assets missing offline");
         evaluate("location.hash='#/map'");
-        waitUntil("document.querySelectorAll('.map-course-card').length===7", "Seven-course framework failed offline");
+        waitUntil("document.querySelectorAll('.subject-links a').length===7 && document.querySelector('#relation-select')", "Seven-course framework failed offline");
         String[] courseIds = {"calculus", "linear-algebra", "thermodynamics", "heat-transfer", "fluid-mechanics", "python", "machine-learning"};
         for (String course : courseIds) {
             evaluate("location.hash='#/map/" + course + "'");
-            waitUntil("document.querySelectorAll('[data-node-id]').length===window.COURSES.find(function(c){return c.id==='" + course + "'}).chapters.length", "Incomplete offline map: " + course);
+            waitUntil("document.querySelector('.subject-links a[aria-current=\"page\"]').getAttribute('href')==='#/map/" + course + "' && document.querySelectorAll('#relation-select option').length===window.COURSES.find(function(c){return c.id==='" + course + "'}).chapters.length", "Incomplete offline map: " + course);
+            require(Boolean.TRUE.equals(evaluate("Array.from(document.querySelectorAll('#relation-select option')).every(function(o){return window.COURSES.find(function(c){return c.id==='" + course + "'}).chapters.some(function(l){return l.id===o.value})})")), "Unknown lesson in relationship selector: " + course);
             require(Boolean.TRUE.equals(evaluate("document.documentElement.scrollWidth<=innerWidth+1")), "Course map overflows mobile viewport: " + course);
         }
         evaluate("location.hash='#/map/calculus/calculus-03'");
         waitUntil("document.querySelector('.dependency-current') && document.querySelector('.dependency-current').textContent.includes('导数')", "Local dependency graph missing");
         saveReaderScreenshot("knowledge-map-screen.png");
+        evaluate("document.querySelector('#relation-select').value='calculus-04';document.querySelector('#relation-select').dispatchEvent(new Event('change',{bubbles:true}))");
+        waitUntil("location.hash==='#/map/calculus/calculus-04' && document.querySelector('#relation-select').value==='calculus-04' && document.querySelector('.dependency-current h2').textContent===window.ZHIXU.all.find(function(l){return l.id==='calculus-04'}).title", "Relationship lesson picker did not change the displayed knowledge point");
         evaluate("location.hash='#/path'");
-        waitUntil("document.querySelectorAll('.core-route>li').length===30", "Core path incomplete offline");
+        waitUntil("document.querySelectorAll('.tree-course').length===7 && document.querySelectorAll('.tree-chapter a').length===253", "Legacy path did not open the complete knowledge tree");
+        require(Boolean.TRUE.equals(evaluate("(function(){var chapter=document.querySelector('.tree-course .tree-chapter');if(chapter.open)return false;chapter.querySelector('summary').click();return chapter.open&&chapter.querySelector('a').getBoundingClientRect().height>0})()")), "Knowledge tree chapter did not reveal its lesson links");
+        evaluate("location.hash='#/path/calculus'");
+        waitUntil("document.querySelectorAll('.course-contents .tree-chapter a').length===window.COURSES.find(function(c){return c.id==='calculus'}).chapters.length", "Legacy course path did not open the complete course contents");
         evaluate("location.hash='#/course/calculus/calculus-03'");
-        waitUntil("document.querySelector('#reading-depth') && document.querySelector('details.advanced-reading')", "Progressive reading controls missing");
-        require(Boolean.TRUE.equals(evaluate("(function(){var heading=document.querySelector('details.advanced-reading h2');document.querySelector('[data-scroll=\"'+heading.id+'\"]').click();return heading.closest('details').open && document.activeElement===heading})()")), "TOC did not open and focus an original proof");
+        waitUntil("document.querySelectorAll('#lesson-body > h2').length>3 && document.querySelector('#mobile-toc-list')", "Continuous lesson and contents missing");
+        require(Boolean.TRUE.equals(evaluate("!document.querySelector('#reading-depth,details.advanced-reading,.reader-preflight') && Array.from(document.querySelectorAll('#lesson-body > h2')).every(function(h){return h.getBoundingClientRect().height>0})")), "Formal explanation is still hidden behind an outer reading layer");
+        evaluate("window.__proofHeading=Array.from(document.querySelectorAll('#lesson-body > h2')).find(function(h){return /证明|推导|可导等价/.test(h.textContent)});if(window.__proofHeading)document.querySelector('[data-scroll=\"'+window.__proofHeading.id+'\"]').click()");
+        waitUntil("window.__proofHeading && document.activeElement===window.__proofHeading && !window.__proofHeading.closest('details')", "TOC did not focus the continuously visible derivation");
         evaluate("document.querySelector('#lesson-body figure a').click()");
         waitUntil("window.FigureViewer.isOpen() && document.querySelector('.figure-enlarged').complete", "Offline diagram enlargement failed");
         require(Boolean.TRUE.equals(evaluate("document.querySelector('.figure-enlarged').naturalWidth>0")), "Offline enlarged diagram failed to load");
@@ -427,10 +435,10 @@ public final class TextbookSmokeTest extends Instrumentation {
 
     private void reportRevision() throws Exception {
         evaluate("location.hash='#/path'");
-        waitUntil("document.querySelector('.core-continuation') && document.querySelectorAll('.core-route>li').length===30", "Revised continuation path missing offline");
-        require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.core-continuation .relation').length===6 && document.documentElement.scrollWidth<=innerWidth+1")), "Continuation capabilities missing or overflowing");
-        evaluate("document.querySelector('.core-continuation h2').scrollIntoView({block:'start',behavior:'instant'})");
-        saveReaderScreenshot("core-continuation-screen.png");
+        waitUntil("document.querySelectorAll('.tree-course').length===7 && document.querySelectorAll('.tree-chapter a').length===253", "Revised complete knowledge tree missing offline");
+        require(Boolean.TRUE.equals(evaluate("Array.from(document.querySelectorAll('.tree-chapter a')).every(function(a){return window.ZHIXU.all.some(function(l){return a.getAttribute('href')==='#/course/'+l.course.id+'/'+l.id})}) && document.querySelectorAll('.tree-supplement a').length===2 && document.documentElement.scrollWidth<=innerWidth+1")), "Knowledge tree lesson links, subject indices or mobile layout invalid");
+        evaluate("document.querySelector('.tree-course h2').scrollIntoView({block:'start',behavior:'instant'})");
+        saveReaderScreenshot("knowledge-tree-screen.png");
         String[] lessons = {"calculus/calculus-02", "calculus/calculus-04", "linear-algebra/linear-algebra-05", "linear-algebra/linear-algebra-06", "thermodynamics/thermodynamics-04", "heat-transfer/heat-transfer-30", "machine-learning/machine-learning-03", "machine-learning/machine-learning-06", "fluid-mechanics/fluid-mechanics-39"};
         for (String lesson : lessons) {
             String id = lesson.substring(lesson.indexOf('/') + 1);
@@ -498,8 +506,23 @@ public final class TextbookSmokeTest extends Instrumentation {
         waitUntil("document.querySelector('#lesson-body h3') && document.querySelector('#lesson-body').textContent.includes('四分之一圆柱闸门')", "Segmented fluid lesson did not render");
         require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('#mobile-toc-list .toc-concept').length===document.querySelectorAll('#lesson-body h3').length")), "Concepts are missing from mobile navigation");
         waitForConceptLayout();
-        tapVisible(".reader-preflight > summary", false);
-        waitUntil("document.querySelector('.reader-preflight').open", "Outer reading controls did not open after native tap");
+        tapVisible("#menu", false);
+        waitUntil("document.querySelector('#course-sidebar').classList.contains('open') && document.querySelector('#menu').getAttribute('aria-expanded')==='true'", "Mobile course tree did not open");
+        require(Boolean.TRUE.equals(evaluate("document.querySelectorAll('.sidebar-tree .tree-chapter a').length===window.COURSES.find(function(c){return c.id==='fluid-mechanics'}).chapters.length")), "Mobile course tree omits lessons");
+        tapVisible("[data-close-sidebar]", false);
+        waitUntil("!document.querySelector('#course-sidebar').classList.contains('open') && document.querySelector('#menu').getAttribute('aria-expanded')==='false'", "Mobile course tree close control failed");
+        require(Boolean.TRUE.equals(evaluate("!document.querySelector('.reader-preflight') && !document.querySelector('.reading-tools').open && !document.querySelector('#my-notes').open")), "Reading tools or notes should begin collapsed without a preflight layer");
+        tapVisible(".reading-tools > summary", false);
+        waitUntil("document.querySelector('.reading-tools').open", "Reading tools did not open after native tap");
+        Object wasBookmarked = evaluate("document.querySelector('#bookmark').getAttribute('aria-pressed')");
+        tapVisible(".reading-tools #bookmark", false);
+        require(!wasBookmarked.equals(evaluate("document.querySelector('#bookmark').getAttribute('aria-pressed')")), "Bookmark did not update inside reading tools");
+        tapVisible(".reading-tools #bookmark", false);
+        require(wasBookmarked.equals(evaluate("document.querySelector('#bookmark').getAttribute('aria-pressed')")), "Bookmark did not restore after second tap");
+        tapVisible(".reading-tools > summary", false);
+        tapVisible("#my-notes > summary", false);
+        waitUntil("document.querySelector('#my-notes').open && document.querySelector('#note-text').getBoundingClientRect().height>0", "Notes did not become visible after native tap");
+        tapVisible("#my-notes > summary", false);
         tapVisible(".mobile-toc > summary", false);
         waitUntil("document.querySelector('.mobile-toc').open", "Concept outline did not open after native tap");
         tapVisible("#mobile-toc-list .toc-concept", true);
@@ -556,7 +579,7 @@ public final class TextbookSmokeTest extends Instrumentation {
                 + "var rect=heading.getBoundingClientRect(),toolbarBottom=toolbar.getBoundingClientRect().bottom;"
                 + "var padding=parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop)||0;"
                 + "var margin=parseFloat(getComputedStyle(heading).scrollMarginTop)||0;"
-                + "return {top:rect.top,bottom:rect.bottom,scroll:window.scrollY,toolbarBottom:toolbarBottom,padding:padding,margin:margin,innerHeight:innerHeight,fonts:document.fonts.status,preflightOpen:document.querySelector('.reader-preflight').open,tocOpen:document.querySelector('.mobile-toc').open,focused:document.activeElement===heading,visible:rect.height>0&&rect.top>=toolbarBottom"
+                + "return {top:rect.top,bottom:rect.bottom,scroll:window.scrollY,toolbarBottom:toolbarBottom,padding:padding,margin:margin,innerHeight:innerHeight,fonts:document.fonts.status,tocOpen:document.querySelector('.mobile-toc').open,focused:document.activeElement===heading,visible:rect.height>0&&rect.top>=toolbarBottom"
                 + "&&rect.bottom<=window.innerHeight&&Math.abs(rect.top-(padding+margin))<=1};})()");
             lastPosition = position;
             if (observations++ % 20 == 0) report.append("CONCEPT_POSITION ").append(position.toString()).append('\n');

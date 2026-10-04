@@ -4,12 +4,17 @@
   "enTitle": "Fluid Mechanics",
   "icon": "≈",
   "color": "#287b96",
-  "description": "从连续介质与守恒基础，走向流动换热仿真：网格、离散、湍流、近壁处理、共轭传热及验证，全流程串联实验与 AI。",
+  "description": "连续介质、流体静力学、运动学与守恒方程；黏性流、势流、边界层和可压缩流；流动换热计算、湍流模型、实验验证与 AI 数据。",
   "prerequisites": [
     "基本力学与单位",
     "单变量微积分；向量基础"
   ],
   "sources": [
+    {
+      "title": "北航流体力学云教材",
+      "url": "https://aeroengine.buaa.edu.cn/pub/tb/1BLbeDzzLkQ/",
+      "scope": "独立知识页、概念关联及图文推导的组织方式参考；本文未复制原站受版权保护的文字、图片或动画"
+    },
     {
       "title": "MIT OCW 2.06 · Fluid Dynamics",
       "url": "https://ocw.mit.edu/courses/2-06-fluid-dynamics-spring-2013/",

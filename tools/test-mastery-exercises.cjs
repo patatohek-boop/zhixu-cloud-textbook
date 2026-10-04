@@ -7,12 +7,66 @@ const review=JSON.parse(fs.readFileSync(path.join(root,'reviews/mastery-review-m
 const amendmentPath=path.join(root,'reviews/report-revision-preservation.json');
 const masteryAmendments=fs.existsSync(amendmentPath)?JSON.parse(fs.readFileSync(amendmentPath,'utf8')).mastery:[];
 assert.ok(masteryAmendments.length<=1 && masteryAmendments.every(a=>a.scope==='computing'),'Only the reviewed floating-point prompt clarification is allowed');
+const version=JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8')).version;
+assert.equal(w.TEXTBOOK_VERSION.version,version,'Generated exercises must use the current release version');
+assert.ok(['1.5.0','1.6.0'].includes(version),'No exercise preservation contract for this version');
+const sha=value=>require('node:crypto').createHash('sha256').update(value).digest('hex');
+let readerPlan,masteryPlan;
+const appliedChanges=new Set();
+const approvedFields=new Set([
+ 'mastery-calculus-01-01:verification', 'mastery-linear-algebra-02-03:solution',
+ 'mastery-thermodynamics-01-01:prompt', 'mastery-thermodynamics-01-01:solution',
+ 'mastery-thermodynamics-07-01:prompt', 'mastery-thermodynamics-07-01:solution', 'mastery-thermodynamics-07-01:verification',
+ 'mastery-heat-transfer-01-02:prompt', 'mastery-heat-transfer-01-02:verification',
+ 'mastery-heat-transfer-01-03:prompt', 'mastery-heat-transfer-03-02:prompt',
+ 'mastery-heat-transfer-07-01:solution', 'mastery-heat-transfer-07-01:checkpoints'
+]);
+if(version==='1.6.0'){
+ readerPlan=JSON.parse(fs.readFileSync(path.join(root,'reviews/reader-revision-1.6.0.json'),'utf8'));
+ masteryPlan=JSON.parse(fs.readFileSync(path.join(root,'reviews/prepublication-mastery-dispositions-1.6.0.json'),'utf8'));
+ const original=JSON.parse(fs.readFileSync(path.join(root,'reviews/reader-baseline-1.5.0.json'),'utf8'));
+ assert.equal(readerPlan.status,'reviewed','Final exercise source snapshot must be reviewed');
+ assert.equal(masteryPlan.schema,1);assert.equal(masteryPlan.version,'1.6.0');assert.equal(masteryPlan.baseline_version,'1.5.0');
+ assert.equal(masteryPlan.baseline_commit,original.commit);assert.equal(masteryPlan.baseline_archive_sha256,original.archive_sha256);
+ assert.deepEqual(masteryPlan.files.map(f=>f.scope).sort(),review.files.map(f=>f.scope).sort());
+ assert.equal(masteryPlan.files.length,4);
+}
 for(const record of review.files){
- const source=fs.readFileSync(path.join(root,'content/mastery-exercises-'+record.scope+'.json'));
+ const sourcePath='content/mastery-exercises-'+record.scope+'.json';
+ const source=fs.readFileSync(path.join(root,sourcePath));
  const amendment=masteryAmendments.find(a=>a.scope===record.scope);
  if(amendment){assert.equal(amendment.before_sha256,record.integrated_sha256);assert.ok(amendment.reason&&amendment.review);}
- assert.equal(require('node:crypto').createHash('sha256').update(source).digest('hex'),amendment?.after_sha256||record.integrated_sha256,'Reviewed question/answer source changed: '+record.scope);
+ const historicalHash=amendment?.after_sha256||record.integrated_sha256;
+ if(version==='1.5.0'){
+  assert.equal(sha(source),historicalHash,'Reviewed question/answer source changed: '+record.scope);
+ }else{
+  const entry=masteryPlan.files.find(f=>f.scope===record.scope);
+  assert.equal(entry.path,sourcePath);assert.equal(entry.exercises,record.exercises);
+  assert.equal(entry.baseline_sha256,historicalHash,'Original 1.5.0 exercise pin changed: '+record.scope);
+  assert.equal(sha(Buffer.from(entry.baseline_utf8,'utf8')),historicalHash,'Stored baseline does not reproduce published bytes: '+record.scope);
+  const expected=JSON.parse(entry.baseline_utf8);
+  assert.equal(expected.length,record.exercises);assert.equal(new Set(expected.map(q=>q.id)).size,expected.length);
+  for(const change of entry.changes){
+   const key=change.id+':'+change.field;
+   assert.ok(approvedFields.has(key)&&!appliedChanges.has(key),'Unexpected/duplicate exercise-field amendment: '+key);
+   assert.ok(change.reason?.trim()&&change.review?.trim(),'Missing amendment reason or review');
+   assert.ok(readerPlan.review_notes.includes(change.review)&&fs.existsSync(path.join(root,change.review)),'Missing approved exercise review');
+   const question=expected.find(q=>q.id===change.id);
+   assert.ok(question&&Object.hasOwn(question,change.field),'Amendment target must exist in the original question');
+   assert.deepEqual(question[change.field],change.before,'Amendment does not match the original field: '+key);
+   assert.notDeepEqual(change.before,change.after,'No-op amendment is not a reviewed change');
+   question[change.field]=JSON.parse(JSON.stringify(change.after));appliedChanges.add(key);
+  }
+  assert.deepEqual(JSON.parse(source),expected,'Exercise content differs beyond the 13 approved field changes: '+record.scope);
+  assert.equal(sha(source),entry.reviewed_sha256,'Exercise bytes differ from reviewed amendments: '+record.scope);
+  const frozen=readerPlan.reviewed_files.filter(f=>f.path===sourcePath);assert.equal(frozen.length,1);
+  assert.equal(sha(source),frozen[0].sha256,'Exercise bytes differ from the final 1.6.0 source snapshot: '+record.scope);
+ }
  assert.equal(JSON.parse(source).length,record.exercises);
+}
+if(version==='1.6.0'){
+ assert.deepEqual([...appliedChanges].sort(),[...approvedFields].sort(),'All 13 approved amendments must be applied exactly once');
+ console.log('Mastery preservation: four original 1.5.0 byte-pinned files plus exactly 13 reviewed field changes equal all 78 current objects');
 }
 assert.equal(exercises.length,78,'All 78 reviewed exercises ship without replacing their identities');
 const originalAnchors=JSON.parse(fs.readFileSync(path.join(root,'reviews/learning-original-content-baseline.json'),'utf8')).anchors.map(a=>a.id);

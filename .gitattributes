@@ -1,0 +1,13 @@
+# Canonical bytes for new text sources on Windows and Linux.
+* text=auto eol=lf
+
+# Published historical review baselines are immutable byte snapshots.
+/reviews/reader-baseline-1.5.0.json -text
+/reviews/learning-original-content-baseline.json -text
+/reviews/report-revision-preservation.json -text
+/reviews/report-revision-2026-10-03.json -text
+
+# Published artwork and vendored upstream assets retain exact original bytes.
+*.svg -text
+*.SVG -text
+/site/assets/vendor/** -text

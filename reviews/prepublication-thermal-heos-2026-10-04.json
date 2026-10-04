@@ -1,0 +1,98 @@
+{
+  "status": "passed",
+  "utc": "2026-10-03T19:54:23.607267+00:00",
+  "python_version": "3.10.10",
+  "numpy_version": "1.26.4",
+  "dependency_mode": "explicit-directory",
+  "dependency_note": "Dependencies are only imported; this audit does not install or modify them.",
+  "coolprop_version": "7.2.0",
+  "gitrevision": "98b3523d5daa98454618d381d2ae53f7471d216b",
+  "backend": "HEOS",
+  "reference_state": "CoolProp 7.2.0 unchanged default",
+  "saved_table_sha256": "9b63d1b13719f4666a3679a77efa495cc62261387e2f757ed4f941741a2a0ec0",
+  "source_cases": [
+    "thermodynamics-04",
+    "thermodynamics-15",
+    "thermodynamics-19",
+    "thermodynamics-21",
+    "heat-transfer-30"
+  ],
+  "check_count": 269,
+  "categories": {
+    "saved_model": 189,
+    "printed_NIST": 25,
+    "printed_model": 55
+  },
+  "failed_checks": [],
+  "refrigeration": {
+    "qL": 148.78277771381823,
+    "win": 43.0259837056185,
+    "qH": 191.80876141943673,
+    "COP": 3.4579750397290647
+  },
+  "tube": {
+    "rho_in": 1.2045751824931505,
+    "mdot": 0.28909804379835613,
+    "As": 5.026548245743669,
+    "rho_b": 1.1429212599898093,
+    "mu_b": 1.8964541728303878e-05,
+    "k_b": 0.02704385192949949,
+    "cp_b": 1006.7295733472529,
+    "Pr_b": 0.7059706232911209,
+    "Pr_s": 0.7033837965818982,
+    "Vmax": 6.323664934733426,
+    "Re": 7622.067749912669,
+    "Nu": 66.53212355360338,
+    "h": 89.96424489694076,
+    "NTU": 1.553752408936358,
+    "Tout_C": 51.54187899790992,
+    "Q_W": 9180.060446326535
+  },
+  "approximation_differences": {
+    "water_265C_HEOS_minus_printed_linear_interpolation": {
+      "h_kJkg": 0.05264236039965908,
+      "s_kJkgK": 0.00014530320663652674,
+      "v_m3kg": 5.7894077586106985e-06
+    },
+    "ideal_pump_HEOS_minus_incompressible_table_h_kJkg": -0.004573986064883684,
+    "interpretation": "EOS recomputation, table rounding, interpolation, and constant-property approximations are distinct. No experimental validation is claimed."
+  },
+  "state_record_count": 33,
+  "count_note": "Counts are scalar comparisons, including repeated states and iteration values, not independent experiments.",
+  "tolerance_policy": {
+    "saved_model": "max(abs(saved) * 1e-10, 1e-12)",
+    "printed_values": "Half of the last displayed decimal unit plus 1e-12 floating-point allowance."
+  },
+  "largest_tolerance_fraction_by_category": {
+    "saved_model": {
+      "label": "water_pump_model.h_kJkg",
+      "category": "saved_model",
+      "computed": 194.82613331393512,
+      "saved_or_printed": 194.8261333139275,
+      "difference": 7.617018127348274e-12,
+      "absolute_tolerance": 1.9482613331392752e-08,
+      "within_tolerance": true,
+      "tolerance_fraction": 0.0003909649079302318
+    },
+    "printed_NIST": {
+      "label": "thermodynamics-15.NIST.3MPa_400C.s_kJkgK",
+      "category": "printed_NIST",
+      "computed": 6.923448666758737,
+      "saved_or_printed": 6.9234,
+      "difference": 4.866675873671511e-05,
+      "absolute_tolerance": 5.0000001000000005e-05,
+      "within_tolerance": true,
+      "tolerance_fraction": 0.973335155267599
+    },
+    "printed_model": {
+      "label": "thermodynamics-19.state.2.s_kJkgK",
+      "category": "printed_model",
+      "computed": 1.7757195009153282,
+      "saved_or_printed": 1.77572,
+      "difference": -4.990846718122555e-07,
+      "absolute_tolerance": 5.00001e-07,
+      "within_tolerance": true,
+      "tolerance_fraction": 0.9981673472898164
+    }
+  }
+}

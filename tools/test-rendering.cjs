@@ -68,7 +68,7 @@ assert.equal(w.TEXTBOOK_VERSION.version,JSON.parse(fs.readFileSync(path.join(roo
 w.location.hash='#/simulation';w.dispatchEvent(new w.HashChangeEvent('hashchange'));
 assert.equal(d.querySelectorAll('.simulation-stage').length,6);
 assert.equal(d.querySelectorAll('.simulation-stage .research-lessons a').length,24);
-assert.ok(d.querySelector('[data-nav=simulation]').classList.contains('active'));
+assert.equal(d.querySelectorAll('.topbar [data-nav]').length,3,'Compact primary navigation');
 for(const stage of w.SimulationGuide.stages)for(const id of stage.ids)assert.ok(w.ZHIXU.all.some(l=>l.id===id));
 for(const id of ['cfd-upwind','cfd-yplus','cfd-grid','cfd-cht']){
  w.location.hash='#/labs/'+id;w.dispatchEvent(new w.HashChangeEvent('hashchange'));
@@ -114,7 +114,7 @@ for(const course of w.COURSES){
 // The research route must resolve every prerequisite and preserve shared progress.
 w.location.hash='#/research';w.dispatchEvent(new w.HashChangeEvent('hashchange'));
 assert.equal(d.querySelectorAll('.research-stage').length,6);
-assert.ok(d.querySelector('[data-nav=research]').classList.contains('active'));
+assert.ok(d.querySelector('.research-page'),'Research remains accessible as a course supplement');
 for(const stage of w.ResearchGuide.stages){
  for(const id of stage.ids)assert.ok(w.ZHIXU.all.some(l=>l.id===id),'Missing research prerequisite '+id);
  assert.ok(Object.hasOwn(w.LABS,stage.lab),'Missing research lab '+stage.lab);
@@ -184,8 +184,8 @@ const exportEvent=new aw.MouseEvent('click',{bubbles:true,cancelable:true});ad.q
 assert.equal(exportEvent.defaultPrevented,true);assert.equal(webpageHandlerRan,false);
 aw.ZhixuAndroid.notify(hostile);assert.equal(ad.querySelector('#toast').textContent,hostile);assert.equal(ad.querySelectorAll('#toast img,#toast script').length,0);
 aw.location.hash='#/about';aw.dispatchEvent(new aw.HashChangeEvent('hashchange'));
-assert.match(ad.querySelector('#main').textContent,/安装包内置的教材版本/);
-assert.match(ad.querySelector('#main').textContent,/独立本地存储/);
+assert.match(ad.querySelector('#main').textContent,/离线 App 需要安装对应新版/);
+assert.match(ad.querySelector('#main').textContent,/只保存在当前设备，没有账户或云端同步/);
 assert.ok(!ad.querySelector('#main').textContent.includes('其他项目共享本地存储边界'));
 androidDom.window.close();
 console.log(JSON.stringify({attack_payloads:attacks.length,lessons,formulas,notes:'escaped',invalid_routes:'handled',lab:'updated',quiz:'correct',backup_api:'transactional',android_adapter:'isolated',back_handler:'passed',status:'passed'},null,2));

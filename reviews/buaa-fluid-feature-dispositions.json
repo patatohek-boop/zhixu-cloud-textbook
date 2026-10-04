@@ -1,0 +1,37 @@
+[
+  {
+    "id": "fluid-mechanics-13",
+    "kind": "inline_math",
+    "sha256": "7c8956b38f396febc88993e29f6a845f40189bf3544a822dca8141c0586ce9c7",
+    "before_count": 4,
+    "after_count": 3,
+    "text": "n-r",
+    "reason": "删除先修导学中重复出现一次的 n-r 符号；没有删去量纲分析结论。定义和证明正文仍有三次相同公式，构造例题仍说明 5-3=2。",
+    "review": "人工复核通过：知识与证明保留，减少的是导学重复。",
+    "evidence_files": [
+      "content/fluid-mechanics/fluid-mechanics-13.md"
+    ],
+    "evidence_sections": [
+      "量纲齐次性与无量纲组合 / 齐次关系与 Π 定理的条件",
+      "证明：为什么独立组合数是 n−r",
+      "构造实例与动力相似"
+    ]
+  },
+  {
+    "id": "fluid-mechanics-26",
+    "kind": "inline_math",
+    "sha256": "4566ec2a9d5a4595c038362897edd5350d9a00f90e3e1450235e8feaaa7dabb6",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "\\delta Y\\approx\\sum_i f_i\\delta X_i",
+    "reason": "先修工具段不再预演一次一阶展开式；同一 δY 公式仍完整保留在“推导二”开头，并接平方取期望得到协方差传播式。δXi、ui²、fi 的含义仍在前置数学工具段定义。",
+    "review": "人工复核通过：重复预告删除，局部线性化和后续推导完整保留。",
+    "evidence_files": [
+      "content/fluid-mechanics/fluid-mechanics-26.md"
+    ],
+    "evidence_sections": [
+      "不确定度传播所需的数学工具",
+      "推导二：不确定度为什么平方相加"
+    ]
+  }
+]

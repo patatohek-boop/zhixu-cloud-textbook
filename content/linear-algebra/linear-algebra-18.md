@@ -2,7 +2,7 @@
 {
   "id": "linear-algebra-18",
   "title": "奇异值分解 SVD",
-  "group": "06 · 复数与奇异值",
+  "group": "06 · 复内积与奇异值分解",
   "minutes": 60,
   "level": "进阶",
   "tags": [
@@ -34,7 +34,7 @@
 }
 ---
 
-## 严谨定义：完整 SVD、奇异值和左右方向
+## 完整 SVD、奇异值和左右方向
 
 ### 完整 SVD 的三种尺寸
 
@@ -42,9 +42,9 @@
 
 ### 奇异值排序与左右方向
 
-正奇异值记 $\sigma_1\ge\cdots\ge\sigma_r>0$，余下对角为零；右方向 $v_i\in\mathbb R^n$，左方向 $u_i\in\mathbb R^m$，$Av_i=\sigma_i u_i$。这里 $r=\operatorname{rank}A$，要由证明得到。
+正奇异值记 $\sigma_1\ge\cdots\ge\sigma_r>0$，余下对角为零；右方向 $v_i\in\mathbb R^n$，左方向 $u_i\in\mathbb R^m$，$Av_i=\sigma_i u_i$。非零奇异值的个数等于 $\operatorname{rank}A$，下文给出证明。
 
-## 通俗解释：输入和输出各自换一把正交尺子
+### 输入空间与输出空间的正交基
 特征向量试图留在同一个方向，长方形矩阵甚至输入输出维数都不同。SVD 允许一边一套方向，中间只负责按非负长度伸缩，因此适用于任何矩阵。
 
 ## SVD 存在性的完整构造证明
@@ -79,11 +79,9 @@ $$Ax=\sum_{i=1}^r\sigma_i u_i(v_i^\mathsf Tx).$$
 
 **反例。** $A=\begin{pmatrix}0&1\\0&0\end{pmatrix}$ 两个特征值都为零，却有奇异值 $1,0$。特征值零不代表矩阵不伸缩任何向量，SVD 才直接描述长度。
 
-## 配图：把定义与几何对应起来
-
 <figure class="teaching-figure"><a href="assets/diagrams/svd-ellipse.svg" target="_blank" rel="noopener" aria-label="打开大图：单位圆先经 Vᵀ 旋转后仍为圆，再被 Σ=diag(2,1) 变为半轴 2 与 1 的椭圆，最后经 U 旋转 30°。"><img src="assets/diagrams/svd-ellipse.svg" alt="单位圆先经 Vᵀ 旋转后仍为圆，再被 Σ=diag(2,1) 变为半轴 2 与 1 的椭圆，最后经 U 旋转 30°。" loading="lazy"></a><figcaption>单位圆先经 Vᵀ 旋转后仍为圆，再被 Σ=diag(2,1) 变为半轴 2 与 1 的椭圆，最后经 U 旋转 30°。<br><small>二维示例，Vᵀ=R(−30°)、U=R(30°)。三个阶段采用同一尺度 30 像素/单位。完整 SVD 也允许正交反射；本图用旋转便于理解。 · 点按图形可放大。</small></figcaption></figure>
 
-## 逐步例题：一个长方形映射
+## 例：一个长方形映射
 取三行两列矩阵，其两列分别为 $(3,0,0)$ 与 $(0,1,0)$。
 
 第一步求 $A^TA$，得到对角元素九与一的二阶矩阵。
@@ -97,7 +95,9 @@ $$Ax=\sum_{i=1}^r\sigma_i u_i(v_i^\mathsf Tx).$$
 单位圆经过该映射变成三维空间中位于水平面的椭圆，长短半轴为三与一。第三个输出方向无法由任何输入产生，因此它位于左零空间。这个例子把列空间、左零空间与奇异值几何联系在一起。
 
 ## 完整、薄与截断分解
-完整 SVD 包含两侧空间的全部正交基；薄 SVD 只保留所需数量的列；秩分解还可以只写非零奇异值部分。不同库返回尺寸可能不同，使用公式前应确认。截断 SVD 则主动只保留最大的若干奇异值，这是近似而不是完全相同的分解。不要把“省去本来为零的项”和“舍去小但非零的项”混为一谈。
+设 $p=\min(m,n)$。完整 SVD 的尺寸为 $U:m\times m$、$\Sigma:m\times n$、$V:n\times n$。常用薄 SVD 取 $U_p:m\times p$、$\Sigma_p:p\times p$、$V_p:n\times p$，仍满足 $A=U_p\Sigma_pV_p^\mathsf T$。只保留 $r$ 个非零奇异值则得到秩为 $r$ 的紧致形式，也精确表示 $A$。
+
+截断 SVD 保留最大的 $k<r$ 个奇异值，舍去的非零项会产生近似误差。软件中“薄”或“经济型”的命名可能不同，使用时应核对各矩阵尺寸。
 
 矩阵可写成若干奇异值乘左、右奇异向量外积之和，每一项都是一个秩一模式。这种表达适合解释图像压缩、数据结构提取和低秩近似。
 
@@ -117,7 +117,6 @@ $$Ax=\sum_{i=1}^r\sigma_i u_i(v_i^\mathsf Tx).$$
 秩为三。其余方向对应零伸缩或额外的零空间结构。
 </details>
 
-<!-- math-revision-20261003:non-axis-svd-practice:start -->
 ## 练习 M13：把混合方向的 SVD 完整算出来
 
 对
@@ -146,4 +145,3 @@ $$\Sigma_B=\begin{pmatrix}2&0\\0&0\\0&0\end{pmatrix},\qquad B=2u_1v_1^\mathsf T.
 </details>
 
 延伸阅读：[MIT 18.06SC 的 SVD 课程与独立习题](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/pages/positive-definite-matrices-and-applications/singular-value-decomposition/)。本题的两种矩阵与检查步骤可直接手算。
-<!-- math-revision-20261003:non-axis-svd-practice:end -->

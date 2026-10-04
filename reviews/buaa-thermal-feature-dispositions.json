@@ -1,0 +1,1772 @@
+[
+  {
+    "id": "heat-transfer-01",
+    "kind": "display_math",
+    "sha256": "a83089f2cc262628ece3290e658a00c39a62c93bb6d6954b1e8a364725912ce8",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\dot Q=q''A,\\qquad Q=\\dot Q\\Delta t.",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "043a718774c572bd8a25adbeb1bfcd5c0256ae11cecf9f9c3f925d0e52beaf89",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "s",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "04a6fb16934512861d5643dc9a5f8e7881cf42630a6f23699a6bca66d01ffbf9",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "+x",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "3a9acb4ab26afe52ef1ca331d25e6de31f16d2d483fb04df591c68bb162ef79c",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\dot Q_{rad}=\\varepsilon\\sigma A(T_s^4-T_{sur}^4)",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "3d8757b2e5d226003f3cb12e12728163b54ecd84a6d2002eea08ae71d354583e",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "\\dot Q=q''A",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "4ae81572f06e1b88fd5ced7a1a000945432e83e1551e6f721ee9c00b8cc33260",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "Q",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "4cbf454f69689ebaa9bc32113c0d8c1d5def4e0d8389af9c4bd1f7243fcfd8dc",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\Delta T",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "A",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "59bcc099f28c4ba7c74b738c2ebeb5b1d712721960ce10d932c1acb4749d983c",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "q_x''=-k\\,dT/dx",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "6d6c4f072fd1f994a62c6de7216b3949d3a5bc70ce503657220c8b125335b977",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "T_s",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "8254c329a92850f6d539dd376f4816ee2764517da5e0235514af433164480d7a",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "k",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "8cde4d454bfecb76322a2305a79329f1302f7afe4f2805ed4c81d8bd9d83d71d",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "q''",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "966b5b456f14661becdec8e046e75249f31ad2046bd2fcd3aaa5b5a945db7ad5",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "Q=\\dot Q\\Delta t",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "9c3245dfb4ac54c1623a60e7b8d1fc07cb02eae1229435230c7dab5e71083a26",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\sigma",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123",
+    "before_count": 3,
+    "after_count": 0,
+    "text": "h",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "c1560baf44f978f29df501ef99a3412a1ec88af381cb984c26d41a61fa5814a8",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\dot Q_{conv}=hA(T_s-T_\\infty)",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "c89b6c3d164a650911703c604c2add0e1d8c0d9ffa448bafbce4bc6fff75903f",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "sur",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "daec86669d42946c1832d74d74b9f0af0206ffd283c054be6ff8d841d1cb7d6f",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "\\varepsilon",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "db307e9343ea80e8f579141df70a44d6e673c220f645ceca3732194d3a6ecc81",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "\\dot Q",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "db8e84427c2e1e02f2b2c74d337ab8d69d80cbb28224cd7f85e0174f1f5ed5c7",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\infty",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-01",
+    "kind": "inline_math",
+    "sha256": "ee0a9b47da300e03e7a2a10c07433a1b219b7cb51573f4183959ecef48b51d4f",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "q^{\\prime\\prime\\prime}",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。面积和时间均匀条件下的乘法关系拆成行内公式；Fourier 写成向量形式，x 方向负号另作解释；对流、辐射公式和温度符号保留在各自定义与能量平衡段，J/W/面积/体积单位均保留 首次使用漫灰假设时分别定义方向无关与波长无关，不混同两种条件。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-01.md"
+    ],
+    "evidence_sections": "传热方式与基本物理量；从定义与第一律建立完整热账；符号与边界检验"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "display_math",
+    "sha256": "6cfdc127d3992b2b496fd9258b145e2c3a22b12e9a1500e1ccb1662645008b64",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "dT=-\\frac{\\dot Q}{kA}dx,\\qquad T_2-T_1=-\\frac{\\dot Q}{kA}L.",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "x",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "33ab0f85cd2c53e0815611867233a0a76c7ab397b44f69cd25aa56a2b9fac963",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "\\dot Q=-kA\\,dT/dx",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "4f330547996369e8729bd41a10b2aad61f4cc6a96c03498d7cb6151b64277bb9",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "R''=RA",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "A",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "5d03421cee7ca867eb8a3ed78464a222c3382f3c5f45249784dd6dded2026198",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "T_2-T_1=-\\dot QL/(kA)",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "65378ce29523e4793c3e6f4eeed805dfbf0d203a3339374d2b6571d96e12626d",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\dot Q=\\Delta T/R",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "72dfcfb0c470ac255cde83fb8fe38de8a128188e03ea5ba5b2a93adbea1062fa",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "L",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "746e7e6039ee1539f5d67d254c2f748ee8200306a05d5315f72770d1576bf734",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\dot Q=(T_1-T_2)/(L/(kA))",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "8254c329a92850f6d539dd376f4816ee2764517da5e0235514af433164480d7a",
+    "before_count": 5,
+    "after_count": 2,
+    "text": "k",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 2 处。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "8c2574892063f995fdf756bce07f46c1a5193e54cd52837ed91e32008ccf41ac",
+    "before_count": 3,
+    "after_count": 1,
+    "text": "R",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "a651ec02cf75ed44af7306f0a741665b8584b8c380fe1da4391c33d629fbfe97",
+    "before_count": 3,
+    "after_count": 2,
+    "text": "R=L/(kA)",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 2 处。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "aa95a3da007942989fc84a4f3f552491ee95155548c87e6fe72bbf4091dfc223",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "\\dot Q,k,A",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "d98b1e091ab234be8a93e37a2e4038437c60a69224ddf186d3f64b8e4225bd0a",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "dT=-\\dot Q\\,dx/(kA)",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-03",
+    "kind": "inline_math",
+    "sha256": "db307e9343ea80e8f579141df70a44d6e673c220f645ceca3732194d3a6ecc81",
+    "before_count": 3,
+    "after_count": 2,
+    "text": "\\dot Q",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 2 处。旧入口的平壁积分改写为正文 dT=-Q̇dx/(kA)、T₂−T₁=-Q̇L/(kA)，物性和热流恒定条件写在同段；R=ΔT/Q̇、R=L/(kA) 与接触面比热阻 R_c=R_c″/A 均在正式定义和推导中保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-03.md"
+    ],
+    "evidence_sections": "热阻与温度节点；推导平壁与串联规则；推导并联规则与面积基准"
+  },
+  {
+    "id": "heat-transfer-05",
+    "kind": "inline_math",
+    "sha256": "13d9e355cf8431e1c7ea0374076938e88255048b3cc4a5b5f3c2f79bc33adc24",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "C>0",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。删除扩展段重复引入的缩记 F=P_gen−P_out；正式推导直接使用 P′_gen−P′_out，对负、正和零线性系数分别说明渐近稳定、不稳定及不能判定，并保留 ±z³ 反例",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-05.md"
+    ],
+    "evidence_sections": "推导二：变k与热失稳；对稳态附近的小扰动作线性分析；热源反馈与稳态交点"
+  },
+  {
+    "id": "heat-transfer-05",
+    "kind": "inline_math",
+    "sha256": "4532449bace4da64f228aea87a5bfa9f15bf2c85b3828dd1064e63c381d705c3",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "F(T)=P_{gen}(T)-P_{out}(T)",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。删除扩展段重复引入的缩记 F=P_gen−P_out；正式推导直接使用 P′_gen−P′_out，对负、正和零线性系数分别说明渐近稳定、不稳定及不能判定，并保留 ±z³ 反例",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-05.md"
+    ],
+    "evidence_sections": "推导二：变k与热失稳；对稳态附近的小扰动作线性分析；热源反馈与稳态交点"
+  },
+  {
+    "id": "heat-transfer-05",
+    "kind": "inline_math",
+    "sha256": "abfe683c47b46ab37a5bfec05814d7b76e55b65970ca21270b1a2e9958303a4f",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "F'(T_*)=0",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。删除扩展段重复引入的缩记 F=P_gen−P_out；正式推导直接使用 P′_gen−P′_out，对负、正和零线性系数分别说明渐近稳定、不稳定及不能判定，并保留 ±z³ 反例",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-05.md"
+    ],
+    "evidence_sections": "推导二：变k与热失稳；对稳态附近的小扰动作线性分析；热源反馈与稳态交点"
+  },
+  {
+    "id": "heat-transfer-05",
+    "kind": "inline_math",
+    "sha256": "dac3bc08a7acec1907564fef04bc53a333fe44a5ec70e7000e4759c234985502",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "F'(T_*)>0",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。删除扩展段重复引入的缩记 F=P_gen−P_out；正式推导直接使用 P′_gen−P′_out，对负、正和零线性系数分别说明渐近稳定、不稳定及不能判定，并保留 ±z³ 反例",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-05.md"
+    ],
+    "evidence_sections": "推导二：变k与热失稳；对稳态附近的小扰动作线性分析；热源反馈与稳态交点"
+  },
+  {
+    "id": "heat-transfer-05",
+    "kind": "inline_math",
+    "sha256": "e8f776d8f0d769fcddb08503c2da6fedfb8fed045b693078ce9958fd261677f5",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "F'(T_*)<0",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。删除扩展段重复引入的缩记 F=P_gen−P_out；正式推导直接使用 P′_gen−P′_out，对负、正和零线性系数分别说明渐近稳定、不稳定及不能判定，并保留 ±z³ 反例",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-05.md"
+    ],
+    "evidence_sections": "推导二：变k与热失稳；对稳态附近的小扰动作线性分析；热源反馈与稳态交点"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "display_math",
+    "sha256": "7d11bab38ca95d6f8de660d0854a49f6f878e17a537a48d980e8cf8c39a452d5",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "L_c=\\frac{V}{A_s},\\qquad Bi=\\frac{hL_c}{k_s},\\qquad \\tau=\\frac{C}{hA_s}.",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "display_math",
+    "sha256": "a97148affb3e09a486b7a1f41239a5acb4326fab516fc241da9f3b6398ea47fd",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\frac{d\\theta}{dt}=-\\frac{\\theta}{\\tau},\\qquad \\frac{\\theta(t)}{\\theta_i}=e^{-t/\\tau}.",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "0f61d9ea395c0ef63e2b61f6cddff53fd99aeec8677ecea1a4fd865eda11b8bc",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "\\theta=T-T_\\infty",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "29c39282177d4b623e8bb0f4512cd323f4164386d056641d864f24520668401b",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "C,h,A_s",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "2f8dd52a01de0ecdc57f16cbbca9142d584b8c81f1cd146fe2e4180efcf164d2",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "L_c",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "4cbf454f69689ebaa9bc32113c0d8c1d5def4e0d8389af9c4bd1f7243fcfd8dc",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "\\Delta T",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "500b25a246eeff3bfd5a5f13b1d9d0aa18e8ccafe8d2665296a2e7fac9103788",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "C\\Delta T",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "556bf5771cf983e28e9e9cbbe04c21d91e934324d169292e01720c89f7c1d459",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "C\\,dT/dt=-hA_s(T-T_\\infty)",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "55d1823545b5b4c3cbc42b784c5e84605ffbe8e59d1dee9782cd87741eef9dc3",
+    "before_count": 3,
+    "after_count": 1,
+    "text": "\\tau",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "6b15df33edd8693c4bb73e72c992446ac9eaac0b073bcf982ebf977a1836014c",
+    "before_count": 5,
+    "after_count": 3,
+    "text": "Bi",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "6b23c0d5f35d1b11f9b683f0b0a617355deb11277d91ae091d399c655b87940d",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "C",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "81247272dafcc33aef1207d7eddfa5fcd40dfb6c01f20fa833364fb4a52af74c",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "\\theta_i=T_i-T_\\infty",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "a59a9d70d819a2cb3aac86cc0fca397561c32c2be3f5fed8ff22e11b5152a9d0",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "k_s",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "a721963f725aae53850c503b3514d17d1106369a18268fe52151e27499894c05",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\theta_i",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123",
+    "before_count": 6,
+    "after_count": 5,
+    "text": "h",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "c3410bcd8babfe60c4e62dfd9457ffa54cd8d206a48504ccabb60ac6ef1a7bad",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "Bi<0.1",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "ccffa4096a1fcd34bbab1492d10453dde611370040fb474399935a679c588ffd",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "C=\\rho Vc",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "cf2169daa166a157ccc8df69a4843491849c5156900d99dca663dff590e54aa7",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "T(t)",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "de5a6f78116eca62d7fc5ce159d23ae6b889b365a1739ad2cf36f925a140d0cc",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "V",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "e6dd8a9384e7eb8b51f4f0b0870e98df14fb2c51e2e0fe0ce5af0750d6faae0a",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "d\\theta/dt=dT/dt",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-07",
+    "kind": "inline_math",
+    "sha256": "f5f058e9e1bf59f34efa9ba20365bded62500f8338637489def9406ec71d99bb",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\theta_i=0",
+    "reason": "将指数解适用条件明确集中在推导前：仅通过对流与恒温环境换热，无内热源、无其他热交换及做功，C、h、A_s均为常量；由第一律与θ定义推出指数解，保留零初始温差不得相除的说明。本项符号次数变化来自入口去重与该条件的显式补写。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-07.md"
+    ],
+    "evidence_sections": "集总热容与Biot数；推导二：指数解必须衰减的是温差"
+  },
+  {
+    "id": "heat-transfer-11",
+    "kind": "inline_math",
+    "sha256": "aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "h",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。重复解释中的单个 h 数学标记改为文字“对流换热系数”；正式定义 h_x=q_w″/(T_s−T∞)、壁面热流和全部边界层推导保留",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-11.md"
+    ],
+    "evidence_sections": "壁面梯度与当地换热系数；壁面导热与流体携热"
+  },
+  {
+    "id": "heat-transfer-19",
+    "kind": "inline_math",
+    "sha256": "583cf6290785d72cc1b71808962dd4bd72ca369f004fb5cb587694fc1b26149f",
+    "before_count": 1,
+    "after_count": 2,
+    "text": "\\lambda",
+    "reason": "在首次使用前补充定义或明确极限条件。在已有波长 λ 定义处补明真空波长，符号出现次数增加；Planck、Wien 与 Stefan–Boltzmann 公式未改",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-19.md"
+    ],
+    "evidence_sections": "黑体与光谱发射力；光谱密度与总发射力"
+  },
+  {
+    "id": "heat-transfer-22",
+    "kind": "inline_math",
+    "sha256": "18036d14ca008ac3d396c73d04f93dc649fda6170273163ed1784390787263e1",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "0<\\varepsilon_i<1",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。把表面辐射阻的有效范围明确为 0<ε_i<1，并单列 ε_i=1 时 J_i=E_b,i 及 ε_i=0 时 J_i=G_i 的本构极限，避免直接除以零；原网络方程不变",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-22.md"
+    ],
+    "evidence_sections": "推导灰体网络"
+  },
+  {
+    "id": "heat-transfer-22",
+    "kind": "inline_math",
+    "sha256": "1ee2e9046e4b8e25c0a991cbd959d1b3a7b0493f0f43f9e6e6323d1011e004d1",
+    "before_count": 1,
+    "after_count": 2,
+    "text": "J_i=E_{b,i}",
+    "reason": "在首次使用前补充定义或明确极限条件。把表面辐射阻的有效范围明确为 0<ε_i<1，并单列 ε_i=1 时 J_i=E_b,i 及 ε_i=0 时 J_i=G_i 的本构极限，避免直接除以零；原网络方程不变",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-22.md"
+    ],
+    "evidence_sections": "推导灰体网络"
+  },
+  {
+    "id": "heat-transfer-22",
+    "kind": "inline_math",
+    "sha256": "332ccb4815d3590113d32d047e2117331997add44208972a354b64e79e4c9374",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "\\varepsilon_i=1",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。把表面辐射阻的有效范围明确为 0<ε_i<1，并单列 ε_i=1 时 J_i=E_b,i 及 ε_i=0 时 J_i=G_i 的本构极限，避免直接除以零；原网络方程不变",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-22.md"
+    ],
+    "evidence_sections": "推导灰体网络"
+  },
+  {
+    "id": "heat-transfer-22",
+    "kind": "inline_math",
+    "sha256": "3742260f81a1fb73bd39a6a1cba51ab010f2e24ba6a262a9b4d831faa4423e40",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "\\varepsilon_i=0",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。把表面辐射阻的有效范围明确为 0<ε_i<1，并单列 ε_i=1 时 J_i=E_b,i 及 ε_i=0 时 J_i=G_i 的本构极限，避免直接除以零；原网络方程不变",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-22.md"
+    ],
+    "evidence_sections": "推导灰体网络"
+  },
+  {
+    "id": "heat-transfer-22",
+    "kind": "inline_math",
+    "sha256": "48b9803f44af8574f9fc2998da6eb34f029798e486d70f1f0a2b012c5d92c8dc",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "J_i=G_i",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。把表面辐射阻的有效范围明确为 0<ε_i<1，并单列 ε_i=1 时 J_i=E_b,i 及 ε_i=0 时 J_i=G_i 的本构极限，避免直接除以零；原网络方程不变",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/heat-transfer/heat-transfer-22.md"
+    ],
+    "evidence_sections": "推导灰体网络"
+  },
+  {
+    "id": "thermodynamics-01",
+    "kind": "display_math",
+    "sha256": "964320ad8b23742f8e078194f6c72b7e200da7be4f12b3eb9ad13aef592a2ac6",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "m_2=\\frac{m_1}{2},\\qquad V_2=\\frac{V_1}{2},\\qquad \\rho_2=\\frac{m_1/2}{V_1/2}=\\frac{m_1}{V_1}=\\rho_1.",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口的二等分特例由正式的任意 0<λ<1 缩放证明覆盖；λ=1/2 即得到原式，原质量/体积/密度复制数值例题保留；强度量与比性质的定义仍位于证明之前",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-01.md"
+    ],
+    "evidence_sections": "总量、强度量与比性质；命题与证明：比性质为何不随等比例分割改变"
+  },
+  {
+    "id": "thermodynamics-01",
+    "kind": "inline_math",
+    "sha256": "62c66a7a5dd70c3146618063c344e531e6d4b59e379808443ce962b3abd63c5a",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "m",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。入口的二等分特例由正式的任意 0<λ<1 缩放证明覆盖；λ=1/2 即得到原式，原质量/体积/密度复制数值例题保留；强度量与比性质的定义仍位于证明之前",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-01.md"
+    ],
+    "evidence_sections": "总量、强度量与比性质；命题与证明：比性质为何不随等比例分割改变"
+  },
+  {
+    "id": "thermodynamics-01",
+    "kind": "inline_math",
+    "sha256": "6dd1f1580465d59e40de950bf7b34212f214ae0978b148a836aaca9c5b98c396",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "m,V,U",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。入口的二等分特例由正式的任意 0<λ<1 缩放证明覆盖；λ=1/2 即得到原式，原质量/体积/密度复制数值例题保留；强度量与比性质的定义仍位于证明之前",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-01.md"
+    ],
+    "evidence_sections": "总量、强度量与比性质；命题与证明：比性质为何不随等比例分割改变"
+  },
+  {
+    "id": "thermodynamics-01",
+    "kind": "inline_math",
+    "sha256": "a25513c7e0f6eaa80a3337ee18081b9e2ed09e00af8531c8f7bb2542764027e7",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "U",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。入口的二等分特例由正式的任意 0<λ<1 缩放证明覆盖；λ=1/2 即得到原式，原质量/体积/密度复制数值例题保留；强度量与比性质的定义仍位于证明之前",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-01.md"
+    ],
+    "evidence_sections": "总量、强度量与比性质；命题与证明：比性质为何不随等比例分割改变"
+  },
+  {
+    "id": "thermodynamics-01",
+    "kind": "inline_math",
+    "sha256": "b2ce5a681d0d25568e8bd6d387fe3e3f8186f5de44bd3344d43aca12f0f3bb22",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\rho=m/V",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口的二等分特例由正式的任意 0<λ<1 缩放证明覆盖；λ=1/2 即得到原式，原质量/体积/密度复制数值例题保留；强度量与比性质的定义仍位于证明之前",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-01.md"
+    ],
+    "evidence_sections": "总量、强度量与比性质；命题与证明：比性质为何不随等比例分割改变"
+  },
+  {
+    "id": "thermodynamics-01",
+    "kind": "inline_math",
+    "sha256": "b4b1aed2896ecb621e2657ccf08dbca5cb4d9d6ec470d5ec4a3b714cdd5a8a0b",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "T,\\rho,u",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口的二等分特例由正式的任意 0<λ<1 缩放证明覆盖；λ=1/2 即得到原式，原质量/体积/密度复制数值例题保留；强度量与比性质的定义仍位于证明之前",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-01.md"
+    ],
+    "evidence_sections": "总量、强度量与比性质；命题与证明：比性质为何不随等比例分割改变"
+  },
+  {
+    "id": "thermodynamics-01",
+    "kind": "inline_math",
+    "sha256": "cef208e043ee4b8cfc1927a0c82372e23aa430a309602170e9a4a9c3d52a5bcd",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "Q,W",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口的二等分特例由正式的任意 0<λ<1 缩放证明覆盖；λ=1/2 即得到原式，原质量/体积/密度复制数值例题保留；强度量与比性质的定义仍位于证明之前",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-01.md"
+    ],
+    "evidence_sections": "总量、强度量与比性质；命题与证明：比性质为何不随等比例分割改变"
+  },
+  {
+    "id": "thermodynamics-01",
+    "kind": "inline_math",
+    "sha256": "de5a6f78116eca62d7fc5ce159d23ae6b889b365a1739ad2cf36f925a140d0cc",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "V",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。入口的二等分特例由正式的任意 0<λ<1 缩放证明覆盖；λ=1/2 即得到原式，原质量/体积/密度复制数值例题保留；强度量与比性质的定义仍位于证明之前",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-01.md"
+    ],
+    "evidence_sections": "总量、强度量与比性质；命题与证明：比性质为何不随等比例分割改变"
+  },
+  {
+    "id": "thermodynamics-01",
+    "kind": "inline_math",
+    "sha256": "e632b7095b0bf32c260fa4c539e9fd7b852d0de454e9be26f24d0d6f91d069d3",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "T",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。入口的二等分特例由正式的任意 0<λ<1 缩放证明覆盖；λ=1/2 即得到原式，原质量/体积/密度复制数值例题保留；强度量与比性质的定义仍位于证明之前",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-01.md"
+    ],
+    "evidence_sections": "总量、强度量与比性质；命题与证明：比性质为何不随等比例分割改变"
+  },
+  {
+    "id": "thermodynamics-01",
+    "kind": "inline_math",
+    "sha256": "f1033fedd3a68968db3cac42bd47e1ba8a572835e235be58e690fe0f6e08b5aa",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "u=U/m",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。入口的二等分特例由正式的任意 0<λ<1 缩放证明覆盖；λ=1/2 即得到原式，原质量/体积/密度复制数值例题保留；强度量与比性质的定义仍位于证明之前",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-01.md"
+    ],
+    "evidence_sections": "总量、强度量与比性质；命题与证明：比性质为何不随等比例分割改变"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "display_math",
+    "sha256": "53da829ee464d24ee69728fc63b9ad4f7121c36a60671c4bdf2b8f331f452942",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\Delta U=Q-W.",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "inline_math",
+    "sha256": "27df0982cfb1c12e26addff42f88963a37f82e59b13e7b49a8bac1830a8264af",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\Delta U=U_2-U_1",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "inline_math",
+    "sha256": "294763754a8efd4c739d9f679bfca3ab510106f42ddb5dc0216ba8bc98ba3158",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "PE",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "inline_math",
+    "sha256": "445a729b204673c596a4bb2e0b60412428a07365ca8452a0ed8f172d39108307",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "Q+W",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "inline_math",
+    "sha256": "485c051a7fb631e0d8a99482feef29b82556c67298d5c570f8fcdff58dbb67e8",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\dot Q,\\dot W",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "inline_math",
+    "sha256": "4ae81572f06e1b88fd5ced7a1a000945432e83e1551e6f721ee9c00b8cc33260",
+    "before_count": 3,
+    "after_count": 2,
+    "text": "Q",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 2 处。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "inline_math",
+    "sha256": "8b4d968fe3dc0c2703364f9db4bf37c435f55235b3c794c0f9fe16f1f6578012",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\Delta U+\\Delta KE+\\Delta PE=Q-W",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "inline_math",
+    "sha256": "a7eedc800d1661d16595f535754c37d16af3978f0e9bbb6f7a2c690bc628af24",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\mathrm W",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "inline_math",
+    "sha256": "b5e22fb36ea0760dffd2f186c3e64b15efa56e0c0a36a1136d3884b4cf236403",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "KE",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "inline_math",
+    "sha256": "bc7c4513577fd57aa2146cf35198519cc91e7f186c20349382303c4f6feab375",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "W_b=0",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "inline_math",
+    "sha256": "d04253126b67c473cf43458d1e06606c7094441e96178602e504f9f730fef9ef",
+    "before_count": 4,
+    "after_count": 3,
+    "text": "p_b",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 3 处。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-05",
+    "kind": "inline_math",
+    "sha256": "fcb5f40df9be6bae66c1d77a6c15968866a9e6cbd7314ca432b019d17392f6f4",
+    "before_count": 3,
+    "after_count": 1,
+    "text": "W",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。入口 ΔU=Q−W 是 ΔE=Q−W 在忽略动位能变化时的特例；总能量定义和删除动位能的条件、两个热功数值例题保留。KE/PE、ΔU 的单独复述及把 Q+W 当正确式的否定句合并到符号和常见误区段，不改第一律符号约定",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-05.md"
+    ],
+    "evidence_sections": "热、功与系统能量；物理定律与微分记号；从定律推导：边界功与常见特例"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "display_math",
+    "sha256": "e248772ac097345494280eca5a20d598ae1a2a3250a44faa32cc7fd0b692cd69",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\dot Q-\\dot W_s=\\dot m(h_2-h_1).",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "display_math",
+    "sha256": "e93f510e89dc9bd8e6dd6d75a893525b3f442bb3f36020a5c87a8b137e380b61",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\delta W_{push}=pA(c\\,dt)=p\\,dV=pv\\,dm.",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "0eaa1204dfcfa445eb73ef302dc2617b64e43c9bf9e2cad57c5e2f5aa6befa97",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "\\mathbf c",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "0ed6fc09482696a1224a013314936888dd82efbb8835a1fc84ec3ef90f6e79c3",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "pAc",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "2aa34ef1611fca9c52ad5588374b0a1d64ac1e4875d5f078a68ab67a4e1810ea",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "\\mathbf n",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "2e7d2c03a9507ae265ecf5b5356885a53393a2029d241394997265a1a25aefc6",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "c",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "33bfb8d928c56deb62f4af49dcac0b523ddbb41ea2cee2421d02e7ee6240ff6a",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "c_n=\\mathbf c\\cdot\\mathbf n",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "A",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "62c66a7a5dd70c3146618063c344e531e6d4b59e379808443ce962b3abd63c5a",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "m",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "75427c5569ed4a232de73528ba141425f4efd20b374cb062dddc28d26c976088",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "\\dot m_1=\\dot m_2=\\dot m",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "870b50a3ab21ad4bb201e9623de869d8266acccfc4b3b5c18b6bc6df7b283032",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "\\dot W_s",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "8a721b977b3b2a0d4dd8632bb9b2237b666b418a7861741196831a0bd143e91c",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "u\\,dm",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "92237a12e542d37c7ecdbdece0fc1128efb6fa8f0c00763182567ae7412fe199",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "pA",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "9a09a386951bb51b7c4792966f0de6b69c2b9838126bf0ea19163375efb25b3c",
+    "before_count": 2,
+    "after_count": 0,
+    "text": "\\dot m h",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "a2bd042ee4a8e21d4458838c908b03a3abbfe999dc51c69983197f331436a4a5",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "c\\,dt",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123",
+    "before_count": 4,
+    "after_count": 3,
+    "text": "h",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 3 处。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "b29e952e5a1b67df692d4d03a67e5972d2feccbc96cb6cf238de65549a85798d",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "(u+pv)dm=h\\,dm",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "b48a467a636fcefbcc7b960cc2de7f09b9960f793d6034065df8f02201163947",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "\\dot m",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "dabec2cdc19c316749385782948e50b66047b4aac5b8cd44e6f5037d11109ac0",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "\\rho",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "db307e9343ea80e8f579141df70a44d6e673c220f645ceca3732194d3a6ecc81",
+    "before_count": 1,
+    "after_count": 0,
+    "text": "\\dot Q",
+    "reason": "原独立记号或合写式改为下述等价定义、正式推导或文字条件，需按该对应关系审校。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "dd496f58f294a49aaee71fb28f3d14bc882f8de79cfd9440e106376fd412012a",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "c^2/2",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "ddeb8602d48018417522f34f34ddb5b3cc720fc7723501c91f5f24d821526cfb",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "c_n=c",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "f7419c118b2cb761b9d013ffa3fa5fbef83a30cb67061c743f7edb5eca4cb27e",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "h=u+pv",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-07",
+    "kind": "inline_math",
+    "sha256": "fefbdb67a3b2d570a0c29fd64907931f9340cc93cdf53b2f724c0674ac8a6024",
+    "before_count": 2,
+    "after_count": 1,
+    "text": "dt",
+    "reason": "入口/扩展段重复解释合并；相同 TeX 记号仍保留 1 处。压力推流功的力乘位移推导合并到正式方程段，以 c_n 表示法向分量并先定义速度、法向和密度；补留 dm=ρAc dt、v=1/ρ、dV=v dm，压力功 pAc_n dt=pv dm 及 (u+pv+c²/2+gz)dm 均保留。忽略动位能差得到原稳流简式，水加热器完整数值例题仍按该条件计算 已在定义前明确固定控制体与均匀端口；移动控制面须另用相对法向速度。",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-07.md"
+    ],
+    "evidence_sections": "穿越截面的质量流率；储能、焓流与非流动功；从守恒律一步步建立方程"
+  },
+  {
+    "id": "thermodynamics-23",
+    "kind": "inline_math",
+    "sha256": "7938ebfd8582fe8deddfbc2b9c7ef29ac734a91ce55f8a255679cb91d3239224",
+    "before_count": 1,
+    "after_count": 2,
+    "text": "\\mu_i=\\mu_i^\\circ+R_uT\\ln a_i",
+    "reason": "在首次使用前补充定义或明确极限条件。为防止先用后定义，在活度首次出现处增加其化学势相对标准态定义 μ_i=μ_i°+R_uT ln a_i；后文同式推导位置保留，故次数增加",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-23.md"
+    ],
+    "evidence_sections": "化学势、反应进度与活度；活度、反应商与平衡常数"
+  },
+  {
+    "id": "thermodynamics-27",
+    "kind": "inline_math",
+    "sha256": "4c94485e0c21ae6c41ce1dfe7b6bfaceea5ab68e40a2476f50208e526f506080",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "v",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。在使用体膨胀系数之前增加 α_v=(1/v)(∂v/∂T)_p，并说明比体积 v 与单位；没有改节流温变的后续关系",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-27.md"
+    ],
+    "evidence_sections": "体膨胀系数"
+  },
+  {
+    "id": "thermodynamics-27",
+    "kind": "inline_math",
+    "sha256": "7e2e7b9a45202607861d44cb2dc4697ebdc239e3df3f4a4ac5bce142e3e36d03",
+    "before_count": 0,
+    "after_count": 1,
+    "text": "\\alpha_v=(1/v)(\\partial v/\\partial T)_p",
+    "reason": "补明符号、条件或将原合写式拆入相应定义。在使用体膨胀系数之前增加 α_v=(1/v)(∂v/∂T)_p，并说明比体积 v 与单位；没有改节流温变的后续关系",
+    "review": "已对照权威 1.5.0 源文件与本次连续正文逐项回读；此说明确认保留位置，不将文本哈希当作数学证明。",
+    "evidence_files": [
+      "reviews/buaa-thermal-2026-10-04.md",
+      "content/thermodynamics/thermodynamics-27.md"
+    ],
+    "evidence_sections": "体膨胀系数"
+  }
+]

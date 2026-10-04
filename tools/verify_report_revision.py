@@ -6,7 +6,7 @@ import json, math, pathlib, re
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
 def lesson(course, number):
-    return (ROOT / 'content' / course / f'{course}-{number:02}.md').read_text()
+    return (ROOT / 'content' / course / f'{course}-{number:02}.md').read_text(encoding='utf-8')
 
 # Approaching a candidate from below alone does not make it an upper bound.
 S, u = {0, 1, 2}, 1
@@ -36,27 +36,35 @@ assert math.isclose(delta_T, 5/21)
 assert math.isclose(cp*delta_T + delta_p/rho, 0., abs_tol=1e-9)
 
 # Compile-time publication contract: stable identity and 30 clear entry guides.
-version = json.loads((ROOT/'version.json').read_text())
-assert version['version'] == '1.5.0'
+version = json.loads((ROOT/'version.json').read_text(encoding='utf-8'))
+assert version['version'] in ('1.5.0', '1.6.0'), 'No publication contract for this version'
 all_lessons = [p for p in (ROOT/'content').glob('*/*.md')]
 assert len(all_lessons) == 253
-all_guides = sum([json.loads(p.read_text()) for p in (ROOT/'content').glob('learning-guides-*.json')], [])
+all_guides = sum([json.loads(p.read_text(encoding='utf-8')) for p in (ROOT/'content').glob('learning-guides-*.json')], [])
 assert len(all_guides) == 30 and len({g['id'] for g in all_guides}) == 30
 assert {'calculus-02','calculus-04','linear-algebra-05','linear-algebra-06'} <= {g['id'] for g in all_guides}
-assert sum(len(json.loads(p.read_text())) for p in (ROOT/'content').glob('mastery-exercises-*.json')) == 78
-assert '本科核心续学' in (ROOT/'site/assets/knowledge-map.js').read_text()
+assert sum(len(json.loads(p.read_text(encoding='utf-8'))) for p in (ROOT/'content').glob('mastery-exercises-*.json')) == 78
+if version['version'] == '1.5.0':
+    assert '本科核心续学' in (ROOT/'site/assets/knowledge-map.js').read_text(encoding='utf-8')
+else:
+    assert 'window.TextbookNav.tree(courses,state)' in (ROOT/'site/assets/app.js').read_text(encoding='utf-8')
+    assert 'relation-select' in (ROOT/'site/assets/textbook-navigation.js').read_text(encoding='utf-8')
 print('Report revision: four independent counterexamples, stable 253 IDs, 30 entry guides and original 78 mastery tasks passed')
 
 # Reviewed publication sources are frozen by exact content hashes; generated data
 # is then rebuilt and compared separately by the offline/browser release checks.
-manifest_path = ROOT/'reviews/report-revision-2026-10-03.json'
-assert manifest_path.is_file(), 'Reviewed-source manifest is required for this release'
-if manifest_path.exists():
-    import hashlib
-    manifest=json.loads(manifest_path.read_text())
-    assert manifest['version']=='1.5.0'
-    assert len({row['path'] for row in manifest['files']})==len(manifest['files'])
-    for row in manifest['files']:
-        source=ROOT/row['path']
-        assert hashlib.sha256(source.read_bytes()).hexdigest()==row['sha256'], 'Reviewed source changed: '+row['path']
-    print(f"Reviewed revision sources: {len(manifest['files'])} exact files match their reviewed digests")
+if version['version'] == '1.6.0':
+    from verify_reader_revision import verify
+    verify()
+else:
+    manifest_path = ROOT/'reviews/report-revision-2026-10-03.json'
+    assert manifest_path.is_file(), 'Reviewed-source manifest is required for this release'
+    if manifest_path.exists():
+        import hashlib
+        manifest=json.loads(manifest_path.read_text(encoding='utf-8'))
+        assert manifest['version']=='1.5.0'
+        assert len({row['path'] for row in manifest['files']})==len(manifest['files'])
+        for row in manifest['files']:
+            source=ROOT/row['path']
+            assert hashlib.sha256(source.read_bytes()).hexdigest()==row['sha256'], 'Reviewed source changed: '+row['path']
+        print(f"Reviewed revision sources: {len(manifest['files'])} exact files match their reviewed digests")

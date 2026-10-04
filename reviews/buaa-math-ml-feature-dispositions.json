@@ -1,0 +1,1390 @@
+{
+  "feature_dispositions": [
+    {
+      "id": "calculus-02",
+      "kind": "inline_math",
+      "sha256": "2d711642b726b04401627ca9fbac32f5c8530fb1903cc4db02258717921a4881",
+      "before_count": 4,
+      "after_count": 3,
+      "text": "x",
+      "reason": "重复表述合并：本项 `x` 从 4 次变为 3 次。epsilon–delta 定义及数值例仍保留 δ 可依赖 ε、不得依赖最后选取的 x。删除的是把作者/读者当作双方的重复比喻，相关变量在定义、例题和证明中继续出现。",
+      "review": "已逐项核对现行 content/calculus/calculus-02.md:31（极限的量词次序）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/calculus/calculus-02.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "calculus-02",
+      "kind": "inline_math",
+      "sha256": "d203ba01eef4198ca268a62391076e5080e260b3fcb9b05b334d66206a893936",
+      "before_count": 5,
+      "after_count": 4,
+      "text": "\\delta",
+      "reason": "重复表述合并：本项 `\\delta` 从 5 次变为 4 次。epsilon–delta 定义及数值例仍保留 δ 可依赖 ε、不得依赖最后选取的 x。删除的是把作者/读者当作双方的重复比喻，相关变量在定义、例题和证明中继续出现。",
+      "review": "已逐项核对现行 content/calculus/calculus-02.md:41（极限的量词次序）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/calculus/calculus-02.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "calculus-08",
+      "kind": "inline_math",
+      "sha256": "0b3e5b51b9b0d5dc7a5687150d29fe8e5662fcd5521d344c27b356083993244a",
+      "before_count": 2,
+      "after_count": 1,
+      "text": "x=a\\sin\\theta",
+      "reason": "重复表述合并：本项 `x=a\\sin\\theta` 从 2 次变为 1 次。原有重复的“常见路线”段与根式代换小节合并；x=a sin θ 与 sqrt(a²−x²) 在根式代换的实质计算中各自保留，部分分式的唯一算例也已移至对应小节。",
+      "review": "已逐项核对现行 content/calculus/calculus-08.md:75（三角代换）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/calculus/calculus-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "calculus-08",
+      "kind": "inline_math",
+      "sha256": "70556cccdc579ca68389e342d50a127e76dd2b3107d87cb7248e1266be88bf12",
+      "before_count": 3,
+      "after_count": 2,
+      "text": "\\sqrt{a^2-x^2}",
+      "reason": "重复表述合并：本项 `\\sqrt{a^2-x^2}` 从 3 次变为 2 次。原有重复的“常见路线”段与根式代换小节合并；x=a sin θ 与 sqrt(a²−x²) 在根式代换的实质计算中各自保留，部分分式的唯一算例也已移至对应小节。",
+      "review": "已逐项核对现行 content/calculus/calculus-08.md:75（三角代换）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/calculus/calculus-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "calculus-15",
+      "kind": "inline_math",
+      "sha256": "38164fbd17603d73f696b8b4d72664d735bb6a7c88577687fd2ae33fd6964153",
+      "before_count": 1,
+      "after_count": 0,
+      "text": "AB",
+      "reason": "重复表述合并：本项 `AB` 从 1 次变为 0 次。旧 AB 是回读先修提示里的单独符号；实际链式证明仍保留 Δg=Bh+o、AΔg 及 ABh+o，并写明雅可比乘法的中间维数必须相同。",
+      "review": "已逐项核对现行 content/calculus/calculus-15.md:124（多元链式法则及混合偏导交换的证明）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/calculus/calculus-15.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "calculus-16",
+      "kind": "inline_math",
+      "sha256": "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111",
+      "before_count": 1,
+      "after_count": 2,
+      "text": "f",
+      "reason": "定义补充或记号明确：本项 `f` 从 1 次变为 2 次。新增 f 仅用于在方向导数之前明确函数是开集上的实值函数，不改变后面的方向导数与梯度公式。",
+      "review": "已逐项核对现行 content/calculus/calculus-16.md:4（方向导数）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/calculus/calculus-16.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "calculus-27",
+      "kind": "inline_math",
+      "sha256": "73ec8038e3175b44cd44a2e813a3bbdf63e5b5cd0aae9211f0c7868b8a07947b",
+      "before_count": 1,
+      "after_count": 0,
+      "text": "B^{-1}",
+      "reason": "重复表述合并：本项 `B^{-1}` 从 1 次变为 0 次。旧 B^{-1} 是回读提示中的孤立提及；B=D_yF(a,b) 的可逆假设、迭代 T_x(y)=y−B^{-1}F(x,y) 及最终 Dg 公式均保留。",
+      "review": "已逐项核对现行 content/calculus/calculus-27.md:74（向量版的可逆矩阵条件）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/calculus/calculus-27.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-02",
+      "kind": "inline_math",
+      "sha256": "594e519ae499312b29433b7dd8a97ff068defcba9755b6d5d00e84c524d67b06",
+      "before_count": 3,
+      "after_count": 2,
+      "text": "z",
+      "reason": "重复表述合并：本项 `z` 从 3 次变为 2 次。消元反例中自由变量 z 的重复口语被精简；0=4 的矛盾行仍直接推出无解，后文仍明确只有相容时才可计数自由参数。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-02.md:37（行等价、主元与自由变量）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-02.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-04",
+      "kind": "inline_math",
+      "sha256": "50326770c34ca13ba42c6b62ea8ab1d5f04f12c23d8c597457ea4c303639e99a",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "LU",
+      "reason": "新增或明确记号：本项 `LU` 从 0 次变为 1 次。在解释段新增 LU 的显式记号，说明 L 的消元倍数与 U 的三角系数相乘还原原矩阵；存在与唯一性的原公式不变。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-04.md:47（消元倍数与三角结构）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-04.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-05",
+      "kind": "inline_math",
+      "sha256": "1b16b1df538ba12dc3f97edbb85caa7050d46c148134290feba80f8236c83db9",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "n",
+      "reason": "新增或明确记号：本项 `n` 从 0 次变为 1 次。n 与 n+1 用于明确次数不超过 n 的多项式有 n+1 个系数；W=span(v1,v2) 明确前述平面等于两个向量的张成，而参数式和封闭性证明完整保留。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-05.md:123（函数和矩阵也能组成空间）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-05.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-05",
+      "kind": "inline_math",
+      "sha256": "1f97d653b7ed2d2be5caf6b568a7619bfdc112e35069f9a2b2be5ec4d71383cf",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "n+1",
+      "reason": "新增或明确记号：本项 `n+1` 从 0 次变为 1 次。n 与 n+1 用于明确次数不超过 n 的多项式有 n+1 个系数；W=span(v1,v2) 明确前述平面等于两个向量的张成，而参数式和封闭性证明完整保留。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-05.md:123（函数和矩阵也能组成空间）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-05.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-05",
+      "kind": "inline_math",
+      "sha256": "4ee859e4d0cbf09e191fd4aeaf0f4abd792dea6d3df2e7447852a7086d761473",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "W=\\operatorname{span}(v_1,v_2)",
+      "reason": "新增或明确记号：本项 `W=\\operatorname{span}(v_1,v_2)` 从 0 次变为 1 次。n 与 n+1 用于明确次数不超过 n 的多项式有 n+1 个系数；W=span(v1,v2) 明确前述平面等于两个向量的张成，而参数式和封闭性证明完整保留。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-05.md:123（函数和矩阵也能组成空间）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-05.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "display_math",
+      "sha256": "7819a5a75c6b703fe15421ba5cb0bb9505a2cf6c147e451f2259a64440366701",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "p(t)=4(1+t)-(1+t)^2.",
+      "reason": "新增或明确记号：本项 `p(t)=4(1+t)-(1+t)^2.` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "display_math",
+      "sha256": "b300d5810d88c992d6419cec19f2feb9d785aed3280c207e9729ff2a8eb60686",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "c=\\gamma,\\qquad b=\\beta-2\\gamma,\\qquad a=\\alpha-\\beta+\\gamma.",
+      "reason": "新增或明确记号：本项 `c=\\gamma,\\qquad b=\\beta-2\\gamma,\\qquad a=\\alpha-\\beta+\\gamma.` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "04e2c5724183b1b2f627b2c545bb19904b4a7c248dedb03c36c667a430def2fe",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "t^2,t,1",
+      "reason": "新增或明确记号：本项 `t^2,t,1` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "0ebf5aa45276d14ac24e5dec9ea78a2ebe832996655646494c5800e793494f6b",
+      "before_count": 1,
+      "after_count": 0,
+      "text": "a-b=2",
+      "reason": "重复表述合并：本项 `a-b=2` 从 1 次变为 0 次。原后段重复算例的方程已合并入前段斜基算例：目标(4,2)、基v1=(1,1),v2=(1,−1)和坐标(3,1)保留，通用坐标公式给 a=(x+y)/2、b=(x−y)/2，代入即可还原 a−b=2。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:59（三个向量的线性关系）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "12aacf2d6c0aaea5ede469a41376cf0b86b18ec848ee0b8661f125feb03b9bb3",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "p(t)=\\alpha+\\beta t+\\gamma t^2",
+      "reason": "新增或明确记号：本项 `p(t)=\\alpha+\\beta t+\\gamma t^2` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "12dc02192d4ede528cd1f1ece7b910505ab0f4d2d4bfc44faebf865506286ee7",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "p\\in P_2",
+      "reason": "新增或明确记号：本项 `p\\in P_2` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "1710efea7aa998a6caeeffcfe40c5e6d7580fceb025d2a2ffff9efad5d03d8ff",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "a+b+c=0",
+      "reason": "新增或明确记号：本项 `a+b+c=0` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "20fe2056e1ebdf47a3b60a9d138812807dbb2dd5737bd1634470c97e153d2285",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "a+b+c=\\alpha",
+      "reason": "新增或明确记号：本项 `a+b+c=\\alpha` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "25e9f30d4b41f18166ccfa519a290b0706d80a4db0c7d0a9f9195dea8193328f",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "a+b(1+t)+c(1+t)^2=0",
+      "reason": "新增或明确记号：本项 `a+b(1+t)+c(1+t)^2=0` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "2ad9517d90d2d38bab94544edf649161580c3c5a72cbaa28f52d3520936dc951",
+      "before_count": 3,
+      "after_count": 1,
+      "text": "(4,2)",
+      "reason": "重复表述合并：本项 `(4,2)` 从 3 次变为 1 次。目标(4,2)仍在前段斜基算例及保留的 math-bridge-basis.svg 图文中；计数减少来自去掉后段完全重复的目标与标准坐标复述。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:59（三个向量的线性关系）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "4b118678de684ec7c4fcab147aa8a3b6129d8e9aaddf6b909a25ee89c93dac70",
+      "before_count": 2,
+      "after_count": 1,
+      "text": "v_2=(1,-1)",
+      "reason": "重复表述合并：本项 `v_2=(1,-1)` 从 2 次变为 1 次。v2 定义仍在前段三个向量的线性关系与斜基图中；去掉后段重复定义。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:59（三个向量的线性关系）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "523743119dbfdfaa65f5f982c797b68aab0cd477f0cb0ea8957ebc7eee94d060",
+      "before_count": 2,
+      "after_count": 1,
+      "text": "(3,1)",
+      "reason": "重复表述合并：本项 `(3,1)` 从 2 次变为 1 次。(3,1) 仍在前段斜基算例作为目标(4,2)的基坐标；后段相同计算已替换为多项式基例。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:59（三个向量的线性关系）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "55326b5e47414208370a917279b3bff7d045159915f4d33dcce218f30494d042",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "(1,t,t^2)",
+      "reason": "新增或明确记号：本项 `(1,t,t^2)` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "5d130493f3dd85e9d8ef9c3b263741496aefd51ef79d62f1a2c1abdcab370fc2",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "b+2c=\\beta",
+      "reason": "新增或明确记号：本项 `b+2c=\\beta` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "63b72d439a1bf8484dccd7b2a821215279fe6fa1ab99786f6e2afff329ebcf72",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "(0,4,-1)^\\mathsf T",
+      "reason": "新增或明确记号：本项 `(0,4,-1)^\\mathsf T` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "688ddb17f72fae5ace17f043c72fbae95a523808a0bc0fecbf1e8034900e41f5",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "(3,2,-1)^\\mathsf T",
+      "reason": "新增或明确记号：本项 `(3,2,-1)^\\mathsf T` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "6951988059b915cf2934260fe5baee0fe505887d3e78d7886f1e13e6ce425a3d",
+      "before_count": 2,
+      "after_count": 1,
+      "text": "v_1=(1,1)",
+      "reason": "重复表述合并：本项 `v_1=(1,1)` 从 2 次变为 1 次。v1 定义仍在前段三个向量的线性关系与斜基图中；去掉后段重复定义。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:59（三个向量的线性关系）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "6a8e81bb2fda6f70004fe7f74b3f66ed414304bc2a6f9dfc5b1d6c9afab373db",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "a=b=c=0",
+      "reason": "新增或明确记号：本项 `a=b=c=0` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "84609f40c1cd96182a082d0f1359ae9f14fad94e8459e0d4c176fe9cea484b90",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "p(t)=3+2t-t^2",
+      "reason": "新增或明确记号：本项 `p(t)=3+2t-t^2` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "8a178cf096c8213526c6d4da6654518585484399229bc0f65bf226b29341cf81",
+      "before_count": 1,
+      "after_count": 0,
+      "text": "a=3,b=1",
+      "reason": "重复表述合并：本项 `a=3,b=1` 从 1 次变为 0 次。重复后段的系数结论已在前段“目标(4,2)的基坐标为(3,1)”及3v1+v2图中保留；只删除第二次完整复述。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:59（三个向量的线性关系）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "a8646574dafe7057c570d8c9e5f590dbfeb84ae8b839af1908b1ba890e45e784",
+      "before_count": 1,
+      "after_count": 2,
+      "text": "\\dim V",
+      "reason": "定义补充或记号明确：本项 `\\dim V` 从 1 次变为 2 次。维数定义由“以后才能定义”的阅读指示改为正式定义，新增 dim V 记号；下文交换引理和基长相等证明保持，继续给出定义不依赖基的依据。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:4（维数）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "b3b3732c9a3a550c2c184a1323a12b3f63f54fc179ff9fc90695fb2677d9b7b4",
+      "before_count": 0,
+      "after_count": 2,
+      "text": "\\mathcal B",
+      "reason": "新增或明确记号：本项 `\\mathcal B` 从 0 次变为 2 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "c5e705958e40c3bdac7ee7ea97157d3c6aa5f645623b738fb4f188f5ab481da5",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "P_2",
+      "reason": "新增或明确记号：本项 `P_2` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "c925f402b5b247ce2ff372d80e53848003167dd06face7b97dfc911a40f7c801",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "c=0",
+      "reason": "新增或明确记号：本项 `c=0` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "d9f180c40f89c3aaf0773972ba2f3a79ac5dbee393a9f40a4109b00d2270bd7e",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "c=\\gamma",
+      "reason": "新增或明确记号：本项 `c=\\gamma` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "e0c77132ba466633eedeb259d574c4b0f841bc4f0900c94ed0be2ad736c953d0",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "(a,b,c)=(0,4,-1)",
+      "reason": "新增或明确记号：本项 `(a,b,c)=(0,4,-1)` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "ea61af54653a39e6f752b67f009529a9540aaa671f934079e5a92a9307a438d3",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\mathcal B=(1,1+t,(1+t)^2)",
+      "reason": "新增或明确记号：本项 `\\mathcal B=(1,1+t,(1+t)^2)` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "f5bf86811b2231e9dc8581d39133ca3f0dc461d48a387b30a5956a8d5cd626e0",
+      "before_count": 1,
+      "after_count": 0,
+      "text": "a+b=4",
+      "reason": "重复表述合并：本项 `a+b=4` 从 1 次变为 0 次。原后段重复算例的方程已合并入前段：目标(4,2)与基坐标(3,1)及通用表示式均保留，3v1+v2=(4,2)也保留在同尺度配图中，其第一分量仍为 a+b=4。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:59（三个向量的线性关系）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-06",
+      "kind": "inline_math",
+      "sha256": "f6d7d8dff3e76912d56f384b785e16cf0324178fc4b7be0b1001e973cf5e7699",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "b+2c=0",
+      "reason": "新增或明确记号：本项 `b+2c=0` 从 0 次变为 1 次。新多项式算例把 a+b(1+t)+c(1+t)² 按常数、一次、二次项比较，先证明零组合只有零系数，再解任意目标的坐标；例 p=3+2t−t² 得 (0,4,−1)。代回 4(1+t)−(1+t)²=3+2t−t²，已独立核对。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-06.md:110（例：多项式空间中的一组基）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-06.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-08",
+      "kind": "display_math",
+      "sha256": "45e46f0aae05a27728e0a4171e28359dd01e931b5710446986f10335eb608f63",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "[D]=\\begin{pmatrix}0&1&0\\\\0&0&2\\\\0&0&0\\end{pmatrix}.",
+      "reason": "新增或明确记号：本项 `[D]=\\begin{pmatrix}0&1&0\\\\0&0&2\\\\0&0&0\\end{pmatrix}.` 从 0 次变为 1 次。原文只说求导可以写成矩阵，现在补出基 (1,t,t²) 的三个像 0、1、2t，并组成 D；作用于 (a,b,c) 得 (b,2c,0)，与直接求导相同。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-08.md:88（例：多项式求导的矩阵）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-08",
+      "kind": "inline_math",
+      "sha256": "18b8551b416d7c934d672c0a206ac139fcd5dbc4056a309d33009d44d642afb0",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "D(1)=0",
+      "reason": "新增或明确记号：本项 `D(1)=0` 从 0 次变为 1 次。原文只说求导可以写成矩阵，现在补出基 (1,t,t²) 的三个像 0、1、2t，并组成 D；作用于 (a,b,c) 得 (b,2c,0)，与直接求导相同。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-08.md:88（例：多项式求导的矩阵）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-08",
+      "kind": "inline_math",
+      "sha256": "27071a9101606650a6c8cfd684fae005fbe7524d944bd8eabe418d77bab00db3",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "D(t^2)=2t",
+      "reason": "新增或明确记号：本项 `D(t^2)=2t` 从 0 次变为 1 次。原文只说求导可以写成矩阵，现在补出基 (1,t,t²) 的三个像 0、1、2t，并组成 D；作用于 (a,b,c) 得 (b,2c,0)，与直接求导相同。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-08.md:88（例：多项式求导的矩阵）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-08",
+      "kind": "inline_math",
+      "sha256": "2c2a307d4971782c57220e95a4aff1bf6a9e50f163248cf1f1ca5bf202d3131c",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "D(t)=1",
+      "reason": "新增或明确记号：本项 `D(t)=1` 从 0 次变为 1 次。原文只说求导可以写成矩阵，现在补出基 (1,t,t²) 的三个像 0、1、2t，并组成 D；作用于 (a,b,c) 得 (b,2c,0)，与直接求导相同。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-08.md:88（例：多项式求导的矩阵）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-08",
+      "kind": "inline_math",
+      "sha256": "36d374532a092526357be0024f1f4340fd7f89215e902c596cf5a115f8c38098",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "(b,2c,0)^\\mathsf T",
+      "reason": "新增或明确记号：本项 `(b,2c,0)^\\mathsf T` 从 0 次变为 1 次。原文只说求导可以写成矩阵，现在补出基 (1,t,t²) 的三个像 0、1、2t，并组成 D；作用于 (a,b,c) 得 (b,2c,0)，与直接求导相同。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-08.md:88（例：多项式求导的矩阵）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-08",
+      "kind": "inline_math",
+      "sha256": "3f39d5c348e5b79d06e842c114e6cc571583bbf44e4b0ebfda1a01ec05745d43",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "D",
+      "reason": "新增或明确记号：本项 `D` 从 0 次变为 1 次。原文只说求导可以写成矩阵，现在补出基 (1,t,t²) 的三个像 0、1、2t，并组成 D；作用于 (a,b,c) 得 (b,2c,0)，与直接求导相同。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-08.md:88（例：多项式求导的矩阵）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-08",
+      "kind": "inline_math",
+      "sha256": "55326b5e47414208370a917279b3bff7d045159915f4d33dcce218f30494d042",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "(1,t,t^2)",
+      "reason": "新增或明确记号：本项 `(1,t,t^2)` 从 0 次变为 1 次。原文只说求导可以写成矩阵，现在补出基 (1,t,t²) 的三个像 0、1、2t，并组成 D；作用于 (a,b,c) 得 (b,2c,0)，与直接求导相同。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-08.md:88（例：多项式求导的矩阵）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-08",
+      "kind": "inline_math",
+      "sha256": "671ee6b1271a5ae68705a53774a04354b1495105817af3882b4dd8c3ef1321f5",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "(a,b,c)^\\mathsf T",
+      "reason": "新增或明确记号：本项 `(a,b,c)^\\mathsf T` 从 0 次变为 1 次。原文只说求导可以写成矩阵，现在补出基 (1,t,t²) 的三个像 0、1、2t，并组成 D；作用于 (a,b,c) 得 (b,2c,0)，与直接求导相同。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-08.md:88（例：多项式求导的矩阵）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-08",
+      "kind": "inline_math",
+      "sha256": "853516881048309823b6a3a052bb94097b96752c95e163a351e2c17df9554c69",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "p(t)=a+bt+ct^2",
+      "reason": "新增或明确记号：本项 `p(t)=a+bt+ct^2` 从 0 次变为 1 次。原文只说求导可以写成矩阵，现在补出基 (1,t,t²) 的三个像 0、1、2t，并组成 D；作用于 (a,b,c) 得 (b,2c,0)，与直接求导相同。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-08.md:88（例：多项式求导的矩阵）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-08",
+      "kind": "inline_math",
+      "sha256": "d15a5f0cb06cd4eb3bcc2623387fca3000ca3951a14b6233ad69950d975d1d25",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "b+2ct",
+      "reason": "新增或明确记号：本项 `b+2ct` 从 0 次变为 1 次。原文只说求导可以写成矩阵，现在补出基 (1,t,t²) 的三个像 0、1、2t，并组成 D；作用于 (a,b,c) 得 (b,2c,0)，与直接求导相同。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-08.md:88（例：多项式求导的矩阵）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-08.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-10",
+      "kind": "inline_math",
+      "sha256": "071f998b08d223cff524e70a3869bfc7d8b3987584eabf41ff1c436c3a570171",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "u^\\mathsf Tb",
+      "reason": "新增或明确记号：本项 `u^\\mathsf Tb` 从 0 次变为 1 次。新增记号明确：p 是投影向量，||p|| 是非负长度，u 为指定单位方向，u^Tb 是可能为负的标量投影；两者绝对值的关系消除了原文“投影长度可能有符号”的歧义。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-10.md:146（易错点与应用）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-10.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-10",
+      "kind": "inline_math",
+      "sha256": "0bfe935e70c321c7ca3afc75ce0d0ca2f98b5422e008bb31c00c6d7f1f1c0ad6",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "u",
+      "reason": "新增或明确记号：本项 `u` 从 0 次变为 1 次。新增记号明确：p 是投影向量，||p|| 是非负长度，u 为指定单位方向，u^Tb 是可能为负的标量投影；两者绝对值的关系消除了原文“投影长度可能有符号”的歧义。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-10.md:146（易错点与应用）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-10.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-10",
+      "kind": "inline_math",
+      "sha256": "148de9c5a7a44d19e56cd9ae1a554bf67847afb0c58f6e12fa29ac7ddfca9940",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "p",
+      "reason": "新增或明确记号：本项 `p` 从 0 次变为 1 次。新增记号明确：p 是投影向量，||p|| 是非负长度，u 为指定单位方向，u^Tb 是可能为负的标量投影；两者绝对值的关系消除了原文“投影长度可能有符号”的歧义。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-10.md:146（易错点与应用）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-10.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-10",
+      "kind": "inline_math",
+      "sha256": "7fb8e126b46c1dbcc00015f5e5b0f280dfce8b75836575f2feb5fa6a086329be",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\|p\\|",
+      "reason": "新增或明确记号：本项 `\\|p\\|` 从 0 次变为 1 次。新增记号明确：p 是投影向量，||p|| 是非负长度，u 为指定单位方向，u^Tb 是可能为负的标量投影；两者绝对值的关系消除了原文“投影长度可能有符号”的歧义。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-10.md:146（易错点与应用）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-10.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-10",
+      "kind": "inline_math",
+      "sha256": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+      "before_count": 3,
+      "after_count": 2,
+      "text": "a",
+      "reason": "重复表述合并：本项 `a` 从 3 次变为 2 次。减少的 a 位于“接着去最小二乘”导航段；投影到方向 a 的分子、分母和几何例仍保留，删除导航不会删掉方向向量定义或投影公式。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-10.md:131（例：投影到一条直线）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-10.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-11",
+      "kind": "inline_math",
+      "sha256": "34b039f468ebaabcda77d5b85b072d58bb4d7d86f5ef38192ada813b9531b34c",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "3\\times(0.5)^2=0.75",
+      "reason": "新增或明确记号：本项 `3\\times(0.5)^2=0.75` 从 0 次变为 1 次。把“三倍的半平方，零点七五”写成 3×(0.5)²=0.75，未改变算例数据、最优常数或平方损失。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-11.md:4（最小二乘）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-11.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-12",
+      "kind": "inline_math",
+      "sha256": "1b16b1df538ba12dc3f97edbb85caa7050d46c148134290feba80f8236c83db9",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "n",
+      "reason": "新增或明确记号：本项 `n` 从 0 次变为 1 次。补出完整 QR 中 Q 为 m×m、R 为 m×n、前 n 行上三角、其余行为零；Householder 的 a1=0 符号选择改为明确 sign(0)=1，原 alpha=−sign(a1)||a|| 及反射公式保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-12.md:47（完整 QR 与薄 QR 的区别）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-12.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-12",
+      "kind": "inline_math",
+      "sha256": "527c4a6c49c745644a1e0bb1ab183c9e71064986d6c970ddabc7722dc4e16102",
+      "before_count": 0,
+      "after_count": 2,
+      "text": "m\\times n",
+      "reason": "新增或明确记号：本项 `m\\times n` 从 0 次变为 2 次。补出完整 QR 中 Q 为 m×m、R 为 m×n、前 n 行上三角、其余行为零；Householder 的 a1=0 符号选择改为明确 sign(0)=1，原 alpha=−sign(a1)||a|| 及反射公式保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-12.md:47（完整 QR 与薄 QR 的区别）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-12.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-12",
+      "kind": "inline_math",
+      "sha256": "867eb42a8239a6c608c90fc05cd5a431f6b5f22eb82444616a002404780a3b05",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\operatorname{sign}(0)=1",
+      "reason": "新增或明确记号：本项 `\\operatorname{sign}(0)=1` 从 0 次变为 1 次。补出完整 QR 中 Q 为 m×m、R 为 m×n、前 n 行上三角、其余行为零；Householder 的 a1=0 符号选择改为明确 sign(0)=1，原 alpha=−sign(a1)||a|| 及反射公式保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-12.md:47（完整 QR 与薄 QR 的区别）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-12.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-12",
+      "kind": "inline_math",
+      "sha256": "89ef41306fca51ec4237e8e106697636c6e851355fb1f19aea6ed2cd5ff589da",
+      "before_count": 1,
+      "after_count": 0,
+      "text": "a_1=0",
+      "reason": "重复表述合并：本项 `a_1=0` 从 1 次变为 0 次。把含糊的“a1=0 时取正号约定”替换为 sign(0)=1；代回 alpha=−sign(a1)||a||，零首元时取 alpha=−||a||，避免零除且保持反射构造。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-12.md:79（Householder）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-12.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-12",
+      "kind": "inline_math",
+      "sha256": "8c2574892063f995fdf756bce07f46c1a5193e54cd52837ed91e32008ccf41ac",
+      "before_count": 2,
+      "after_count": 3,
+      "text": "R",
+      "reason": "定义补充或记号明确：本项 `R` 从 2 次变为 3 次。补出完整 QR 中 Q 为 m×m、R 为 m×n、前 n 行上三角、其余行为零；Householder 的 a1=0 符号选择改为明确 sign(0)=1，原 alpha=−sign(a1)||a|| 及反射公式保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-12.md:47（完整 QR 与薄 QR 的区别）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-12.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-15",
+      "kind": "inline_math",
+      "sha256": "54265b0ccf864ed1f2d6b6e3598bbba3e1051a474025ca213419ce5dea138f25",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "v=(x-y)/\\sqrt2",
+      "reason": "新增或明确记号：本项 `v=(x-y)/\\sqrt2` 从 0 次变为 1 次。原例已给两个单位特征方向并得到对角二次型，现明确坐标 u=(x+y)/sqrt2、v=(x−y)/sqrt2；代入给 q=4u²+2v²，与原对角结果一致。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-15.md:90（例：消去二次式中的交叉项）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-15.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-15",
+      "kind": "inline_math",
+      "sha256": "e188289400ca270d30d60f832567ef2d9281be3939bdfd4a756c7006b9f3f9a9",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "u=(x+y)/\\sqrt2",
+      "reason": "新增或明确记号：本项 `u=(x+y)/\\sqrt2` 从 0 次变为 1 次。原例已给两个单位特征方向并得到对角二次型，现明确坐标 u=(x+y)/sqrt2、v=(x−y)/sqrt2；代入给 q=4u²+2v²，与原对角结果一致。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-15.md:90（例：消去二次式中的交叉项）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-15.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "454349e422f05297191ead13e21d3db520e5abef52055e4964b82fb213f593a1",
+      "before_count": 1,
+      "after_count": 3,
+      "text": "r",
+      "reason": "定义补充或记号明确：本项 `r` 从 1 次变为 3 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
+      "before_count": 1,
+      "after_count": 2,
+      "text": "A",
+      "reason": "定义补充或记号明确：本项 `A` 从 1 次变为 2 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "5d1935a73e710a390e3959c5bd5be305019a4e66605cca875b03972ab84449dc",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "k<r",
+      "reason": "新增或明确记号：本项 `k<r` 从 0 次变为 1 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "75cd28304ecd47ff87434e37f1e42494166506e093497af45b11013260229366",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "p=\\min(m,n)",
+      "reason": "新增或明确记号：本项 `p=\\min(m,n)` 从 0 次变为 1 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "88d3bea038c24ac12dc8134d45adefb5e86db883b44702bb5b1399f9c3bdd381",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "V:n\\times n",
+      "reason": "新增或明确记号：本项 `V:n\\times n` 从 0 次变为 1 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "a25c6a28b5dba8c5212e9a8765bc0f0f912fbe806932e589c3334997a24caaa1",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\Sigma:m\\times n",
+      "reason": "新增或明确记号：本项 `\\Sigma:m\\times n` 从 0 次变为 1 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "d1ec8c12728b5efafc14a7d35e2a5837aa943d2cb197dae118be1a4f4ba768f1",
+      "before_count": 1,
+      "after_count": 0,
+      "text": "r=\\operatorname{rank}A",
+      "reason": "重复表述合并：本项 `r=\\operatorname{rank}A` 从 1 次变为 0 次。这条等式改为同义文字“非零奇异值的个数等于 rank A”；r 是此前按正奇异值编号给出的个数。构造证明仍证明列空间由 u1,…,ur 张成且维数为 r。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:43（奇异值排序与左右方向）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "d4a0995a14f4e6e19d4b76ee40f305b3790c0aa3cfa9475a6cb056dde750c9d5",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "U:m\\times m",
+      "reason": "新增或明确记号：本项 `U:m\\times m` 从 0 次变为 1 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "d95c34a7c10d0eb867415e4b7b509a407f67e65885afd628c54549be0d5f85c7",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\Sigma_p:p\\times p",
+      "reason": "新增或明确记号：本项 `\\Sigma_p:p\\times p` 从 0 次变为 1 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "dfd78e77d8b79b555e380091fb2619f88799f8a0e52cd190e1d0bb672b68130e",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "V_p:n\\times p",
+      "reason": "新增或明确记号：本项 `V_p:n\\times p` 从 0 次变为 1 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "e4c3e0666698e4c3b44d51b3ff8038be1d7a52ac5e329e7e7155aa85e15b8902",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\operatorname{rank}A",
+      "reason": "新增或明确记号：本项 `\\operatorname{rank}A` 从 0 次变为 1 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "e7579b8a7a9df514e62c2b0062f52b20965cc5064c835aee3b3d04017ff5d55d",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "A=U_p\\Sigma_pV_p^\\mathsf T",
+      "reason": "新增或明确记号：本项 `A=U_p\\Sigma_pV_p^\\mathsf T` 从 0 次变为 1 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-18",
+      "kind": "inline_math",
+      "sha256": "ffdeeb1e0e29183ee0d495734090c3cac1590b972d5c45d87281a1b981b69022",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "U_p:m\\times p",
+      "reason": "新增或明确记号：本项 `U_p:m\\times p` 从 0 次变为 1 次。明确 p=min(m,n)，完整 U、Sigma、V 的尺寸和薄形式 Up、Sigmap、Vp 的尺寸，薄形式仍精确重构 A；紧致形式保留 r 个非零值，k<r 截断才引入误差。非零奇异值个数等于 rank A 的结论及原证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-18.md:97（完整、薄与截断分解）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-18.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-19",
+      "kind": "inline_math",
+      "sha256": "3bcfcbdbbe9f7c7ca41c8885ed1fc5df5f4596575a6566ce40d1464b76e651e6",
+      "before_count": 1,
+      "after_count": 2,
+      "text": "A\\in\\mathbb R^{m\\times n}",
+      "reason": "定义补充或记号明确：本项 `A\\in\\mathbb R^{m\\times n}` 从 1 次变为 2 次。在伪逆定义前增加 A∈R^{m×n}，使后面的 A+∈R^{n×m} 和四个乘法条件有明确输入尺寸；条件和证明不变。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-19.md:39（用四个条件定义伪逆）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-19.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-22",
+      "kind": "inline_math",
+      "sha256": "025c3a41db434a674f27c7d7b0f3640c61fdcfbfb47c45af98367641ce951293",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\sigma_1\\ge\\cdots\\ge\\sigma_r>0",
+      "reason": "新增或明确记号：本项 `\\sigma_1\\ge\\cdots\\ge\\sigma_r>0` 从 0 次变为 1 次。将无上下限的求和写成 i=1 到 r，并明确正奇异值排序、0≤k≤r 和 k=0 的空和约定；Ak 的原显示式及谱/Frobenius 最优性证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-22.md:47（截断 SVD 的定义）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-22.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-22",
+      "kind": "inline_math",
+      "sha256": "34c14001ab1c20058eb0881c5399d87bc3b164c38d81bf8e922c6fed4bd789d1",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "k=0",
+      "reason": "新增或明确记号：本项 `k=0` 从 0 次变为 1 次。将无上下限的求和写成 i=1 到 r，并明确正奇异值排序、0≤k≤r 和 k=0 的空和约定；Ak 的原显示式及谱/Frobenius 最优性证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-22.md:47（截断 SVD 的定义）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-22.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-22",
+      "kind": "inline_math",
+      "sha256": "5dece1e9247e87a3b6f7cb0315913d0db1d12ad97f3d6b9d13d016c8ed0c14df",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "0\\le k\\le r",
+      "reason": "新增或明确记号：本项 `0\\le k\\le r` 从 0 次变为 1 次。将无上下限的求和写成 i=1 到 r，并明确正奇异值排序、0≤k≤r 和 k=0 的空和约定；Ak 的原显示式及谱/Frobenius 最优性证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-22.md:47（截断 SVD 的定义）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-22.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-22",
+      "kind": "inline_math",
+      "sha256": "6b7576c89c3264771655a3e5dbc613cb7f8ee9c630041ec6771e946d8bf14840",
+      "before_count": 1,
+      "after_count": 0,
+      "text": "A=\\sum_i\\sigma_i u_iv_i^\\mathsf T",
+      "reason": "重复表述合并：本项 `A=\\sum_i\\sigma_i u_iv_i^\\mathsf T` 从 1 次变为 0 次。不定范围的和改写成 A=sum_{i=1}^r sigma_i u_i vi^T，r 指非零奇异值个数；零项省去不改变矩阵，后续截断定义和两个最优性证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-22.md:47（截断 SVD 的定义）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-22.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-22",
+      "kind": "inline_math",
+      "sha256": "8254c329a92850f6d539dd376f4816ee2764517da5e0235514af433164480d7a",
+      "before_count": 6,
+      "after_count": 5,
+      "text": "k",
+      "reason": "重复表述合并：本项 `k` 从 6 次变为 5 次。将无上下限的求和写成 i=1 到 r，并明确正奇异值排序、0≤k≤r 和 k=0 的空和约定；Ak 的原显示式及谱/Frobenius 最优性证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-22.md:47（截断 SVD 的定义）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-22.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-22",
+      "kind": "inline_math",
+      "sha256": "aa510ec225d178fdacf6e54a5db1be6e5817c22383716904284098b790c22f34",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "A=\\sum_{i=1}^r\\sigma_i u_iv_i^\\mathsf T",
+      "reason": "新增或明确记号：本项 `A=\\sum_{i=1}^r\\sigma_i u_iv_i^\\mathsf T` 从 0 次变为 1 次。将无上下限的求和写成 i=1 到 r，并明确正奇异值排序、0≤k≤r 和 k=0 的空和约定；Ak 的原显示式及谱/Frobenius 最优性证明保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-22.md:47（截断 SVD 的定义）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-22.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-23",
+      "kind": "inline_math",
+      "sha256": "17dde28ef37430b377ac3ea058a934e7196e04cb0ac2def2f0bc8e0119e5e238",
+      "before_count": 0,
+      "after_count": 2,
+      "text": "\\mathbb F",
+      "reason": "新增或明确记号：本项 `\\mathbb F` 从 0 次变为 2 次。开头新增 A 为数域 F 上 n×n 方阵、n≥1，并在 Jordan 部分说明特征多项式需在 F 上分裂；旧单独 t 来自对“把标量直接塞成矩阵”的教学评论，Cayley–Hamilton 的全部 t 多项式和系数递推保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-23.md:36（矩阵多项式和广义特征空间）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-23.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-23",
+      "kind": "inline_math",
+      "sha256": "37da60206b14e06bf71351a297c4bf5db7653b3a6defb20cd4a5b8d8af1cd1ae",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "n\\ge1",
+      "reason": "新增或明确记号：本项 `n\\ge1` 从 0 次变为 1 次。开头新增 A 为数域 F 上 n×n 方阵、n≥1，并在 Jordan 部分说明特征多项式需在 F 上分裂；旧单独 t 来自对“把标量直接塞成矩阵”的教学评论，Cayley–Hamilton 的全部 t 多项式和系数递推保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-23.md:36（矩阵多项式和广义特征空间）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-23.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-23",
+      "kind": "inline_math",
+      "sha256": "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd",
+      "before_count": 2,
+      "after_count": 3,
+      "text": "A",
+      "reason": "定义补充或记号明确：本项 `A` 从 2 次变为 3 次。开头新增 A 为数域 F 上 n×n 方阵、n≥1，并在 Jordan 部分说明特征多项式需在 F 上分裂；旧单独 t 来自对“把标量直接塞成矩阵”的教学评论，Cayley–Hamilton 的全部 t 多项式和系数递推保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-23.md:36（矩阵多项式和广义特征空间）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-23.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-23",
+      "kind": "inline_math",
+      "sha256": "bd659b9efe81c0f7ad9b46231f94861dda797a58a35996f19d72a396f78d290c",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "n\\times n",
+      "reason": "新增或明确记号：本项 `n\\times n` 从 0 次变为 1 次。开头新增 A 为数域 F 上 n×n 方阵、n≥1，并在 Jordan 部分说明特征多项式需在 F 上分裂；旧单独 t 来自对“把标量直接塞成矩阵”的教学评论，Cayley–Hamilton 的全部 t 多项式和系数递推保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-23.md:36（矩阵多项式和广义特征空间）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-23.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-23",
+      "kind": "inline_math",
+      "sha256": "e3b98a4da31a127d4bde6e43033f66ba274cab0eb7eb1c70ec41402bf6273dd8",
+      "before_count": 1,
+      "after_count": 0,
+      "text": "t",
+      "reason": "重复表述合并：本项 `t` 从 1 次变为 0 次。开头新增 A 为数域 F 上 n×n 方阵、n≥1，并在 Jordan 部分说明特征多项式需在 F 上分裂；旧单独 t 来自对“把标量直接塞成矩阵”的教学评论，Cayley–Hamilton 的全部 t 多项式和系数递推保持。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-23.md:36（矩阵多项式和广义特征空间）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-23.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-24",
+      "kind": "inline_math",
+      "sha256": "19e6f13552723ad193e6f3965e0dcf8f68646d76629dffaaaf9600bd6242e4bc",
+      "before_count": 1,
+      "after_count": 2,
+      "text": "k\\ge0",
+      "reason": "定义补充或记号明确：本项 `k\\ge0` 从 1 次变为 2 次。把“小初值保持小”展开为 ε–δ 定义及全部 t≥0 的要求，再明确趋零、局部吸引在线性情形等价于全部初值趋零，离散时间用 k≥0；谱半径的 max 补出下标 i，数值意义不变。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-24.md:45（稳定与渐近稳定）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-24.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-24",
+      "kind": "inline_math",
+      "sha256": "28c5f4f559bc00a49055a369c53d2382bf799ab5fa662c1b53944e9762606ec9",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\delta>0",
+      "reason": "新增或明确记号：本项 `\\delta>0` 从 0 次变为 1 次。把“小初值保持小”展开为 ε–δ 定义及全部 t≥0 的要求，再明确趋零、局部吸引在线性情形等价于全部初值趋零，离散时间用 k≥0；谱半径的 max 补出下标 i，数值意义不变。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-24.md:45（稳定与渐近稳定）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-24.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-24",
+      "kind": "inline_math",
+      "sha256": "602a50f3fcaffd179f44a1fc289b2bdfc10dacb99fb65704f629e1ae64cef344",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\|x(t)\\|<\\varepsilon",
+      "reason": "新增或明确记号：本项 `\\|x(t)\\|<\\varepsilon` 从 0 次变为 1 次。把“小初值保持小”展开为 ε–δ 定义及全部 t≥0 的要求，再明确趋零、局部吸引在线性情形等价于全部初值趋零，离散时间用 k≥0；谱半径的 max 补出下标 i，数值意义不变。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-24.md:45（稳定与渐近稳定）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-24.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-24",
+      "kind": "inline_math",
+      "sha256": "7280c957c669d9baf63b5af8a6323fd4e5e48f89be8b45d6b95a51b8ab977ba8",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\|x(0)\\|<\\delta",
+      "reason": "新增或明确记号：本项 `\\|x(0)\\|<\\delta` 从 0 次变为 1 次。把“小初值保持小”展开为 ε–δ 定义及全部 t≥0 的要求，再明确趋零、局部吸引在线性情形等价于全部初值趋零，离散时间用 k≥0；谱半径的 max 补出下标 i，数值意义不变。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-24.md:45（稳定与渐近稳定）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-24.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-24",
+      "kind": "inline_math",
+      "sha256": "cc1f776bbd29d1f97fde770da0206471780d1047d396ccebdc83b837b508587e",
+      "before_count": 1,
+      "after_count": 0,
+      "text": "\\rho(A)=\\max|\\lambda_i|",
+      "reason": "重复表述合并：本项 `\\rho(A)=\\max|\\lambda_i|` 从 1 次变为 0 次。谱半径公式仅显式补出最大值的索引 i，新式 rho(A)=max_i |lambda_i|，定义和后续连续/离散稳定性判据未改变。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-24.md:51（谱半径）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-24.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-24",
+      "kind": "inline_math",
+      "sha256": "cd2a7292e607e0cee2d34e77c92e2d2a12ff258093ddb69871968ec2e238c70d",
+      "before_count": 1,
+      "after_count": 3,
+      "text": "t\\ge0",
+      "reason": "定义补充或记号明确：本项 `t\\ge0` 从 1 次变为 3 次。把“小初值保持小”展开为 ε–δ 定义及全部 t≥0 的要求，再明确趋零、局部吸引在线性情形等价于全部初值趋零，离散时间用 k≥0；谱半径的 max 补出下标 i，数值意义不变。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-24.md:45（稳定与渐近稳定）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-24.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-24",
+      "kind": "inline_math",
+      "sha256": "cdcb98d788a2a339a6242d40b025e0f207bbc544bc823f53c45cfd36c0c87610",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\varepsilon>0",
+      "reason": "新增或明确记号：本项 `\\varepsilon>0` 从 0 次变为 1 次。把“小初值保持小”展开为 ε–δ 定义及全部 t≥0 的要求，再明确趋零、局部吸引在线性情形等价于全部初值趋零，离散时间用 k≥0；谱半径的 max 补出下标 i，数值意义不变。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-24.md:45（稳定与渐近稳定）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-24.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-24",
+      "kind": "inline_math",
+      "sha256": "d6c0f7f5aeb24c55f6c952da56700c8c37e55f17067062067c4d234c63d210bf",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "x(t)\\to0",
+      "reason": "新增或明确记号：本项 `x(t)\\to0` 从 0 次变为 1 次。把“小初值保持小”展开为 ε–δ 定义及全部 t≥0 的要求，再明确趋零、局部吸引在线性情形等价于全部初值趋零，离散时间用 k≥0；谱半径的 max 补出下标 i，数值意义不变。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-24.md:45（稳定与渐近稳定）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-24.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "linear-algebra-24",
+      "kind": "inline_math",
+      "sha256": "f3e22ad2ba8cdd4409efdca8ce21b836d1e21ae34ede7ce5a69cf7e82f13d7b1",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "\\rho(A)=\\max_i|\\lambda_i|",
+      "reason": "新增或明确记号：本项 `\\rho(A)=\\max_i|\\lambda_i|` 从 0 次变为 1 次。把“小初值保持小”展开为 ε–δ 定义及全部 t≥0 的要求，再明确趋零、局部吸引在线性情形等价于全部初值趋零，离散时间用 k≥0；谱半径的 max 补出下标 i，数值意义不变。",
+      "review": "已逐项核对现行 content/linear-algebra/linear-algebra-24.md:45（稳定与渐近稳定）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/linear-algebra/linear-algebra-24.md",
+        "reviews/buaa-math-2026-10-04.md"
+      ]
+    },
+    {
+      "id": "machine-learning-27",
+      "kind": "inline_math",
+      "sha256": "3ebee0ce8f34456dbe55ebe4ceae56eb1406355f403f2b820c24cb90d6ac92e7",
+      "before_count": 0,
+      "after_count": 1,
+      "text": "Q^\\pi(s,a)=E_\\pi[G_t\\mid S_t=s,A_t=a]",
+      "reason": "新增或明确记号：本项 `Q^\\pi(s,a)=E_\\pi[G_t\\mid S_t=s,A_t=a]` 从 0 次变为 1 次。原文只说行动价值指定第一步行动，现补 Qπ(s,a)=Eπ[G_t | S_t=s,A_t=a]，其策略、回报和 MDP 条件沿用本节前述定义；Bellman 与 Q-learning 公式保持。",
+      "review": "已逐项核对现行 content/machine-learning/machine-learning-27.md:47（价值是回报的条件期望）及相邻推导；该差异按上述具体内容判断，不以文件哈希等同于教学保全。",
+      "evidence_files": [
+        "content/machine-learning/machine-learning-27.md",
+        "reviews/buaa-ml-advanced-2026-10-04.md"
+      ]
+    }
+  ]
+}

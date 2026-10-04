@@ -55,7 +55,7 @@
   "records": [
     {
       "id": "thermodynamics-01",
-      "title": "从一杯热水开始：系统、状态与平衡",
+      "title": "系统、状态与平衡",
       "checked_concepts": [
         "系统",
         "环境",
@@ -290,7 +290,7 @@
     },
     {
       "id": "thermodynamics-07",
-      "title": "控制体：质量守恒与稳流能量方程",
+      "title": "控制体质量守恒与能量方程",
       "checked_concepts": [
         "稳态",
         "控制体质量",
@@ -991,7 +991,7 @@
     },
     {
       "id": "thermodynamics-26",
-      "title": "综合项目：从第一律到能量审计",
+      "title": "能量审计与火用分析",
       "checked_concepts": [
         "审计边界",
         "稳态残差",
@@ -1089,7 +1089,7 @@
     },
     {
       "id": "thermodynamics-29",
-      "title": "熵的微观桥梁：计数、概率与宏观极限",
+      "title": "熵的统计解释：微观态与宏观极限",
       "checked_concepts": [
         "微观态宏观态",
         "等概率假设",
