@@ -1,0 +1,29 @@
+{
+  "sha256": "ed7ff3bad991e391c1552c62ca6bc3670fd2ac50e905192eb257c981ea626963",
+  "package": "app.zhixu.textbook.reader",
+  "versionName": "1.6.0",
+  "versionCode": 9,
+  "scenario": "independent-1.5.0",
+  "source": {
+    "kind": "archived-production-apk",
+    "package": "app.zhixu.textbook.independent",
+    "versionName": "1.5.0",
+    "versionCode": 8,
+    "sha256": "b4f92a1342ac5029e2a8a6c599e676ed414246c76d48c80b5dd50a37705734a0",
+    "certificate_sha256": "eac09dcca7192a3a7c99bc67de80d9616c9afa9b986fb107d5ef233e7368f376"
+  },
+  "install": true,
+  "offline_first_launch": true,
+  "distinct_uids": {
+    "app.zhixu.textbook.independent": "10214",
+    "app.zhixu.textbook.reader": "10215"
+  },
+  "initial_records_empty": true,
+  "native_json_export_import": true,
+  "cancel_and_invalid_import_atomic": true,
+  "relaunch_and_same_apk_reinstall_preserve_records": true,
+  "legacy_records_unchanged": true,
+  "legacy_1_5_independent_coexistence_tested": true,
+  "legacy_native_import_normal_exit_reopen": true,
+  "boundary": "Exact production-signed APK driven through public UI; no production-key instrumentation APK."
+}

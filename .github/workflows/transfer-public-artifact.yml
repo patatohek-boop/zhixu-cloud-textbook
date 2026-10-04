@@ -1,4 +1,4 @@
-name: Inspect verified public web screenshots
+name: Inspect verified signed Android screenshots
 on:
   push:
     branches: ['release-transfer/zhixu-1.6.0']
@@ -14,7 +14,7 @@ jobs:
       matrix:
         chunk: [0]
     steps:
-      - name: Emit selected public browser screenshots
+      - name: Emit selected production Android acceptance screenshots
         env:
           GH_TOKEN: ${{ github.token }}
           PART: ${{ matrix.chunk }}
@@ -24,7 +24,7 @@ jobs:
           class NoRedirect(urllib.request.HTTPRedirectHandler):
               def redirect_request(self, req, fp, code, msg, headers, newurl):
                   return None
-          api='https://api.github.com/repos/patatohek-boop/zhixu-cloud-textbook/actions/artifacts/11288962719/zip'
+          api='https://api.github.com/repos/patatohek-boop/zhixu-cloud-textbook/actions/artifacts/11290161194/zip'
           req=urllib.request.Request(api,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
           try:
               urllib.request.build_opener(NoRedirect()).open(req,timeout=30)
@@ -34,12 +34,12 @@ jobs:
               location=error.headers['Location']
           assert location.startswith('https://')
           raw=urllib.request.urlopen(location,timeout=60).read()
-          assert hashlib.sha256(raw).hexdigest()=='799ccb0ed8fef44fd62b8b37c12b482a0eed40a3d6ee6f00ff62cce89d1ded91'
+          assert hashlib.sha256(raw).hexdigest()=='f7d9f8b88c9cd7c43114a4702ef3fc3408ed0fbc78121c025b7e1ef404c3c645'
           archive=zipfile.ZipFile(io.BytesIO(raw))
           names=archive.namelist()
           print('ZHIXU_SCREENSHOT_NAMES '+json.dumps(names))
-          selected=[n for n in names if n.endswith('reader-continuous.png') and ('width-390' in n or 'width-1440' in n)]
-          assert len(selected)==2, selected
+          selected=[n for n in names if n.endswith('01-first-offline-launch.png') or n.endswith('02-imported-records.png') and 'independent-1.5.0' in n]
+          assert len(selected)==3, selected
           for index,name in enumerate(selected):
               payload=archive.read(name)
               print('ZHIXU_IMAGE_META '+json.dumps({'part':index,'name':name,'sha256':hashlib.sha256(payload).hexdigest(),'bytes':len(payload)}))

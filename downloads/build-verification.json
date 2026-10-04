@@ -18,8 +18,75 @@
     "v2",
     "v3"
   ],
-  "status": "Locally signed and verified; production-signed Android UI acceptance pending",
+  "status": "Production-signed APK passed both Android 15 public-UI migration scenarios",
   "public_artifact_transfer_run": 37165639218,
   "public_artifact_transfer_reason": "Artifact download host unavailable locally; verified public APK segments reconstructed through authenticated GitHub logs, full SHA-256 and exact payload checked",
-  "local_key_backup": "Two restricted local copies verified; external backup not performed"
+  "local_key_backup": "Two restricted local copies verified; external backup not performed",
+  "acceptance_source_commit": "5b7142ca7548b7f5fe94fd9642696c9889a70df5",
+  "acceptance_run": 37166324383,
+  "acceptance_url": "https://github.com/patatohek-boop/zhixu-cloud-textbook/actions/runs/37166324383",
+  "formal_ui_artifact_id": 11290161194,
+  "formal_ui_artifact_sha256": "f7d9f8b88c9cd7c43114a4702ef3fc3408ed0fbc78121c025b7e1ef404c3c645",
+  "temporary_signed_release_tests": 14,
+  "formal_ui_scenarios": [
+    {
+      "sha256": "ed7ff3bad991e391c1552c62ca6bc3670fd2ac50e905192eb257c981ea626963",
+      "package": "app.zhixu.textbook.reader",
+      "versionName": "1.6.0",
+      "versionCode": 9,
+      "scenario": "original-package",
+      "source": {
+        "kind": "current-source-original-package-fixture",
+        "package": "app.zhixu.textbook"
+      },
+      "install": true,
+      "offline_first_launch": true,
+      "distinct_uids": {
+        "app.zhixu.textbook": "10209",
+        "app.zhixu.textbook.reader": "10213"
+      },
+      "initial_records_empty": true,
+      "native_json_export_import": true,
+      "cancel_and_invalid_import_atomic": true,
+      "relaunch_and_same_apk_reinstall_preserve_records": true,
+      "legacy_records_unchanged": true,
+      "legacy_1_5_independent_coexistence_tested": false,
+      "legacy_native_import_normal_exit_reopen": true,
+      "boundary": "Exact production-signed APK driven through public UI; no production-key instrumentation APK."
+    },
+    {
+      "sha256": "ed7ff3bad991e391c1552c62ca6bc3670fd2ac50e905192eb257c981ea626963",
+      "package": "app.zhixu.textbook.reader",
+      "versionName": "1.6.0",
+      "versionCode": 9,
+      "scenario": "independent-1.5.0",
+      "source": {
+        "kind": "archived-production-apk",
+        "package": "app.zhixu.textbook.independent",
+        "versionName": "1.5.0",
+        "versionCode": 8,
+        "sha256": "b4f92a1342ac5029e2a8a6c599e676ed414246c76d48c80b5dd50a37705734a0",
+        "certificate_sha256": "eac09dcca7192a3a7c99bc67de80d9616c9afa9b986fb107d5ef233e7368f376"
+      },
+      "install": true,
+      "offline_first_launch": true,
+      "distinct_uids": {
+        "app.zhixu.textbook.independent": "10214",
+        "app.zhixu.textbook.reader": "10215"
+      },
+      "initial_records_empty": true,
+      "native_json_export_import": true,
+      "cancel_and_invalid_import_atomic": true,
+      "relaunch_and_same_apk_reinstall_preserve_records": true,
+      "legacy_records_unchanged": true,
+      "legacy_1_5_independent_coexistence_tested": true,
+      "legacy_native_import_normal_exit_reopen": true,
+      "boundary": "Exact production-signed APK driven through public UI; no production-key instrumentation APK."
+    }
+  ],
+  "limits": [
+    "Android 15 isolated emulator; not all phone brands or file managers",
+    "Normal exit, relaunch and same-APK replacement tested; not arbitrary power-loss timing",
+    "Two restricted local signing backups exist; external private-key backup not performed"
+  ]
 }
