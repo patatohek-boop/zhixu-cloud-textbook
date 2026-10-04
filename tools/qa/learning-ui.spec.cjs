@@ -125,7 +125,11 @@ test('every new diagram can be enlarged to readable labels without leaving the l
  const fs=require('node:fs'),path=require('node:path'),capture=['width-320','width-390','width-1440'].includes(info.project.name);
  await open(page,'#/');const guides=await page.evaluate(()=>LEARNING_GUIDES.filter(g=>MASTERY_EXERCISES.some(e=>e.lessonId===g.id)).map(g=>({id:g.id,course:ZHIXU.all.find(l=>l.id===g.id).course.id})));
  for(const guide of guides){
-  const hash='#/course/'+guide.course+'/'+guide.id;await open(page,hash);const image=page.locator('#lesson-body figure img[src*="learn-"]').first();await expect(image).toBeVisible();const src=await image.getAttribute('src');
+  const hash='#/course/'+guide.course+'/'+guide.id;await open(page,hash);const image=page.locator('#lesson-body figure img[src*="learn-"]').first();
+  // Reach the figure as a reader would before asserting a lazy-loaded image.
+  await page.locator('#lesson-body figure').filter({has:page.locator('img[src*="learn-"]')}).first().scrollIntoViewIfNeeded();
+  await expect.poll(()=>image.evaluate(el=>el.complete&&el.naturalWidth>0),{message:guide.id+' teaching image loads after scrolling to its figure'}).toBe(true);
+  await image.scrollIntoViewIfNeeded();await expect(image).toBeVisible();const src=await image.getAttribute('src');
   const svg=fs.readFileSync(path.resolve(__dirname,'../../site',src),'utf8'),box=svg.match(/viewBox="([^"]+)"/)[1].trim().split(/\s+/).map(Number),fonts=[...svg.matchAll(/font-size\s*(?:=|:)\s*["']?(\d+(?:\.\d+)?)/g)].map(m=>Number(m[1]));expect(fonts.length,src).toBeGreaterThan(0);
   const minFont=Math.min(...fonts);const link=image.locator('..');await expect(link).toHaveAttribute('aria-haspopup','dialog');await image.click();await expect(page.locator('#figure-dialog')).toBeVisible();
   const enlarged=page.locator('.figure-enlarged');const actual=await enlarged.boundingBox();expect(minFont*actual.width/box[2],src+' enlarged minimum label px').toBeGreaterThanOrEqual(14);
