@@ -1,0 +1,51 @@
+name: Transfer verified public Android build
+on:
+  push:
+    branches: ['release-transfer/zhixu-1.6.0']
+    paths: ['.github/workflows/transfer-public-artifact.yml']
+permissions:
+  actions: read
+  contents: read
+jobs:
+  transfer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        chunk: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - name: Emit one verified public APK segment for local signing
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PART: ${{ matrix.chunk }}
+        run: |
+          python - <<'PY'
+          import os, urllib.request, urllib.error, io, zipfile, hashlib, base64, json
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self, req, fp, code, msg, headers, newurl):
+                  return None
+          api='https://api.github.com/repos/patatohek-boop/zhixu-cloud-textbook/actions/artifacts/11284328311/zip'
+          req=urllib.request.Request(api,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json'})
+          try:
+              urllib.request.build_opener(NoRedirect()).open(req,timeout=30)
+              raise RuntimeError('Expected temporary artifact redirect')
+          except urllib.error.HTTPError as error:
+              assert error.code == 302
+              location=error.headers['Location']
+          assert location.startswith('https://')
+          raw=urllib.request.urlopen(location,timeout=60).read()
+          assert hashlib.sha256(raw).hexdigest()=='aaf76fcd0bec65527e765cf830c77b4ab0291115f5d2372c421e99acce44d81f'
+          archive=zipfile.ZipFile(io.BytesIO(raw))
+          candidate=archive.read('candidate-commit.txt').decode().strip()
+          assert candidate=='c085ea46ee39d7a85c5dd977ba1fd0ad15bb54b6'
+          apk=archive.read('app-release-unsigned.apk')
+          part=int(os.environ['PART'])
+          width=(len(apk)+7)//8
+          payload=apk[part*width:(part+1)*width]
+          meta={'part':part,'parts':8,'bytes':len(apk),'sha256':hashlib.sha256(apk).hexdigest(),'part_sha256':hashlib.sha256(payload).hexdigest(),'candidate':candidate,'checkout':archive.read('source-commit.txt').decode().strip(),'signer_sha256':hashlib.sha256(archive.read('apksigner.jar')).hexdigest(),'metadata':archive.read('apk-metadata.txt').decode(),'permissions':archive.read('apk-permissions.txt').decode()}
+          print('ZHIXU_TRANSFER_META '+json.dumps(meta,ensure_ascii=True))
+          encoded=base64.b64encode(payload).decode()
+          for offset in range(0,len(encoded),8192):
+              print('ZHIXU_TRANSFER_DATA '+encoded[offset:offset+8192])
+          print('ZHIXU_TRANSFER_END '+str(part))
+          PY
