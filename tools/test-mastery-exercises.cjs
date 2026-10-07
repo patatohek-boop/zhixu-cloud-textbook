@@ -9,7 +9,7 @@ const masteryAmendments=fs.existsSync(amendmentPath)?JSON.parse(fs.readFileSync(
 assert.ok(masteryAmendments.length<=1 && masteryAmendments.every(a=>a.scope==='computing'),'Only the reviewed floating-point prompt clarification is allowed');
 const version=JSON.parse(fs.readFileSync(path.join(root,'version.json'),'utf8')).version;
 assert.equal(w.TEXTBOOK_VERSION.version,version,'Generated exercises must use the current release version');
-assert.ok(['1.5.0','1.6.0'].includes(version),'No exercise preservation contract for this version');
+assert.ok(['1.5.0','1.6.0','1.6.1'].includes(version),'No exercise preservation contract for this version');
 const sha=value=>require('node:crypto').createHash('sha256').update(value).digest('hex');
 let readerPlan,masteryPlan;
 const appliedChanges=new Set();
@@ -21,7 +21,7 @@ const approvedFields=new Set([
  'mastery-heat-transfer-01-03:prompt', 'mastery-heat-transfer-03-02:prompt',
  'mastery-heat-transfer-07-01:solution', 'mastery-heat-transfer-07-01:checkpoints'
 ]);
-if(version==='1.6.0'){
+if(['1.6.0','1.6.1'].includes(version)){
  readerPlan=JSON.parse(fs.readFileSync(path.join(root,'reviews/reader-revision-1.6.0.json'),'utf8'));
  masteryPlan=JSON.parse(fs.readFileSync(path.join(root,'reviews/prepublication-mastery-dispositions-1.6.0.json'),'utf8'));
  const original=JSON.parse(fs.readFileSync(path.join(root,'reviews/reader-baseline-1.5.0.json'),'utf8'));
@@ -64,7 +64,7 @@ for(const record of review.files){
  }
  assert.equal(JSON.parse(source).length,record.exercises);
 }
-if(version==='1.6.0'){
+if(['1.6.0','1.6.1'].includes(version)){
  assert.deepEqual([...appliedChanges].sort(),[...approvedFields].sort(),'All 13 approved amendments must be applied exactly once');
  console.log('Mastery preservation: four original 1.5.0 byte-pinned files plus exactly 13 reviewed field changes equal all 78 current objects');
 }

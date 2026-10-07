@@ -9,13 +9,13 @@ android {
     compileSdk { version = release(37) }
 
     defaultConfig {
-        applicationId independentEdition ? 'app.zhixu.textbook.reader' : 'app.zhixu.textbook'
+        applicationId independentEdition ? 'app.zhixu.textbook.independent' : 'app.zhixu.textbook'
         manifestPlaceholders = [appLabel: independentEdition ? '@string/independent_app_name' : '@string/app_name']
         buildConfigField 'boolean', 'INDEPENDENT', independentEdition.toString()
         minSdk 26
         targetSdk 35
-        versionCode 9
-        versionName '1.6.0'
+        versionCode 10
+        versionName '1.6.1'
         testInstrumentationRunner 'app.zhixu.textbook.TextbookSmokeTest'
     }
     buildFeatures { buildConfig true }

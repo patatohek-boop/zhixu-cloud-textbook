@@ -143,9 +143,9 @@ check('supremum candidate excluded',not all(i<=1 for i in [0,1,2]))
 # 1.5.0 retains its immutable pre-revision hashes. 1.6.0 uses the reviewed
 # metadata/source mapping after authorized heading and reader restructuring.
 version=json.loads((ROOT/'version.json').read_text(encoding='utf-8'))['version']
-check('known preservation contract',version in ('1.5.0','1.6.0'))
+check('known preservation contract',version in ('1.5.0','1.6.0','1.6.1'))
 reviewed={}
-if version=='1.6.0':
+if version in ('1.6.0', '1.6.1'):
  review=json.loads((ROOT/'reviews/reader-revision-1.6.0.json').read_text(encoding='utf-8'))
  check('1.6 reviewed source snapshot',review['version']=='1.6.0' and review['status']=='reviewed')
  reviewed={row['id']:row for row in review['lesson_mapping']}
@@ -155,7 +155,7 @@ newids=[]
 for item in manifest:
  rel=item['path'];new=(ROOT/rel).read_text(encoding='utf-8');newids+=re.findall(r'##+ (?:桥梁自检|练习) (M\d+)',new)
  metadata_hash=hashlib.sha256(json.dumps(json.loads(new[8:].split('\n---\n',1)[0]),ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
- if version=='1.6.0':
+ if version in ('1.6.0', '1.6.1'):
   row=reviewed[item['id']]
   check('reviewed lesson path '+item['id'],row['path']==rel)
   check('reviewed metadata unchanged '+item['id'],metadata_hash==row['after_metadata_sha256'])

@@ -6,8 +6,8 @@ original digest and exact reviewed replacement; unrelated edits still fail.
 import hashlib, json, pathlib
 root = pathlib.Path(__file__).resolve().parents[1]
 version = json.loads((root/'version.json').read_text(encoding='utf-8'))['version']
-assert version in ('1.5.0', '1.6.0'), 'No preservation contract for this version'
-if version == '1.6.0':
+assert version in ('1.5.0', '1.6.0', '1.6.1'), 'No preservation contract for this version'
+if version in ('1.6.0', '1.6.1'):
     from verify_reader_revision import verify
     verify()
     raise SystemExit(0)

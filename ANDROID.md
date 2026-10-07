@@ -1,5 +1,13 @@
 # 安卓 App
 
+## 1.6.1 纠错独立版
+
+本次纠错采用 **知序·独立版**，包名 `app.zhixu.textbook.independent`，版本 1.6.1 / versionCode 10，复用 1.5.0 独立版的长期发布证书，不创建新密钥。它与“知序”1.6.0（`app.zhixu.textbook.reader`）并存；reader 的记录需先导出 JSON，再在独立版导入。已安装 1.5.0 独立版的设备可在同证书验证后覆盖升级，不需要先卸载。
+
+[下载与校验](downloads/README.md)提供长期证书正式签名的 1.6.1 APK。静态核对包括同包名与原独立版证书、递增版本号、零权限、非 debug 及 155 项运行资源逐字节一致；实际 reader 1.6.0 JSON 迁移与 1.5.0 独立版覆盖保留检查的证据见[本次发布验收](https://github.com/patatohek-boop/zhixu-cloud-textbook/pull/13/checks)。只有相应验收通过才可发布；临时测试包的结果不代替正式 APK 验收。下述 1.6.0 下载与历史验收保持有效，但不包含本次勘误。
+
+当前构建继续使用 `-Pindependent=true`，现在输出 independent 身份；下述 reader 身份及其签名保管说明仅对应 1.6.0 历史版本。签名材料仍只在本项目受限目录保管，不上传仓库或 CI。
+
 ## 知序 1.6.0
 
 应用名为 **知序**，包名 `app.zhixu.textbook.reader`，版本 1.6.0 / versionCode 9。它与 **知序·独立版 1.5.0**（`app.zhixu.textbook.independent`）及更早原包（`app.zhixu.textbook`）并存，不能覆盖它们，也不会自动读取旧应用的学习记录。

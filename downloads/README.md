@@ -1,8 +1,27 @@
-# 知序 1.6.0
+# 知序·独立版 1.6.1
+
+本次仅同步五项教材勘误。应用名 **知序·独立版**，包名 `app.zhixu.textbook.independent`，版本 1.6.1 / versionCode 10，复用 1.5.0 独立版发布证书，适用于 Android 8.0 及以上。
+
+**[下载知序·独立版 1.6.1 APK](https://raw.githubusercontent.com/patatohek-boop/zhixu-cloud-textbook/main/downloads/Zhixu-Independent-1.6.1.apk)** · [SHA-256 文件](Zhixu-Independent-1.6.1.apk.sha256)
+
+- 使用“知序”1.6.0（reader）：新旧应用并存，不会自动读取 reader 的记录。先在 reader 导出 JSON，再在独立版导入；核对笔记、收藏、完成和答题记录后再决定是否保留 reader。
+- 使用“知序·独立版”1.5.0：同包同证书覆盖升级；不要先卸载或清数据。升级前仍建议导出备份。
+- JSON 未加密，不要公开上传。不同应用和网站的记录不会自动同步。
+
+## 1.6.1 校验与验收
+
+- APK SHA-256：`58e6e53598a04f03e1739db117371905edd297fba1f5d83299b39e482912bfc7`
+- 发布证书 SHA-256：`eac09dcca7192a3a7c99bc67de80d9616c9afa9b986fb107d5ef233e7368f376`，与 1.5.0 独立版相同
+- [构建与静态核验](1.6.1-build-verification.json)：候选源码 `fa56edffd43c6b37dbfa2b490fe0e34424e60ac0`，零权限、非 debug、155 项运行资源一致；[v2/v3 签名核验](1.6.1-signature-verification.txt)
+- [本次发布验收](https://github.com/patatohek-boop/zhixu-cloud-textbook/pull/13/checks)：以实际正式 APK 的离线、公开界面 JSON 迁移、旧 reader 记录不变和 1.5.0 → 1.6.1 真实覆盖保留结果为准；必须通过后发布。临时测试签名或同一 APK 重装不能代替跨版本升级验收
+
+测试使用隔离模拟器和合成记录，不表示所有手机品牌、文件管理器或任意强杀/断电时序都已覆盖。详细安装、签名保管和历史身份说明见 [ANDROID.md](../ANDROID.md)。
+
+# 历史：知序 1.6.0
 
 应用名：**知序**；包名：`app.zhixu.textbook.reader`；版本：1.6.0 / versionCode 9。新版使用新的长期发布证书，与“知序·独立版 1.5.0”并存，不能覆盖它，也不会自动读取或更改旧版记录。
 
-**正式版本：知序 1.6.0，适用于 Android 8.0 及以上。** 网站与 App 使用同一版教材；本页校验信息仅对应下方的正式安装包。
+**历史版本：知序 1.6.0，适用于 Android 8.0 及以上，未包含 1.6.1 勘误。** 1.6.0 发布时网站与 App 使用同一版教材；本页校验信息仅对应下方的正式安装包。
 
 **[下载知序 1.6.0 APK](https://raw.githubusercontent.com/patatohek-boop/zhixu-cloud-textbook/main/downloads/Zhixu-1.6.0.apk)**
 

@@ -13,10 +13,10 @@ import time
 import xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-TARGET_PKG = 'app.zhixu.textbook.reader'
+TARGET_PKG = 'app.zhixu.textbook.independent'
 ORIGINAL_PKG = 'app.zhixu.textbook'
-HISTORICAL_PKG = 'app.zhixu.textbook.independent'
-HISTORICAL_APK_SHA256 = 'b4f92a1342ac5029e2a8a6c599e676ed414246c76d48c80b5dd50a37705734a0'
+HISTORICAL_PKG = 'app.zhixu.textbook.reader'
+HISTORICAL_APK_SHA256 = 'ed7ff3bad991e391c1552c62ca6bc3670fd2ac50e905192eb257c981ea626963'
 PKG = TARGET_PKG
 OUT = pathlib.Path('work/signed-release-ui')
 FILE_PREFIX = ''
@@ -28,15 +28,15 @@ def arguments(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('apk', type=pathlib.Path)
     parser.add_argument('--source-package', choices=(ORIGINAL_PKG, HISTORICAL_PKG), default=ORIGINAL_PKG)
-    parser.add_argument('--source-apk', type=pathlib.Path, help='Exact archived 1.5.0 APK; only for the independent source scenario')
+    parser.add_argument('--source-apk', type=pathlib.Path, help='Exact archived reader 1.6.0 APK; only for the independent source scenario')
     parser.add_argument('--out-dir', type=pathlib.Path, help='Scenario-specific screenshots, backups, and result directory')
     parser.add_argument('--aapt', default='aapt', help='Android build-tools aapt executable')
     parser.add_argument('--apksigner', default='apksigner', help='Android build-tools apksigner executable')
     args = parser.parse_args(argv)
     if args.source_package == ORIGINAL_PKG and args.source_apk:
-        parser.error('--source-apk is only valid for the archived independent 1.5.0 scenario')
+        parser.error('--source-apk is only valid for the archived reader 1.6.0 scenario')
     if args.source_package == HISTORICAL_PKG and args.source_apk is None:
-        args.source_apk = ROOT / 'downloads/Zhixu-Independent-1.5.0.apk'
+        args.source_apk = ROOT / 'downloads/Zhixu-1.6.0.apk'
     return args
 
 
@@ -44,9 +44,9 @@ def verify_historical_source(args):
     """Read only public APK bytes and certificate metadata; never use a private key."""
     apk = args.source_apk
     digest = hashlib.sha256(apk.read_bytes()).hexdigest()
-    assert digest == HISTORICAL_APK_SHA256, 'Source must be the exact archived 1.5.0 production APK'
+    assert digest == HISTORICAL_APK_SHA256, 'Source must be the exact archived reader 1.6.0 production APK'
     assert digest == pathlib.Path(str(apk) + '.sha256').read_text().split()[0]
-    pin = (ROOT / 'downloads/1.5.0-certificate-sha256.txt').read_text().strip()
+    pin = (ROOT / 'downloads/certificate-sha256.txt').read_text().strip()
     assert re.fullmatch(r'[0-9a-f]{64}', pin), 'Historical certificate pin must be a SHA-256 digest'
     metadata = subprocess.run([args.aapt, 'dump', 'badging', str(apk)], check=True,
                               capture_output=True, text=True, encoding='utf-8', timeout=45).stdout
@@ -54,14 +54,14 @@ def verify_historical_source(args):
                                check=True, capture_output=True, text=True, encoding='utf-8', timeout=45).stdout
     (OUT / 'source-apk-metadata.txt').write_text(metadata, encoding='utf-8')
     (OUT / 'source-apk-signature.txt').write_text(signature, encoding='utf-8')
-    assert "name='app.zhixu.textbook.independent' versionCode='8' versionName='1.5.0'" in metadata
-    assert "application-label:'知序·独立版'" in metadata and 'application-debuggable' not in metadata
+    assert "name='app.zhixu.textbook.reader' versionCode='9' versionName='1.6.0'" in metadata
+    assert "application-label:'知序'" in metadata and 'application-debuggable' not in metadata
     assert 'Number of signers: 1' in signature
     assert 'Signer #1 certificate SHA-256 digest: ' + pin in signature
     assert 'Verified using v2 scheme (APK Signature Scheme v2): true' in signature
     assert 'Verified using v3 scheme (APK Signature Scheme v3): true' in signature
     return {'kind': 'archived-production-apk', 'package': HISTORICAL_PKG,
-            'versionName': '1.5.0', 'versionCode': 8, 'sha256': digest, 'certificate_sha256': pin}
+            'versionName': '1.6.0', 'versionCode': 9, 'sha256': digest, 'certificate_sha256': pin}
 
 
 def device_document(name):
@@ -249,7 +249,7 @@ def launch():
     tree = hierarchy('reader-ready')
     button = locate(tree, ['应用菜单'], cls='android.widget.Button')
     assert button is not None and button.attrib.get('package') == PKG, 'Expected package is not the visible native reader'
-    title = '知序·独立版 · 离线教材' if PKG == HISTORICAL_PKG else '知序 · 离线教材'
+    title = '知序·独立版 · 离线教材' if PKG == TARGET_PKG else '知序 · 离线教材'
     label = locate(tree, [title], cls='android.widget.TextView')
     assert label is not None and label.attrib.get('package') == PKG, 'Wrong old/new native app title'
 
@@ -280,7 +280,7 @@ def normal_back_exit():
 def main(argv=None):
     global PKG, OUT, FILE_PREFIX, emulator_verified
     args = arguments(argv)
-    scenario = 'independent-1.5.0' if args.source_package == HISTORICAL_PKG else 'original-package'
+    scenario = 'reader-1.6.0' if args.source_package == HISTORICAL_PKG else 'original-package'
     OUT = args.out_dir or pathlib.Path('work/signed-release-ui') / scenario
     OUT.mkdir(parents=True, exist_ok=True)
     assert not (OUT / 'verification.json').exists(), 'Use a fresh output directory; do not reuse a prior acceptance result'
@@ -302,7 +302,7 @@ def main(argv=None):
     source_runtime = adb('shell', 'dumpsys', 'package', args.source_package)
     (OUT / 'source-runtime-package.txt').write_text(source_runtime, encoding='utf-8')
     if args.source_package == HISTORICAL_PKG:
-        assert 'versionCode=8' in source_runtime and 'versionName=1.5.0' in source_runtime
+        assert 'versionCode=9' in source_runtime and 'versionName=1.6.0' in source_runtime
     # Establish the legacy record through the same native import UI a user uses.
     # Its new marker was never present in the earlier instrumentation fixture.
     PKG = args.source_package
@@ -331,7 +331,7 @@ def main(argv=None):
     assert 'Success' in installed
     runtime = adb('shell', 'dumpsys', 'package', PKG)
     (OUT / 'runtime-package.txt').write_text(runtime)
-    assert 'versionCode=9' in runtime and 'versionName=1.6.0' in runtime
+    assert 'versionCode=10' in runtime and 'versionName=1.6.1' in runtime
     assert not re.search(r'(?m)^\s*(?:pkgFlags|flags)=.*DEBUGGABLE', runtime)
     uids = adb('shell', 'pm', 'list', 'packages', '-U', 'app.zhixu.textbook')
     (OUT / 'package-uids.txt').write_text(uids)
@@ -370,7 +370,7 @@ def main(argv=None):
     restored = export('zhixu-restored.json')
     assert_source(restored)
     assert 'INDEPENDENT_ONLY_FORMAL_RELEASE' in restored['notes']['calculus-03']
-    # Reinstall this same 1.6.0 APK and certificate; this does not test an upgrade from 1.5.0.
+    # Reinstall this same 1.6.1 APK and certificate; this does not test an upgrade from 1.5.0.
     assert 'Success' in adb('install', '-r', str(apk))
     launch()
     updated = export('zhixu-after-reinstall.json')
@@ -383,13 +383,13 @@ def main(argv=None):
     PKG = TARGET_PKG
     launch()
     snapshot('03-relaunch-and-reinstall')
-    result = {'sha256': expected, 'package': PKG, 'versionName': '1.6.0', 'versionCode': 9,
+    result = {'sha256': expected, 'package': PKG, 'versionName': '1.6.1', 'versionCode': 10,
               'scenario': scenario, 'source': source_evidence,
               'install': True, 'offline_first_launch': True, 'distinct_uids': found,
               'initial_records_empty': True, 'native_json_export_import': True,
               'cancel_and_invalid_import_atomic': True, 'relaunch_and_same_apk_reinstall_preserve_records': True,
               'legacy_records_unchanged': True,
-              'legacy_1_5_independent_coexistence_tested': args.source_package == HISTORICAL_PKG,
+              'reader_1_6_coexistence_tested': args.source_package == HISTORICAL_PKG,
               'legacy_native_import_normal_exit_reopen': True,
               'boundary': 'Exact production-signed APK driven through public UI; no production-key instrumentation APK.'}
     (OUT / 'verification.json').write_text(json.dumps(result, ensure_ascii=False, indent=2))

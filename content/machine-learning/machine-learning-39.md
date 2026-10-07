@@ -22,7 +22,7 @@
 
 ## 观测协方差与加权最小二乘
 
-设 $y\in\mathbb R^n$，前向预测为 $f(\theta)$，$r(\theta)=y-f(\theta)$。本节先假设 $y\mid\theta\sim N(f(\theta),\Sigma)$，$\Sigma$ 已知、正定、与参数无关。对数似然为
+设 $y\in\mathbb R^n$，前向预测为 $f(\theta)$，$r(\theta)=y-f(\theta)$。本节先假设 $y\mid\theta\sim N(f(\theta),\Sigma)$，$\Sigma$ 已知、正定、与参数无关。负对数似然为
 
 $$-\log p(y\mid\theta)=\frac12r^\top\Sigma^{-1}r
 +\frac12\log|\Sigma|+\frac n2\log(2\pi).$$

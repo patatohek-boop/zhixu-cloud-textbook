@@ -1,0 +1,21 @@
+{
+  "sha256": "58e6e53598a04f03e1739db117371905edd297fba1f5d83299b39e482912bfc7",
+  "applicationId": "app.zhixu.textbook.independent",
+  "label": "知序·独立版",
+  "versionName": "1.6.1",
+  "versionCode": 10,
+  "debuggable": false,
+  "requested_permissions": 0,
+  "exact_runtime_assets": 155,
+  "candidate_commit": "fa56edffd43c6b37dbfa2b490fe0e34424e60ac0",
+  "build_commit": "0a50fae0643f160d50b76f41e13d5c4ce58e4071",
+  "build_run": "https://github.com/patatohek-boop/zhixu-cloud-textbook/actions/runs/37682534726",
+  "unsigned_sha256": "4a4f8c3bd2822b216b291f0e3864a36bd109369faecbe1e99aea397cb303b093",
+  "certificate_sha256": "eac09dcca7192a3a7c99bc67de80d9616c9afa9b986fb107d5ef233e7368f376",
+  "apk_signature_v2": true,
+  "apk_signature_v3": true,
+  "original_apk_entries_unchanged_by_signing": true,
+  "bytes": 3123445,
+  "production_ui_evidence": "https://github.com/patatohek-boop/zhixu-cloud-textbook/pull/13/checks",
+  "validation_boundary": "This file records static APK verification. Actual migration and cross-version upgrade results are separate CI evidence; release requires those checks to pass."
+}

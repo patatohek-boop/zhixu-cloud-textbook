@@ -50,3 +50,16 @@ for(const [id,lab] of Object.entries(LABS).filter(([id])=>id.startsWith('cfd-'))
 }
 console.log(`CFD exact: ${referenceChecks} independent reference checks passed.`);
 console.log('CFD labs: 4 models; 108 control combinations; analytic identities and failure cases passed.');
+// X-axis labels must preserve the actual tick values, not just avoid NaN.
+// All grid slider values plus the quarter-position and log-wall axes are covered.
+function xTicks(svg){return [...svg.matchAll(/<text x="[^"]+" y="286"[^>]*>([^<]+)<\/text>/g)].map(m=>Number(m[1]));}
+function checkTicks(svg,expected){
+ const labels=xTicks(svg);assert.equal(labels.length,5);assert.equal(new Set(labels).size,5);
+ labels.forEach((n,i)=>assert.ok(Math.abs(n-expected[i])<1e-12,`${n} != tick ${expected[i]}`));
+}
+for(let hundredths=2;hundredths<=20;hundredths++){
+ const h=hundredths/100;checkTicks(LABS['cfd-grid'].draw({h,order:2,noise:0}).svg,[0,h,2*h,3*h,4*h]);
+}
+checkTicks(LABS['cfd-upwind'].draw({pe:10,n:20,scheme:0}).svg,[0,.25,.5,.75,1]);
+checkTicks(LABS['cfd-yplus'].draw({ut:.1,nu:15,y:150}).svg,[-2,-.625,.75,2.125,3.5]);
+console.log('CFD axis regression: all 19 grid scales and both other numeric x axes retain five exact, distinct ticks.');

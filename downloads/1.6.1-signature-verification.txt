@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Zhixu Independent Edition
+Signer #1 certificate SHA-256 digest: eac09dcca7192a3a7c99bc67de80d9616c9afa9b986fb107d5ef233e7368f376
+Signer #1 certificate SHA-1 digest: 6fde30cfbdbdfcdd9f33c12e214e3a6dd3f702be
+Signer #1 certificate MD5 digest: d9f6c34f6e4d0fff98f911cf80aa0bae
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 3072
+Signer #1 public key SHA-256 digest: f8283024e07d4ef70f0d56696a55a581c34d18bf32de5db7d93e98582a01f39e
+Signer #1 public key SHA-1 digest: 6245f71522d9475b0fa6d6b1d67c79259f58e4c0
+Signer #1 public key MD5 digest: 25490929f5d0466891b4351b69730793

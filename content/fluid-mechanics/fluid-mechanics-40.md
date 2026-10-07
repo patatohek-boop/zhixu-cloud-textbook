@@ -87,7 +87,7 @@ $$\mathbf f_b=-\rho_0\beta(T-T_0)\mathbf g.$$
 
 <details><summary>练习 1：2 cm³ 固体内部均匀发热 4 W，体积热源是多少？</summary>
 
-$2\ \mathrm{cm^3}=2\times10^{-6}\ \mathrm{m^3}$，所以 $q_v=2\times10^6\ \mathrm{W/m^3}$。如果把 4 当作 W/m³ 输入，功率会小一百万倍；应积分检查 $\int q_vdV=4\ \mathrm W$。
+$2\ \mathrm{cm^3}=2\times10^{-6}\ \mathrm{m^3}$，所以 $q_v=2\times10^6\ \mathrm{W/m^3}$。如果把 4 当作 W/m³ 输入，实际功率仅为 $8\times10^{-6}\ \mathrm W$，比 4 W 小五十万倍；应积分检查 $\int q_vdV=4\ \mathrm W$。
 
 </details>
 
