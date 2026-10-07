@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="independent_app_name">知序</string>
-    <string name="independent_offline_title">知序 · 离线教材</string>
-    <string name="independent_notice">本版使用新的应用身份，可与旧版并存，不会自动读取旧版学习记录。请保留原版，在原版导出 JSON 后到此处导入；核对完成前不要卸载原版。\n\n</string>
+    <string name="independent_app_name">知序·独立版</string>
+    <string name="independent_offline_title">知序·独立版 · 离线教材</string>
+    <string name="independent_notice">本版延续知序·独立版 1.5.0 的应用身份与签名，可覆盖该独立版；与知序 1.6.0（reader）并存。不会自动读取 reader 的学习记录；请先在 reader 导出 JSON，再在此处导入，核对完成前保留 reader。\n\n</string>
     <string name="app_name">知序云教材</string>
     <string name="offline_title">知序 · 离线教材</string>
     <string name="app_menu">应用菜单</string>

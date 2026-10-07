@@ -102,7 +102,7 @@ public final class TextbookSmokeTest extends Instrumentation {
             waitUntil(READY, "Migration reader not ready offline");
             waitForReaderFocus();
             String pkg = getTargetContext().getPackageName();
-            boolean independent = pkg.equals("app.zhixu.textbook.reader");
+            boolean independent = pkg.equals("app.zhixu.textbook.independent");
             File exported = new File(getTargetContext().getFilesDir(), "migration-export.json");
             if ("seed".equals(migrationAction)) {
                 require(!independent, "Seed must run in legacy sandbox");
@@ -256,7 +256,7 @@ public final class TextbookSmokeTest extends Instrumentation {
         String[] requested = info.requestedPermissions == null ? new String[0] : info.requestedPermissions;
         require(requested.length == 0, "Application must request zero permissions");
         if (expectRelease) require((info.applicationInfo.flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) == 0, "Expected non-debug release app");
-        require((BuildConfig.INDEPENDENT ? "app.zhixu.textbook.reader" : "app.zhixu.textbook").equals(info.packageName), "Unexpected distribution identity");
+        require((BuildConfig.INDEPENDENT ? "app.zhixu.textbook.independent" : "app.zhixu.textbook").equals(info.packageName), "Unexpected distribution identity");
         for (String dangerous : new String[]{"android.permission.INTERNET", "android.permission.READ_EXTERNAL_STORAGE",
                 "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA", "android.permission.RECORD_AUDIO"})
             require(!Arrays.asList(requested).contains(dangerous), "Unexpected permission " + dangerous);
