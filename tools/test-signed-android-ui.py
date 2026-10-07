@@ -331,7 +331,7 @@ def main(argv=None):
     assert 'Success' in installed
     runtime = adb('shell', 'dumpsys', 'package', PKG)
     (OUT / 'runtime-package.txt').write_text(runtime)
-    assert 'versionCode=9' in runtime and 'versionName=1.6.0' in runtime
+    assert 'versionCode=10' in runtime and 'versionName=1.6.1' in runtime
     assert not re.search(r'(?m)^\s*(?:pkgFlags|flags)=.*DEBUGGABLE', runtime)
     uids = adb('shell', 'pm', 'list', 'packages', '-U', 'app.zhixu.textbook')
     (OUT / 'package-uids.txt').write_text(uids)
@@ -370,7 +370,7 @@ def main(argv=None):
     restored = export('zhixu-restored.json')
     assert_source(restored)
     assert 'INDEPENDENT_ONLY_FORMAL_RELEASE' in restored['notes']['calculus-03']
-    # Reinstall this same 1.6.0 APK and certificate; this does not test an upgrade from 1.5.0.
+    # Reinstall this same 1.6.1 APK and certificate; this does not test an upgrade from 1.5.0.
     assert 'Success' in adb('install', '-r', str(apk))
     launch()
     updated = export('zhixu-after-reinstall.json')
@@ -383,7 +383,7 @@ def main(argv=None):
     PKG = TARGET_PKG
     launch()
     snapshot('03-relaunch-and-reinstall')
-    result = {'sha256': expected, 'package': PKG, 'versionName': '1.6.0', 'versionCode': 9,
+    result = {'sha256': expected, 'package': PKG, 'versionName': '1.6.1', 'versionCode': 10,
               'scenario': scenario, 'source': source_evidence,
               'install': True, 'offline_first_launch': True, 'distinct_uids': found,
               'initial_records_empty': True, 'native_json_export_import': True,

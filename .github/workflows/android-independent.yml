@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       require_production:
-        description: 'Release acceptance: require the final 1.6.0 signed APK and both migration scenarios'
+        description: 'Release acceptance: require the final 1.6.1 signed APK and both migration scenarios'
         type: boolean
         default: false
         required: false
@@ -48,8 +48,8 @@ jobs:
       - name: Require production inputs for release acceptance
         if: inputs.require_production == true
         run: |
-          test -s downloads/Zhixu-1.6.0.apk
-          test -s downloads/Zhixu-1.6.0.apk.sha256
+          test -s downloads/Zhixu-1.6.1.apk
+          test -s downloads/Zhixu-1.6.1.apk.sha256
           test -s downloads/certificate-sha256.txt
           test -s downloads/Zhixu-Independent-1.5.0.apk
           test -s downloads/Zhixu-Independent-1.5.0.apk.sha256
@@ -244,26 +244,26 @@ jobs:
             work/emulator-preflight-window.txt
           retention-days: 14
       - name: Verify exact production-signed APK through public UI
-        if: always() && !cancelled() && hashFiles('downloads/Zhixu-1.6.0.apk') != ''
+        if: always() && !cancelled() && hashFiles('downloads/Zhixu-1.6.1.apk') != ''
         timeout-minutes: 25
         run: |
           set -euo pipefail
-          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs downloads/Zhixu-1.6.0.apk | tee work/production-signature.txt
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs downloads/Zhixu-1.6.1.apk | tee work/production-signature.txt
           grep -q "Signer #1 certificate SHA-256 digest: $(cat downloads/certificate-sha256.txt)" work/production-signature.txt
           test "$(cat downloads/certificate-sha256.txt)" != "$(cat downloads/1.5.0-certificate-sha256.txt)"
-          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging downloads/Zhixu-1.6.0.apk > work/production-metadata.txt
-          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump permissions downloads/Zhixu-1.6.0.apk > work/production-permissions.txt
-          python tools/verify-independent-apk.py --apk downloads/Zhixu-1.6.0.apk --metadata work/production-metadata.txt --permissions work/production-permissions.txt > work/production-payload.json
-          python tools/test-signed-android-ui.py downloads/Zhixu-1.6.0.apk --source-package app.zhixu.textbook --out-dir work/signed-release-ui/original-package | tee work/production-ui-original.txt
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging downloads/Zhixu-1.6.1.apk > work/production-metadata.txt
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump permissions downloads/Zhixu-1.6.1.apk > work/production-permissions.txt
+          python tools/verify-independent-apk.py --apk downloads/Zhixu-1.6.1.apk --metadata work/production-metadata.txt --permissions work/production-permissions.txt > work/production-payload.json
+          python tools/test-signed-android-ui.py downloads/Zhixu-1.6.1.apk --source-package app.zhixu.textbook --out-dir work/signed-release-ui/original-package | tee work/production-ui-original.txt
           grep -q ZHIXU_SIGNED_RELEASE_UI_SUCCESS work/production-ui-original.txt
-          python tools/test-signed-android-ui.py downloads/Zhixu-1.6.0.apk --source-package app.zhixu.textbook.independent --source-apk downloads/Zhixu-Independent-1.5.0.apk --aapt "$ANDROID_HOME/build-tools/36.0.0/aapt" --apksigner "$ANDROID_HOME/build-tools/36.0.0/apksigner" --out-dir work/signed-release-ui/independent-1.5.0 | tee work/production-ui-independent-1.5.0.txt
+          python tools/test-signed-android-ui.py downloads/Zhixu-1.6.1.apk --source-package app.zhixu.textbook.independent --source-apk downloads/Zhixu-Independent-1.5.0.apk --aapt "$ANDROID_HOME/build-tools/36.0.0/aapt" --apksigner "$ANDROID_HOME/build-tools/36.0.0/apksigner" --out-dir work/signed-release-ui/independent-1.5.0 | tee work/production-ui-independent-1.5.0.txt
           grep -q ZHIXU_SIGNED_RELEASE_UI_SUCCESS work/production-ui-independent-1.5.0.txt
       - name: Confirm both production migration results for release acceptance
-        if: always() && !cancelled() && (inputs.require_production == true || hashFiles('downloads/Zhixu-1.6.0.apk') != '')
+        if: always() && !cancelled() && (inputs.require_production == true || hashFiles('downloads/Zhixu-1.6.1.apk') != '')
         run: |
           python - <<'PY'
           import hashlib, json, pathlib
-          apk_hash = hashlib.sha256(pathlib.Path('downloads/Zhixu-1.6.0.apk').read_bytes()).hexdigest()
+          apk_hash = hashlib.sha256(pathlib.Path('downloads/Zhixu-1.6.1.apk').read_bytes()).hexdigest()
           scenarios = [('original-package', 'app.zhixu.textbook', False), ('independent-1.5.0', 'app.zhixu.textbook.independent', True)]
           for scenario, package, historical in scenarios:
               result = json.loads(pathlib.Path('work/signed-release-ui', scenario, 'verification.json').read_text())

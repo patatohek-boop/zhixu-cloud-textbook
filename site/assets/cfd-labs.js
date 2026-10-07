@@ -34,7 +34,7 @@
  function svg(body,label,h=320){return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 ${h}" role="img" aria-label="${esc(label)}" style="width:100%;height:auto;color:var(--ink)">${body}</svg>`;}
  function chart(series,xr,yr,xlabel,ylabel){
   const X=x=>66+540*(x-xr[0])/(xr[1]-xr[0]),Y=y=>263-210*(y-yr[0])/(yr[1]-yr[0]);let s='';
-  for(let i=0;i<=4;i++){const x=xr[0]+i*(xr[1]-xr[0])/4,y=yr[0]+i*(yr[1]-yr[0])/4;s+=`<path d="M66 ${Y(y)}H606" stroke="currentColor" opacity=".12"/><text x="56" y="${Y(y)+5}" text-anchor="end" fill="currentColor" font-size="19">${y.toFixed(2)}</text><text x="${X(x)}" y="286" text-anchor="middle" fill="currentColor" font-size="19">${x.toFixed(1)}</text>`;}
+  for(let i=0;i<=4;i++){const x=xr[0]+i*(xr[1]-xr[0])/4,y=yr[0]+i*(yr[1]-yr[0])/4;s+=`<path d="M66 ${Y(y)}H606" stroke="currentColor" opacity=".12"/><text x="56" y="${Y(y)+5}" text-anchor="end" fill="currentColor" font-size="19">${y.toFixed(2)}</text><text x="${X(x)}" y="286" text-anchor="middle" fill="currentColor" font-size="19">${Number(x.toFixed(3))}</text>`;}
   s+='<path d="M66 53V263H606" fill="none" stroke="currentColor" opacity=".5"/>';
   for(const z of series){s+=`<polyline points="${z.points.map(([x,y])=>`${X(x).toFixed(2)},${Y(y).toFixed(2)}`).join(' ')}" fill="none" stroke="${z.color}" stroke-width="3" ${z.dash?'stroke-dasharray="7 5"':''}/>`;if(z.dots)s+=z.points.map(([x,y])=>`<circle cx="${X(x)}" cy="${Y(y)}" r="3" fill="${z.color}"/>`).join('');}
   s+=`<text x="66" y="27" fill="currentColor" font-size="21">${esc(ylabel)}</text><text x="336" y="313" text-anchor="middle" fill="currentColor" font-size="21">${esc(xlabel)}</text>`;return svg(s,`${xlabel}；${ylabel}`);

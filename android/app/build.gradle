@@ -14,8 +14,8 @@ android {
         buildConfigField 'boolean', 'INDEPENDENT', independentEdition.toString()
         minSdk 26
         targetSdk 35
-        versionCode 9
-        versionName '1.6.0'
+        versionCode 10
+        versionName '1.6.1'
         testInstrumentationRunner 'app.zhixu.textbook.TextbookSmokeTest'
     }
     buildFeatures { buildConfig true }

@@ -28,7 +28,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     private static final String RECORD_KEY = "zhixu-learning-v1";
     private static final String LESSON = "calculus-03";
     private static final int TOTAL = 14;
-    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.6.0' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length===253";
+    private static final String READY = "window.ZHIXU && window.TEXTBOOK_VERSION && window.TEXTBOOK_VERSION.version==='1.6.1' && window.ZHIXU.all.length===window.TEXTBOOK_VERSION.lessons && window.ZHIXU.all.length===253";
     private Activity reader;
     private WebView web;
     private int number;
@@ -252,7 +252,7 @@ public final class TextbookSmokeTest extends Instrumentation {
     private void permissions() throws Exception {
         PackageInfo info = getTargetContext().getPackageManager().getPackageInfo(
             getTargetContext().getPackageName(), PackageManager.GET_PERMISSIONS);
-        require("1.6.0".equals(info.versionName) && info.versionCode == 9, "App version does not match the textbook revision");
+        require("1.6.1".equals(info.versionName) && info.versionCode == 10, "App version does not match the textbook revision");
         String[] requested = info.requestedPermissions == null ? new String[0] : info.requestedPermissions;
         require(requested.length == 0, "Application must request zero permissions");
         if (expectRelease) require((info.applicationInfo.flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) == 0, "Expected non-debug release app");

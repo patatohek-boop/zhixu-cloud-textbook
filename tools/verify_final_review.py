@@ -53,3 +53,26 @@ for lid,phrases in required.items():
  source=current[lid][0].read_text()
  for phrase in phrases:assert phrase in source,(lid,phrase)
 print('Final review regressions: 253 stable IDs, original quiz keys and exact approved condition clarifications; documented stem correction, cycle data, mean counterexample, covariance/entropy conditions and proof continuity passed')
+
+# 1.6.1 focused errata arithmetic, independent of the reader's display strings.
+from fractions import Fraction
+volume = Fraction(2, 10**6)
+wrong_power = 4 * volume
+assert wrong_power == Fraction(8, 10**6)
+assert Fraction(4) / wrong_power == 500000
+assert '小五十万倍' in current['fluid-mechanics-40'][0].read_text()
+assert '负对数似然为' in current['machine-learning-39'][0].read_text()
+# A two-token document: counts are constrained, though token positions are iid.
+# Counts (1,1) have likelihood 2*theta1*theta2; the class-common factor cancels.
+from itertools import product
+counts = [(tokens.count(0), tokens.count(1)) for tokens in product([0, 1], repeat=2)]
+assert all(sum(c) == 2 for c in counts)
+assert sum(c == (1, 1) for c in counts) / 4 == .5
+assert sum(c[0] == 1 for c in counts) / 4 * sum(c[1] == 1 for c in counts) / 4 == .25
+scores = [math.log(.5) + math.log(t) + math.log(1-t) for t in (.8, .4)]
+likelihoods = [.5 * 2 * t * (1-t) for t in (.8, .4)]
+assert math.isclose(math.exp(scores[0]-scores[1]), likelihoods[0]/likelihoods[1])
+assert '词袋计数分量因总和等于文长而不独立' in current['machine-learning-11'][0].read_text()
+assert '沿水平路径相连' in current['fluid-mechanics-03'][0].read_text()
+assert '整个连通域共享同一个密度函数' in current['fluid-mechanics-03'][0].read_text()
+print('1.6.1 focused errata: power ratio, negative-log label, token/count likelihood and hydrostatic conditions passed')

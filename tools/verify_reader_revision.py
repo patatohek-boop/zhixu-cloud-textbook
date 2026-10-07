@@ -183,6 +183,9 @@ def check_changes(base, plan, report):
 
 
 def verify(require_frozen=True):
+    if read_json(ROOT / 'version.json')['version'] == '1.6.1':
+        from verify_patch_release import verify_patch
+        return verify_patch()
     base, plan = read_json(BASE), read_json(PLAN)
     report = diff(base)
     check_changes(base, plan, report)
@@ -223,6 +226,7 @@ def main():
         print(f'Draft report: {len(report["source_changes"])} changed lessons, {len(report["feature_changes"])} feature differences; {len(report["quiz_changes"])} changed quizzes; {REPORT}')
         return
     if args.freeze_reviewed:
+        assert read_json(ROOT / 'version.json')['version'] == '1.6.0', 'Historical 1.6.0 snapshot cannot be re-frozen for a patch'
         # This option never invents approvals or reasons for differing features.
         verify(require_frozen=False)
         plan = read_json(PLAN)

@@ -37,7 +37,7 @@ assert math.isclose(cp*delta_T + delta_p/rho, 0., abs_tol=1e-9)
 
 # Compile-time publication contract: stable identity and 30 clear entry guides.
 version = json.loads((ROOT/'version.json').read_text(encoding='utf-8'))
-assert version['version'] in ('1.5.0', '1.6.0'), 'No publication contract for this version'
+assert version['version'] in ('1.5.0', '1.6.0', '1.6.1'), 'No publication contract for this version'
 all_lessons = [p for p in (ROOT/'content').glob('*/*.md')]
 assert len(all_lessons) == 253
 all_guides = sum([json.loads(p.read_text(encoding='utf-8')) for p in (ROOT/'content').glob('learning-guides-*.json')], [])
@@ -53,7 +53,7 @@ print('Report revision: four independent counterexamples, stable 253 IDs, 30 ent
 
 # Reviewed publication sources are frozen by exact content hashes; generated data
 # is then rebuilt and compared separately by the offline/browser release checks.
-if version['version'] == '1.6.0':
+if version['version'] in ('1.6.0', '1.6.1'):
     from verify_reader_revision import verify
     verify()
 else:

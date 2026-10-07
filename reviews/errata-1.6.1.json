@@ -1,0 +1,66 @@
+{
+  "schema": 1,
+  "version": "1.6.1",
+  "date": "2026-10-07",
+  "baseline_version": "1.6.0",
+  "baseline_commit": "376813bdf1600f8f086e3647339b523c7fdf357e",
+  "baseline_manifest_sha256": "0774a1aa9d90cdcf95e6f61cd78952675ee8f69cf572e81ff942d23147da3503",
+  "status": "reviewed",
+  "scope": "仅修五项已确认错误；不新增课程、例题、功能或变更自测与记录结构。",
+  "files": [
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-03.md",
+      "before_sha256": "968dd372d343967633b46559cbfd4f13fafc57bb7c4d2ef6e841b5293e26ef2a",
+      "after_sha256": "af057780526f209dec149b9afe57e0ebb948b5400026890b48eb23e454640204",
+      "reason": "等高同压补充水平连通或统一密度条件，并限定竖直柱积分"
+    },
+    {
+      "path": "content/fluid-mechanics/fluid-mechanics-40.md",
+      "before_sha256": "2ea6c0fadfbd51d617522e3f5c0072f6044fde2ddf8828c53a5feb4df9fe2296",
+      "after_sha256": "15cb892d069c5437db6e80a74fefeb302165bdf78fbfdf469979c058682f2609",
+      "reason": "热源误输入功率为8×10⁻⁶ W，差五十万倍"
+    },
+    {
+      "path": "content/machine-learning/machine-learning-11.md",
+      "before_sha256": "4181716bf33f65b1917a814178ca12372dbaf4c0dddd1aaa498e571492bc3cdc",
+      "after_sha256": "f2d7d21213e2dc3d9dc2e6ccac1936d966536b2490d1d4cdada99aca000bb917",
+      "reason": "澄清token位置独立而固定文长词袋计数不独立"
+    },
+    {
+      "path": "content/machine-learning/machine-learning-39.md",
+      "before_sha256": "79bd440748507574708c822f79ccc8c377f2671852171534d41cfc4b7181b9f6",
+      "after_sha256": "2a189c46dd0cdce55631e7e78f51074283c7056bd84f810ba4e04408ae2b95a1",
+      "reason": "负对数似然名称与原公式一致"
+    },
+    {
+      "path": "site/assets/cfd-labs.js",
+      "before_sha256": "313c156db9ae44431e7a3e967956fe6ff54ad7b458335d7604211c5d7ac1118d",
+      "after_sha256": "c1c926cf7a558a5a02ef483ccfd79556ef1d8c257ac0b70bd9e3e5af50ff4fb9",
+      "reason": "横轴保留至三位小数并去掉多余零，涵盖现有全部刻度"
+    },
+    {
+      "path": "reviews/content-audit-2026-09/fluid-mechanics.json",
+      "before_sha256": "f6966cf8c7e0887aa58dfd897854d82dc4e6fd38224e3c1b26e93fa5f650452a",
+      "after_sha256": "c688d4c229be75aa383a50382f3076e4dae9fe80563c2bcf37adc4250772fdb4",
+      "reason": "仅追加本次两节勘误记录"
+    },
+    {
+      "path": "reviews/content-audit-2026-09/machine-learning.json",
+      "before_sha256": "621012cb276306944b2d0c51b3037260914cf1b07a093311e035e8e1fea8af81",
+      "after_sha256": "b2607b382a8d8cfde821228a48d65732f71e059851d8094012e565856bdc12b7",
+      "reason": "仅追加本次两节勘误记录"
+    },
+    {
+      "path": "version.json",
+      "before_sha256": "074cd8a6587fab1c71c1f14f891fc051750aa15bcfb7506ecde6ee04d891909b",
+      "after_sha256": "ac594a17ebd39ff0947c84e958bf9a8edc077035f5e0fd87518d2b0f1123eb40",
+      "reason": "网站与待构建应用源码升至1.6.1补丁版"
+    },
+    {
+      "path": "site/index.html",
+      "before_sha256": "6237b7a095c536c07ec099ef8ebdd7ecef3374a4c2df8e1644f177e7a959d466",
+      "after_sha256": "c1738d2e72c9ca303b0fdf20dce811f3e21e1536b2081f5a546246e2b6bafb5a",
+      "reason": "生成入口的data与CFD资源缓存摘要同步为本次补丁"
+    }
+  ]
+}
